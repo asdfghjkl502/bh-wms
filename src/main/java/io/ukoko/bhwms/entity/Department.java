@@ -21,7 +21,10 @@ public class Department {
         父ID
      */
     private Integer parentId;
-
+    /*
+        是否删除 0:删除 1:未删除
+     */
+    private int isDelete=1;
     public Department() {
     }
 
@@ -64,6 +67,14 @@ public class Department {
         this.parentId = parentId;
     }
 
+    public int getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(int isDelete) {
+        this.isDelete = isDelete;
+    }
+
     @Override
     public String toString() {
         return "Department{" +
@@ -71,6 +82,7 @@ public class Department {
                 ", deptName='" + deptName + '\'' +
                 ", level=" + level +
                 ", parentId=" + parentId +
+                ", isDelete=" + isDelete +
                 '}';
     }
 }

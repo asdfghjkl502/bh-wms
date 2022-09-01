@@ -28,7 +28,10 @@ public class Customer {
       客户联系地址
      */
     private String customerAddress;
-
+    /*
+        是否删除 0:删除 1:未删除
+     */
+    private int isDelete=1;
     public Integer getCustomerId() {
         return customerId;
     }
@@ -77,6 +80,14 @@ public class Customer {
         this.customerAddress = customerAddress;
     }
 
+    public int getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(int isDelete) {
+        this.isDelete = isDelete;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
@@ -86,6 +97,7 @@ public class Customer {
                 ", customerTel='" + customerTel + '\'' +
                 ", customerEmail='" + customerEmail + '\'' +
                 ", customerAddress='" + customerAddress + '\'' +
+                ", isDelete=" + isDelete +
                 '}';
     }
 }

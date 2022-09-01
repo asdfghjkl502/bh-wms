@@ -12,7 +12,10 @@ public class UserRole {
     角色ID
    */
   private Integer roleId;
-
+  /*
+      是否删除 0:删除 1:未删除
+   */
+  private int isDelete=1;
   public UserRole() {
   }
 
@@ -37,11 +40,20 @@ public class UserRole {
     this.roleId = roleId;
   }
 
+  public int getIsDelete() {
+    return isDelete;
+  }
+
+  public void setIsDelete(int isDelete) {
+    this.isDelete = isDelete;
+  }
+
   @Override
   public String toString() {
     return "UserRole{" +
             "userId=" + userId +
             ", roleId=" + roleId +
+            ", isDelete=" + isDelete +
             '}';
   }
 }

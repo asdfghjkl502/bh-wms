@@ -12,7 +12,10 @@ public class UserDepartment {
     部门ID
    */
   private Integer deptId;
-
+  /*
+      是否删除 0:删除 1:未删除
+   */
+  private int isDelete=1;
   public UserDepartment() {
   }
 
@@ -37,11 +40,20 @@ public class UserDepartment {
     this.deptId = deptId;
   }
 
+  public int getIsDelete() {
+    return isDelete;
+  }
+
+  public void setIsDelete(int isDelete) {
+    this.isDelete = isDelete;
+  }
+
   @Override
   public String toString() {
     return "UserDepartment{" +
             "userId=" + userId +
             ", deptId=" + deptId +
+            ", isDelete=" + isDelete +
             '}';
   }
 }

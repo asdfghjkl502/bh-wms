@@ -17,7 +17,10 @@ public class RecordStock {
     库存数量
    */
   private Integer productStock;
-
+  /*
+      是否删除 0:删除 1:未删除
+   */
+  private int isDelete=1;
   public RecordStock() {
   }
 
@@ -51,12 +54,21 @@ public class RecordStock {
     this.productStock = productStock;
   }
 
+  public int getIsDelete() {
+    return isDelete;
+  }
+
+  public void setIsDelete(int isDelete) {
+    this.isDelete = isDelete;
+  }
+
   @Override
   public String toString() {
     return "RecordStock{" +
             "productId=" + productId +
             ", repoId=" + repoId +
             ", productStock=" + productStock +
+            ", isDelete=" + isDelete +
             '}';
   }
 }

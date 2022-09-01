@@ -12,7 +12,10 @@ public class Category {
       类目名称
      */
     private String categoryName;
-
+    /*
+        是否删除 0:删除 1:未删除
+     */
+    private int isDelete=1;
     public Category() {
     }
 
@@ -37,11 +40,20 @@ public class Category {
         this.categoryName = categoryName;
     }
 
+    public int getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(int isDelete) {
+        this.isDelete = isDelete;
+    }
+
     @Override
     public String toString() {
         return "Category{" +
                 "categoryId=" + categoryId +
                 ", categoryName='" + categoryName + '\'' +
+                ", isDelete=" + isDelete +
                 '}';
     }
 }

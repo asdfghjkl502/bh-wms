@@ -53,7 +53,10 @@ public class RecordOut {
     备注
    */
   private String remarks;
-
+  /*
+      是否删除 0:删除 1:未删除
+   */
+  private int isDelete=1;
   public RecordOut() {
   }
 
@@ -153,6 +156,14 @@ public class RecordOut {
     this.remarks = remarks;
   }
 
+  public int getIsDelete() {
+    return isDelete;
+  }
+
+  public void setIsDelete(int isDelete) {
+    this.isDelete = isDelete;
+  }
+
   @Override
   public String toString() {
     return "RecordOut{" +
@@ -168,6 +179,7 @@ public class RecordOut {
             ", repoId=" + repoId +
             ", repository=" + repository +
             ", remarks='" + remarks + '\'' +
+            ", isDelete=" + isDelete +
             '}';
   }
 }

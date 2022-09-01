@@ -27,7 +27,10 @@ public class Supplier {
     供应商联系地址
    */
   private String supplierAddress;
-
+  /*
+      是否删除 0:删除 1:未删除
+   */
+  private int isDelete=1;
   public Supplier() {
   }
 
@@ -79,6 +82,14 @@ public class Supplier {
     this.supplierAddress = supplierAddress;
   }
 
+  public int getIsDelete() {
+    return isDelete;
+  }
+
+  public void setIsDelete(int isDelete) {
+    this.isDelete = isDelete;
+  }
+
   @Override
   public String toString() {
     return "Supplier{" +
@@ -88,6 +99,7 @@ public class Supplier {
             ", supplierTel='" + supplierTel + '\'' +
             ", supplierEmail='" + supplierEmail + '\'' +
             ", supplierAddress='" + supplierAddress + '\'' +
+            ", isDelete=" + isDelete +
             '}';
   }
 }

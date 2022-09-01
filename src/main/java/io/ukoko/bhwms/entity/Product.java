@@ -28,7 +28,10 @@ public class Product {
     产品价格
    */
   private Double productPrice;
-
+  /*
+      是否删除 0:删除 1:未删除
+   */
+  private int isDelete=1;
   public Product() {
   }
 
@@ -80,6 +83,14 @@ public class Product {
     this.productPrice = productPrice;
   }
 
+  public int getIsDelete() {
+    return isDelete;
+  }
+
+  public void setIsDelete(int isDelete) {
+    this.isDelete = isDelete;
+  }
+
   @Override
   public String toString() {
     return "Product{" +
@@ -89,6 +100,7 @@ public class Product {
             ", category=" + category +
             ", productSize='" + productSize + '\'' +
             ", productPrice=" + productPrice +
+            ", isDelete=" + isDelete +
             '}';
   }
 }

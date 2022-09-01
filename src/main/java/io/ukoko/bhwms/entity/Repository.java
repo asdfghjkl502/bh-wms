@@ -24,7 +24,10 @@ public class Repository {
     仓库状态 0:故障 1:正常 2:已满
    */
   private Integer repoStatus;
-
+  /*
+      是否删除 0:删除 1:未删除
+   */
+  private int isDelete=1;
   public Repository() {
   }
 
@@ -68,6 +71,14 @@ public class Repository {
     this.repoStatus = repoStatus;
   }
 
+  public int getIsDelete() {
+    return isDelete;
+  }
+
+  public void setIsDelete(int isDelete) {
+    this.isDelete = isDelete;
+  }
+
   @Override
   public String toString() {
     return "Repository{" +
@@ -76,6 +87,7 @@ public class Repository {
             ", repoArea='" + repoArea + '\'' +
             ", repoDesc='" + repoDesc + '\'' +
             ", repoStatus=" + repoStatus +
+            ", isDelete=" + isDelete +
             '}';
   }
 }

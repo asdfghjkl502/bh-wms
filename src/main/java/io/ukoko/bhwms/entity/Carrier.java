@@ -28,6 +28,10 @@ public class Carrier {
       联系地址
      */
     private String carrierAddress;
+    /*
+        是否删除 0:删除 1:未删除
+     */
+    private int isDelete=1;
 
     public Carrier() {
     }
@@ -80,6 +84,14 @@ public class Carrier {
         this.carrierAddress = carrierAddress;
     }
 
+    public int getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(int isDelete) {
+        this.isDelete = isDelete;
+    }
+
     @Override
     public String toString() {
         return "Carrier{" +
@@ -89,6 +101,7 @@ public class Carrier {
                 ", carrierTel='" + carrierTel + '\'' +
                 ", carrierEmail='" + carrierEmail + '\'' +
                 ", carrierAddress='" + carrierAddress + '\'' +
+                ", isDelete=" + isDelete +
                 '}';
     }
 }

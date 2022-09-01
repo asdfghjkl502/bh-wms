@@ -33,7 +33,10 @@ public class User {
     盐值
    */
   private String salt;
-
+  /*
+      是否删除 0:删除 1:未删除
+   */
+  private int isDelete=1;
   public User() {
   }
 
@@ -93,6 +96,14 @@ public class User {
     this.salt = salt;
   }
 
+  public int getIsDelete() {
+    return isDelete;
+  }
+
+  public void setIsDelete(int isDelete) {
+    this.isDelete = isDelete;
+  }
+
   @Override
   public String toString() {
     return "User{" +
@@ -103,6 +114,7 @@ public class User {
             ", userNick='" + userNick + '\'' +
             ", password='" + password + '\'' +
             ", salt='" + salt + '\'' +
+            ", isDelete=" + isDelete +
             '}';
   }
 }

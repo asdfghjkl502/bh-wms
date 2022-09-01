@@ -4,11 +4,31 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="io.ukoko.bhwms.mapper.RoleMapper">
 
+    <!--  添加角色  -->
     <insert id="addRole" parameterType="role" useGeneratedKeys="true" keyProperty="roleId">
-        INSERT INTO role(ROLE_NAME) VALUES(#{roleName})
+        INSERT INTO role(ROLE_NAME,IS_DELETE) VALUES(#{roleName},#{isDelete})
     </insert>
-
-
+    <!--  删除角色  -->
+    <update id="deleteRole" parameterType="int">
+        UPDATE role SET IS_DELETE=0 WHERE ROLE_ID=#{roleId}
+    </update>
+    <!--  更新角色  -->
+    <update id="updateRole" parameterType="role">
+        UPDATE role
+        <set>
+            <if test="roleName!=null">ROLE_NAME=#{roleName},</if>
+            <if test="isDelete!=null">IS_DELETE=#{isDelete}</if>
+        </set>
+        WHERE ROLE_ID=#{roleId}
+    </update>
+    <!--  查询角色列表  -->
+    <select id="getRoleList" resultType="role" parameterType="int">
+        SELECT * FROM role WHERE IS_DELETE=#{isDelete}
+    </select>
+    <!--  查询单个角色  -->
+    <select id="getRoleBy" parameterType="int" resultType="role">
+        SELECT * FROM role WHERE ROLE_ID=#{roleId}
+    </select>
 
 
 </mapper>

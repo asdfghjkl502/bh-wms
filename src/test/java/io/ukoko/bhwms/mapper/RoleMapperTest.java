@@ -33,7 +33,7 @@ class RoleMapperTest extends BhWmsApplicationTests {
 
     @Test
     void getRoleList() {
-        roleMapper.getRoleList(0).forEach(System.out::println);
+        roleMapper.getRoleList(1).forEach(System.out::println);
     }
 
     @Test

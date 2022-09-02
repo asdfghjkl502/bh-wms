@@ -25,6 +25,7 @@ public interface RoleMapper {
     void updateRole(Role role);
     /*
         查询角色列表
+        isDelete: 是否删除 1: 未删除 0:已删除
      */
     List<Role> getRoleList(Integer isDelete);
     /*

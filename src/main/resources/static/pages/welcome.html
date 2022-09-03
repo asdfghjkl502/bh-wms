@@ -1,0 +1,32 @@
+<div class="panel panel-default">
+  <div class="panel-heading wel-head">
+	  <span>欢迎页</span>
+	  <span class="currentTime"></span>
+  </div>
+  <div class="panel-body">
+	<div class="home-body">
+		<a href="pages/productStock.html" class="home-body-item">
+			<span class="iconfont icon-kucun"></span>
+			<p>库存查询</p>
+		</a>
+		<a href="pages/warehouseOut.html" class="home-body-item">
+			<span class="iconfont icon-chukuguanli"></span>
+			<p>货物出库</p>
+		</a>
+		<a href="pages/warehouseIn.html" class="home-body-item">
+			<span class="iconfont icon-rukuguanli"></span>
+			<p>货物入库</p>
+		</a>
+	</div>
+  </div>
+</div>
+<script type="text/javascript">
+	var whbi = $(".home-body-item");
+	for(var i=0;i<whbi.length;i++){
+		$(whbi[i]).click(function(){
+			//展示
+			$(".showContent").load(this.href);
+			return false;
+		});
+	}
+</script>

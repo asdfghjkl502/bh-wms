@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>登录</title>
+	<link rel="stylesheet" href="/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/login.css">
+	<link rel="stylesheet" href="dist/wms/iconfont.css">
+  </head>
+  <body style="background: url(images/bg.jpg) no-repeat;">
+    
+	
+	<div class="login">
+		<!-- 标题 -->
+		<h4>百惠仓库管理系统</h4>
+		<div class="login-ares">
+			<form action="login" method="post">
+				<!-- 手机号 -->
+				<div class="login-in">
+					<div class="login-in-icon">
+						<span class="iconfont icon-shoujihao"></span>
+					</div>
+					<div class="login-in-content">
+						<input type="text" placeholder="手机号">
+					</div>
+				</div>
+				<!-- 密码 -->
+				<div class="login-in">
+					<div class="login-in-icon">
+						<span class="iconfont icon-mima"></span>
+					</div>
+					<div class="login-in-content">
+						<input type="password" placeholder="密码">
+					</div>
+				</div>
+				<!-- 验证码 -->
+				<div class="login-in">
+					<div class="login-in-icon">
+						<span class="iconfont icon-yanzhengma"></span>
+					</div>
+					<div class="login-in-captcha">
+						<input type="text" placeholder="验证码">
+						<img src="images/captcha.png"/>
+					</div>
+				</div>
+				<div class="login-in">
+					<input id="rm" type="checkbox">
+					<label for="rm">记住我</label>
+				</div>
+				<div class="login-in">
+					<input class="sub" type="submit" value="登录">
+				</div>
+				<div class="login-wg">
+					<a href="#">忘记密码?</a>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+
+	<script src="dist/js/jquery-3.5.1.min.js"></script>
+	<script src="dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

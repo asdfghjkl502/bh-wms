@@ -14,6 +14,7 @@ public class BhWmsExceptionHandler {
 
     @ExceptionHandler(value = {Exception.class})
     public Result commonException(Exception e){
+        e.printStackTrace();//控制台异常消息打印
         Result result = new Result();
         result.setCode(-1);
         result.setMsg("系统异常");

@@ -1,0 +1,95 @@
+.login{
+	height: 310px;
+	width: 300px;
+	background-color: rgba(255, 255, 255, 0.6);
+	margin: 120px auto 0 auto;
+}
+.login>h4{
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+}
+.login-ares{
+	width: 80%;
+	margin: 0 auto;
+	height: 220px;
+}
+.login-in{
+	width: 100%;
+	height: 40px;
+	margin-bottom: 5px;
+	display: flex;
+	align-items: center;
+}
+.login-wg{
+	width: 100%;
+	height: 40px;
+	margin-bottom: 5px;
+}
+.login-wg>a{
+	font-size: 12px;
+	color: #aaa;
+	float: right;
+	margin-right: 10px;
+	text-decoration: none;
+}
+.login-wg>a:hover{
+	color: cornflowerblue;
+}
+.login-in>.sub{
+	display: block;
+	border: none;
+	width: 100%;
+	height: 35px;
+	color: white;
+	font-weight: bold;
+	background-color: LightSkyBlue;
+}
+.login-in>.login-in-icon{
+	height: 40px;
+	width: 15%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: white;
+}
+.login-in>.login-in-icon>span{
+	font-size: 16px;
+	font-weight: bold;
+	color: #ccc;
+}
+.login-in>.login-in-content{
+	height: 40px;
+	width: 85%;
+	background-color: pink;
+}
+.login-in>.login-in-content>input{
+	height: 40px;
+	width: 100%;
+	outline: none;
+	border: none;
+	font-size: 12px;
+}
+.login-in>.login-in-captcha{
+	height: 40px;
+	width: 85%;
+	display: flex;
+}
+.login-in>.login-in-captcha>input{
+	border: none;
+	outline: none;
+	width: 40%;
+}
+.login-in>.login-in-captcha>img{
+	height: 40px;
+}
+.login-in>#rm{
+	height: 40px;
+	width: 6.5%;
+}
+.login-in>label{
+	height: 40px;
+	margin-left: 10px;
+	line-height: 48px;
+	cursor: pointer;
+}

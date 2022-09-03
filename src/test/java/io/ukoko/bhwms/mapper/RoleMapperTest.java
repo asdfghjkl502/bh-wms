@@ -14,7 +14,10 @@ class RoleMapperTest extends BhWmsApplicationTests {
 
     @Test
     void addRole() {
-        roleMapper.addRole(new Role(null,"库管"));
+        for (int i = 0; i < 100; i++) {
+            roleMapper.addRole(new Role(null,"普通角色"+i));
+        }
+
     }
 
     @Test

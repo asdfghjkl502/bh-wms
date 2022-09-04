@@ -16,7 +16,14 @@ public class UserController {
     @PostMapping(value = "/login")
     public String login(){
         System.out.println("跳转首页...");
-        return "home";
+        return "redirect:/toHome";
     }
 
+    /**
+     * 跳转home页面
+     */
+    @GetMapping(value = "/toHome")
+    public String toHome(){
+        return "home";
+    }
 }

@@ -41,4 +41,14 @@ public interface RoleService {
      * @return
      */
     Page getRolePage(int pageNo,int pageSize,int isDelete);
+
+
+    /**
+     * 角色分页信息
+     * @param limit 每页显示多少条数
+     * @param offset 偏移量
+     * @param isDelete 是否删除 1:未删除 0:已删除
+     * @return
+     */
+    Page getRolePageFor(int limit,int offset,int isDelete);
 }

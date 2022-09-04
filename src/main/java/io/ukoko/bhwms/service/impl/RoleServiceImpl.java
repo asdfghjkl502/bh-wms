@@ -61,5 +61,19 @@ public class RoleServiceImpl implements RoleService {
         return page;
     }
 
+    @Override
+    public Page getRolePageFor(int limit, int offset, int isDelete) {
+        Page page = new Page();
+        PageHelper.offsetPage(offset,limit);
+        List<Role> roleList = roleMapper.getRoleList(isDelete);
+        PageInfo<Role> pageInfo = new PageInfo<>(roleList);
+        page.setHasPre(pageInfo.isHasPreviousPage());
+        page.setHasNext(pageInfo.isHasNextPage());
+        page.setCount(pageInfo.getTotal());
+        page.setPageCount(pageInfo.getPages());
+        page.setData(pageInfo.getList());
+        return page;
+    }
+
 
 }

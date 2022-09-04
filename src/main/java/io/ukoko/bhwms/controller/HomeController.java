@@ -14,7 +14,7 @@ public class HomeController {
      * @return
      */
     @GetMapping(value = "/")
-    public String home(){
+    public String toLogin(){
         System.out.println("登录页...");
         return "login";
     }

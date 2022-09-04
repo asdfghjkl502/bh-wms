@@ -19,12 +19,19 @@ public class RoleController {
     private RoleService roleService;
 
 
-    /*
-        获取角色分页数据
+    /**
+     * 获取角色分页数据
+     * @param offset: 偏移量
+     * @param limit: 每页显示多少条数
+     * @param isDelete: 是否删除 1:未删除 0:删除
+     * @return
      */
     @GetMapping(value = "/getRoleList")
-    public Result getRoleList(Integer pageNo,Integer pageSize,Integer isDelete){
-        Page page = roleService.getRolePage(pageNo, pageSize, isDelete);
+    public Result getRoleList(Integer limit,Integer offset,Integer isDelete){
+        System.out.println("limit:"+limit);
+        System.out.println("offset:"+offset);
+        System.out.println("isDelete:"+isDelete);
+        Page page = roleService.getRolePageFor(limit,offset,isDelete);
         return new Result(page);
     }
 

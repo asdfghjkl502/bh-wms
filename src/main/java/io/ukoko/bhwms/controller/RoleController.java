@@ -5,6 +5,7 @@ import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "角色管理模块控制器")
 @RestController
+@CrossOrigin
 public class RoleController {
 
     @Autowired

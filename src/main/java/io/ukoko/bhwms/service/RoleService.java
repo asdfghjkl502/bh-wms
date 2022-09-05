@@ -3,6 +3,9 @@ package io.ukoko.bhwms.service;
 import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.entity.Role;
 
+import java.awt.*;
+import java.util.List;
+
 /**
  * 角色管理模块的业务逻辑层
  */
@@ -51,4 +54,11 @@ public interface RoleService {
      * @return
      */
     Page getRolePageFor(int limit,int offset,int isDelete);
+
+    /**
+     * 获取 角色列表
+     * @param isDelete 0:删除列表 1: 未删除列表 null: 全部(删除和未删除)
+     * @return
+     */
+    List<Role> getRolesBy(Integer isDelete);
 }

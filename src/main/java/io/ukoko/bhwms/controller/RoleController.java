@@ -3,11 +3,14 @@ package io.ukoko.bhwms.controller;
 import io.swagger.annotations.Api;
 import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.dto.Result;
+import io.ukoko.bhwms.entity.Role;
 import io.ukoko.bhwms.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * 角色管理模块的控制器层
@@ -35,6 +38,17 @@ public class RoleController {
         System.out.println("isDelete:"+isDelete);
         Page page = roleService.getRolePageFor(limit,offset,isDelete);
         return new Result(page);
+    }
+
+
+    /**
+     * 查询列表
+     * @param isDelete
+     * @return
+     */
+    @GetMapping(value = "/getRoleAll")
+    public List<Role> getRoleAll(Integer isDelete){
+        return roleService.getRolesBy(isDelete);
     }
 
 }

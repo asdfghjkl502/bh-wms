@@ -23,7 +23,10 @@
     </update>
     <!--  查询角色列表  -->
     <select id="getRoleList" resultType="role" parameterType="int">
-        SELECT * FROM role WHERE IS_DELETE=#{isDelete}
+        SELECT * FROM role
+        <where>
+            <if test="isDelete!=null">IS_DELETE=#{isDelete}</if>
+        </where>
     </select>
     <!--  查询单个角色  -->
     <select id="getRoleBy" parameterType="int" resultType="role">

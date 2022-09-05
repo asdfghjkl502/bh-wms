@@ -75,5 +75,10 @@ public class RoleServiceImpl implements RoleService {
         return page;
     }
 
+    @Override
+    public List<Role> getRolesBy(Integer isDelete) {
+        return roleMapper.getRoleList(isDelete);
+    }
+
 
 }

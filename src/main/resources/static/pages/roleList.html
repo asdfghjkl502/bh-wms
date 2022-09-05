@@ -4,57 +4,16 @@
   	  <span class="currentTime"></span>
   </div>
   <div class="panel-body">
-      <table
-              id="table"
-              data-method="get"
-              data-click-to-select="true"
-              data-pagination="true"
-              data-side-pagination="server"
-              data-page-number="1"
-              data-page-size="5"
-              data-page-list="[5, 10, 15, 20]"
-              data-query-params="queryParams"
-              data-response-handler="responseHandler"
-              data-url="getRoleList">
+      <table>
+          <thead
+            data-url="http://localhost:8080/getRoleAll"
+          >
+            <tr>
+                <th data-field="roleId">角色编号</th>
+                <th data-field="roleName">角色名称</th>
+                <th data-field="isDelete">是否有效</th>
+            </tr>
+          </thead>
       </table>
   </div>
 </div>
-<script>
-    var $table = $('#table');
-
-    $(function() {
-        $table.bootstrapTable({
-            columns: [{
-                title: '角色ID',
-                field: 'roleId'
-            }, {
-                title: '角色名称',
-                field: 'roleName'
-            }, {
-                title: '是否有效',
-                field: 'isDelete'
-            }]
-        })
-    })
-
-    /**
-     * 响应处理
-     */
-    function responseHandler(res){
-        var r = {};
-        if(res.code==0){//成功
-            r.total=res.obj.count;
-            r.rows=res.obj.data;
-        }
-        return r;
-    }
-
-    /**
-     * 自定义请求参数
-     */
-    function queryParams(params){
-        params.isDelete=1;
-        return params;
-    }
-
-</script>

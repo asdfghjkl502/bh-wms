@@ -48,6 +48,7 @@ public class RoleController {
      */
     @GetMapping(value = "/getRoleAll")
     public List<Role> getRoleAll(Integer isDelete){
+        System.out.println("getRollAll...");
         return roleService.getRolesBy(isDelete);
     }
 

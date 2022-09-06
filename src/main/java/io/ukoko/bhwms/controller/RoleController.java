@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 角色管理模块的控制器层
@@ -40,6 +42,14 @@ public class RoleController {
         return new Result(page);
     }
 
+    @GetMapping(value = "/getRoleBootstrap")
+    public Object getRoleBootstrap(Integer limit,Integer offset,Integer isDelete){
+        Page page = roleService.getRolePageFor(limit,offset,isDelete);
+        Map<String,Object> map = new HashMap<>();
+        map.put("total",page.getCount());
+        map.put("rows",page.getData());
+        return map;
+    }
 
     /**
      * 查询列表

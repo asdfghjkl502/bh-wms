@@ -53,6 +53,17 @@ public class RoleController {
         return map;
     }
 
+    @GetMapping(value = "/getRolePage")
+    public Object getRolePage(Integer pageNumber,Integer pageSize){
+        System.out.println("+++"+pageNumber);
+        System.out.println("---"+pageSize);
+        Page page = roleService.getRolePage(pageNumber,pageSize,1);
+        Map<String,Object> map = new HashMap<>();
+        map.put("total",page.getCount());
+        map.put("rows",page.getData());
+        return map;
+    }
+
     /**
      * 查询列表
      * @param isDelete

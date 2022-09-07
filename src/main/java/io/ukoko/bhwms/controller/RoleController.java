@@ -43,8 +43,10 @@ public class RoleController {
     }
 
     @GetMapping(value = "/getRoleBootstrap")
-    public Object getRoleBootstrap(Integer limit,Integer offset,Integer isDelete){
-        Page page = roleService.getRolePageFor(limit,offset,isDelete);
+    public Object getRoleBootstrap(Integer limit,Integer offset){
+        System.out.println("==="+offset);
+        System.out.println("---"+limit);
+        Page page = roleService.getRolePageFor(limit,offset,1);
         Map<String,Object> map = new HashMap<>();
         map.put("total",page.getCount());
         map.put("rows",page.getData());

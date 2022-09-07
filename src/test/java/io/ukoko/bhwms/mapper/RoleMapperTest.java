@@ -1,5 +1,6 @@
 package io.ukoko.bhwms.mapper;
 
+import com.github.pagehelper.PageHelper;
 import io.ukoko.bhwms.BhWmsApplicationTests;
 import io.ukoko.bhwms.entity.Role;
 import org.junit.jupiter.api.Test;
@@ -36,6 +37,7 @@ class RoleMapperTest extends BhWmsApplicationTests {
 
     @Test
     void getRoleList() {
+        PageHelper.offsetPage(0,5);
         roleMapper.getRoleList(1).forEach(System.out::println);
     }
 

@@ -61,4 +61,14 @@ public interface RoleService {
      * @return
      */
     List<Role> getRolesBy(Integer isDelete);
+
+    /**
+     * 搜索
+     * @param limit
+     * @param offset
+     * @param roleName
+     * @param isDelete
+     * @return
+     */
+    Page searchRolePage(int limit,int offset,String roleName,int isDelete);
 }

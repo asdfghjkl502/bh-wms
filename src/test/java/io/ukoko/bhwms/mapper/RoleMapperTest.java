@@ -6,6 +6,8 @@ import io.ukoko.bhwms.entity.Role;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class RoleMapperTest extends BhWmsApplicationTests {
@@ -45,5 +47,15 @@ class RoleMapperTest extends BhWmsApplicationTests {
     void getRoleBy() {
         Role role = roleMapper.getRoleBy(1);
         System.out.println(role);
+    }
+
+    @Test
+    void getRoleListLike(){
+        PageHelper.startPage(1,2);
+        List<Role> roles = roleMapper.getRoleListLike("0", 1);
+        for (Role role : roles) {
+            System.out.println(role);
+        }
+
     }
 }

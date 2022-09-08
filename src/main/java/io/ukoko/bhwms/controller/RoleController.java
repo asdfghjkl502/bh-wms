@@ -27,6 +27,25 @@ public class RoleController {
 
 
     /**
+     * 搜索
+     * @param limit
+     * @param offset
+     * @param isDelete
+     * @param search
+     * @return
+     */
+    @GetMapping(value = "/searchRolePage")
+    public Result searchRolePage(Integer limit,Integer offset,Integer isDelete,String search){
+        System.out.println(limit);
+        System.out.println(offset);
+        System.out.println(isDelete);
+        System.out.println(search);
+        Page page = roleService.searchRolePage(limit, offset, search, isDelete);
+        return new Result(page);
+    }
+
+
+    /**
      * 获取角色分页数据
      * @param offset: 偏移量
      * @param limit: 每页显示多少条数

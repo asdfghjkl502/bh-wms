@@ -2,6 +2,7 @@ package io.ukoko.bhwms.mapper;
 
 import io.ukoko.bhwms.entity.Role;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -32,4 +33,12 @@ public interface RoleMapper {
         通过角色ID查询角色信息
      */
     Role getRoleBy(Integer roleId);
+
+    /**
+     * 搜索
+     * @param roleName: 搜索条件
+     * @param isDelete: 是否删除 1: 未删除 0:已删除
+     * @return
+     */
+    List<Role> getRoleListLike(@Param("roleName") String roleName,@Param("isDelete") Integer isDelete);
 }

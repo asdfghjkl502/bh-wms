@@ -33,5 +33,12 @@
         SELECT * FROM role WHERE ROLE_ID=#{roleId}
     </select>
 
+    <select id="getRoleListLike" resultType="role">
+        SELECT * FROM role
+            <where>
+                <if test="isDelete!=null">IS_DELETE=#{isDelete} </if>
+                <if test="roleName!=null">AND  ROLE_NAME LIKE CONCAT('%',#{roleName},'%')</if>
+            </where>
+    </select>
 
 </mapper>

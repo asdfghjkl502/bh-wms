@@ -34,15 +34,12 @@ public class RoleController {
      * @return
      */
     @GetMapping(value = "/getRoleList")
-    public Object getRoleList(Integer limit,Integer offset,Integer isDelete){
+    public Result getRoleList(Integer limit,Integer offset,Integer isDelete){
         System.out.println("limit:"+limit);
         System.out.println("offset:"+offset);
         System.out.println("isDelete:"+isDelete);
         Page page = roleService.getRolePageFor(limit,offset,isDelete);
-        Map<String,Object> map = new HashMap<>();
-        map.put("total",page.getCount());
-        map.put("rows",page.getData());
-        return map;
+        return new Result(page);
     }
 
     @GetMapping(value = "/getRoleBootstrap")

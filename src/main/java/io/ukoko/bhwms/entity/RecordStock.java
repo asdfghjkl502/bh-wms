@@ -1,5 +1,7 @@
 package io.ukoko.bhwms.entity;
 
+import java.util.Date;
+
 /**
  * 映射数据库record_stock(库存记录)表
  */
@@ -17,6 +19,14 @@ public class RecordStock {
     库存数量
    */
   private Integer productStock;
+  /*
+        创建时间
+     */
+  private Date createTime;
+  /*
+      更新时间
+   */
+  private Date updateTime;
   /*
       是否删除 0:删除 1:未删除
    */
@@ -62,12 +72,30 @@ public class RecordStock {
     this.isDelete = isDelete;
   }
 
+  public Date getCreateTime() {
+    return createTime;
+  }
+
+  public void setCreateTime(Date createTime) {
+    this.createTime = createTime;
+  }
+
+  public Date getUpdateTime() {
+    return updateTime;
+  }
+
+  public void setUpdateTime(Date updateTime) {
+    this.updateTime = updateTime;
+  }
+
   @Override
   public String toString() {
     return "RecordStock{" +
             "productId=" + productId +
             ", repoId=" + repoId +
             ", productStock=" + productStock +
+            ", createTime=" + createTime +
+            ", updateTime=" + updateTime +
             ", isDelete=" + isDelete +
             '}';
   }

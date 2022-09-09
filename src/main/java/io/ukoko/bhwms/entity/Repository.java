@@ -1,5 +1,7 @@
 package io.ukoko.bhwms.entity;
 
+import java.util.Date;
+
 /**
  * 映射数据库repository(仓库)表
  */
@@ -24,6 +26,14 @@ public class Repository {
     仓库状态 0:故障 1:正常 2:已满
    */
   private Integer repoStatus;
+  /*
+        创建时间
+     */
+  private Date createTime;
+  /*
+      更新时间
+   */
+  private Date updateTime;
   /*
       是否删除 0:删除 1:未删除
    */
@@ -79,6 +89,22 @@ public class Repository {
     this.isDelete = isDelete;
   }
 
+  public Date getCreateTime() {
+    return createTime;
+  }
+
+  public void setCreateTime(Date createTime) {
+    this.createTime = createTime;
+  }
+
+  public Date getUpdateTime() {
+    return updateTime;
+  }
+
+  public void setUpdateTime(Date updateTime) {
+    this.updateTime = updateTime;
+  }
+
   @Override
   public String toString() {
     return "Repository{" +
@@ -87,6 +113,8 @@ public class Repository {
             ", repoArea='" + repoArea + '\'' +
             ", repoDesc='" + repoDesc + '\'' +
             ", repoStatus=" + repoStatus +
+            ", createTime=" + createTime +
+            ", updateTime=" + updateTime +
             ", isDelete=" + isDelete +
             '}';
   }

@@ -54,6 +54,14 @@ public class RecordOut {
    */
   private String remarks;
   /*
+        创建时间
+     */
+  private Date createTime;
+  /*
+      更新时间
+   */
+  private Date updateTime;
+  /*
       是否删除 0:删除 1:未删除
    */
   private int isDelete=1;
@@ -164,6 +172,22 @@ public class RecordOut {
     this.isDelete = isDelete;
   }
 
+  public Date getCreateTime() {
+    return createTime;
+  }
+
+  public void setCreateTime(Date createTime) {
+    this.createTime = createTime;
+  }
+
+  public Date getUpdateTime() {
+    return updateTime;
+  }
+
+  public void setUpdateTime(Date updateTime) {
+    this.updateTime = updateTime;
+  }
+
   @Override
   public String toString() {
     return "RecordOut{" +
@@ -179,6 +203,8 @@ public class RecordOut {
             ", repoId=" + repoId +
             ", repository=" + repository +
             ", remarks='" + remarks + '\'' +
+            ", createTime=" + createTime +
+            ", updateTime=" + updateTime +
             ", isDelete=" + isDelete +
             '}';
   }

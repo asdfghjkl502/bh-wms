@@ -4,6 +4,7 @@ import io.ukoko.bhwms.entity.Role;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,4 +42,7 @@ public interface RoleMapper {
      * @return
      */
     List<Role> getRoleListLike(@Param("roleName") String roleName,@Param("isDelete") Integer isDelete);
+
+    List<Role> getRolesByParam(@Param("roleName") String roleName, @Param("isDelete") Integer isDelete, @Param("startTime") Date startTime,@Param("endTime")Date endTime);
+
 }

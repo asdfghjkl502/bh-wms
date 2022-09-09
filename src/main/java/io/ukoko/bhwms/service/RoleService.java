@@ -4,6 +4,7 @@ import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.entity.Role;
 
 import java.awt.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -71,4 +72,16 @@ public interface RoleService {
      * @return
      */
     Page searchRolePage(int limit,int offset,String roleName,int isDelete);
+
+    /**
+     * 多条件查询
+     * @param limit
+     * @param offset
+     * @param roleName
+     * @param isDelete
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    Page searchRolePageParam(int limit, int offset, String roleName, Integer isDelete, Date startTime,Date endTime);
 }

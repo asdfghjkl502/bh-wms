@@ -6,10 +6,12 @@ import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.entity.Role;
 import io.ukoko.bhwms.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +26,20 @@ public class RoleController {
 
     @Autowired
     private RoleService roleService;
+
+    /**
+     * 多条件搜索查询
+     */
+    @GetMapping(value = "/searchRolePageParam")
+    public Object searchRolePageParam(Integer limit, Integer offset, Integer isDelete, String roleName, @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") Date startTime, @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") Date endTime){
+        System.out.println(startTime);
+        System.out.println(endTime);
+        Page page = roleService.searchRolePageParam(limit, offset, roleName, isDelete, startTime, endTime);
+        Map<String,Object> map = new HashMap<>();
+        map.put("total",page.getCount());
+        map.put("rows",page.getData());
+        return map;
+    }
 
 
     /**

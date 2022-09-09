@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -87,6 +88,20 @@ public class RoleServiceImpl implements RoleService {
         Page page = new Page();
         PageHelper.offsetPage(offset,limit);
         List<Role> roleList = roleMapper.getRoleListLike(roleName,isDelete);
+        PageInfo<Role> pageInfo = new PageInfo<>(roleList);
+        page.setHasPre(pageInfo.isHasPreviousPage());
+        page.setHasNext(pageInfo.isHasNextPage());
+        page.setCount(pageInfo.getTotal());
+        page.setPageCount(pageInfo.getPages());
+        page.setData(pageInfo.getList());
+        return page;
+    }
+
+    @Override
+    public Page searchRolePageParam(int limit, int offset, String roleName, Integer isDelete, Date startTime, Date endTime) {
+        Page page = new Page();
+        PageHelper.offsetPage(offset,limit);
+        List<Role> roleList = roleMapper.getRolesByParam(roleName,isDelete,startTime,endTime);
         PageInfo<Role> pageInfo = new PageInfo<>(roleList);
         page.setHasPre(pageInfo.isHasPreviousPage());
         page.setHasNext(pageInfo.isHasNextPage());

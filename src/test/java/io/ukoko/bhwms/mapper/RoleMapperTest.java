@@ -6,6 +6,7 @@ import io.ukoko.bhwms.entity.Role;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +19,7 @@ class RoleMapperTest extends BhWmsApplicationTests {
     @Test
     void addRole() {
         for (int i = 0; i < 100; i++) {
-            roleMapper.addRole(new Role(null,"普通角色"+i));
+            roleMapper.addRole(new Role("普通角色"+i,new Date(),1));
         }
 
     }

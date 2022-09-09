@@ -34,6 +34,12 @@ public class Role {
         this.roleName = roleName;
     }
 
+    public Role(String roleName, Date createTime, int isDelete) {
+        this.roleName = roleName;
+        this.createTime = createTime;
+        this.isDelete = isDelete;
+    }
+
     public Integer getRoleId() {
         return roleId;
     }

@@ -6,7 +6,7 @@
 
     <!--  添加角色  -->
     <insert id="addRole" parameterType="role" useGeneratedKeys="true" keyProperty="roleId">
-        INSERT INTO role(ROLE_NAME,IS_DELETE) VALUES(#{roleName},#{isDelete})
+        INSERT INTO role(ROLE_NAME,CREATE_TIME,IS_DELETE) VALUES(#{roleName},#{createTime},#{isDelete})
     </insert>
     <!--  删除角色  -->
     <update id="deleteRole" parameterType="int">
@@ -17,6 +17,7 @@
         UPDATE role
         <set>
             <if test="roleName!=null">ROLE_NAME=#{roleName},</if>
+            <if test="createTime!=null">CREATE_TIME=#{createTime},</if>
             <if test="isDelete!=null">IS_DELETE=#{isDelete}</if>
         </set>
         WHERE ROLE_ID=#{roleId}

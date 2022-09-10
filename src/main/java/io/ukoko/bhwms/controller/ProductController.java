@@ -7,7 +7,11 @@ import io.ukoko.bhwms.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 商品处理器
@@ -36,6 +40,12 @@ public class ProductController {
     public Object getProductList(Integer limit,Integer offset,String productName,Integer categoryId,Double productPrice,String productSize,Integer productId,Integer isDelete){
         Page page = productService.getProductBy(limit, offset, productName, categoryId, productPrice, productSize, productId, isDelete);
         return new Result(page);
+    }
+
+    @GetMapping(value = "/deleteProduct")
+    public Result deleteProduct(Integer productId){
+        productService.deleteProduct(productId);
+        return new Result();
     }
 
 }

@@ -44,4 +44,9 @@ public class ProductServiceImpl implements ProductService {
         page.setHasPre(info.isHasPreviousPage());
         return page;
     }
+
+    @Override
+    public void deleteProduct(Integer productId) {
+        productMapper.deleteProduct(productId);
+    }
 }

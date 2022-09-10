@@ -36,5 +36,9 @@
             <if test="productId!=null">AND PRODUCT_ID=#{productId}</if>
         </where>
     </select>
+    
+    <update id="deleteProduct" parameterType="int">
+        UPDATE product SET IS_DELETE=0 WHERE PRODUCT_ID=#{productId}
+    </update>
 
 </mapper>

@@ -23,4 +23,10 @@ public interface ProductMapper {
      * @return
      */
     List<Product> getProductList(Product product);
+
+    /**
+     * 删除
+     * @param productId
+     */
+    void deleteProduct(Integer productId);
 }

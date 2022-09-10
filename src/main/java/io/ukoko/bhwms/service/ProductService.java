@@ -13,4 +13,9 @@ public interface ProductService {
      */
     Page getProductBy(Integer limit,Integer offset,String productName,Integer categoryId,Double productPrice,String productSize,Integer productId,Integer isDelete);
 
+    /**
+     * 删除
+     * @param productId
+     */
+    void deleteProduct(Integer productId);
 }

@@ -45,4 +45,9 @@ public interface RoleMapper {
 
     List<Role> getRolesByParam(@Param("roleName") String roleName, @Param("isDelete") Integer isDelete, @Param("startTime") Date startTime,@Param("endTime")Date endTime);
 
+    /**
+     * 批量删除
+     * @param roleIds
+     */
+    void batchDeleteRole(List<Integer> roleIds);
 }

@@ -7,9 +7,7 @@ import io.ukoko.bhwms.entity.Role;
 import io.ukoko.bhwms.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -26,6 +24,19 @@ public class RoleController {
 
     @Autowired
     private RoleService roleService;
+
+
+    /**
+     * 批量删除
+     * @param roleIds
+     * @return
+     */
+    @PostMapping(value = "/batchDeleteRole")
+    public Result batchDeleteRole(@RequestBody List<Integer> roleIds){
+        System.out.println("roleIds:"+roleIds);
+        roleService.batchDeleteRole(roleIds);
+        return new Result();
+    }
 
     /**
      * 多条件搜索查询

@@ -111,5 +111,10 @@ public class RoleServiceImpl implements RoleService {
         return page;
     }
 
+    @Override
+    public void batchDeleteRole(List<Integer> roleIds) {
+        roleMapper.batchDeleteRole(roleIds);
+    }
+
 
 }

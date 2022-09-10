@@ -6,6 +6,7 @@ import io.ukoko.bhwms.entity.Role;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +16,14 @@ class RoleMapperTest extends BhWmsApplicationTests {
 
     @Autowired
     private RoleMapper roleMapper;
+
+    @Test
+    void batchDeleteRole(){
+        List<Integer> roleIds = new ArrayList<>();
+        roleIds.add(1);
+        roleIds.add(2);
+        roleMapper.batchDeleteRole(roleIds);
+    }
 
     @Test
     void addRole() {

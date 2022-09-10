@@ -84,4 +84,10 @@ public interface RoleService {
      * @return
      */
     Page searchRolePageParam(int limit, int offset, String roleName, Integer isDelete, Date startTime,Date endTime);
+
+    /**
+     * 批量删除
+     * @param roleIds
+     */
+    void batchDeleteRole(List<Integer> roleIds);
 }

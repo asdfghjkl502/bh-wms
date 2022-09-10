@@ -53,4 +53,16 @@
         </where>
     </select>
 
+    <update id="batchDeleteRole">
+        <foreach collection="list" item="item" separator=";">
+            UPDATE role
+            <set>
+                IS_DELETE=0
+            </set>
+            <where>
+                ROLE_ID=#{item}
+            </where>
+        </foreach>
+    </update>
+
 </mapper>

@@ -41,7 +41,7 @@ public class Product {
   /*
       是否删除 0:删除 1:未删除
    */
-  private int isDelete=1;
+  private Integer isDelete=1;
   public Product() {
   }
 
@@ -93,11 +93,11 @@ public class Product {
     this.productPrice = productPrice;
   }
 
-  public int getIsDelete() {
+  public Integer getIsDelete() {
     return isDelete;
   }
 
-  public void setIsDelete(int isDelete) {
+  public void setIsDelete(Integer isDelete) {
     this.isDelete = isDelete;
   }
 

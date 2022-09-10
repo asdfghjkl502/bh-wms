@@ -34,6 +34,19 @@ public class Category {
         this.categoryName = categoryName;
     }
 
+    public Category(String categoryName, Date createTime, int isDelete) {
+        this.categoryName = categoryName;
+        this.createTime = createTime;
+        this.isDelete = isDelete;
+    }
+
+    public Category(String categoryName, Date createTime, Date updateTime, int isDelete) {
+        this.categoryName = categoryName;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+        this.isDelete = isDelete;
+    }
+
     public Integer getCategoryId() {
         return categoryId;
     }

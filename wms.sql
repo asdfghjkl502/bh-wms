@@ -71,6 +71,29 @@ CREATE TABLE user_department (
   IS_DELETE INT DEFAULT 1 COMMENT '是否删除 0:删除 1:未删除'
 )DEFAULT CHARSET=UTF8 COMMENT="用户部门关联表";
 
+-- 菜单表
+CREATE TABLE menus (
+     MENU_ID INT PRIMARY KEY AUTO_INCREMENT COMMENT '菜单ID,主键自增',
+     MENU_NAME VARCHAR(100) NOT NULL COMMENT '菜单名称',
+     P_ID INT COMMENT '父ID,关联menus表主键,默认值为0,表示菜单第一级',
+     IS_DELETE INT DEFAULT 1 COMMENT '菜单状态 0:删除 1:未删除'
+)DEFAULT CHARSET=UTF8 COMMENT="菜单表";
+
+-- 插入测试数据
+INSERT INTO menus(MENU_NAME,P_ID,IS_DELETE) VALUES('系统管理',0,1);
+INSERT INTO menus(MENU_NAME,P_ID,IS_DELETE) VALUES('字典管理',0,1);
+INSERT INTO menus(MENU_NAME,P_ID,IS_DELETE) VALUES('新增系统',1,1);
+INSERT INTO menus(MENU_NAME,P_ID,IS_DELETE) VALUES('编辑系统',1,1);
+INSERT INTO menus(MENU_NAME,P_ID,IS_DELETE) VALUES('删除系统',1,1);
+INSERT INTO menus(MENU_NAME,P_ID,IS_DELETE) VALUES('角色管理',2,1);
+INSERT INTO menus(MENU_NAME,P_ID,IS_DELETE) VALUES('新增角色',6,1);
+INSERT INTO menus(MENU_NAME,P_ID,IS_DELETE) VALUES('编辑角色',6,1);
+INSERT INTO menus(MENU_NAME,P_ID,IS_DELETE) VALUES('删除角色',6,1);
+INSERT INTO menus(MENU_NAME,P_ID,IS_DELETE) VALUES('部门管理',2,1);
+INSERT INTO menus(MENU_NAME,P_ID,IS_DELETE) VALUES('新增部门',7,1);
+INSERT INTO menus(MENU_NAME,P_ID,IS_DELETE) VALUES('编辑部门',7,1);
+INSERT INTO menus(MENU_NAME,P_ID,IS_DELETE) VALUES('删除部门',7,1);
+
 -- --------------------------------------------------------------------
 -- 业务相关表
 -- --------------------------------------------------------------------

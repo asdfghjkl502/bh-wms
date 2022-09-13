@@ -24,7 +24,6 @@ public class MenusController {
     @GetMapping(value = "/getMenuList")
     public List<Menus> getMenuList(){
         List<Menus> menuList = menusSerivce.getMenuList();
-        System.out.println("==>>"+menuList);
         return menuList;
     }
 

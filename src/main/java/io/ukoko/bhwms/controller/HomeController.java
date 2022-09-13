@@ -14,7 +14,7 @@ public class HomeController {
      * 跳转网站首页(登录页)
      * @return
      */
-    @GetMapping(value = "/")
+    @GetMapping(value = "/toLogin")
     public String toLogin(){
         System.out.println("登录页...");
         return "login";
@@ -34,7 +34,7 @@ public class HomeController {
      * 跳转home页面
      * @return
      */
-    @GetMapping(value = "/home")
+    @GetMapping(value = "/")
     public String toHome(){
         System.out.println("跳转home页...");
         return "home";

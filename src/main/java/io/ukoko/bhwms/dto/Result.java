@@ -20,6 +20,11 @@ public class Result {
     public Result() {
     }
 
+    public Result(int code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
+
     public Result(Object obj) {
         this.obj = obj;
     }

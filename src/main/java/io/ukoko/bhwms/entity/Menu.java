@@ -1,12 +1,10 @@
 package io.ukoko.bhwms.entity;
 
 
-import java.util.List;
-
 /**
- * 映射数据库menus(菜单)表
+ * 映射数据库menu(菜单)表
  */
-public class Menus {
+public class Menu {
     /*
         菜单ID
      */
@@ -25,7 +23,7 @@ public class Menus {
      */
     private Integer isDelete;
 
-    public Menus() {
+    public Menu() {
     }
 
     public Integer getMenuId() {

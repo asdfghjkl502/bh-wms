@@ -1,11 +1,14 @@
 package io.ukoko.bhwms.controller;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.entity.Role;
 import io.ukoko.bhwms.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -68,8 +71,17 @@ public class RoleController {
      * @param roleId : 角色ID
      * @return
      */
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "limit",value = "页容量",dataType = "java.lang.Integer"),
+            @ApiImplicitParam(name = "offset",value = "偏移量",dataType = "java.lang.Integer"),
+            @ApiImplicitParam(name = "isDelete",value = "是否删除 0:删除,1:未删除",dataType = "java.lang.Integer"),
+            @ApiImplicitParam(name = "roleName",value = "角色名称",dataType = "java.lang.String"),
+            @ApiImplicitParam(name = "startTime",value = "开始时间",dataType = "java.util.Date"),
+            @ApiImplicitParam(name = "endTime",value = "结束时间",dataType = "java.util.Date"),
+            @ApiImplicitParam(name = "roleId",value = "角色ID",dataType = "java.lang.Integer")
+    })
     @GetMapping(value = "/getRoles")
-    public Result getRoles(int limit, int offset, Integer isDelete, String roleName, Date startTime, Date endTime, Integer roleId){
+    public Result getRoles(int limit, int offset, Integer isDelete, String roleName, @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime, Integer roleId){
         Page page = roleService.getRolePageFor(limit, offset, isDelete, roleName, startTime, endTime, roleId);
         return new Result(page);
     }
@@ -79,6 +91,7 @@ public class RoleController {
      * @param roleId:角色ID
      * @return
      */
+    @ApiImplicitParams(value = {@ApiImplicitParam(name = "roleId",value = "角色ID",dataType = "java.lang.Integer")})
     @GetMapping(value = "/getRole")
     public Object getRole(Integer roleId){
         Role role = roleService.getRoleByRoleId(roleId);

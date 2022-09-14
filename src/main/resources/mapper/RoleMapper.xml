@@ -22,47 +22,28 @@
         </set>
         WHERE ROLE_ID=#{roleId}
     </update>
-    <!--  查询角色列表  -->
-    <select id="getRoleList" resultType="role" parameterType="int">
-        SELECT * FROM role
-        <where>
-            <if test="isDelete!=null">IS_DELETE=#{isDelete}</if>
-        </where>
-    </select>
-    <!--  查询单个角色  -->
-    <select id="getRoleBy" parameterType="int" resultType="role">
+    
+    <!--查询单个-->
+    <select id="getRoleByRoleId" resultType="role" parameterType="int">
         SELECT * FROM role WHERE ROLE_ID=#{roleId}
     </select>
 
-    <select id="getRoleListLike" resultType="role">
-        SELECT * FROM role
-            <where>
-                <if test="isDelete!=null">IS_DELETE=#{isDelete} </if>
-                <if test="roleName!=null">AND  ROLE_NAME LIKE CONCAT('%',#{roleName},'%')</if>
-            </where>
-    </select>
-    
-    <select id="getRolesByParam" resultType="role">
-        SELECT * FROM role
-        <where>
-            <if test="isDelete!=null">IS_DELETE=#{isDelete} </if>
-            <if test="roleName!=null">AND  ROLE_NAME LIKE CONCAT('%',#{roleName},'%')</if>
-            <if test="startTime!=null and endTime!=null">
-                AND CREATE_TIME  <![CDATA[>=]]>  #{startTime} AND CREATE_TIME <![CDATA[<=]]> #{endTime}
-            </if>
-        </where>
-    </select>
-
+    <!--批量删除-->
     <update id="batchDeleteRole">
         <foreach collection="list" item="item" separator=";">
-            UPDATE role
-            <set>
-                IS_DELETE=0
-            </set>
-            <where>
-                ROLE_ID=#{item}
-            </where>
+            UPDATE role SET IS_DELETE=0 WHERE ROLE_ID=#{item}
         </foreach>
     </update>
+
+    <!--查询列表-->
+    <select id="getRoleList" resultType="role">
+        SELECT * FROM role
+        <where>
+            <if test="roleName!=null">ROLE_NAME LIKE CONCAT('%',#{roleName},'%')</if>
+            <if test="isDelete!=null">AND IS_DELETE=#{isDelete}</if>
+            <if test="roleId!=null">AND ROLE_ID=#{roleId}</if>
+            <if test="startTime!=null and endTime!=null">AND UPDATE_TIME <![CDATA[>=]]> #{startTime} AND UPDATE_TIME <![CDATA[<=]]> #{endTime}</if>
+        </where>
+    </select>
 
 </mapper>

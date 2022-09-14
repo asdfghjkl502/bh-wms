@@ -70,6 +70,7 @@ public class RoleController {
      * @param endTime: 结束时间
      * @param roleId : 角色ID
      * @return
+     * swagger文档 https://blog.csdn.net/qq_40772692/article/details/124348169
      */
     @ApiImplicitParams({
             @ApiImplicitParam(name = "limit",value = "页容量",dataType = "java.lang.Integer"),
@@ -83,6 +84,7 @@ public class RoleController {
     @GetMapping(value = "/getRoles")
     public Result getRoles(int limit, int offset, Integer isDelete, String roleName, @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime, Integer roleId){
         Page page = roleService.getRolePageFor(limit, offset, isDelete, roleName, startTime, endTime, roleId);
+        System.out.println("page==:"+page);
         return new Result(page);
     }
 

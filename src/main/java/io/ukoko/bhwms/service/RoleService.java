@@ -39,55 +39,21 @@ public interface RoleService {
 
     /**
      * 角色分页信息
-     * @param pageNo 当前页
-     * @param pageSize 每页显示多少条数
-     * @param isDelete 是否删除 1:未删除 0:已删除
+     * @param limit: 每页显示多少条数
+     * @param offset: 偏移量
+     * @param isDelete: 是是否有效 0:无效 1: 有效
+     * @param roleName: 角色名称
+     * @param startTime: 开始时间
+     * @param endTime : 结束时间
+     * @param roleId : 角色ID
      * @return
      */
-    Page getRolePage(int pageNo,int pageSize,int isDelete);
+    Page getRolePageFor(int limit,int offset,Integer isDelete,String roleName,Date startTime,Date endTime,Integer roleId);
 
-
-    /**
-     * 角色分页信息
-     * @param limit 每页显示多少条数
-     * @param offset 偏移量
-     * @param isDelete 是否删除 1:未删除 0:已删除
-     * @return
-     */
-    Page getRolePageFor(int limit,int offset,int isDelete);
-
-    /**
-     * 获取 角色列表
-     * @param isDelete 0:删除列表 1: 未删除列表 null: 全部(删除和未删除)
-     * @return
-     */
-    List<Role> getRolesBy(Integer isDelete);
-
-    /**
-     * 搜索
-     * @param limit
-     * @param offset
-     * @param roleName
-     * @param isDelete
-     * @return
-     */
-    Page searchRolePage(int limit,int offset,String roleName,int isDelete);
-
-    /**
-     * 多条件查询
-     * @param limit
-     * @param offset
-     * @param roleName
-     * @param isDelete
-     * @param startTime
-     * @param endTime
-     * @return
-     */
-    Page searchRolePageParam(int limit, int offset, String roleName, Integer isDelete, Date startTime,Date endTime);
 
     /**
      * 批量删除
-     * @param roleIds
+     * @param roleIds 角色ID
      */
     void batchDeleteRole(List<Integer> roleIds);
 }

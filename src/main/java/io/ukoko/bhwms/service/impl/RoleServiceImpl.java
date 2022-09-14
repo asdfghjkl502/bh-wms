@@ -13,16 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 import java.util.List;
 
-/**
- * 角色模块功能实现类
- */
 @Transactional
 @Service
 public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private RoleMapper roleMapper;
-
 
     @Override
     public void addRole(Role role) {
@@ -41,73 +37,22 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role getRoleByRoleId(Integer roleId) {
-        return roleMapper.getRoleBy(roleId);
+        return roleMapper.getRoleByRoleId(roleId);
     }
 
     @Override
-    public Page getRolePage(int pageNo, int pageSize, int isDelete) {
-        Page page = new Page();
-        PageHelper.startPage(pageNo,pageSize);
-        List<Role> roleList = roleMapper.getRoleList(isDelete);
-        PageInfo<Role> pageInfo = new PageInfo<>(roleList);
-
-        page.setPageNo(pageNo);
-        page.setPageSize(pageSize);
-        page.setHasPre(pageInfo.isHasPreviousPage());
-        page.setHasNext(pageInfo.isHasNextPage());
-        page.setCount(pageInfo.getTotal());
-        page.setPageCount(pageInfo.getPages());
-        page.setData(pageInfo.getList());
-
-        return page;
-    }
-
-    @Override
-    public Page getRolePageFor(int limit, int offset, int isDelete) {
-        Page page = new Page();
+    public Page getRolePageFor(int limit, int offset, Integer isDelete, String roleName, Date startTime, Date endTime, Integer roleId) {
         PageHelper.offsetPage(offset,limit);
-        List<Role> roleList = roleMapper.getRoleList(isDelete);
-        System.out.println(roleList.size());
-        PageInfo<Role> pageInfo = new PageInfo<>(roleList);
-        page.setHasPre(pageInfo.isHasPreviousPage());
-        page.setHasNext(pageInfo.isHasNextPage());
-        page.setCount(pageInfo.getTotal());
-        page.setPageCount(pageInfo.getPages());
-        page.setData(pageInfo.getList());
-        System.out.println(page);
-        return page;
-    }
-
-    @Override
-    public List<Role> getRolesBy(Integer isDelete) {
-        return roleMapper.getRoleList(isDelete);
-    }
-
-    @Override
-    public Page searchRolePage(int limit, int offset, String roleName, int isDelete) {
+        List<Role> list = roleMapper.getRoleList(roleName, isDelete, roleId, startTime, endTime);
+        PageInfo<Role> info = new PageInfo<>(list);
         Page page = new Page();
-        PageHelper.offsetPage(offset,limit);
-        List<Role> roleList = roleMapper.getRoleListLike(roleName,isDelete);
-        PageInfo<Role> pageInfo = new PageInfo<>(roleList);
-        page.setHasPre(pageInfo.isHasPreviousPage());
-        page.setHasNext(pageInfo.isHasNextPage());
-        page.setCount(pageInfo.getTotal());
-        page.setPageCount(pageInfo.getPages());
-        page.setData(pageInfo.getList());
-        return page;
-    }
-
-    @Override
-    public Page searchRolePageParam(int limit, int offset, String roleName, Integer isDelete, Date startTime, Date endTime) {
-        Page page = new Page();
-        PageHelper.offsetPage(offset,limit);
-        List<Role> roleList = roleMapper.getRolesByParam(roleName,isDelete,startTime,endTime);
-        PageInfo<Role> pageInfo = new PageInfo<>(roleList);
-        page.setHasPre(pageInfo.isHasPreviousPage());
-        page.setHasNext(pageInfo.isHasNextPage());
-        page.setCount(pageInfo.getTotal());
-        page.setPageCount(pageInfo.getPages());
-        page.setData(pageInfo.getList());
+        page.setPageNo(info.getPageNum());
+        page.setPageSize(info.getPageSize());
+        page.setPageCount(info.getPages());
+        page.setCount(info.getTotal());
+        page.setHasPre(info.isHasPreviousPage());
+        page.setHasNext(info.isHasNextPage());
+        page.setData(info.getList());
         return page;
     }
 
@@ -115,6 +60,4 @@ public class RoleServiceImpl implements RoleService {
     public void batchDeleteRole(List<Integer> roleIds) {
         roleMapper.batchDeleteRole(roleIds);
     }
-
-
 }

@@ -43,7 +43,7 @@ public class UserServiceImpl  implements UserService {
     @Override
     public Page getUserPage(int limit, int offset, Integer isDelete, String userName, String userTel, String userEmail, String userNick, Date startTime, Date endTime, Integer userId) {
         Page page = new Page();
-        PageHelper.offsetPage(limit,offset);
+        PageHelper.offsetPage(offset,limit);
         List<User> userList = userMapper.getUserList(userId, userName, userTel, userEmail, userNick, startTime, endTime, isDelete);
         PageInfo<User> info = new PageInfo<>(userList);
         page.setPageSize(info.getPageSize());

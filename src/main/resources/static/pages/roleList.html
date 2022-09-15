@@ -62,6 +62,14 @@
                     return s;
                 }
 
+            },
+            {
+                title:'操作',
+                formatter:function (value,row,index,field) {
+                    let s="<div style='width:70%;margin: 0 auto;display:flex;justify-content: space-around'><button type=\"button\" class=\"btn btn-danger btn-sm\">删除</button>";
+                    s+="<button type=\"button\" class=\"btn btn-warning btn-sm\">更新</button></div>";
+                    return s;
+                }
             }
         ]
     });

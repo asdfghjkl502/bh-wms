@@ -7,3 +7,40 @@
     <table id="table"></table>
   </div>
 </div>
+<script>
+    //1. 获取table的JQuery对象
+    var $table=$("#table");
+    //2. 调用bootstrapTable函数
+    $table.bootstrapTable({
+        url:"http://localhost:8080/getRoles",
+        /* 开启分页 */
+        pagination:true,
+        /* 从服务端获取数据,如果不设置分页不会生效 */
+        sidePagination:"server",
+        /*响应数据处理*/
+        responseHandler:function(res){
+            return{
+                rows:res.obj.data,
+                total:res.obj.count
+            }
+        },
+        // 自定义表的列
+        columns:[
+            {
+                // 自定义列名称
+                title:'角色ID',
+                // 后台JSON数据中对应的属性名
+                field:'roleId'
+            },
+            {
+                title:'角色名称',
+                field:'roleName'
+            },
+            {
+                title:'是否删除',
+                field:'isDelete'
+            }
+        ]
+    });
+
+</script>

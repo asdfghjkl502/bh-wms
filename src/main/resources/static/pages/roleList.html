@@ -28,6 +28,12 @@
                 total:res.obj.count
             }
         },
+        /* 分页列表 */
+        pageList:[5,10,15,20,25],
+        /*默认当前页*/
+        pageNumber:1,
+        /* 每页显示多少条数 */
+        pageSize:5,
         // 自定义表的列
         columns:[
             {
@@ -50,7 +56,12 @@
             },
             {
                 title:'是否删除',
-                field:'isDelete'
+                field:'isDelete',
+                formatter:function (value,row,index,field) {
+                    let s="<span class=\"label label-success\">"+(value==1?'有效':'无效')+"</span>";
+                    return s;
+                }
+
             }
         ]
     });

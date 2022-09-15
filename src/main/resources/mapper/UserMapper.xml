@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.ukoko.bhwms.mapper.UserMapper">
+
+    <insert id="addUser" parameterType="user" useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO user(
+                         USER_NAME,USER_TEL,
+                         USER_EMAIL,USER_NICK,
+                         PASSWORD,SALT,
+                         CREATE_TIME,IS_DELETE)
+                VALUES(#{userName},#{userTel},
+                       #{userEmail},#{userNick},
+                       #{password},#{salt},
+                       #{createTime},#{isDelete})
+    </insert>
+
+    <update id="deleteUser" parameterType="int">
+        UPDATE user SET IS_DELETE=0 WHERE USER_ID=#{userId}
+    </update>
+    
+    <update id="updateUser" parameterType="user">
+        UPDATE user
+            <set>
+                <if test="userName!=null">USER_NAME=#{userName},</if>
+                <if test="userTel!=null">USER_TEL=#{userTel},</if>
+                <if test="userEmail!=null">USER_EMAIL=#{userEmail},</if>
+                <if test="userNick!=null">USER_NICK=#{userNick},</if>
+                <if test="password!=null">PASSWORD=#{password},</if>
+                <if test="salt!=null">SALT=#{salt},</if>
+                <if test="createTime!=null">CREATE_TIME=#{createTime},</if>
+                <if test="isDelete!=null">IS_DELETE=#{isDelete}</if>
+            </set>
+            <where>
+                USER_ID=#{userId}
+            </where>
+    </update>
+    
+    <select id="getUser" resultType="user" parameterType="int">
+        SELECT * FROM user WHERE USER_ID=#{userId}
+    </select>
+    
+    <select id="getUserList" resultType="user">
+        SELECT * FROM user
+            <where>
+                <if test="userName!=null">USER_NAME LIKE CONCAT('%',#{userName},'%')</if>
+                <if test="userTel!=null">AND USER_TEL=#{userTel}</if>
+                <if test="userEmail!=null">AND USER_EMAIL=#{userEmail}</if>
+                <if test="userNick!=null">AND USER_NICK=#{userNick}</if>
+                <if test="isDelete!=null">AND IS_DELETE=#{isDelete}</if>
+                <if test="userId!=null">AND USER_ID=#{userId}</if>
+                <if test="startTime!=null and endTime!=null">AND CREATE_TIME <![CDATA[>=]]> #{startTime} AND CREATE_TIME <![CDATA[<=]]> #{endTime}</if>
+            </where>
+    </select>
+</mapper>

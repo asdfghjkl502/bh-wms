@@ -84,7 +84,6 @@ public class RoleController {
     @GetMapping(value = "/getRoles")
     public Result getRoles(int limit, int offset, Integer isDelete, String roleName, @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime, Integer roleId){
         Page page = roleService.getRolePageFor(limit, offset, isDelete, roleName, startTime, endTime, roleId);
-        System.out.println("page==:"+page);
         return new Result(page);
     }
 

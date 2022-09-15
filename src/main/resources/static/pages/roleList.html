@@ -17,6 +17,10 @@
         pagination:true,
         /* 从服务端获取数据,如果不设置分页不会生效 */
         sidePagination:"server",
+        /* 上一页设置 */
+        paginationPreText:"上一页",
+        /* 下一页设置 */
+        paginationNextText:"下一页",
         /*响应数据处理*/
         responseHandler:function(res){
             return{
@@ -35,6 +39,14 @@
             {
                 title:'角色名称',
                 field:'roleName'
+            },
+            {
+                title:'创建时间',
+                field:'createTime'
+            },
+            {
+                title:'更新时间',
+                field:'updateTime'
             },
             {
                 title:'是否删除',

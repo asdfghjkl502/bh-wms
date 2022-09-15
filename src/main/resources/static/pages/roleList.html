@@ -19,6 +19,8 @@
         sidePagination:"server",
         /* 上一页设置 */
         paginationPreText:"上一页",
+        /* 分页循环 */
+        paginationLoop:false,
         /* 下一页设置 */
         paginationNextText:"下一页",
         /*响应数据处理*/
@@ -34,7 +36,14 @@
         pageNumber:1,
         /* 每页显示多少条数 */
         pageSize:5,
-        // 自定义表的列
+        /* 开启搜索 */
+        search:true,
+        /*定制化请求参数*/
+        queryParams:function(params){
+            params.roleName = params.search;
+            return params;
+        },
+        /* 自定义表的列 */
         columns:[
             {
                 // 自定义列名称

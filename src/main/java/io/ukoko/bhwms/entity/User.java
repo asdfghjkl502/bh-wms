@@ -47,6 +47,7 @@ public class User {
       是否删除 0:删除 1:未删除
    */
   private int isDelete=1;
+
   public User() {
   }
 

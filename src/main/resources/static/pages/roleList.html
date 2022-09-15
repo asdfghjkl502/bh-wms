@@ -67,7 +67,7 @@
                 title:'是否删除',
                 field:'isDelete',
                 formatter:function (value,row,index,field) {
-                    let s="<span class=\"label label-success\">"+(value==1?'有效':'无效')+"</span>";
+                    let s=value==1?"<span class=\"label label-success\">有效</span>":"<span class=\"label label-danger\">无效</span>";
                     return s;
                 }
 

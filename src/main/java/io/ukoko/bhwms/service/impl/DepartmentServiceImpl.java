@@ -25,18 +25,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Page getDepartmentPage(int offset, int limit) {
-        Page page = new Page();
-        PageHelper.offsetPage(offset,limit);
-        List<Department> list = departmentMapper.getDepartmentList();
-        PageInfo<Department> info = new PageInfo<>(list);
-        page.setPageNo(info.getPageNum());
-        page.setPageSize(info.getPageSize());
-        page.setPageCount(info.getPages());
-        page.setCount(info.getTotal());
-        page.setHasNext(info.isHasNextPage());
-        page.setHasPre(info.isHasPreviousPage());
-        page.setData(info.getList());
-        return page;
+    public List<Department> getDepartmentList() {
+        return departmentMapper.getDepartmentList();
     }
+
+
 }

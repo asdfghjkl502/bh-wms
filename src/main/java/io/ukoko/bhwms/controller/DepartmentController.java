@@ -31,14 +31,10 @@ public class DepartmentController {
     }
 
     /**
-     * 获取部门分页
-     * @param offset
-     * @param limit
-     * @return
+     * 获取部门列表
      */
-    @GetMapping(value = "/getDepartmentPage")
-    public Result getDepartmentPage(Integer offset,Integer limit){
-        Page page = departmentService.getDepartmentPage(offset, limit);
-        return new Result(page);
+    @GetMapping(value = "/getDepartmentList")
+    public Object getDepartmentList(){
+        return departmentService.getDepartmentList();
     }
 }

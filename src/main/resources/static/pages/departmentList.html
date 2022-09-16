@@ -11,32 +11,12 @@
 
 	var $departmentTable=$("#departmentTable");
     $departmentTable.bootstrapTable({
-        url: 'getDepartmentPage',
+        url: 'getDepartmentList',
         /* 主键ID,和父ID产生关联的属性 */
         idField: 'deptId',
         /*显示列*/
         showColumns: true,
-        /* 开启分页 */
-        pagination:true,
-        /* 从服务端获取数据,如果不设置分页不会生效 */
-        sidePagination:"server",
-        /* 上一页设置 */
-        paginationPreText:"上一页",
-        /* 分页循环 */
-        paginationLoop:false,
-        /* 下一页设置 */
-        paginationNextText:"下一页",
-        /*响应数据处理*/
-        responseHandler:function(res){
-            return{
-                rows:res.obj.data,
-                total:res.obj.count
-            }
-        },
         columns: [
-            {
-                checkbox: true
-            },
             {
                 field: 'deptName',
                 title: '部门名称'
@@ -75,7 +55,7 @@
         onPostBody: function() {
             $departmentTable.treegrid({
                 //在哪一列展示折叠图标,序号从0开始
-                treeColumn: 1,
+                treeColumn: 0,
                 onChange: function() {
                     //展示
                     $departmentTable.bootstrapTable('resetView')

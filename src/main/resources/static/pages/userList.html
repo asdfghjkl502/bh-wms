@@ -4,16 +4,15 @@
   	  <span class="currentTime"></span>
   </div>
   <div class="panel-body">
-      789
-      <table id="table"></table>
+      <table id="tableUserList"></table>
   </div>
 </div>
 <script>
     //1. 获取table的JQuery对象
-    let $table=$("#table");
+    var $tableUserList=$("#tableUserList");
     //2. 调用bootstrapTable函数
-    $table.bootstrapTable({
-        url:"getUserList",
+    $tableUserList.bootstrapTable({
+        url:"http://127.0.0.1:8080/getUserList",
         /* 开启分页 */
         pagination:true,
         /* 从服务端获取数据,如果不设置分页不会生效 */
@@ -24,6 +23,10 @@
         paginationLoop:false,
         /* 下一页设置 */
         paginationNextText:"下一页",
+        /* 搜索背景提示 */
+        formatSearch:function () {
+            return "用户名...";
+        },
         /*响应数据处理*/
         responseHandler:function(res){
             return{
@@ -96,7 +99,7 @@
             {
                 title:'操作',
                 formatter:function (value,row,index,field) {
-                    let s="<div style='width:70%;margin: 0 auto;display:flex;justify-content: space-around'><button type=\"button\" class=\"btn btn-danger btn-sm\">删除</button>";
+                    let s="<div style='width:90%;margin: 0 auto;display:flex;justify-content: space-around'><button type=\"button\" class=\"btn btn-danger btn-sm\">删除</button>";
                     s+="<button type=\"button\" class=\"btn btn-warning btn-sm\">更新</button></div>";
                     return s;
                 }

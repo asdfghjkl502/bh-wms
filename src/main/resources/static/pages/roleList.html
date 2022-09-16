@@ -4,14 +4,14 @@
   	  <span class="currentTime"></span>
   </div>
   <div class="panel-body">
-    <table id="table"></table>
+    <table id="tableRoleList"></table>
   </div>
 </div>
 <script>
     //1. 获取table的JQuery对象
-    var $table=$("#table");
+    var $tableRoleList=$("#tableRoleList");
     //2. 调用bootstrapTable函数
-    $table.bootstrapTable({
+    $tableRoleList.bootstrapTable({
         url:"getRoles",
         /* 开启分页 */
         pagination:true,
@@ -23,6 +23,10 @@
         paginationLoop:false,
         /* 下一页设置 */
         paginationNextText:"下一页",
+        /* 搜索背景提示 */
+        formatSearch:function () {
+            return "角色名...";
+        },
         /*响应数据处理*/
         responseHandler:function(res){
             return{

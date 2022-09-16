@@ -18,11 +18,13 @@ class RoleMapperTest extends BhWmsApplicationTests {
 
     @Test
     void addRole() {
-        Role role = new Role();
-        role.setRoleName("测试角色名称");
-        role.setIsDelete(1);
-        role.setCreateTime(new Date());
-        roleMapper.addRole(role);
+        for (int i = 0; i < 100; i++) {
+            Role role = new Role();
+            role.setRoleName("测试角色名称"+i);
+            role.setIsDelete(i%2==0?1:0);
+            role.setCreateTime(new Date());
+            roleMapper.addRole(role);
+        }
     }
 
     @Test

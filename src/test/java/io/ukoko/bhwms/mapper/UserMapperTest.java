@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -41,9 +42,13 @@ class UserMapperTest extends BhWmsApplicationTests {
 
     @Test
     void getUserList() {
+        List<User> list = userMapper.getUserList(1, "0", null, null, null, null, null, 1);
+        list.forEach(System.out::println);
     }
 
     @Test
     void getUser() {
+        User user = userMapper.getUser(1);
+        System.out.println(user);
     }
 }

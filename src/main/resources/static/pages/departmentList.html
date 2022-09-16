@@ -4,35 +4,84 @@
   	  <span class="currentTime"></span>
   </div>
   <div class="panel-body">
-    <table class="table table-hover table-bordered">
-      <thead>
-    	  <tr class="active">
-    		  <th>编号</th>
-    		  <th>部门名称</th>
-    	  </tr>
-      </thead>
-      <tbody>
-    	  <tr>
-    		  <td>1001</td>
-    		  <td>人事部</td>
-    	  </tr>	
-    	  <tr>
-    		  <td>1001</td>
-    		  <td>财务部</td>
-    	  </tr>	
-    	  <tr>
-    		  <td>1001</td>
-    		  <td>公关部</td>
-    	  </tr>	
-    	  <tr>
-    		  <td>1001</td>
-    		  <td>李雷</td>
-    	  </tr>	
-    	  <tr>
-    		  <td>1001</td>
-    		  <td>李雷</td>
-    	  </tr>		  
-      </tbody>
-    </table>
+    <table id="departmentTable"></table>
   </div>
 </div>
+<script>
+
+	var $departmentTable=$("#departmentTable");
+    $departmentTable.bootstrapTable({
+        url: 'getDepartmentPage',
+        /* 主键ID,和父ID产生关联的属性 */
+        idField: 'deptId',
+        /*显示列*/
+        showColumns: true,
+        /* 开启分页 */
+        pagination:true,
+        /* 从服务端获取数据,如果不设置分页不会生效 */
+        sidePagination:"server",
+        /* 上一页设置 */
+        paginationPreText:"上一页",
+        /* 分页循环 */
+        paginationLoop:false,
+        /* 下一页设置 */
+        paginationNextText:"下一页",
+        /*响应数据处理*/
+        responseHandler:function(res){
+            return{
+                rows:res.obj.data,
+                total:res.obj.count
+            }
+        },
+        columns: [
+            {
+                checkbox: true
+            },
+            {
+                field: 'deptName',
+                title: '部门名称'
+            },
+            {
+                field: 'level',
+                title: '层级'
+            },
+            {
+                field: 'parentId',
+                title: '父ID'
+            },
+            {
+                field: 'createTime',
+                title: '创建时间'
+            },
+            {
+                field: 'updateTime',
+                title: '更新时间'
+            },
+            {
+                field: 'isDelete',
+                title: '状态',
+                formatter:function(value, row, index){
+                    if (value === 1) {
+                        return '<span class="label label-success">正常</span>'
+                    }
+                    return '<span class="label label-default">锁定</span>'
+                }
+            }
+        ],
+        /* 列名称 */
+        treeShowField: 'deptName',
+        /* 父ID,与idField属性产生关联 */
+        parentIdField: 'parentId',
+        onPostBody: function() {
+            $departmentTable.treegrid({
+                //在哪一列展示折叠图标,序号从0开始
+                treeColumn: 1,
+                onChange: function() {
+                    //展示
+                    $departmentTable.bootstrapTable('resetView')
+                }
+            })
+        }
+    })
+
+</script>

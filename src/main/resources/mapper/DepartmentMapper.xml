@@ -9,24 +9,10 @@
                                DEPT_NAME,LEVEL,PARENT_ID,CREATE_TIME,IS_DELETE)
                        VALUES (#{deptName},#{level},#{parentId},#{createTime},#{isDelete})
     </insert>
-    
-    <resultMap id="deptMap" type="department">
-        <id column="DEPT_ID" property="deptId"></id>
-        <result column="DEPT_NAME" property="deptName"></result>
-        <result column="LEVEL" property="level"></result>
-        <result column="PARENT_ID" property="parentId"></result>
-        <result column="CREATE_TIME" property="createTime"></result>
-        <result column="UPDATE_TIME" property="updateTime"></result>
-        <result column="IS_DELETE" property="isDelete"></result>
-        <collection property="child" ofType="department" column="DEPT_ID" select="io.ukoko.bhwms.mapper.DepartmentMapper.getDepartmentListByDeptId"></collection>
-    </resultMap>
-    
-    <select id="getDepartmentList" resultMap="deptMap">
-        SELECT * FROM department WHERE  PARENT_ID=0
+
+    <select id="getDepartmentList" resultType="department">
+        SELECT * FROM department ORDER BY PARENT_ID ASC,DEPT_ID ASC
     </select>
 
-    <select id="getDepartmentListByDeptId" resultMap="deptMap" parameterType="int">
-        SELECT * FROM department WHERE PARENT_ID=#{deptId}
-    </select>
 
 </mapper>

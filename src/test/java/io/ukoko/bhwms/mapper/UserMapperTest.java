@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserMapperTest  {
+class UserMapperTest extends BhWmsApplicationTests {
 
     @Autowired
     private UserMapper userMapper;

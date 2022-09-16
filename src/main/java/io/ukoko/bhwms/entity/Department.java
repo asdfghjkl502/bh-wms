@@ -1,6 +1,7 @@
 package io.ukoko.bhwms.entity;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 映射数据库department(部门)表
@@ -23,6 +24,10 @@ public class Department {
         父ID
      */
     private Integer parentId;
+    /*
+        子部门列表
+     */
+    private List<Department> child;
     /*
         创建时间
      */
@@ -101,6 +106,14 @@ public class Department {
         this.updateTime = updateTime;
     }
 
+    public List<Department> getChild() {
+        return child;
+    }
+
+    public void setChild(List<Department> child) {
+        this.child = child;
+    }
+
     @Override
     public String toString() {
         return "Department{" +
@@ -108,6 +121,7 @@ public class Department {
                 ", deptName='" + deptName + '\'' +
                 ", level=" + level +
                 ", parentId=" + parentId +
+                ", child=" + child +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 ", isDelete=" + isDelete +

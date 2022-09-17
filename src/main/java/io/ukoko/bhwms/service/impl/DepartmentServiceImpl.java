@@ -1,8 +1,5 @@
 package io.ukoko.bhwms.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.entity.Department;
 import io.ukoko.bhwms.mapper.DepartmentMapper;
 import io.ukoko.bhwms.service.DepartmentService;
@@ -28,6 +25,4 @@ public class DepartmentServiceImpl implements DepartmentService {
     public List<Department> getDepartmentList() {
         return departmentMapper.getDepartmentList();
     }
-
-
 }

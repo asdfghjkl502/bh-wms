@@ -4,6 +4,84 @@
   	  <span class="currentTime"></span>
   </div>
   <div class="panel-body">
-    <h1>菜单管理</h1>
+      <table id="menuTable"></table>
   </div>
 </div>
+<script>
+
+    var $menuTable=$("#menuTable");
+    $menuTable.bootstrapTable({
+        url: 'getMenuList',
+        /* 主键ID,和父ID产生关联的属性 */
+        idField: 'menuId',
+        /*显示列*/
+        showColumns: true,
+        columns: [
+            {
+                field: 'menuId',
+                title: '标题编号'
+            },
+            {
+                field: 'menuName',
+                title: '标题'
+            },
+            {
+                field: 'menuUrl',
+                title: '地址'
+            },
+            {
+                field: 'level',
+                title: '层级'
+            },
+            {
+                field: 'parentId',
+                title: '父ID'
+            },
+            {
+                field: 'createTime',
+                title: '创建时间'
+            },
+            {
+                field: 'updateTime',
+                title: '更新时间'
+            },
+            {
+                field: 'isDelete',
+                title: '状态',
+                formatter:function(value, row, index){
+                    if (value === 1) {
+                        return '<span class="label label-success">有效</span>'
+                    }
+                    return '<span class="label label-default">无效</span>'
+                }
+            },
+            {
+                title: '操作',
+                formatter:function(value, row, index){
+                    var s="<div style='display: flex;justify-content: space-around;'>";
+                    s+="<button type=\"button\" class=\"btn btn-info btn-xs\">添加</button>";
+                    s+="<button type=\"button\" class=\"btn btn-danger btn-xs\">删除</button>";
+                    s+="<button type=\"button\" class=\"btn btn-warning btn-xs\">更新</button></div>";
+                    return s;
+                }
+            }
+        ],
+        /* 列名称 */
+        treeShowField: 'menuName',
+        /* 父ID,与idField属性产生关联 */
+        parentIdField: 'parentId',
+        onPostBody: function() {
+            $menuTable.treegrid({
+                //在哪一列展示折叠图标,序号从0开始
+                treeColumn: 1,
+                //显示的树形默认全部折叠还是全部展开expanded(展开,默认)collapsed(折叠)
+                initialState:"collapsed",
+                onChange: function() {
+                    //展示
+                    $menuTable.bootstrapTable('resetView')
+                }
+            })
+        }
+    })
+
+</script>

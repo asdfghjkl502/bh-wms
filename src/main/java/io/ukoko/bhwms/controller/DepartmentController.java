@@ -1,7 +1,6 @@
 package io.ukoko.bhwms.controller;
 
 import io.swagger.annotations.Api;
-import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.entity.Department;
 import io.ukoko.bhwms.service.DepartmentService;

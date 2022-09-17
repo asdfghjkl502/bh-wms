@@ -24,6 +24,9 @@ class DepartmentMapperTest extends BhWmsApplicationTests {
 //        department.setIsDelete(1);
 //        department.setCreateTime(new Date());
 
+//        departmentMapper.addDepartment(department);
+
+
 //        for (int i = 1; i <= 5; i++) {
 //            Department department = new Department();
 //            department.setDeptName("大萝卜子公司"+i);
@@ -44,6 +47,7 @@ class DepartmentMapperTest extends BhWmsApplicationTests {
             department.setCreateTime(new Date());
 
             departmentMapper.addDepartment(department);
+
         }
     }
 

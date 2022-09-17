@@ -31,6 +31,31 @@ public class Customer {
      */
     private String customerAddress;
     /*
+        级别ID
+     */
+    private Integer levelId;
+    /*
+        级别详情(多对一)
+     */
+    private Level level;
+    /*
+        来源ID
+     */
+    private Integer sourceId;
+    /*
+        来源详情(多对一)
+     */
+    private Source source;
+    /*
+        行业ID
+     */
+    private Integer industryId;
+    /*
+        行业详情(多对一)
+     */
+    private Industry industry;
+
+    /*
         创建时间
      */
     private Date createTime;
@@ -42,6 +67,10 @@ public class Customer {
         是否删除 0:删除 1:未删除
      */
     private int isDelete=1;
+
+    public Customer() {
+    }
+
     public Integer getCustomerId() {
         return customerId;
     }
@@ -90,12 +119,52 @@ public class Customer {
         this.customerAddress = customerAddress;
     }
 
-    public int getIsDelete() {
-        return isDelete;
+    public Integer getLevelId() {
+        return levelId;
     }
 
-    public void setIsDelete(int isDelete) {
-        this.isDelete = isDelete;
+    public void setLevelId(Integer levelId) {
+        this.levelId = levelId;
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
+    }
+
+    public Integer getSourceId() {
+        return sourceId;
+    }
+
+    public void setSourceId(Integer sourceId) {
+        this.sourceId = sourceId;
+    }
+
+    public Source getSource() {
+        return source;
+    }
+
+    public void setSource(Source source) {
+        this.source = source;
+    }
+
+    public Integer getIndustryId() {
+        return industryId;
+    }
+
+    public void setIndustryId(Integer industryId) {
+        this.industryId = industryId;
+    }
+
+    public Industry getIndustry() {
+        return industry;
+    }
+
+    public void setIndustry(Industry industry) {
+        this.industry = industry;
     }
 
     public Date getCreateTime() {
@@ -114,6 +183,14 @@ public class Customer {
         this.updateTime = updateTime;
     }
 
+    public int getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(int isDelete) {
+        this.isDelete = isDelete;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
@@ -123,6 +200,12 @@ public class Customer {
                 ", customerTel='" + customerTel + '\'' +
                 ", customerEmail='" + customerEmail + '\'' +
                 ", customerAddress='" + customerAddress + '\'' +
+                ", levelId=" + levelId +
+                ", level=" + level +
+                ", sourceId=" + sourceId +
+                ", source=" + source +
+                ", industryId=" + industryId +
+                ", industry=" + industry +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 ", isDelete=" + isDelete +

@@ -15,6 +15,14 @@ public class Category {
      */
     private String categoryName;
     /*
+        层级
+     */
+    private Integer level;
+    /*
+        父ID
+     */
+    private Integer parentId;
+    /*
     创建时间
     */
     private Date createTime;
@@ -29,19 +37,11 @@ public class Category {
     public Category() {
     }
 
-    public Category(Integer categoryId, String categoryName) {
+    public Category(Integer categoryId, String categoryName, Integer level, Integer parentId, Date createTime, Date updateTime, int isDelete) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
-    }
-
-    public Category(String categoryName, Date createTime, int isDelete) {
-        this.categoryName = categoryName;
-        this.createTime = createTime;
-        this.isDelete = isDelete;
-    }
-
-    public Category(String categoryName, Date createTime, Date updateTime, int isDelete) {
-        this.categoryName = categoryName;
+        this.level = level;
+        this.parentId = parentId;
         this.createTime = createTime;
         this.updateTime = updateTime;
         this.isDelete = isDelete;
@@ -63,12 +63,20 @@ public class Category {
         this.categoryName = categoryName;
     }
 
-    public int getIsDelete() {
-        return isDelete;
+    public Integer getLevel() {
+        return level;
     }
 
-    public void setIsDelete(int isDelete) {
-        this.isDelete = isDelete;
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public Integer getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
     public Date getCreateTime() {
@@ -87,11 +95,21 @@ public class Category {
         this.updateTime = updateTime;
     }
 
+    public int getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(int isDelete) {
+        this.isDelete = isDelete;
+    }
+
     @Override
     public String toString() {
         return "Category{" +
                 "categoryId=" + categoryId +
                 ", categoryName='" + categoryName + '\'' +
+                ", level=" + level +
+                ", parentId=" + parentId +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 ", isDelete=" + isDelete +

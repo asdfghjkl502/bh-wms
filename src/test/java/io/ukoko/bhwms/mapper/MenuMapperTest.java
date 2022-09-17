@@ -26,15 +26,18 @@ class MenuMapperTest extends BhWmsApplicationTests {
 //            menuMapper.addMenu(menu);
 //        }
 
-        for (int i = 1; i <= 2; i++) {
-            Menu menu = new Menu();
-            menu.setMenuName("子集菜单标题"+i);
-            menu.setLevel(1);
-            menu.setParentId(5);
-            menu.setCreateTime(new Date());
-            menu.setIsDelete(1);
-            menuMapper.addMenu(menu);
+        for (int j = 1; j <=5; j++) {
+            for (int i = 1; i <= 2; i++) {
+                Menu menu = new Menu();
+                menu.setMenuName("子集菜单标题"+i);
+                menu.setLevel(2);
+                menu.setParentId(j);
+                menu.setCreateTime(new Date());
+                menu.setIsDelete(1);
+                menuMapper.addMenu(menu);
+            }
         }
+
 
     }
 

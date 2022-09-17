@@ -57,17 +57,19 @@ class DepartmentMapperTest extends BhWmsApplicationTests {
 //            departmentMapper.addDepartment(department);
 //        }
 
-
-//        for (int i = 1; i <= 2; i++) {
-//            Department department = new Department();
-//            department.setDeptName("部门"+i);
-//            department.setLevel(3);
-//            department.setParentId(12);
-//            department.setIsDelete(1);
-//            department.setCreateTime(new Date());
+//        for (int j = 3; j <= 12; j++) {
+//            for (int i = 1; i <= 2; i++) {
+//                Department department = new Department();
+//                department.setDeptName("部门"+i);
+//                department.setLevel(3);
+//                department.setParentId(j);
+//                department.setIsDelete(1);
+//                department.setCreateTime(new Date());
 //
-//            departmentMapper.addDepartment(department);
+//                departmentMapper.addDepartment(department);
+//            }
 //        }
+
     }
 
     @Test

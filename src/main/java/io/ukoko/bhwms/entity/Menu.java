@@ -1,6 +1,8 @@
 package io.ukoko.bhwms.entity;
 
 
+import java.util.Date;
+
 /**
  * 映射数据库menu(菜单)表
  */
@@ -14,14 +16,29 @@ public class Menu {
      */
     private String  menuName;
     /*
+        菜单地址
+     */
+    private String menuUrl;
+    /*
+        菜单级别
+     */
+    private Integer level;
+    /*
         父类ID
      */
-    private Integer pId;
-
+    private Integer parentId;
+    /*
+        创建时间
+     */
+    private Date createTime;
+    /*
+        更新时间
+     */
+    private Date updateTime;
     /*
         是否删除
      */
-    private Integer isDelete;
+    private Integer isDelete=1;
 
     public Menu() {
     }
@@ -42,12 +59,44 @@ public class Menu {
         this.menuName = menuName;
     }
 
-    public Integer getpId() {
-        return pId;
+    public String getMenuUrl() {
+        return menuUrl;
     }
 
-    public void setpId(Integer pId) {
-        this.pId = pId;
+    public void setMenuUrl(String menuUrl) {
+        this.menuUrl = menuUrl;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public Integer getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
     public Integer getIsDelete() {
@@ -60,10 +109,14 @@ public class Menu {
 
     @Override
     public String toString() {
-        return "Menus{" +
+        return "Menu{" +
                 "menuId=" + menuId +
                 ", menuName='" + menuName + '\'' +
-                ", pId=" + pId +
+                ", menuUrl='" + menuUrl + '\'' +
+                ", level=" + level +
+                ", parentId=" + parentId +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
                 ", isDelete=" + isDelete +
                 '}';
     }

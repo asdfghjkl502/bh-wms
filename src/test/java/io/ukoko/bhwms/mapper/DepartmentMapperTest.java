@@ -16,14 +16,22 @@ class DepartmentMapperTest extends BhWmsApplicationTests {
 
     @Test
     void addDepartment() {
-
 //        Department department = new Department();
 //        department.setDeptName("大萝卜股份有限公司");
 //        department.setLevel(1);
 //        department.setParentId(0);
 //        department.setIsDelete(1);
 //        department.setCreateTime(new Date());
+//
+//        departmentMapper.addDepartment(department);
 
+//        Department department = new Department();
+//        department.setDeptName("小萝卜股份有限公司");
+//        department.setLevel(1);
+//        department.setParentId(0);
+//        department.setIsDelete(1);
+//        department.setCreateTime(new Date());
+//
 //        departmentMapper.addDepartment(department);
 
 
@@ -38,17 +46,28 @@ class DepartmentMapperTest extends BhWmsApplicationTests {
 //            departmentMapper.addDepartment(department);
 //        }
 
-        for (int i = 1; i <= 2; i++) {
-            Department department = new Department();
-            department.setDeptName("部门"+i);
-            department.setLevel(3);
-            department.setParentId(6);
-            department.setIsDelete(1);
-            department.setCreateTime(new Date());
+//        for (int i = 1; i <= 5; i++) {
+//            Department department = new Department();
+//            department.setDeptName("小萝卜子公司"+i);
+//            department.setLevel(2);
+//            department.setParentId(2);
+//            department.setIsDelete(1);
+//            department.setCreateTime(new Date());
+//
+//            departmentMapper.addDepartment(department);
+//        }
 
-            departmentMapper.addDepartment(department);
 
-        }
+//        for (int i = 1; i <= 2; i++) {
+//            Department department = new Department();
+//            department.setDeptName("部门"+i);
+//            department.setLevel(3);
+//            department.setParentId(12);
+//            department.setIsDelete(1);
+//            department.setCreateTime(new Date());
+//
+//            departmentMapper.addDepartment(department);
+//        }
     }
 
     @Test

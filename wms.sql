@@ -10,7 +10,7 @@ USE bh_wms;
 
 
 -- --------------------------------------------------------------------
--- 权限相关表
+-- 系统相关表
 -- --------------------------------------------------------------------
 
 -- 用户表
@@ -75,17 +75,25 @@ CREATE TABLE user_department (
 CREATE TABLE menus (
      MENU_ID INT PRIMARY KEY AUTO_INCREMENT COMMENT '菜单ID,主键自增',
      MENU_NAME VARCHAR(100) NOT NULL COMMENT '菜单名称',
-     P_ID INT COMMENT '父ID,关联menus表主键,默认值为0,表示菜单第一级',
+     MENU_URL VARCHAR(255) DEFAULT NULL COMMENT '菜单地址',
+     LEVEL INT DEFAULT 1 COMMENT '层级',
+     PARENT_ID INT COMMENT '父ID,关联menus表主键,默认值为0,表示菜单第一级',
+     CREATE_TIME DATETIME DEFAULT NULL COMMENT '创建时间',
+     UPDATE_TIME TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '设置当前时间，并且自动更更新时间',
      IS_DELETE INT DEFAULT 1 COMMENT '菜单状态 0:删除 1:未删除'
 )DEFAULT CHARSET=UTF8 COMMENT="菜单表";
 
--- 插入测试数据
-INSERT INTO menus(MENU_NAME,P_ID,IS_DELETE) VALUES('仪表盘',0,1);
-INSERT INTO menus(MENU_NAME,P_ID,IS_DELETE) VALUES('系统设置',0,1);
-INSERT INTO menus(MENU_NAME,P_ID,IS_DELETE) VALUES('基础数据',0,1);
-INSERT INTO menus(MENU_NAME,P_ID,IS_DELETE) VALUES('仓库管理',0,1);
-INSERT INTO menus(MENU_NAME,P_ID,IS_DELETE) VALUES('字典管理',0,1);
-INSERT INTO menus(MENU_NAME,P_ID,IS_DELETE) VALUES('日志管理',0,1);
+-- 角色菜单关联表
+CREATE TABLE role_menus (
+     ROLE_ID INT COMMENT '角色ID,关联角色表主键',
+     MENU_ID INT COMMENT '菜单ID,关联菜单表主键',
+     CREATE_TIME DATETIME DEFAULT NULL COMMENT '创建时间',
+     UPDATE_TIME TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '设置当前时间，并且自动更更新时间',
+     PRIMARY KEY(ROLE_ID,MENU_ID),
+     FOREIGN KEY(ROLE_ID) REFERENCES role(ROLE_ID),
+     FOREIGN KEY(MENU_ID) REFERENCES menus(MENU_ID),
+     IS_DELETE INT DEFAULT 1 COMMENT '是否删除 0:删除 1:未删除'
+)DEFAULT CHARSET=UTF8 COMMENT="角色菜单关联表";
 
 -- --------------------------------------------------------------------
 -- 业务相关表

@@ -4,6 +4,76 @@
   	  <span class="currentTime"></span>
   </div>
   <div class="panel-body">
-    <h1>类目管理</h1>
+      <table id="categoryTable"></table>
   </div>
 </div>
+<script>
+
+    var $categoryTable=$("#categoryTable");
+    $categoryTable.bootstrapTable({
+        url: 'getCategoryList',
+        /* 主键ID,和父ID产生关联的属性 */
+        idField: 'categoryId',
+        /*显示列*/
+        showColumns: true,
+        columns: [
+            {
+                field: 'categoryName',
+                title: '类目名称'
+            },
+            {
+                field: 'level',
+                title: '层级'
+            },
+            {
+                field: 'parentId',
+                title: '父ID'
+            },
+            {
+                field: 'createTime',
+                title: '创建时间'
+            },
+            {
+                field: 'updateTime',
+                title: '更新时间'
+            },
+            {
+                field: 'isDelete',
+                title: '状态',
+                formatter:function(value, row, index){
+                    if (value === 1) {
+                        return '<span class="label label-success">正常</span>'
+                    }
+                    return '<span class="label label-default">锁定</span>'
+                }
+            },
+            {
+                title: '操作',
+                formatter:function(value, row, index){
+                    var s="<div style='display: flex;justify-content: space-around;'>";
+                    s+="<button type=\"button\" class=\"btn btn-info btn-xs\">添加</button>";
+                    s+="<button type=\"button\" class=\"btn btn-danger btn-xs\">删除</button>";
+                    s+="<button type=\"button\" class=\"btn btn-warning btn-xs\">更新</button></div>";
+                    return s;
+                }
+            }
+        ],
+        /* 列名称 */
+        treeShowField: 'categoryName',
+        /* 父ID,与idField属性产生关联 */
+        parentIdField: 'parentId',
+        onPostBody: function() {
+            $categoryTable.treegrid({
+                //在哪一列展示折叠图标,序号从0开始
+                treeColumn: 0,
+                //显示的树形默认全部折叠还是全部展开expanded(展开,默认)collapsed(折叠)
+                initialState:"collapsed",
+                onChange: function() {
+                    //展示
+                    $categoryTable.bootstrapTable('resetView')
+                }
+            })
+        }
+    })
+
+</script>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.ukoko.bhwms.mapper.CarrierMapper">
+
+    <insert id="addCarrier" parameterType="carrier">
+        INSERT INTO
+            carrier(
+                    CARRIER_NAME,CARRIER_LEADER,
+                    CARRIER_TEL,CARRIER_EMAIL,
+                    CARRIER_ADDRESS,CREATE_TIME,IS_DELETE
+                    )
+            VALUES(
+                    #{carrierName},#{carrierLeader},
+                    #{carrierTel},#{carrierEmail},
+                    #{carrierAddress},#{createTime},#{isDelete},
+                  )
+    </insert>
+
+    <select id="getCarrierList" resultType="carrier">
+        SELECT * FROM carrier
+            <where>
+                <if test="carrierName!=null">CARRIER_NAME LIKE CONCAT('%',#{carrierName},'%')</if>
+            </where>
+    </select>
+
+</mapper>

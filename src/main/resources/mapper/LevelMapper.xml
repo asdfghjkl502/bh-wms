@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.ukoko.bhwms.mapper.LevelMapper">
+
+    <insert id="addLevel" parameterType="level">
+        INSERT INTO level(LEVEL_NAME,CREATE_TIME,IS_DELETE) VALUES (#{levelName},#{createTime},#{isDelete})
+    </insert>
+    
+    <select id="getLevelList" resultType="level">
+        SELECT * FROM level
+    </select>
+
+</mapper>

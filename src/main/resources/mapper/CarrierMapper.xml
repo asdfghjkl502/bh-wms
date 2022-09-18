@@ -14,7 +14,7 @@
             VALUES(
                     #{carrierName},#{carrierLeader},
                     #{carrierTel},#{carrierEmail},
-                    #{carrierAddress},#{createTime},#{isDelete},
+                    #{carrierAddress},#{createTime},#{isDelete}
                   )
     </insert>
 

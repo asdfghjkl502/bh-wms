@@ -4,9 +4,7 @@ import io.swagger.annotations.Api;
 import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.entity.Industry;
-import io.ukoko.bhwms.entity.Level;
 import io.ukoko.bhwms.service.IndustryService;
-import io.ukoko.bhwms.service.LevelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,8 +35,8 @@ public class IndustryController {
      * @param industry
      * @return
      */
-    @PostMapping(value = "/addLevel")
-    public Object addLevel(Industry industry){
+    @PostMapping(value = "/addIndustry")
+    public Object addIndustry(Industry industry){
         industryService.addIndustry(industry);
         return new Result();
     }

@@ -4,6 +4,103 @@
   	  <span class="currentTime"></span>
   </div>
   <div class="panel-body">
-    <h1>供应商管理</h1>
+      <table id="tableSupplierList"></table>
   </div>
 </div>
+<script>
+    //1. 获取table的JQuery对象
+    var $tableSupplierList=$("#tableSupplierList");
+    //2. 调用bootstrapTable函数
+    $tableSupplierList.bootstrapTable({
+        url:"getSupplierPage",
+        /* 开启分页 */
+        pagination:true,
+        /* 从服务端获取数据,如果不设置分页不会生效 */
+        sidePagination:"server",
+        /* 上一页设置 */
+        paginationPreText:"上一页",
+        /* 分页循环 */
+        paginationLoop:false,
+        /* 下一页设置 */
+        paginationNextText:"下一页",
+        /* 搜索背景提示 */
+        formatSearch:function () {
+            return "供应商名...";
+        },
+        /*响应数据处理*/
+        responseHandler:function(res){
+            return{
+                rows:res.obj.data,
+                total:res.obj.count
+            }
+        },
+        /* 分页列表 */
+        pageList:[5,10,15,20,25],
+        /*默认当前页*/
+        pageNumber:1,
+        /* 每页显示多少条数 */
+        pageSize:5,
+        /* 开启搜索 */
+        search:true,
+        /*定制化请求参数*/
+        queryParams:function(params){
+            params.supplierName = params.search;
+            return params;
+        },
+        /* 自定义表的列 */
+        columns:[
+            {
+                // 自定义列名称
+                title:'供应商ID',
+                // 后台JSON数据中对应的属性名
+                field:'supplierId'
+            },
+            {
+                title:'供应商名称',
+                field:'supplierName'
+            },
+            {
+                title:'负责人',
+                field:'supplierLeader'
+            },
+            {
+                title:'联系电话',
+                field:'supplierTel'
+            },
+            {
+                title:'联系邮箱',
+                field:'supplierEmail'
+            },
+            {
+                title:'联系地址',
+                field:'supplierAddress'
+            },
+            {
+                title:'创建时间',
+                field:'createTime'
+            },
+            {
+                title:'更新时间',
+                field:'updateTime'
+            },
+            {
+                title:'是否删除',
+                field:'isDelete',
+                formatter:function (value,row,index,field) {
+                    let s=value==1?"<span class=\"label label-success\">有效</span>":"<span class=\"label label-danger\">无效</span>";
+                    return s;
+                }
+
+            },
+            {
+                title:'操作',
+                formatter:function (value,row,index,field) {
+                    let s="<div style='width:100%;margin: 0 auto;display:flex;justify-content: space-around;'><button type=\"button\" class=\"btn btn-danger btn-xs\">删除</button>";
+                    s+="<button type=\"button\" class=\"btn btn-warning btn-xs\">更新</button></div>";
+                    return s;
+                }
+            }
+        ]
+    });
+
+</script>

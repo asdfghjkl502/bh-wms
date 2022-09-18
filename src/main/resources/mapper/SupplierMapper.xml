@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.ukoko.bhwms.mapper.SupplierMapper">
+
+    <insert id="addSupplier" parameterType="supplier">
+        INSERT INTO
+            supplier(
+            SUPPLIER_NAME,SUPPLIER_LEADER,
+            SUPPLIER_TEL,SUPPLIER_EMAIL,
+            SUPPLIER_ADDRESS,CREATE_TIME,IS_DELETE
+        )
+        VALUES(
+                  #{supplierName},#{supplierLeader},
+                  #{supplierTel},#{supplierEmail},
+                  #{supplierAddress},#{createTime},#{isDelete}
+              )
+    </insert>
+
+    <select id="getSupplierList" resultType="supplier">
+        SELECT * FROM supplier
+        <where>
+            <if test="supplierName!=null">SUPPLIER_NAME LIKE CONCAT('%',#{supplierName},'%')</if>
+        </where>
+    </select>
+
+</mapper>

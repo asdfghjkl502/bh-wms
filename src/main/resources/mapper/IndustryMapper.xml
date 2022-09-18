@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.ukoko.bhwms.mapper.IndustryMapper">
+
+    <insert id="addIndustry" parameterType="industry">
+        INSERT INTO industry(INDUSTRY_NAME,CREATE_TIME,IS_DELETE) VALUES (#{industryName},#{createTime},#{isDelete})
+    </insert>
+
+    <select id="getIndustryList" resultType="industry">
+        SELECT * FROM industry
+    </select>
+
+</mapper>

@@ -11,5 +11,9 @@
     <select id="getSourceList" resultType="source">
         SELECT * FROM source
     </select>
+    
+    <select id="getSource" parameterType="int" resultType="source">
+        SELECT * FROM source WHERE SOURCE_ID=#{sourceId}
+    </select>
 
 </mapper>

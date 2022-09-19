@@ -22,4 +22,9 @@ public interface LevelMapper {
      * @return
      */
     List<Level> getLevelList();
+
+    /**
+     * 通过ID查询级别信息
+     */
+    Level getLevel(Integer levelId);
 }

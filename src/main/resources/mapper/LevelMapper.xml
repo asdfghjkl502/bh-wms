@@ -11,5 +11,9 @@
     <select id="getLevelList" resultType="level">
         SELECT * FROM level
     </select>
+    
+    <select id="getLevel" parameterType="int" resultType="level">
+        SELECT * FROM level WHERE LEVEL_ID=#{levelId}
+    </select>
 
 </mapper>

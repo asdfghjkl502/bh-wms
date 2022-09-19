@@ -22,4 +22,9 @@ public interface IndustryMapper {
      * @return
      */
     List<Industry> getIndustryList();
+
+    /**
+     * 根据来源ID查询来源信息
+     */
+    Industry getIndustry(Integer industryId);
 }

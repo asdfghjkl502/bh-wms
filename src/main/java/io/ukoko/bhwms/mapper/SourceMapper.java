@@ -21,4 +21,9 @@ public interface SourceMapper {
      * @return
      */
     List<Source> getSourceList();
+
+    /**
+     * 通过来源ID查询来源信息
+     */
+    Source getSource(Integer sourceId);
 }

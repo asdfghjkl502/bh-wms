@@ -5,12 +5,50 @@
 <mapper namespace="io.ukoko.bhwms.mapper.CustomerMapper">
 
     <insert id="addCustomer" parameterType="customer">
-        INSERT INTO customer (
-
-                            )
-                       VALUES(
-
-                            )
+        INSERT INTO customer
+        (
+            CUSTOMER_NAME,CUSTOMER_LEADER,CUSTOMER_TEL,
+            CUSTOMER_EMAIL,CUSTOMER_ADDRESS,LEVEL_ID,
+            SOURCE_ID,INDUSTRY_ID,CREATE_TIME,
+            IS_DELETE
+        )
+        VALUES
+        (
+            #{customerName},#{customerLeader},#{customerTel},
+            #{customerEmail},#{customerAddress},#{levelId},
+            #{sourceId},#{industryId},#{createTime},
+            #{isDelete}
+        )
     </insert>
+
+    <resultMap id="customerMap" type="customer">
+        <id column="CUSTOMER_ID" property="customerId"></id>
+        <result column="CUSTOMER_NAME" property="customerName"></result>
+        <result column="CUSTOMER_LEADER" property="customerLeader"></result>
+        <result column="CUSTOMER_TEL" property="customerTel"></result>
+        <result column="CUSTOMER_EMAIL" property="customerEmail"></result>
+        <result column="CUSTOMER_ADDRESS" property="customerAddress"></result>
+        <result column="LEVEL_ID" property="levelId"></result>
+        <result column="SOURCE_ID" property="sourceId"></result>
+        <result column="INDUSTRY_ID" property="industryId"></result>
+        <result column="CREATE_TIME" property="createTime"></result>
+        <result column="UPDATE_TIME" property="updateTime"></result>
+        <result column="IS_DELETE" property="isDelete"></result>
+        <association property="level" column="LEVEL_ID" select="io.ukoko.bhwms.mapper.LevelMapper.getLevel"></association>
+        <association property="source" column="SOURCE_ID" select="io.ukoko.bhwms.mapper.SourceMapper.getSource"></association>
+        <association property="industry" column="INDUSTRY_ID" select="io.ukoko.bhwms.mapper.IndustryMapper.getIndustry"></association>
+    </resultMap>
+    <select id="getCustomerList" resultMap="customerMap">
+        SELECT * FROM customer
+        <where>
+            <if test="customerName!=null">CUSTOMER_NAME LIKE CONCAT('%',#{customerName},'%')</if>
+            <if test="customerLeader!=null">AND CUSTOMER_LEADER LIKE CONCAT('%',#{customerLeader},'%')</if>
+            <if test="customerTel!=null">AND CUSTOMER_TEL LIKE CONCAT('%',#{customerTel},'%')</if>
+            <if test="customerEmail!=null">AND CUSTOMER_EMAIL LIKE CONCAT('%',#{customerEmail},'%')</if>
+            <if test="customerAddress!=null">AND CUSTOMER_ADDRESS LIKE CONCAT('%',#{customerAddress},'%')</if>
+            <if test="isDelete!=null">AND IS_DELETE=#{isDelete}</if>
+            <if test="startTime!=null and endTime!=null">AND CREATE_TIME <![CDATA[>=]]> #{startTime} AND CREATE_TIME <![CDATA[<=]]> #{endTime} </if>
+        </where>
+    </select>
 
 </mapper>

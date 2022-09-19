@@ -11,5 +11,9 @@
     <select id="getIndustryList" resultType="industry">
         SELECT * FROM industry
     </select>
+    
+    <select id="getIndustry" resultType="Industry" parameterType="int">
+        SELECT * FROM industry WHERE INDUSTRY_ID=#{industryId}
+    </select>
 
 </mapper>

@@ -18,6 +18,10 @@
         showColumns: true,
         columns: [
             {
+                field: 'categoryId',
+                title: '类目ID'
+            },
+            {
                 field: 'categoryName',
                 title: '类目名称'
             },
@@ -65,7 +69,7 @@
         onPostBody: function() {
             $categoryTable.treegrid({
                 //在哪一列展示折叠图标,序号从0开始
-                treeColumn: 0,
+                treeColumn: 1,
                 //显示的树形默认全部折叠还是全部展开expanded(展开,默认)collapsed(折叠)
                 initialState:"collapsed",
                 onChange: function() {

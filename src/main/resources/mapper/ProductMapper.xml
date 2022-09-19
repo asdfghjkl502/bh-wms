@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.ukoko.bhwms.mapper.ProductMapper">
+
+    <insert id="addProduct" parameterType="product">
+        INSERT INTO product
+            (PRODUCT_NAME,PRODUCT_SIZE,PRODUCT_PRICE,
+             CATEGORY_ID,CREATE_TIME,IS_DELETE
+            )
+        VALUES
+            (
+             #{productName},#{productSize},#{productPrice},
+             #{categoryId},#{createTime},#{isDelete}
+             )
+    </insert>
+
+    <select id="getProductList" resultMap="productMap">
+        SELECT * FROM product
+        <where>
+            <if test="productName!=null">PRODUCT_NAME LIKE CONCAT('%',#{productName},'%')</if>
+            <if test="productSize!=null"> AND PRODUCT_SIZE LIKE CONCAT('%',#{productSize},'%')</if>
+            <if test="isDelete!=null"> AND IS_DELETE=#{isDelete}</if>
+            <if test="startTime!=null and endTime!=null"> AND CREATE_TIME <![CDATA[>=]]> #{startTime} AND CREATE_TIME <![CDATA[<=]]> #{endTime}</if>
+        </where>
+    </select>
+</mapper>

@@ -25,6 +25,7 @@
         <result column="CREATE_TIME" property="createTime"></result>
         <result column="UPDATE_TIME" property="updateTime"></result>
         <result column="IS_DELETE" property="isDelete"></result>
+        <association property="category" column="CATEGORY_ID" select="io.ukoko.bhwms.mapper.CategoryMapper.getCategory"></association>
     </resultMap>
     
     <select id="getProductList" resultMap="productMap">

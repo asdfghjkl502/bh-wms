@@ -14,5 +14,9 @@
     <select id="getCategoryList" resultType="category">
         SELECT * FROM category ORDER BY PARENT_ID ASC,CATEGORY_ID ASC
     </select>
+    
+    <select id="getCategory" resultType="category">
+        SELECT * FROM category WHERE CATEGORY_ID=#{categoryId}
+    </select>
 
 </mapper>

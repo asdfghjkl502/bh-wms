@@ -16,6 +16,17 @@
              )
     </insert>
 
+    <resultMap id="productMap" type="product">
+        <id column="PRODUCT_ID" property="productId"></id>
+        <result column="PRODUCT_NAME" property="productName"></result>
+        <result column="CATEGORY_ID" property="categoryId"></result>
+        <result column="PRODUCT_SIZE" property="productSize"></result>
+        <result column="PRODUCT_PRICE" property="productPrice"></result>
+        <result column="CREATE_TIME" property="createTime"></result>
+        <result column="UPDATE_TIME" property="updateTime"></result>
+        <result column="IS_DELETE" property="isDelete"></result>
+    </resultMap>
+    
     <select id="getProductList" resultMap="productMap">
         SELECT * FROM product
         <where>

@@ -1,95 +1,105 @@
+/*
+* @Author: xuebingsi
+* @Date:   2019-04-01 13:37:17
+* @Last Modified by:   zhibinm
+* @Last Modified time: 2019-04-01 13:37:19
+*/
+.login-bg{
+    /*background: #eeeeee url() 0 0 no-repeat;*/
+     background:url(../images/bg.png) no-repeat center;
+    background-size: cover;
+    overflow: hidden;
+}
 .login{
-	height: 310px;
-	width: 300px;
-	background-color: rgba(255, 255, 255, 0.6);
-	margin: 120px auto 0 auto;
+    margin: 120px auto 0 auto;
+    min-height: 420px;
+    max-width: 420px;
+    padding: 40px;
+    background-color: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 4px;
+    /* overflow-x: hidden; */
+    box-sizing: border-box;
 }
-.login>h4{
-	height: 50px;
-	text-align: center;
-	line-height: 50px;
+.login a.logo{
+    display: block;
+    height: 58px;
+    width: 167px;
+    margin: 0 auto 30px auto;
+    background-size: 167px 42px;
 }
-.login-ares{
-	width: 80%;
-	margin: 0 auto;
-	height: 220px;
+.login .message {
+    margin: 10px 0 0 -58px;
+    padding: 18px 10px 18px 60px;
+    background: #189F92;
+    position: relative;
+    color: #fff;
+    font-size: 16px;
 }
-.login-in{
-	width: 100%;
-	height: 40px;
-	margin-bottom: 5px;
-	display: flex;
-	align-items: center;
+.login #darkbannerwrap {
+    background: url(../images/aiwrap.png);
+    width: 18px;
+    height: 10px;
+    margin: 0 0 20px -58px;
+    position: relative;
 }
-.login-wg{
-	width: 100%;
-	height: 40px;
-	margin-bottom: 5px;
+
+.login input[type=text],
+.login input[type=file],
+.login input[type=password],
+.login input[type=email], select {
+    border: 1px solid #DCDEE0;
+    vertical-align: middle;
+    border-radius: 3px;
+    height: 50px;
+    padding: 0px 16px;
+    font-size: 14px;
+    color: #555555;
+    outline:none;
+    width:100%;
+    box-sizing: border-box;
 }
-.login-wg>a{
-	font-size: 12px;
-	color: #aaa;
-	float: right;
-	margin-right: 10px;
-	text-decoration: none;
+.login input[type=text]:focus,
+.login input[type=file]:focus,
+.login input[type=password]:focus,
+.login input[type=email]:focus, select:focus {
+    border: 1px solid #27A9E3;
 }
-.login-wg>a:hover{
-	color: cornflowerblue;
+.login input[type=submit],
+.login input[type=button]{
+    display: inline-block;
+    vertical-align: middle;
+    padding: 12px 24px;
+    margin: 0px;
+    font-size: 18px;
+    line-height: 24px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #189F92;
+    border-radius: 3px;
+    border: none;
+    -webkit-appearance: none;
+    outline:none;
+    width:100%;
 }
-.login-in>.sub{
-	display: block;
-	border: none;
-	width: 100%;
-	height: 35px;
-	color: white;
-	font-weight: bold;
-	background-color: LightSkyBlue;
+.login hr {
+    background: #fff url() 0 0 no-repeat;
 }
-.login-in>.login-in-icon{
-	height: 40px;
-	width: 15%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: white;
+.login hr.hr15 {
+    height: 15px;
+    border: none;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
 }
-.login-in>.login-in-icon>span{
-	font-size: 16px;
-	font-weight: bold;
-	color: #ccc;
-}
-.login-in>.login-in-content{
-	height: 40px;
-	width: 85%;
-	background-color: pink;
-}
-.login-in>.login-in-content>input{
-	height: 40px;
-	width: 100%;
-	outline: none;
-	border: none;
-	font-size: 12px;
-}
-.login-in>.login-in-captcha{
-	height: 40px;
-	width: 85%;
-	display: flex;
-}
-.login-in>.login-in-captcha>input{
-	border: none;
-	outline: none;
-	width: 40%;
-}
-.login-in>.login-in-captcha>img{
-	height: 40px;
-}
-.login-in>#rm{
-	height: 40px;
-	width: 6.5%;
-}
-.login-in>label{
-	height: 40px;
-	margin-left: 10px;
-	line-height: 48px;
-	cursor: pointer;
+.login hr.hr20 {
+    height: 20px;
+    border: none;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
 }

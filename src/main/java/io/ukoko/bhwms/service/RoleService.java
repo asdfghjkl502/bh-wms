@@ -49,6 +49,8 @@ public interface RoleService {
      */
     Page getRolePageFor(int limit,int offset,Integer isDelete,String roleName,Date startTime,Date endTime,Integer roleId);
 
+    Page getRolePage(int pageSize,int pageNo,Integer isDelete,String roleName,Date startTime,Date endTime,Integer roleId);
+
 
     /**
      * 批量删除

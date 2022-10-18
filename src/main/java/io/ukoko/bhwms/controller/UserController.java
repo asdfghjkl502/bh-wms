@@ -34,9 +34,9 @@ public class UserController {
      * @param userId
      * @return
      */
-    @GetMapping(value = "/getUserList")
-    public Object getUserList(int limit, int offset, Integer isDelete, String userName,String userTel,String userEmail,String userNick, @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime, @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime, Integer userId){
-        Page page = userService.getUserPage(limit, offset, isDelete, userName, userTel, userEmail, userNick, startTime, endTime, userId);
+    @GetMapping(value = "/getUserPage")
+    public Object getUserPage(int pageNo, int pageSize, Integer isDelete, String userName,String userTel,String userEmail,String userNick, @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime, @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime, Integer userId){
+        Page page = userService.getUserPage(pageNo, pageSize, isDelete, userName, userTel, userEmail, userNick, startTime, endTime, userId);
         return new Result(page);
     }
 

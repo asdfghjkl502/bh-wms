@@ -37,8 +37,8 @@ public interface UserService {
 
     /**
      * 用户分页信息
-     * @param limit: 每页显示多少条数
-     * @param offset: 偏移量
+     * @param pageSize: 每页显示多少条数
+     * @param pageNo: 当前页
      * @param isDelete: 是是否有效 0:无效 1: 有效
      * @param userName: 用户名称
      * @param startTime: 开始时间
@@ -46,6 +46,6 @@ public interface UserService {
      * @param userId : 用户ID
      * @return
      */
-    Page getUserPage(int limit, int offset, Integer isDelete, String userName, String userTel,String userEmail,String userNick,Date startTime, Date endTime, Integer userId);
+    Page getUserPage(int pageNo, int pageSize, Integer isDelete, String userName, String userTel,String userEmail,String userNick,Date startTime, Date endTime, Integer userId);
 
 }

@@ -41,9 +41,9 @@ public class UserServiceImpl  implements UserService {
     }
 
     @Override
-    public Page getUserPage(int limit, int offset, Integer isDelete, String userName, String userTel, String userEmail, String userNick, Date startTime, Date endTime, Integer userId) {
+    public Page getUserPage(int pageNo, int pageSize, Integer isDelete, String userName, String userTel, String userEmail, String userNick, Date startTime, Date endTime, Integer userId) {
         Page page = new Page();
-        PageHelper.offsetPage(offset,limit);
+        PageHelper.startPage(pageNo,pageSize);
         List<User> userList = userMapper.getUserList(userId, userName, userTel, userEmail, userNick, startTime, endTime, isDelete);
         PageInfo<User> info = new PageInfo<>(userList);
         page.setPageSize(info.getPageSize());
@@ -55,4 +55,6 @@ public class UserServiceImpl  implements UserService {
         page.setData(info.getList());
         return page;
     }
+
+
 }

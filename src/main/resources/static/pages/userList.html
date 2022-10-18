@@ -4,13 +4,97 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>百慧智慧wms仓库</title>
-  <link href="layui/css/layui.css" rel="stylesheet">
+  <link href="../layui/css/layui.css" rel="stylesheet">
 </head>
 <body>
 
-	<h1>用户管理</h1>
+<div class="layui-fluid">
+
+    <table id="demo" lay-filter="test"></table>
+
+</div>
 
 
-<script src="layui/layui.js"></script>
+<script src="../layui/layui.js"></script>
+<script>
+
+    layui.use(["table"],function(){
+        var table = layui.table;
+        table.render({
+            elem:"#demo",
+            url:"/getUserPage",
+            page:true,
+            request:{
+                pageName: 'pageNo',
+                limitName:'pageSize'
+            },
+            parseData:function(res){
+                console.log(res);
+                return {
+                    "code": res.code,
+                    "msg": res.msg,
+                    "count": res.obj.count,
+                    "data": res.obj.data
+                }
+            },
+            cols:[[
+                {
+                    field: 'userId',
+                    title: '用户编号',
+                    sort: true
+                },
+                {
+                    field: 'userName',
+                    title: '用户名称',
+                    sort: true
+                },
+                {
+                    field: 'userTel',
+                    title: '手机号',
+                    sort: true
+                },
+                {
+                    field: 'userEmail',
+                    title: '邮箱',
+                    sort: true
+                },
+                {
+                    field: 'userNick',
+                    title: '昵称',
+                    sort: true
+                },
+                {
+                    field: 'password',
+                    title: '密码',
+                    sort: true
+                },
+                {
+                    field: 'salt',
+                    title: '盐值',
+                    sort: true
+                },
+                {
+                    field: 'createTime',
+                    title: '创建时间',
+                    sort: true
+                },
+                {
+                    field: 'updateTime',
+                    title: '更新时间',
+                    sort: true
+                },
+                {
+                    field: 'isDelete',
+                    title: '是否删除',
+                    sort: true
+                },
+                {
+                    title: '操作'
+                }
+            ]]
+        });
+    });
+
+</script>
 </body>
 </html>

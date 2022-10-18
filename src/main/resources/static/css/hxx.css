@@ -1,0 +1,96 @@
+/* 惠学习样式总文件 */
+
+/* 设置顶部背景色 */
+.hxx-top{
+	background-color: #393D49;
+	display: flex;
+	justify-content: space-between;
+}
+
+/* 取消顶部导航圆角 */
+.hxx-top>.layui-nav{
+	border-radius: 0;
+}
+.hxx-top>.hxx-left{
+	line-height:45px;
+	padding: 0 20px;
+}
+.hxx-top>.hxx-left>li>a{
+	display: inline-block;
+	color: #FFFFFFB3;
+	font-size: 14px;
+	font-weight: bold;
+}
+.hxx-top>.hxx-left>li>a:hover{
+	color: #fff;
+}
+/* 取消块状元素特点 */
+.layui-nav{
+	display: inline-block;
+}
+/* 取消默认顶部样式 */
+.hxx-nav,.hxx-nav-item{
+	line-height: 45px !important;
+}
+
+/* 内容区样式 */
+.hxx-container{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: nowrap;
+}
+/* 菜单栏样式 */
+.hxx-container-left{
+	width: 220px;
+}
+.nav-tab{
+	margin: 0;
+}
+/* 取消第一个选项卡删除样式 */
+.hxx-container-right .nav-tab .layui-tab-title li.home .layui-tab-close{
+	display: none;
+}
+
+/* 选项卡选中状态 */
+.layui-this{
+	background-color: #eee !important;
+	color: #666 !important;
+}
+/* 首页图标样式设置 */
+.quick-home{
+	display: flex;
+	justify-content: space-around;
+}
+.quick-home>a{
+	width: 240px;
+	height: 250px;
+	border-radius: 10px;
+	border: 2px solid #aaa;
+	color: #aaa;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+	margin-top: 80px;
+}
+.quick-home p{
+	font-weight:bold;
+	font-size: 18px;
+}
+
+.quick-home>a>span{
+	color: #555;
+	font-size: 150px;
+}
+.quick-home>a>span:hover{
+	color: #000;
+}
+.quick-home>a:hover{
+	border: 2px solid #000;
+	color: #000;
+}
+.layui-show>iframe{
+	width: 100%;
+}
+

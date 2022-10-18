@@ -86,18 +86,12 @@ public class RoleController {
         return new Result(page);
     }
 
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "pageSize",value = "页容量",dataType = "java.lang.Integer"),
-            @ApiImplicitParam(name = "pageNo",value = "当前页",dataType = "java.lang.Integer"),
-            @ApiImplicitParam(name = "isDelete",value = "是否删除 0:删除,1:未删除",dataType = "java.lang.Integer"),
-            @ApiImplicitParam(name = "roleName",value = "角色名称",dataType = "java.lang.String"),
-            @ApiImplicitParam(name = "startTime",value = "开始时间",dataType = "java.util.Date"),
-            @ApiImplicitParam(name = "endTime",value = "结束时间",dataType = "java.util.Date"),
-            @ApiImplicitParam(name = "roleId",value = "角色ID",dataType = "java.lang.Integer")
-    })
+
     @GetMapping(value = "/getRolePage")
-    public Result getRolePage(int pageSize, int pageNo, Integer isDelete, String roleName, @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime, Integer roleId){
-        Page page = roleService.getRolePageFor(pageSize, pageNo, isDelete, roleName, startTime, endTime, roleId);
+    public Result getRolePage(Integer pageSize, Integer pageNo, Integer isDelete, String roleName, @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime, Integer roleId){
+        System.out.println(pageNo);
+        System.out.println(pageSize);
+        Page page = roleService.getRolePage(pageSize, pageNo, isDelete, roleName, startTime, endTime, roleId);
         return new Result(page);
     }
 

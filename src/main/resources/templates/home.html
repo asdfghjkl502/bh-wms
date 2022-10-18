@@ -1,243 +1,118 @@
-<!doctype html>
-<html class="x-admin-sm">
-    <head>
-        <meta charset="UTF-8">
-        <title>百惠WMS</title>
-        <meta name="renderer" content="webkit|ie-comp|ie-stand">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-        <meta http-equiv="Cache-Control" content="no-siteapp" />
-        <link rel="stylesheet" href="css/font.css">
-        <link rel="stylesheet" href="css/xadmin.css">
-        <script src="lib/layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="js/xadmin.js"></script>
-    </head>
-    <body class="index">
-        <!-- 顶部开始 -->
-        <div class="container">
-            <div class="logo">
-                <a href="/">百惠WMS仓储管理系统</a></div>
-            <div class="left_open">
-                <a><i title="展开左侧栏" class="layui-icon layui-icon-slider"></i></a>
-            </div>
-            <ul class="layui-nav right" lay-filter="">
-                <li class="layui-nav-item">
-                    <a href="javascript:;">admin</a>
-                    <dl class="layui-nav-child">
-                        <!-- 二级菜单 -->
-                        <dd>
-                            <a onclick="xadmin.open('个人信息','https://www.baidu.com')">个人信息</a></dd>
-                        <dd>
-                            <a onclick="xadmin.open('切换帐号','https://www.baidu.com')">切换帐号</a></dd>
-                        <dd>
-                            <a href="./login.html">退出</a></dd>
-                    </dl>
-                </li>
-            </ul>
-        </div>
-        <!-- 顶部结束 -->
-        <!-- 中部开始 -->
-        <!-- 左侧菜单开始 -->
-        <div class="left-nav">
-            <div id="side-nav">
-                <ul id="nav">
-                    <li>
-                        <a href="javascript:;">
-                            <i class="layui-icon layui-icon-chart-screen left-nav-li" lay-tips="仪表盘"></i>
-                            <cite>仪表盘</cite>
-                            <i class="iconfont nav_right">&#xe697;</i>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a onclick="xadmin.add_tab('商业智能','pages/statistical.html')">
-                                    <i class="layui-icon layui-icon-right"></i>
-                                    <cite>商业智能</cite>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="layui-icon layui-icon-util left-nav-li" lay-tips="系统设置"></i>
-                            <cite>系统设置</cite>
-                            <i class="iconfont  nav_right">&#xe697;</i>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a onclick="xadmin.add_tab('用户管理','order-list.html')">
-                                    <i class="layui-icon layui-icon-right"></i>
-                                    <cite>用户管理</cite>
-                                </a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('角色管理','order-list1.html')">
-                                    <i class="layui-icon layui-icon-right"></i>
-                                    <cite>角色管理</cite>
-                                </a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('部门管理','order-list1.html')">
-                                    <i class="layui-icon layui-icon-right"></i>
-                                    <cite>部门管理</cite>
-                                </a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('菜单管理','order-list1.html')">
-                                    <i class="layui-icon layui-icon-right"></i>
-                                    <cite>菜单管理</cite>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="layui-icon layui-icon-chart left-nav-li" lay-tips="基础数据"></i>
-                            <cite>基础数据</cite>
-                            <i class="iconfont nav_right">&#xe697;</i>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a onclick="xadmin.add_tab('产品管理','cate.html')">
-                                    <i class="layui-icon layui-icon-right"></i>
-                                    <cite>产品管理</cite>
-                                </a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('客户管理','cate.html')">
-                                    <i class="layui-icon layui-icon-right"></i>
-                                    <cite>客户管理</cite>
-                                </a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('供应商管理','cate.html')">
-                                    <i class="layui-icon layui-icon-right"></i>
-                                    <cite>供应商管理</cite>
-                                </a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('承运商管理','cate.html')">
-                                    <i class="layui-icon layui-icon-right"></i>
-                                    <cite>承运商管理</cite>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="layui-icon layui-icon-home left-nav-li" lay-tips="仓库管理"></i>
-                            <cite>仓库管理</cite>
-                            <i class="iconfont nav_right">&#xe697;</i>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a onclick="xadmin.add_tab('仓库管理','city.html')">
-                                   <i class="layui-icon layui-icon-right"></i>
-                                    <cite>仓库管理</cite>
-                                </a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('入库管理','city.html')">
-                                    <i class="layui-icon layui-icon-right"></i>
-                                    <cite>入库管理</cite>
-                                </a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('出库管理','city.html')">
-                                    <i class="layui-icon layui-icon-right"></i>
-                                    <cite>出库管理</cite>
-                                </a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('库存查询','city.html')">
-                                    <i class="layui-icon layui-icon-right"></i>
-                                    <cite>库存查询</cite>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="layui-icon layui-icon-note left-nav-li" lay-tips="字典管理"></i>
-                            <cite>字典管理</cite>
-                            <i class="iconfont nav_right">&#xe697;</i>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a onclick="xadmin.add_tab('产品类目','admin-list.html')">
-                                    <i class="layui-icon layui-icon-right"></i>
-                                    <cite>产品类目</cite>
-                                </a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('客户级别','admin-role.html')">
-                                    <i class="layui-icon layui-icon-right"></i>
-                                    <cite>客户级别</cite>
-                                </a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('客户来源','admin-cate.html')">
-                                    <i class="layui-icon layui-icon-right"></i>
-                                    <cite>客户来源</cite>
-                                </a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('客户行业','admin-rule.html')">
-                                    <i class="layui-icon layui-icon-right"></i>
-                                    <cite>客户行业</cite>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="layui-icon layui-icon-log left-nav-li" lay-tips="日志管理"></i>
-                            <cite>日志管理</cite>
-                            <i class="iconfont nav_right">&#xe697;</i>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a onclick="xadmin.add_tab('系统日志','admin-list.html')">
-                                    <i class="layui-icon layui-icon-right"></i>
-                                    <cite>系统日志</cite>
-                                </a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('登录日志','admin-role.html')">
-                                    <i class="layui-icon layui-icon-right"></i>
-                                    <cite>登录日志</cite>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- <div class="x-slide_left"></div> -->
-        <!-- 左侧菜单结束 -->
-        <!-- 右侧主体开始 -->
-        <div class="page-content">
-            <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
-                <ul class="layui-tab-title">
-                    <li class="home">
-                        <i class="layui-icon">&#xe68e;</i>我的桌面</li></ul>
-                <div class="layui-unselect layui-form-select layui-form-selected" id="tab_right">
-                    <dl>
-                        <dd data-type="this">关闭当前</dd>
-                        <dd data-type="other">关闭其它</dd>
-                        <dd data-type="all">关闭全部</dd></dl>
-                </div>
-                <div class="layui-tab-content">
-                    <div class="layui-tab-item layui-show">
-                        <iframe src='pages/welcome.html' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
-                    </div>
-                </div>
-                <div id="tab_show"></div>
-            </div>
-        </div>
-        <div class="page-content-bg"></div>
-        <style id="theme_style"></style>
-        <!-- 右侧主体结束 -->
-        <!-- 中部结束 -->
-    </body>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>百慧智慧wms仓库</title>
+  <link href="layui/css/layui.css" rel="stylesheet">
+  <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="img/ico/favicon.ico" />
+  <link rel="stylesheet" href="css/hxx.css">
+</head>
+<body>
 
+	<!-- 顶部 -->
+	<div class="hxx-top">
+		<ul class="hxx-left">
+			<li><a href="/">百慧智慧wms仓库</a></li>
+		</ul>
+		<ul class="layui-nav hxx-nav">
+		  <li class="layui-nav-item hxx-nav-item">
+		      <a><img src="img/avatar.jpeg" class="layui-nav-img">枫桥夜泊</a>
+		      <dl class="layui-nav-child">
+		        <dd><a href="javascript:void(0);">修改信息</a></dd>
+		        <dd><a href="javascript:void(0);">退出登录</a></dd>
+		      </dl>
+		    </li>
+		</ul>
+	</div>
+	<!-- 内容区 -->
+	<div class="hxx-container">
+		
+		<!-- 左侧导航 -->
+		<div class="hxx-container-left">
+			<div class="layui-panel">
+			  <ul class="layui-menu" id="hxxmenuid">
+			    <li>
+			        <div onclick="add_tab('仪表盘','pages/statisticsList.html')" class="layui-menu-body-title">仪表盘</div>
+			    </li>
+				<li class="layui-menu-item-divider"></li>
+				<li class="layui-menu-item-group layui-menu-item-up" lay-options="{type: 'group'}">
+				  <div class="layui-menu-body-title">
+				    系统设置 <i class="layui-icon layui-icon-down"></i>
+				  </div>
+				  <ul>
+				    <li onclick="add_tab('用户管理','pages/userList.html')">用户管理</li>
+					<li onclick="add_tab('角色管理','pages/roleList.html')">角色管理</li>
+					<li onclick="add_tab('部门管理','pages/departmentList.html')">部门管理</li>
+					<li onclick="add_tab('菜单管理','pages/menusList.html')">菜单管理</li>
+				  </ul>
+				</li>
+				<li class="layui-menu-item-divider"></li>
+				<li class="layui-menu-item-group layui-menu-item-up" lay-options="{type: 'group'}">
+				  <div class="layui-menu-body-title">
+				    基础数据 <i class="layui-icon layui-icon-down"></i>
+				  </div>
+				  <ul>
+					<li onclick="add_tab('产品管理','pages/productList.html')">产品管理</li>
+					<li onclick="add_tab('客户管理','pages/customerList.html')">客户管理</li>
+					<li onclick="add_tab('供应商管理','pages/supplierList.html')">供应商管理</li>
+					<li onclick="add_tab('承运商管理','pages/logisticsList.html')">承运商管理</li>
+				  </ul>
+				</li>
+				<li class="layui-menu-item-divider"></li>
+				<li class="layui-menu-item-group layui-menu-item-up" lay-options="{type: 'group'}">
+				  <div class="layui-menu-body-title">
+				    仓库管理 <i class="layui-icon layui-icon-down"></i>
+				  </div>
+				  <ul>
+				    <li onclick="add_tab('仓库管理','pages/warehouseList.html')">仓库管理</li>
+					<li onclick="add_tab('入库管理','pages/warehouseIn.html')">入库管理</li>
+					<li onclick="add_tab('出库管理','pages/warehouseOut.html')">出库管理</li>
+					<li onclick="add_tab('库存查询','pages/productStock.html')">库存查询</li>
+				  </ul>
+				</li>
+				<li class="layui-menu-item-divider"></li>
+				<li class="layui-menu-item-group layui-menu-item-up" lay-options="{type: 'group'}">
+				  <div class="layui-menu-body-title">
+				    字典管理 <i class="layui-icon layui-icon-down"></i>
+				  </div>
+				  <ul>
+				    <li onclick="add_tab('产品类目','pages/categoryList.html')">产品类目</li>
+					<li onclick="add_tab('客户级别','pages/customerLevelList.html')">客户级别</li>
+					<li onclick="add_tab('客户来源','pages/customerSourceList.html')">客户来源</li>
+				  </ul>
+				</li>
+				<li class="layui-menu-item-divider"></li>
+				<li class="layui-menu-item-group layui-menu-item-up" lay-options="{type: 'group'}">
+				  <div class="layui-menu-body-title">
+				    日志管理 <i class="layui-icon layui-icon-down"></i>
+				  </div>
+				  <ul>
+				    <li onclick="add_tab('系统日志','pages/sysLog.html')">系统日志</li>
+					<li onclick="add_tab('登录日志','pages/userLog.html')">登录日志</li>
+				  </ul>
+				</li>
+			  </ul>
+			</div>
+		</div>
+		<!-- 右侧内容 -->
+		<div class="hxx-container-right">
+			<div class="layui-tab nav-tab" lay-allowClose="true" lay-filter="nav_filter">
+			  <ul class="layui-tab-title">
+			    <li class="home layui-this">
+					<i class="layui-icon layui-icon-home"></i> 首页
+				</li>
+			  </ul>
+			  <div class="layui-tab-content">
+			    <div class="layui-tab-item layui-show">
+					<iframe frameborder=0 scrolling="yes" class="hxx-iframe" src="pages/welcome.html"></iframe>
+				</div>
+			  </div>
+			</div>
+		</div>
+	</div>
+<script src="layui/layui.js"></script>
+<script src="js/md5.min.js"></script>
+<script src="js/hxx.js"></script>
+</body>
 </html>

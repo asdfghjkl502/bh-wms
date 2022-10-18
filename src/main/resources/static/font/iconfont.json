@@ -1,0 +1,114 @@
+{
+  "id": "3711798",
+  "name": "wmsv",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1137797",
+      "name": "库存",
+      "font_class": "kucun",
+      "unicode": "e680",
+      "unicode_decimal": 59008
+    },
+    {
+      "icon_id": "2045574",
+      "name": "库存报表",
+      "font_class": "icon-p_kucunbaobiao",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "6241664",
+      "name": "库存管理",
+      "font_class": "kucunguanli",
+      "unicode": "e627",
+      "unicode_decimal": 58919
+    },
+    {
+      "icon_id": "6297001",
+      "name": "新出库",
+      "font_class": "xinchuku",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "6297003",
+      "name": "新入库",
+      "font_class": "xinruku",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "6789086",
+      "name": "入库管理",
+      "font_class": "rukuguanli-",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    },
+    {
+      "icon_id": "7992451",
+      "name": "库存",
+      "font_class": "kucun-",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "8117645",
+      "name": "出库管理",
+      "font_class": "chukuguanli",
+      "unicode": "e645",
+      "unicode_decimal": 58949
+    },
+    {
+      "icon_id": "10371617",
+      "name": "快速入库",
+      "font_class": "icon_function_kuaisuruku",
+      "unicode": "e893",
+      "unicode_decimal": 59539
+    },
+    {
+      "icon_id": "11111000",
+      "name": "出库",
+      "font_class": "chuku",
+      "unicode": "e67d",
+      "unicode_decimal": 59005
+    },
+    {
+      "icon_id": "11111005",
+      "name": "库存统计",
+      "font_class": "kucuntongji",
+      "unicode": "e67e",
+      "unicode_decimal": 59006
+    },
+    {
+      "icon_id": "11111008",
+      "name": "库存查询",
+      "font_class": "kucunchaxun",
+      "unicode": "e67f",
+      "unicode_decimal": 59007
+    },
+    {
+      "icon_id": "15085048",
+      "name": "库存查询",
+      "font_class": "kucunchaxun1",
+      "unicode": "e7d4",
+      "unicode_decimal": 59348
+    },
+    {
+      "icon_id": "22425646",
+      "name": "库存查询",
+      "font_class": "kucunchaxun2",
+      "unicode": "e688",
+      "unicode_decimal": 59016
+    },
+    {
+      "icon_id": "26888563",
+      "name": "库存查询",
+      "font_class": "kucunchaxun3",
+      "unicode": "e657",
+      "unicode_decimal": 58967
+    }
+  ]
+}

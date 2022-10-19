@@ -1,0 +1,29 @@
+/* 用户搜索样式 */
+.user-search{
+    display: flex;
+}
+.user{
+    height: 27px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 20%;
+    margin-right: 10px;
+}
+.user>label{
+    display: block;
+    font-size: 10px;
+    width: 20%;
+    height: 27px;
+    line-height: 27px;
+}
+.user>input{
+    border: 1px solid #eee;
+    width: 80%;
+    height: 25px;
+    padding-left: 5px;
+}
+/* placeholder 样式 */
+.user>input::placeholder{
+    font-size: 10px;
+}

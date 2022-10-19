@@ -1,20 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>百慧智慧wms仓库</title>
-  <link href="../layui/css/layui.css" rel="stylesheet">
-  <link href="../css/hxx.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>百慧wms仓库</title>
+    <link href="../layui/css/layui.css" rel="stylesheet">
+    <link href="../css/hxx.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/hxx-user.css">
 </head>
 <body>
 
 <div class="layui-fluid">
-
+    <!--  条件选项  -->
+    <div class="layui-row user-search">
+        <!--  用户名称  -->
+        <div class="user">
+            <label for="userName">姓名:</label>
+            <input id="userName" placeholder="请输入姓名...">
+        </div>
+        <!--  手机号  -->
+        <div class="user">
+            <label for="phone">手机:</label>
+            <input id="phone" placeholder="请输入手机号...">
+        </div>
+        <!--  开始时间  -->
+        <div class="user">
+            <label for="start">开始时间:</label>
+            <input id="start" placeholder="请输入手机号...">
+        </div>
+        <!--  结束时间  -->
+        <div class="user">
+            <label for="end">结束时间:</label>
+            <input id="end" placeholder="请输入手机号...">
+        </div>
+    </div>
     <table id="demo" lay-filter="test"></table>
-
 </div>
-
 
 <script src="../layui/layui.js"></script>
 <script src="../js/hxx.js"></script>
@@ -39,61 +60,58 @@
                     "data": res.obj.data
                 }
             },
-            cols:[[
-                {
-                    field: 'userId',
-                    title: '用户编号',
-                    sort: true
-                },
-                {
-                    field: 'userName',
-                    title: '用户名称',
-                    sort: true
-                },
-                {
-                    field: 'userTel',
-                    title: '手机号',
-                    sort: true
-                },
-                {
-                    field: 'userEmail',
-                    title: '邮箱',
-                    sort: true
-                },
-                {
-                    field: 'userNick',
-                    title: '昵称',
-                    sort: true
-                },
-                {
-                    field: 'password',
-                    title: '密码',
-                    sort: true
-                },
-                {
-                    field: 'salt',
-                    title: '盐值',
-                    sort: true
-                },
-                {
-                    field: 'createTime',
-                    title: '创建时间',
-                    sort: true
-                },
-                {
-                    field: 'updateTime',
-                    title: '更新时间',
-                    sort: true
-                },
-                {
-                    field: 'isDelete',
-                    title: '是否删除',
-                    sort: true
-                },
-                {
-                    title: '操作'
-                }
-            ]]
+            cols:[
+                [
+                    {
+                        field: 'userId',
+                        title: '用户编号',
+                        sort: true
+                    },
+                    {
+                        field: 'userName',
+                        title: '姓名',
+                        sort: true
+                    },
+                    {
+                        field: 'userTel',
+                        title: '手机号'
+                    },
+                    {
+                        field: 'userEmail',
+                        title: '邮箱'
+                    },
+                    {
+                        field: 'userNick',
+                        title: '昵称'
+                    },
+                    {
+                        field: 'password',
+                        title: '密码'
+                    },
+                    {
+                        field: 'salt',
+                        title: '盐值'
+                    },
+                    {
+                        field: 'createTime',
+                        title: '创建时间',
+                        sort: true
+                    },
+                    {
+                        field: 'updateTime',
+                        title: '更新时间',
+                        sort: true
+                    },
+                    {
+                        field: 'isDelete',
+                        title: '是否删除',
+                        sort: true
+                    },
+                    {
+                        title: '操作'
+                    }
+                ]
+            ]
         });
     });
 

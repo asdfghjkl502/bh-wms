@@ -22,7 +22,7 @@ layui.use(['jquery','dropdown','element'],function(){
 	//设置内容区高度
 	var $hcri = $(".hxx-iframe");
 	$hcri.css({
-		"height":$wh-100
+		"height":$wh-150
 	});
 });
 
@@ -50,4 +50,10 @@ function add_tab(title,url){
 	});
 	//切换
 	element.tabChange("nav_filter", tabId);
+	//设置高度
+	var $wh = $(window).height();
+	var $hcri = $(".hxx-iframe");
+	$hcri.css({
+		"height":$wh-150
+	});
 }

@@ -46,7 +46,7 @@ function add_tab(title,url){
 	element.tabAdd("nav_filter",{
 		title:title,
 		id:tabId,
-		content:'<iframe tab-id="'+tabId+'" frameborder=0 scrolling="yes" class="hxx-iframe" src="'+url+'"></iframe>'
+		content:'<iframe style="border: none;" tab-id="'+tabId+'" frameborder=0 scrolling="yes" class="hxx-iframe" src="'+url+'"></iframe>'
 	});
 	//切换
 	element.tabChange("nav_filter", tabId);

@@ -3,6 +3,7 @@
 var $;
 var element;
 var dropdown;
+
 layui.use(['jquery','dropdown','element'],function(){
 	//加载jquery模块
 	$ = layui.jquery;
@@ -18,7 +19,8 @@ layui.use(['jquery','dropdown','element'],function(){
 		"width":$ww-200,
 		"margin":"0 5px"
 	});
-	var $hcri = $(".hxx-container-right .layui-show iframe");
+	//设置内容区高度
+	var $hcri = $(".hxx-iframe");
 	$hcri.css({
 		"height":$wh-100
 	});

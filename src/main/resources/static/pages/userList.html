@@ -26,12 +26,17 @@
         <!--  开始时间  -->
         <div class="user">
             <label for="start">开始时间:</label>
-            <input id="start" placeholder="请输入手机号...">
+            <input id="start" placeholder="起始时间">
         </div>
         <!--  结束时间  -->
         <div class="user">
             <label for="end">结束时间:</label>
-            <input id="end" placeholder="请输入手机号...">
+            <input id="end" placeholder="结束时间">
+        </div>
+        <!--提交按钮-->
+        <div class="user">
+            <button type="button" class="layui-btn  layui-btn-normal">搜索</button>
+            <button type="button" class="layui-btn  layui-btn-danger">重置</button>
         </div>
     </div>
     <table id="demo" lay-filter="test"></table>
@@ -41,12 +46,35 @@
 <script src="../js/hxx.js"></script>
 <script>
 
-    layui.use(["table"],function(){
+    layui.use(["table","laydate"],function(){
         var table = layui.table;
+        var laydate = layui.laydate;
+
+        /* 时间控件选择 */
+        /*
+            开始时间
+         */
+        laydate.render({
+            elem: '#start', //指定元素
+            type:'datetime',/* 年月日时分秒 */
+            theme:'#2F4056 '
+        });
+        /*
+            结束时间
+         */
+        laydate.render({
+            elem: '#end', //指定元素
+            type:'datetime',/* 年月日时分秒 */
+            theme:'#2F4056 '
+        });
+
         table.render({
             elem:"#demo",
             url:"/getUserPage",
-            page:true,
+            page:{
+                prev:'上一页',
+                next:'下一页'
+            },
             request:{
                 pageName: 'pageNo',
                 limitName:'pageSize'
@@ -104,8 +132,16 @@
                     },
                     {
                         field: 'isDelete',
-                        title: '是否删除',
-                        sort: true
+                        title: '是否有效',
+                        templet:function (d) {
+                            if(d.isDelete==1){
+                                var s='<input type="checkbox" name="isDelete" lay-skin="switch" lay-text="有效|无效" checked>';
+                                return s;
+                            }else{
+                                var s='<input type="checkbox" name="isDelete" lay-skin="switch" lay-text="有效|无效">';
+                                return s;
+                            }
+                        }
                     },
                     {
                         title: '操作'

@@ -35,8 +35,8 @@
         </div>
         <!--提交按钮-->
         <div class="user">
-            <button type="button" class="layui-btn  layui-btn-normal">搜索</button>
-            <button type="button" class="layui-btn  layui-btn-danger">重置</button>
+            <button type="button" class="layui-btn  layui-btn-primary layui-border-green">搜索</button>
+            <button type="button" class="layui-btn  layui-btn-primary layui-border-red">重置</button>
         </div>
     </div>
     <table id="demo" lay-filter="test"></table>
@@ -75,6 +75,8 @@
                 prev:'上一页',
                 next:'下一页'
             },
+            limit:5,
+            limits:[5,10,15,20,25],
             request:{
                 pageName: 'pageNo',
                 limitName:'pageSize'
@@ -88,63 +90,85 @@
                     "data": res.obj.data
                 }
             },
+            toolbar: '<div> <button class="layui-btn layui-btn-sm layui-btn-danger"> <i class="layui-icon layui-icon-delete"></i> 批量删除</button><button class="layui-btn layui-btn-sm layui-btn-normal"> <i class="layui-icon layui-icon-add-1"></i>添加</button> </div>',
+            defaultToolbar: ['exports', 'print'],
             cols:[
                 [
                     {
+                        checkbox: true
+                    },
+                    {
                         field: 'userId',
-                        title: '用户编号',
-                        sort: true
+                        title: '编号',
+                        sort: true,
+                        width:'8%'
                     },
                     {
                         field: 'userName',
                         title: '姓名',
-                        sort: true
+                        sort: true,
+                        width:'10%'
                     },
                     {
                         field: 'userTel',
-                        title: '手机号'
+                        title: '手机',
+                        width:'12%'
                     },
                     {
                         field: 'userEmail',
-                        title: '邮箱'
+                        title: '邮箱',
+                        width:'13%'
                     },
                     {
                         field: 'userNick',
-                        title: '昵称'
+                        title: '昵称',
+                        width:'10%'
                     },
                     {
                         field: 'password',
-                        title: '密码'
+                        title: '密码',
+                        width:'12%'
                     },
                     {
                         field: 'salt',
-                        title: '盐值'
+                        title: '盐值',
+                        width:'10%'
                     },
                     {
                         field: 'createTime',
                         title: '创建时间',
-                        sort: true
+                        sort: true,
+                        width:'18%'
                     },
                     {
                         field: 'updateTime',
                         title: '更新时间',
-                        sort: true
+                        sort: true,
+                        width:'10%',
+                        width:'18%'
                     },
                     {
                         field: 'isDelete',
                         title: '是否有效',
                         templet:function (d) {
                             if(d.isDelete==1){
-                                var s='<input type="checkbox" name="isDelete" lay-skin="switch" lay-text="有效|无效" checked>';
+                                var s='<input style="width: 50%;" type="checkbox" name="isDelete" lay-skin="switch" lay-text="有效|无效" checked>';
                                 return s;
                             }else{
-                                var s='<input type="checkbox" name="isDelete" lay-skin="switch" lay-text="有效|无效">';
+                                var s='<input style="width: 50%;" type="checkbox" name="isDelete" lay-skin="switch" lay-text="有效|无效">';
                                 return s;
                             }
-                        }
+                        },
+                        width:'10%'
                     },
                     {
-                        title: '操作'
+                        title: '操作',
+                        templet:function (d) {
+                            var s="<button type='button' class='layui-btn layui-btn-danger layui-btn-xs'>删除</button>";
+                            s+="<button type='button' class='layui-btn layui-btn-warm layui-btn-xs'>更新</button>";
+                            return s;
+                        },
+                        width:'12%'
                     }
                 ]
             ]

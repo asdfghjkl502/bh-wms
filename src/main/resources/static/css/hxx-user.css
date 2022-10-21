@@ -13,13 +13,13 @@
 .user>label{
     display: block;
     font-size: 10px;
-    width: 23%;
+    width: 28%;
     height: 27px;
     line-height: 27px;
 }
 .user>input{
     border: 1px solid #eee;
-    width: 77%;
+    width: 70%;
     height: 25px;
     padding-left: 5px;
 }

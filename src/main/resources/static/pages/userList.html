@@ -46,9 +46,11 @@
 <script src="../js/hxx.js"></script>
 <script>
 
-    layui.use(["table","laydate"],function(){
-        var table = layui.table;
-        var laydate = layui.laydate;
+    layui.use(["table","laydate","form","layer"],function(){
+        const table = layui.table;
+        const laydate = layui.laydate;
+        const form = layui.form;
+        const layer = layui.layer;
 
         /* 时间控件选择 */
         /*
@@ -82,7 +84,6 @@
                 limitName:'pageSize'
             },
             parseData:function(res){
-                console.log(res);
                 return {
                     "code": res.code,
                     "msg": res.msg,
@@ -90,7 +91,7 @@
                     "data": res.obj.data
                 }
             },
-            toolbar: '<div> <button class="layui-btn layui-btn-sm layui-btn-danger"> <i class="layui-icon layui-icon-delete"></i> 批量删除</button><button class="layui-btn layui-btn-sm layui-btn-normal"> <i class="layui-icon layui-icon-add-1"></i>添加</button> </div>',
+            toolbar: '<div> <button lay-event="batchDel" class="layui-btn layui-btn-sm layui-btn-danger"> <i class="layui-icon layui-icon-delete"></i> 批量删除</button><button lay-event="addUser" class="layui-btn layui-btn-sm layui-btn-normal"> <i class="layui-icon layui-icon-add-1"></i>添加</button> </div>',
             defaultToolbar: ['exports', 'print'],
             cols:[
                 [
@@ -98,41 +99,18 @@
                         checkbox: true
                     },
                     {
-                        field: 'userId',
-                        title: '编号',
-                        sort: true,
-                        width:'8%'
+                        title: '序号',
+                        type:'numbers',
+                        width:'10%'
                     },
                     {
                         field: 'userName',
                         title: '姓名',
-                        sort: true,
-                        width:'10%'
+                        sort: true
                     },
                     {
                         field: 'userTel',
-                        title: '手机',
-                        width:'12%'
-                    },
-                    {
-                        field: 'userEmail',
-                        title: '邮箱',
-                        width:'13%'
-                    },
-                    {
-                        field: 'userNick',
-                        title: '昵称',
-                        width:'10%'
-                    },
-                    {
-                        field: 'password',
-                        title: '密码',
-                        width:'12%'
-                    },
-                    {
-                        field: 'salt',
-                        title: '盐值',
-                        width:'10%'
+                        title: '手机'
                     },
                     {
                         field: 'createTime',
@@ -144,35 +122,74 @@
                         field: 'updateTime',
                         title: '更新时间',
                         sort: true,
-                        width:'10%',
                         width:'18%'
                     },
                     {
                         field: 'isDelete',
                         title: '是否有效',
                         templet:function (d) {
-                            if(d.isDelete==1){
-                                var s='<input style="width: 50%;" type="checkbox" name="isDelete" lay-skin="switch" lay-text="有效|无效" checked>';
+                            if(d.isDelete===1){
+                                let s='<input style="width: 50%;" lay-filter="isDel" type="checkbox" name="isDelete" lay-skin="switch" lay-text="有效|无效" checked>';
                                 return s;
                             }else{
-                                var s='<input style="width: 50%;" type="checkbox" name="isDelete" lay-skin="switch" lay-text="有效|无效">';
+                                let s='<input style="width: 50%;" lay-filter="isDel" type="checkbox" name="isDelete" lay-skin="switch" lay-text="有效|无效">';
                                 return s;
                             }
                         },
-                        width:'10%'
+                        exportTemplet:function(d,obj){
+                            return d.isDelete===0?'无效':'有效';
+                        }
                     },
                     {
                         title: '操作',
                         templet:function (d) {
-                            var s="<button type='button' class='layui-btn layui-btn-danger layui-btn-xs'>删除</button>";
-                            s+="<button type='button' class='layui-btn layui-btn-warm layui-btn-xs'>更新</button>";
+                            var s="<button type='button' lay-event='detail' class='layui-btn layui-btn-normal layui-btn-xs'>详情</button>";
+                            s+="<button type='button' lay-event='edit' class='layui-btn layui-btn-danger layui-btn-xs'>更新</button>";
                             return s;
-                        },
-                        width:'12%'
+                        }
                     }
                 ]
             ]
         });
+        /**
+         * 表格头部事件绑定
+         */
+        table.on('toolbar(test)',function (obj){
+           //获取事件名
+           let e = obj.event;
+            if(e=='batchDel'){
+                console.log("表格头部事件[批量删除]: ",e);
+            }else if(e=='addUser'){
+                console.log("表格头部事件[添加]: ",e);
+            }
+        });
+        /**
+         * 单元格事件绑定
+         */
+        table.on("tool(test)",function (obj){
+            console.log(obj);
+            //获取事件名
+            let e = obj.event;
+            if(e=='detail'){
+                console.log("单元格事件[详情]: ",e);
+            }else if(e=='edit'){
+                console.log("单元格事件[编辑]: ",e);
+            }
+        });
+        /**
+         * 开关事件
+         */
+        form.on("switch(isDel)",function (obj){
+            console.log("开关事件: ",obj.elem.checked);
+            layer.confirm("是否修改",function (index){
+                //修改 AJAX
+                //关闭弹出层
+                layer.close(index);
+            });
+        });
+
+
+
     });
 
 </script>

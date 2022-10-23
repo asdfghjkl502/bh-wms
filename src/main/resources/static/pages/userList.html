@@ -12,33 +12,33 @@
 
 <div class="layui-fluid">
     <!--  条件选项  -->
-    <div class="layui-row user-search">
+    <form class="layui-form layui-row user-search">
         <!--  用户名称  -->
         <div class="user">
             <label for="userName">姓名:</label>
-            <input id="userName" placeholder="请输入姓名...">
+            <input id="userName" name="userName" placeholder="请输入姓名...">
         </div>
         <!--  手机号  -->
         <div class="user">
             <label for="phone">手机:</label>
-            <input id="phone" placeholder="请输入手机号...">
+            <input id="phone" name="userTel" placeholder="请输入手机号...">
         </div>
         <!--  开始时间  -->
         <div class="user">
             <label for="start">开始时间:</label>
-            <input id="start" placeholder="起始时间">
+            <input id="start" name="startTime" placeholder="起始时间">
         </div>
         <!--  结束时间  -->
         <div class="user">
             <label for="end">结束时间:</label>
-            <input id="end" placeholder="结束时间">
+            <input id="end" name="endTime" placeholder="结束时间">
         </div>
         <!--提交按钮-->
         <div class="user">
-            <button type="button" class="layui-btn  layui-btn-primary layui-border-green">搜索</button>
-            <button type="button" class="layui-btn  layui-btn-primary layui-border-red">重置</button>
+            <button type="button" lay-submit lay-filter="search" class="layui-btn  layui-btn-primary layui-border-green">搜索</button>
+            <button type="reset" class="layui-btn  layui-btn-primary layui-border-red">重置</button>
         </div>
-    </div>
+    </form>
     <table id="demo" lay-filter="test"></table>
 </div>
 
@@ -158,7 +158,12 @@
            //获取事件名
            let e = obj.event;
             if(e=='batchDel'){
-                console.log("表格头部事件[批量删除]: ",e);
+                //获取选中的行数据
+                let batchParam = table.checkStatus("demo");
+                //调用AJAX删除数据
+
+                //重新加载表格数据
+                console.log("批量: ",batchParam);
             }else if(e=='addUser'){
                 console.log("表格头部事件[添加]: ",e);
             }
@@ -187,7 +192,23 @@
                 layer.close(index);
             });
         });
-
+        /**
+         * 搜索事件绑定
+         */
+        form.on("submit(search)",function (obj){
+            //重新获取数据表格首页数据(根据搜索条件查询出来的数据)
+            table.reload("demo",{
+                page:{
+                    curr:1
+                },
+                where:{
+                    userName:obj.field.userName,
+                    userTel:obj.field.userTel,
+                    startTime:obj.field.startTime,
+                    endTime:obj.field.endTime
+                }
+            })
+        });
 
 
     });

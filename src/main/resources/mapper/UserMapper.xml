@@ -45,7 +45,7 @@
         SELECT * FROM user
             <where>
                 <if test="userName!=null">USER_NAME LIKE CONCAT('%',#{userName},'%')</if>
-                <if test="userTel!=null">AND USER_TEL=#{userTel}</if>
+                <if test="userTel!=null">AND USER_TEL LIKE CONCAT('%',#{userTel},'%')</if>
                 <if test="userEmail!=null">AND USER_EMAIL=#{userEmail}</if>
                 <if test="userNick!=null">AND USER_NICK=#{userNick}</if>
                 <if test="isDelete!=null">AND IS_DELETE=#{isDelete}</if>

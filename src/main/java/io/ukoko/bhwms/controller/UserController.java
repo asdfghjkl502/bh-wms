@@ -22,8 +22,8 @@ public class UserController {
 
     /**
      * 获取用户列表
-     * @param limit
-     * @param offset
+     * @param pageNo
+     * @param pageSize
      * @param isDelete
      * @param userName
      * @param userTel

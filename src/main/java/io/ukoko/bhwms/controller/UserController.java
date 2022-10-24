@@ -3,6 +3,7 @@ package io.ukoko.bhwms.controller;
 import io.swagger.annotations.Api;
 import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.dto.Result;
+import io.ukoko.bhwms.entity.User;
 import io.ukoko.bhwms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,17 +22,6 @@ public class UserController {
 
     /**
      * 获取用户列表
-     * @param pageNo
-     * @param pageSize
-     * @param isDelete
-     * @param userName
-     * @param userTel
-     * @param userEmail
-     * @param userNick
-     * @param startTime
-     * @param endTime
-     * @param userId
-     * @return
      */
     @GetMapping(value = "/getUserPage")
     public Object getUserPage(int pageNo, int pageSize, Integer isDelete, String userName,String userTel,String userEmail,String userNick, @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime, @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime, Integer userId){
@@ -46,6 +36,15 @@ public class UserController {
     public Object batchDeleteUser(@RequestBody List<Integer> userIds){
         System.out.println("批量删除: "+userIds);
         userService.batchDeleteUser(userIds);
+        return new Result();
+    }
+
+    /**
+     * 更新用户
+     */
+    @PostMapping(value = "/updateUser")
+    public Object updateUser(@RequestBody User user){
+        userService.updateUser(user);
         return new Result();
     }
 }

@@ -130,10 +130,10 @@
                         title: '是否有效',
                         templet:function (d) {
                             if(d.isDelete===1){
-                                let s='<input style="width: 50%;" lay-filter="isDel" type="checkbox" name="isDelete" lay-skin="switch" lay-text="有效|无效" checked>';
+                                let s='<input style="width: 50%;" lay-filter="isDel" type="checkbox" name="isDelete" value="'+d.userId+'" lay-skin="switch" lay-text="有效|无效" checked>';
                                 return s;
                             }else{
-                                let s='<input style="width: 50%;" lay-filter="isDel" type="checkbox" name="isDelete" lay-skin="switch" lay-text="有效|无效">';
+                                let s='<input style="width: 50%;" lay-filter="isDel" type="checkbox" name="isDelete" value="'+d.userId+'" lay-skin="switch" lay-text="有效|无效">';
                                 return s;
                             }
                         },
@@ -205,12 +205,22 @@
          * 开关事件
          */
         form.on("switch(isDel)",function (obj){
-            console.log("开关事件: ",obj.elem.checked);
-            layer.confirm("是否修改",function (index){
-                //修改 AJAX
-
-                //关闭弹出层
-                layer.close(index);
+            let param={};
+            param.isDelete=obj.elem.checked==true?1:0;
+            param.userId=obj.value;
+            $.ajax({
+                url:"/updateUser",
+                method:"post",
+                data:JSON.stringify(param),
+                contentType:"application/json",
+                success:function (d){
+                    if(d.code===0){
+                        //刷新表格
+                        table.reload("demo");
+                    }else{
+                        layer.msg(d.msg);
+                    }
+                }
             });
         });
         /**

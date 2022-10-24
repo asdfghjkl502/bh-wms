@@ -46,11 +46,12 @@
 <script src="../js/hxx.js"></script>
 <script>
 
-    layui.use(["table","laydate","form","layer"],function(){
+    layui.use(["table","laydate","form","layer","jquery"],function(){
         const table = layui.table;
         const laydate = layui.laydate;
         const form = layui.form;
         const layer = layui.layer;
+        const $ = layui.jquery;
 
         /* 时间控件选择 */
         /*
@@ -158,17 +159,31 @@
            //获取事件名
            let e = obj.event;
             if(e=='batchDel'){
-                //获取选中的行数据
-                let batchParam = table.checkStatus("demo");
-                //调用AJAX删除数据
-                let userIds=[];
-                let list=batchParam.data;
-                for (let i = 0; i < list.length; i++) {
-                    userIds.push(list[i].userId);
-                }
-
-                //重新加载表格数据
-                console.log("批量: ",userIds);
+                layer.confirm("是否删除",function (index){
+                    layer.close(index);
+                    //获取选中的行数据
+                    let batchParam = table.checkStatus("demo");
+                    //调用AJAX删除数据
+                    let userIds=[];
+                    let list=batchParam.data;
+                    for (let i = 0; i < list.length; i++) {
+                        userIds.push(list[i].userId);
+                    }
+                    $.ajax({
+                        url:"/batchDeleteUser",
+                        method:"post",
+                        data:JSON.stringify(userIds),
+                        contentType:"application/json",
+                        success:function (d){
+                            if(d.code===0){
+                                //刷新表格
+                                table.reload("demo");
+                            }else{
+                                layer.msg(d.msg);
+                            }
+                        }
+                    });
+                });
             }else if(e=='addUser'){
                 console.log("表格头部事件[添加]: ",e);
             }

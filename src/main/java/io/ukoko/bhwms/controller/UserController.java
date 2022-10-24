@@ -44,6 +44,7 @@ public class UserController {
      */
     @PostMapping(value = "/batchDeleteUser")
     public Object batchDeleteUser(@RequestBody List<Integer> userIds){
+        System.out.println("批量删除: "+userIds);
         userService.batchDeleteUser(userIds);
         return new Result();
     }

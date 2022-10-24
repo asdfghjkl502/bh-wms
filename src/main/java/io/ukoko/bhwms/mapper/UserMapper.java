@@ -21,6 +21,12 @@ public interface UserMapper {
      * 删除用户
      */
     void deleteUser(Integer userId);
+
+    /**
+     * 批量删除
+     */
+    void batchDeleteUser(List<Integer> userIds);
+
     /**
      * 更新用户
      */

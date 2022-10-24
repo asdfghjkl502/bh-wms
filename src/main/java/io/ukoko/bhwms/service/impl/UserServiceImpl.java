@@ -56,5 +56,10 @@ public class UserServiceImpl  implements UserService {
         return page;
     }
 
+    @Override
+    public void batchDeleteUser(List<Integer> userIds) {
+        userMapper.batchDeleteUser(userIds);
+    }
+
 
 }

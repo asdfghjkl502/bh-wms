@@ -6,11 +6,10 @@ import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Api(tags = "用户模块")
 @CrossOrigin
@@ -40,4 +39,12 @@ public class UserController {
         return new Result(page);
     }
 
+    /**
+     * 批量删除
+     */
+    @PostMapping(value = "/batchDeleteUser")
+    public Object batchDeleteUser(@RequestBody List<Integer> userIds){
+        userService.batchDeleteUser(userIds);
+        return new Result();
+    }
 }

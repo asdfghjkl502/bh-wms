@@ -161,9 +161,14 @@
                 //获取选中的行数据
                 let batchParam = table.checkStatus("demo");
                 //调用AJAX删除数据
+                let userIds=[];
+                let list=batchParam.data;
+                for (let i = 0; i < list.length; i++) {
+                    userIds.push(list[i].userId);
+                }
 
                 //重新加载表格数据
-                console.log("批量: ",batchParam);
+                console.log("批量: ",userIds);
             }else if(e=='addUser'){
                 console.log("表格头部事件[添加]: ",e);
             }

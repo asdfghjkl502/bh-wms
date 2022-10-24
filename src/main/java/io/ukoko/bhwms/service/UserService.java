@@ -4,6 +4,7 @@ import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.entity.User;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户管理模块的业务逻辑层
@@ -48,4 +49,9 @@ public interface UserService {
      */
     Page getUserPage(int pageNo, int pageSize, Integer isDelete, String userName, String userTel,String userEmail,String userNick,Date startTime, Date endTime, Integer userId);
 
+    /**
+     * 批量删除
+     * @param userIds
+     */
+    void batchDeleteUser(List<Integer> userIds);
 }

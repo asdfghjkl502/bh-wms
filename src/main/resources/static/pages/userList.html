@@ -186,6 +186,15 @@
                 });
             }else if(e=='addUser'){
                 console.log("表格头部事件[添加]: ",e);
+                layer.open({
+                    type:2,
+                    title:'添加用户',
+                    content:'userAdd.html',
+                    area:['500px','450px'],
+                    end:function (){
+
+                    }
+                });
             }
         });
         /**

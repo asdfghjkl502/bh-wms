@@ -214,7 +214,15 @@
                     }
                 });
             }else if(e=='edit'){
-                console.log("单元格事件[编辑]: ",e);
+                layer.open({
+                    type:2,
+                    title:'更新用户',
+                    content:'userUpdate.html',
+                    area:['500px','450px'],
+                    end:function (){
+
+                    }
+                });
             }
         });
         /**

@@ -207,11 +207,8 @@
                 layer.open({
                     type:2,
                     title:'详情',
-                    content:'userDetail.html',
-                    area:['500px','450px'],
-                    end:function (){
-
-                    }
+                    content:'userDetail.html?userId='+obj.data.userId,
+                    area:['600px','470px']
                 });
             }else if(e=='edit'){
                 layer.open({

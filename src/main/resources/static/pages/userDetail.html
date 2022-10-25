@@ -10,10 +10,97 @@
 
 <div class="layui-fluid">
 
-    <h1>用户详情</h1>
+    <table class="layui-table" lay-skin="line">
+        <tbody>
+            <tr>
+                <td style="width: 25%;">贤心</td>
+                <td style="width: 75%;">2016-11-29</td>
+            </tr>
+            <tr>
+                <td style="width: 25%;">贤心</td>
+                <td style="width: 75%;">2016-11-29</td>
+            </tr>
+        </tbody>
+    </table>
 
 </div>
 
 <script src="../layui/layui.js"></script>
+<script>
+    layui.use(["jquery","layer"],function (){
+        let $ = layui.jquery;
+        let layer = layui.layer;
+        //截取参数
+        let url = location.href;
+        url = url.substring(url.lastIndexOf("?")+1,url.length);
+        let userId=url.split("=")[1];
+        $.getJSON("/getUserDetail",{userId:userId},function (d){
+            console.log("详情: ",d);
+            if (d.code===0){
+                //展示数据
+                let s="";
+                $.each(d.obj,function (key,val){
+                    if(key=="userId"){
+                        s+="<tr>\n" +
+                            "                <td style=\"width: 25%;\">用户编号</td>\n" +
+                            "                <td style=\"width: 75%;\">"+val+"</td>\n" +
+                            "            </tr>";
+                    }else if(key=="userName"){
+                        s+="<tr>\n" +
+                            "                <td style=\"width: 25%;\">用户名称</td>\n" +
+                            "                <td style=\"width: 75%;\">"+val+"</td>\n" +
+                            "            </tr>";
+                    }else if(key=="userEmail"){
+                        s+="<tr>\n" +
+                            "                <td style=\"width: 25%;\">邮箱</td>\n" +
+                            "                <td style=\"width: 75%;\">"+val+"</td>\n" +
+                            "            </tr>";
+                    }else if(key=="userTel"){
+                        s+="<tr>\n" +
+                            "                <td style=\"width: 25%;\">手机号</td>\n" +
+                            "                <td style=\"width: 75%;\">"+val+"</td>\n" +
+                            "            </tr>";
+                    }else if(key=="userNick"){
+                        s+="<tr>\n" +
+                            "                <td style=\"width: 25%;\">用户昵称</td>\n" +
+                            "                <td style=\"width: 75%;\">"+val+"</td>\n" +
+                            "            </tr>";
+                    }else if(key=="password"){
+                        s+="<tr>\n" +
+                            "                <td style=\"width: 25%;\">密码</td>\n" +
+                            "                <td style=\"width: 75%;\">"+val+"</td>\n" +
+                            "            </tr>";
+                    }else if(key=="createTime"){
+                        s+="<tr>\n" +
+                            "                <td style=\"width: 25%;\">创建时间</td>\n" +
+                            "                <td style=\"width: 75%;\">"+val+"</td>\n" +
+                            "            </tr>";
+                    }else if(key=="updateTime"){
+                        s+="<tr>\n" +
+                            "                <td style=\"width: 25%;\">更新时间</td>\n" +
+                            "                <td style=\"width: 75%;\">"+val+"</td>\n" +
+                            "            </tr>";
+                    }else if(key=="salt"){
+                        s+="<tr>\n" +
+                            "                <td style=\"width: 25%;\">盐值</td>\n" +
+                            "                <td style=\"width: 75%;\">"+val+"</td>\n" +
+                            "            </tr>";
+                    }else if(key=="isDelete"){
+                        s+="<tr>\n" +
+                            "                <td style=\"width: 25%;\">是否有效</td>\n" +
+                            "                <td style=\"width: 75%;\"> "+(val==1?'<span class="layui-badge layui-bg-blue">有效</span>':'<span class="layui-badge layui-bg-orange">无效</span>')+" </td>\n" +
+                            "            </tr>";
+                    }
+
+                });
+                //展示到指定位置
+                $("tbody").html(s);
+            }else {
+                layer.msg(d.msg);
+            }
+        });
+    });
+
+</script>
 </body>
 </html>

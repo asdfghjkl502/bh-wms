@@ -20,12 +20,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
     /**
      * 添加用户
      */
     @PostMapping(value = "/addUser")
     public Object addUser(@RequestBody User user){
-        System.out.println("==>>>"+user);
+
         user.setSalt("盐"+System.currentTimeMillis());
         userService.addUser(user);
         return new Result();
@@ -55,6 +56,7 @@ public class UserController {
      */
     @PostMapping(value = "/updateUser")
     public Object updateUser(@RequestBody User user){
+        System.out.println("==>>>"+user);
         userService.updateUser(user);
         return new Result();
     }

@@ -22,6 +22,15 @@ public class UserController {
 
 
     /**
+     * 获取用户详情
+     */
+    @GetMapping(value = "/getUserDetail")
+    public Object getUserDetail(Integer userId){
+        User user = userService.getUserByUserId(userId);
+        return new Result(user);
+    }
+
+    /**
      * 添加用户
      */
     @PostMapping(value = "/addUser")

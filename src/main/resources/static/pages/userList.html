@@ -185,7 +185,6 @@
                     });
                 });
             }else if(e=='addUser'){
-                console.log("表格头部事件[添加]: ",e);
                 layer.open({
                     type:2,
                     title:'添加用户',
@@ -205,7 +204,15 @@
             //获取事件名
             let e = obj.event;
             if(e=='detail'){
-                console.log("单元格事件[详情]: ",e);
+                layer.open({
+                    type:2,
+                    title:'详情',
+                    content:'userDetail.html',
+                    area:['500px','450px'],
+                    end:function (){
+
+                    }
+                });
             }else if(e=='edit'){
                 console.log("单元格事件[编辑]: ",e);
             }

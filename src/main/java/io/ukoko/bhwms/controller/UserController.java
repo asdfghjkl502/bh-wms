@@ -21,6 +21,17 @@ public class UserController {
     private UserService userService;
 
     /**
+     * 添加用户
+     */
+    @PostMapping(value = "/addUser")
+    public Object addUser(@RequestBody User user){
+        System.out.println("==>>>"+user);
+        user.setSalt("盐"+System.currentTimeMillis());
+        userService.addUser(user);
+        return new Result();
+    }
+
+    /**
      * 获取用户列表
      */
     @GetMapping(value = "/getUserPage")

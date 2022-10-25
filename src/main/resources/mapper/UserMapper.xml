@@ -52,7 +52,7 @@
                 <if test="userId!=null">AND USER_ID=#{userId}</if>
                 <if test="startTime!=null and endTime!=null">AND CREATE_TIME <![CDATA[>=]]> #{startTime} AND CREATE_TIME <![CDATA[<=]]> #{endTime}</if>
             </where>
-            ORDER BY update_time
+            ORDER BY user_id
     </select>
     
     <update id="batchDeleteUser" parameterType="int">

@@ -46,7 +46,6 @@ public class UserController {
      */
     @PostMapping(value = "/batchDeleteUser")
     public Object batchDeleteUser(@RequestBody List<Integer> userIds){
-        System.out.println("批量删除: "+userIds);
         userService.batchDeleteUser(userIds);
         return new Result();
     }
@@ -56,7 +55,6 @@ public class UserController {
      */
     @PostMapping(value = "/updateUser")
     public Object updateUser(@RequestBody User user){
-        System.out.println("==>>>"+user);
         userService.updateUser(user);
         return new Result();
     }

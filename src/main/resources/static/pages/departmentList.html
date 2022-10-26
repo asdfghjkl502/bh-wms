@@ -21,7 +21,43 @@
         //加载树形表格模块
         let treeTable = layui.treeTable;
         //初始化数据表格
-
+        treeTable.render({
+            elem: '#deptId',
+            url: '/getDepartmentList',
+            toolbar: true,
+            tree: {
+                iconIndex: 0,
+                isPidData: true,
+                idName: 'deptId',
+                pidName: 'parentId'
+            },
+            parseData:function(res){
+                return {
+                    "code": res.code,
+                    "msg": res.msg,
+                    "data": res.obj
+                }
+            },
+            style: 'margin-top:0;',
+            cols:[[
+                    {
+                        field: 'deptName',
+                        title: '部门名称'
+                    },
+                    {
+                        field: 'createTime',
+                        title: '创建时间'
+                    },
+                    {
+                        field: 'updateTime',
+                        title: '更新时间'
+                    },
+                    {
+                        field: 'isDelete',
+                        title: '是否有效'
+                    }
+            ]]
+        });
 
     });
 

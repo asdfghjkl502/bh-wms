@@ -34,6 +34,6 @@ public class DepartmentController {
      */
     @GetMapping(value = "/getDepartmentList")
     public Object getDepartmentList(){
-        return departmentService.getDepartmentList();
+        return new Result(departmentService.getDepartmentList());
     }
 }

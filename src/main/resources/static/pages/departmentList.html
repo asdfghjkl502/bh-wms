@@ -49,7 +49,7 @@
                         title: '层级',
                         width: '15%',
                         templet:function (d){
-                            return '<span class="layui-badge layui-bg-'+(d.level==1?"blue":d.level==2?"green":"orange")+'">'+d.level+'</span>';
+                            return '<span class="layui-badge layui-bg-'+(d.level==1?"blue":d.level==2?"green":"cyan")+'">'+d.level+'</span>';
                         }
                     },
                     {
@@ -73,7 +73,9 @@
                         templet:function (d){
                             let s='<button type="button" class="layui-btn layui-btn-xs layui-btn-danger">删除</button>';
                             s+='<button type="button" class="layui-btn layui-btn-xs layui-btn-warm">更新</button>';
-                            s+='<button type="button" class="layui-btn layui-btn-xs layui-btn-normal">添加</button>';
+                            if(d.level!=3){
+                                s+='<button type="button" class="layui-btn layui-btn-xs layui-btn-normal">添加</button>';
+                            }
                             return s;
                         }
                     }

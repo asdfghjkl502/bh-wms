@@ -16,7 +16,7 @@
 
 <script src="../layui/layui.js"></script>
 <script>
-
+    //加载额外模块
     layui.extend({"treeTable":"../js/treeTable"}).use(["treeTable"],function () {
         //加载树形表格模块
         let treeTable = layui.treeTable;
@@ -24,7 +24,7 @@
         treeTable.render({
             elem: '#deptId',
             url: '/getDepartmentList',
-            toolbar: true,
+            toolbar: '<div><button lay-event="addDept" class="layui-btn layui-btn-sm"> <i class="layui-icon layui-icon-add-1"></i>添加一级部门</button> </div>',
             tree: {
                 iconIndex: 0,
                 isPidData: true,
@@ -38,15 +38,19 @@
                     "data": res.obj
                 }
             },
-            style: 'margin-top:0;',
             cols:[[
                     {
                         field: 'deptName',
-                        title: '部门名称'
+                        title: '部门名称',
+                        width: '35%'
                     },
                     {
                         field: 'level',
-                        title: '级别'
+                        title: '层级',
+                        width: '15%',
+                        templet:function (d){
+                            return '<span class="layui-badge layui-bg-'+(d.level==1?"blue":d.level==2?"green":"orange")+'">'+d.level+'</span>';
+                        }
                     },
                     {
                         field: 'createTime',
@@ -58,7 +62,20 @@
                     },
                     {
                         field: 'isDelete',
-                        title: '是否有效'
+                        title: '是否有效',
+                        width: '15%',
+                        templet:function (d){
+                            return d.isDelete==1?'<span class="layui-badge layui-bg-green">有效</span>':'<span class="layui-badge">无效</span>';
+                        }
+                    },
+                    {
+                        title: '操作',
+                        templet:function (d){
+                            let s='<button type="button" class="layui-btn layui-btn-xs layui-btn-danger">删除</button>';
+                            s+='<button type="button" class="layui-btn layui-btn-xs layui-btn-warm">更新</button>';
+                            s+='<button type="button" class="layui-btn layui-btn-xs layui-btn-normal">添加</button>';
+                            return s;
+                        }
                     }
             ]]
         });

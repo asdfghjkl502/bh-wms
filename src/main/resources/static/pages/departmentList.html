@@ -8,9 +8,23 @@
 </head>
 <body>
 
-	<h1>部门管理</h1>
+	<div class="layui-container">
+        <!--表格展示位置-->
+        <table id="deptId"></table>
+    </div>
 
 
 <script src="../layui/layui.js"></script>
+<script>
+
+    layui.extend({"treeTable":"../js/treeTable"}).use(["treeTable"],function () {
+        //加载树形表格模块
+        let treeTable = layui.treeTable;
+        //初始化数据表格
+
+
+    });
+
+</script>
 </body>
 </html>

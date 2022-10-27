@@ -10,21 +10,25 @@
 
 	<div class="layui-container">
         <!--表格展示位置-->
-        <table id="deptId"></table>
+        <table id="deptId" lay-filter="test"></table>
     </div>
 
 
 <script src="../layui/layui.js"></script>
 <script>
     //加载额外模块
-    layui.extend({"treeTable":"../js/treeTable"}).use(["treeTable"],function () {
+    layui.extend({"treeTable":"../js/treeTable"}).use(["treeTable","jquery","layer"],function () {
         //加载树形表格模块
         let treeTable = layui.treeTable;
+        let $=layui.jquery;
+        let layer = layui.layer;
+
         //初始化数据表格
         treeTable.render({
             elem: '#deptId',
             url: '/getDepartmentList',
             toolbar: '<div><button lay-event="addDept" class="layui-btn layui-btn-sm"> <i class="layui-icon layui-icon-add-1"></i>添加一级部门</button> </div>',
+            defaultToolbar: ['exports', 'print'],
             tree: {
                 iconIndex: 0,
                 isPidData: true,
@@ -80,6 +84,11 @@
                         }
                     }
             ]]
+        });
+
+        //头部事件绑定
+        treeTable.on('toolbar(deptId)',function (obj) {
+            console.log("-->>>",obj.event);
         });
 
     });

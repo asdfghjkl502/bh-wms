@@ -75,15 +75,27 @@
                     {
                         title: '操作',
                         templet:function (d){
-                            let s='<button type="button" class="layui-btn layui-btn-xs layui-btn-danger">删除</button>';
-                            s+='<button type="button" class="layui-btn layui-btn-xs layui-btn-warm">更新</button>';
+                            let s='<button type="button" lay-event="del" class="layui-btn layui-btn-xs layui-btn-danger">删除</button>';
+                            s+='<button type="button" lay-event="edit" class="layui-btn layui-btn-xs layui-btn-warm">更新</button>';
                             if(d.level!=3){
-                                s+='<button type="button" class="layui-btn layui-btn-xs layui-btn-normal">添加</button>';
+                                s+='<button type="button" lay-event="add" class="layui-btn layui-btn-xs layui-btn-normal">添加</button>';
                             }
                             return s;
                         }
                     }
             ]]
+        });
+
+        //列事件绑定
+        treeTable.on('tool(deptId)',function (obj) {
+            console.log("-->>>",obj);
+            if(obj.event==="del"){
+                console.log("删除...")
+            }else if(obj.event==="edit"){
+                console.log("编辑...")
+            }else if(obj.event==="add"){
+                console.log("添加...")
+            }
         });
 
         //头部事件绑定

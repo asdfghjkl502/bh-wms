@@ -88,7 +88,19 @@
 
         //头部事件绑定
         treeTable.on('toolbar(deptId)',function (obj) {
-            console.log("-->>>",obj.event);
+            console.log("-->>>",obj);
+            if(obj.event==="addDept"){
+                layer.open({
+                    type:2,
+                    title:'添加部门',
+                    content:'departmentAdd.html',
+                    area:['500px','450px'],
+                    end:function (){
+                        //刷新数据表格
+                        treeTable.reload("deptId");
+                    }
+                });
+            }
         });
 
     });

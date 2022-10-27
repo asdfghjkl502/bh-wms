@@ -5,10 +5,7 @@ import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.entity.Department;
 import io.ukoko.bhwms.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Api(tags = "部门模块")
 @CrossOrigin
@@ -24,7 +21,7 @@ public class DepartmentController {
      * @return
      */
     @PostMapping(value = "/addDepartment")
-    public Object addDepartment(Department department){
+    public Object addDepartment(@RequestBody Department department){
         departmentService.addDepartment(department);
         return new Result();
     }

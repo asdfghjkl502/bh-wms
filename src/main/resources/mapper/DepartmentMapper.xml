@@ -6,7 +6,7 @@
 
     <insert id="addDepartment" parameterType="department">
         INSERT INTO department(
-                               DEPT_NAME,LEVEL,PARENT_ID,CREATE_TIME,IS_DELETE)
+                               DEPT_NAME,`LEVEL`,PARENT_ID,CREATE_TIME,IS_DELETE)
                        VALUES (#{deptName},#{level},#{parentId},#{createTime},#{isDelete})
     </insert>
 

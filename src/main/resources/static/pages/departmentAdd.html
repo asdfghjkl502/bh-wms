@@ -45,14 +45,30 @@
             theme:'#2F4056 '
         });
 
+        //获取地址参数
+        let url = location.href;
+        url = url.substring(url.lastIndexOf("?")+1,url.length);
+        //参数
+        let level=url.split("=")[1];
+
         /**
          * 提交表单
          */
         form.on("submit(add)",function (data) {
             let param = data.field;
-            param.isDelete=1;
-            param.level=1;
-            param.parentId=0;
+
+            if(level==1){
+                param.isDelete=1;
+                param.level=1;
+                param.parentId=0;
+            }else if(level==2){
+                param.isDelete=1;
+                param.level=2;
+            }else {
+                param.isDelete=1;
+                param.level=3;
+            }
+
             //AJAX
             $.ajax({
                 url:"/addDepartment",

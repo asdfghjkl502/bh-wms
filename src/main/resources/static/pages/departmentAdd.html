@@ -11,7 +11,7 @@
 <div class="layui-fluid">
     <form class="layui-form" style="margin-top: 10px;">
         <input type="hidden" id="parentId" name="parentId">
-        <input type="hidden" id="levelId" name="levelId">
+        <input type="hidden" id="level" name="level">
         <div class="layui-form-item">
             <label class="layui-form-label">部门名称</label>
             <div class="layui-input-block">
@@ -52,10 +52,7 @@
          */
         form.on("submit(add)",function (data) {
             let param = data.field;
-
             param.isDelete=1;
-
-            console.log("-->>>",param);
             //AJAX
             $.ajax({
                 url:"/addDepartment",

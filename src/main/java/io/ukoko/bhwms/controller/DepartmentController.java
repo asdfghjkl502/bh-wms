@@ -15,6 +15,18 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
 
+
+    /**
+     * 更新部门
+     * @param department
+     * @return
+     */
+    @PostMapping(value = "/updateDepartment")
+    public Object updateDepartment(@RequestBody Department department){
+        departmentService.updateDepartment(department);
+        return new Result();
+    }
+
     /**
      * 添加部门
      * @param department

@@ -17,6 +17,11 @@ public interface DepartmentService {
     void addDepartment(Department department);
 
     /**
+     * 更新部门
+     */
+    void updateDepartment(Department department);
+
+    /**
      * 部门列表查询
      */
     List<Department> getDepartmentList();

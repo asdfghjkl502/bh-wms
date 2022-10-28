@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>百慧wms仓库</title>
+    <link href="../layui/css/layui.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="layui-fluid">
+    <form class="layui-form" style="margin-top: 10px;">
+        <input type="hidden" id="deptId" name="deptId">
+        <div class="layui-form-item">
+            <label class="layui-form-label">部门层级</label>
+            <div class="layui-input-block">
+                <input type="text" id="level" name="level" required  lay-verify="required" placeholder="层级" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">部门名称</label>
+            <div class="layui-input-block">
+                <input type="text" id="deptName" name="deptName" required  lay-verify="required" placeholder="部门名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">创建时间</label>
+            <div class="layui-input-block">
+                <input type="text" id="createTime" name="createTime"  placeholder="创建时间"  class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn  layui-btn-normal" lay-submit lay-filter="edit">更新部门</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="../layui/layui.js"></script>
+<script>
+
+    layui.use(["jquery","form","laydate"],function () {
+        let $ = layui.jquery;
+        let form = layui.form;
+        let laydate = layui.laydate;
+        let layer = layui.layer;
+
+        laydate.render({
+            elem: '#createTime', //指定元素
+            type:'datetime',/* 年月日时分秒 */
+            theme:'#2F4056 '
+        });
+
+        /**
+         * 提交表单
+         */
+        form.on("submit(edit)",function (data) {
+            let param = data.field;
+            console.log("--->>>",param);
+            //AJAX
+            $.ajax({
+                url:"/updateDepartment",
+                method:"post",
+                data:JSON.stringify(param),
+                contentType:"application/json",
+                success:function (d){
+                    //关闭弹出层
+                    let index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index); //再执行关闭
+                    if(d.code!=0){
+                        layer.msg(d.msg);
+                    }
+                }
+            });
+            return false;
+        });
+
+    });
+
+</script>
+</body>
+</html>

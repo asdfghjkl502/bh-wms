@@ -92,7 +92,25 @@
             if(obj.event==="del"){
                 console.log("删除...")
             }else if(obj.event==="edit"){
-                console.log("编辑...")
+                layer.open({
+                    type:2,
+                    title:'更新部门',
+                    content:'departmentUpdate.html',
+                    area:['500px','450px'],
+                    success: function(layero, index){
+                        //弹出执行
+                        let body = layer.getChildFrame('body', index);//获取弹出层中body标签的DOM对象
+                        //给弹出层表单回显
+                        body.find('#deptId').val(obj.data.deptId);
+                        body.find('#level').val(obj.data.level);
+                        body.find('#deptName').val(obj.data.deptName);
+                        body.find('#createTime').val(obj.data.createTime);
+                    },
+                    end:function (){
+                        //刷新数据表格
+                        treeTable.reload("deptId");
+                    }
+                });
             }else if(obj.event==="add"){
                 layer.open({
                     type:2,
@@ -120,8 +138,15 @@
                 layer.open({
                     type:2,
                     title:'添加部门',
-                    content:'departmentAdd.html?level=1',
+                    content:'departmentAdd.html',
                     area:['500px','450px'],
+                    success: function(layero, index){
+                        //弹出执行
+                        let body = layer.getChildFrame('body', index);//获取弹出层中body标签的DOM对象
+                        //给弹出层表单回显
+                        body.find('#parentId').val(0);
+                        body.find('#level').val(1);
+                    },
                     end:function (){
                         //刷新数据表格
                         treeTable.reload("deptId");

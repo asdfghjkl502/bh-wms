@@ -17,6 +17,11 @@ public interface DepartmentMapper {
     void addDepartment(Department department);
 
     /*
+        更新部门
+     */
+    void updateDepartment(Department department);
+
+    /*
          获取部门列表
      */
     List<Department> getDepartmentList();

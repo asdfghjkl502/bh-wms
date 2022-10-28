@@ -10,6 +10,20 @@
                        VALUES (#{deptName},#{level},#{parentId},#{createTime},#{isDelete})
     </insert>
 
+    <update id="updateDepartment" parameterType="department">
+        UPDATE department
+        <set>
+            <if test="deptName!=null">DEPT_NAME=#{deptName},</if>
+            <if test="level!=null">LEVEL=#{level},</if>
+            <if test="parentId!=null">PARENT_ID=#{parentId},</if>
+            <if test="createTime!=null">CREATE_TIME=#{createTime},</if>
+            <if test="isDelete!=null">IS_DELETE=#{isDelete}</if>
+        </set>
+        <where>
+            dept_id=#{deptId}
+        </where>
+    </update>
+
     <select id="getDepartmentList" resultType="department">
         SELECT * FROM department ORDER BY PARENT_ID ASC,DEPT_ID ASC
     </select>

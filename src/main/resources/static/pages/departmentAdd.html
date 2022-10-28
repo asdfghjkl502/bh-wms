@@ -10,6 +10,8 @@
 
 <div class="layui-fluid">
     <form class="layui-form" style="margin-top: 10px;">
+        <input type="hidden" id="parentId" name="parentId">
+        <input type="hidden" id="levelId" name="levelId">
         <div class="layui-form-item">
             <label class="layui-form-label">部门名称</label>
             <div class="layui-input-block">
@@ -57,7 +59,7 @@
         form.on("submit(add)",function (data) {
             let param = data.field;
 
-            if(level==1){
+            /*if(level==1){
                 param.isDelete=1;
                 param.level=1;
                 param.parentId=0;
@@ -67,7 +69,7 @@
             }else {
                 param.isDelete=1;
                 param.level=3;
-            }
+            }*/
 
             console.log("-->>>",param);
             //AJAX

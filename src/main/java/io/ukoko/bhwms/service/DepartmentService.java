@@ -20,7 +20,7 @@ public interface DepartmentService {
     /**
      * 更新部门
      */
-    void updateDepartment(Department department);
+    void updateDepartment(Department department) throws BhWmsException;
     /*
         删除部门
      */

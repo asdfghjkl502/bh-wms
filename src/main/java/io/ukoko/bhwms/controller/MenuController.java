@@ -32,6 +32,6 @@ public class MenuController {
      */
     @GetMapping(value = "/getMenuList")
     public Object getMenuList(){
-        return menuService.getMenuList();
+        return new Result(menuService.getMenuList());
     }
 }

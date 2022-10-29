@@ -8,9 +8,85 @@
 </head>
 <body>
 
-	<h1>菜单列表</h1>
+    <div class="layui-container">
+        <!--菜单数据表格-->
+        <table id="menuId" lay-filter="test"></table>
+    </div>
 
 
 <script src="../layui/layui.js"></script>
+<script>
+    layui.extend({"treeTable":"../js/treeTable"}).use(["treeTable","jquery","layer"],function () {
+        //加载树形表格模块
+        let treeTable = layui.treeTable;
+        let $ = layui.jquery;
+        let layer = layui.layer;
+
+        //初始化数据表格
+        treeTable.render({
+            elem: '#menuId',
+            url: '/getMenuList',
+            toolbar: '<div><button lay-event="addMenu" class="layui-btn layui-btn-sm"> <i class="layui-icon layui-icon-add-1"></i>添加一级菜单</button> </div>',
+            defaultToolbar: ['exports', 'print'],
+            tree: {
+                iconIndex: 0,
+                isPidData: true,
+                idName: 'menuId',
+                pidName: 'parentId'
+            },
+            parseData:function(res){
+                return {
+                    "code": res.code,
+                    "msg": res.msg,
+                    "data": res.obj
+                }
+            },
+            cols:[[
+                {
+                    field: 'menuName',
+                    title: '菜单名称',
+                    width: '35%'
+                },
+                {
+                    field: 'level',
+                    title: '层级',
+                    width: '15%',
+                    templet:function (d){
+                        return '<span class="layui-badge layui-bg-'+(d.level==1?"blue":"green")+'">'+d.level+'</span>';
+                    }
+                },
+                {
+                    field: 'createTime',
+                    title: '创建时间'
+                },
+                {
+                    field: 'updateTime',
+                    title: '更新时间'
+                },
+                {
+                    field: 'isDelete',
+                    title: '是否有效',
+                    width: '15%',
+                    templet:function (d){
+                        return d.isDelete==1?'<span class="layui-badge layui-bg-green">有效</span>':'<span class="layui-badge">无效</span>';
+                    }
+                },
+                {
+                    title: '操作',
+                    templet:function (d){
+                        let s='<button type="button" lay-event="del" class="layui-btn layui-btn-xs layui-btn-danger">删除</button>';
+                        s+='<button type="button" lay-event="edit" class="layui-btn layui-btn-xs layui-btn-warm">更新</button>';
+                        if(d.level!=3){
+                            s+='<button type="button" lay-event="add" class="layui-btn layui-btn-xs layui-btn-normal">添加</button>';
+                        }
+                        return s;
+                    }
+                }
+            ]]
+        });
+
+
+    });
+</script>
 </body>
 </html>

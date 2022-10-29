@@ -25,9 +25,9 @@
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">是否有效</label>
-            <div class="layui-input-block">
-                <input type="radio" name="isDelete" value="1" title="有效">
-                <input type="radio" name="isDelete" value="0" title="无效">
+            <div class="layui-input-block" id="isDelete">
+<!--                <input type="radio" name="isDelete" value="1" title="有效">-->
+<!--                <input type="radio" name="isDelete" value="0" title="无效">-->
             </div>
         </div>
         <div class="layui-form-item">
@@ -47,7 +47,7 @@
 <script src="../layui/layui.js"></script>
 <script>
 
-    layui.use(["jquery","form","laydate"],function () {
+    layui.use(["jquery","form","laydate","layer"],function () {
         let $ = layui.jquery;
         let form = layui.form;
         let laydate = layui.laydate;
@@ -59,12 +59,31 @@
             theme:'#2F4056 '
         });
 
+        //获取参数
+        let url=location.href;
+        let param=url.substring(url.lastIndexOf("?")+1,url.length).split("=")[1];
+        //单选框回显
+        if(param==1){
+            //有效
+            let s='<input type="radio" name="isDelete" value="1" title="有效" checked>';
+            s+='<input type="radio" name="isDelete" value="0" title="无效" disabled>';
+            $("#isDelete").html(s);
+            //刷新
+            form.render("radio");
+        }else{
+            //无效
+            let s='<input type="radio" name="isDelete" value="1" title="有效">';
+            s+='<input type="radio" name="isDelete" value="0" title="无效" checked disabled>';
+            $("#isDelete").html(s);
+            //刷新
+            form.render("radio");
+        }
+
         /**
          * 提交表单
          */
         form.on("submit(edit)",function (data) {
             let param = data.field;
-            console.log("--->>>",param);
             //AJAX
             $.ajax({
                 url:"/updateDepartment",

@@ -24,12 +24,18 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public void updateDepartment(Department department) throws BhWmsException{
-        //更新前先判断更新的部门状态,如果状态为无效,那么必须在当前部门的下面没有子部门,否则更新失败
-        List<Department> list = departmentMapper.getDepartmentListByDeptId(department.getDeptId());
-        if(list!=null && list.size()>0){
-            throw new BhWmsException(2,"存在子部门,不能更新");
-        }else{
+        //判断是否是一级部门,如果是一级部门可以随便更新
+        if(department.getLevel()==3){
             departmentMapper.updateDepartment(department);
+        }else if(department.getIsDelete()==1){ //更新前先判断更新的部门状态,如果状态为无效,那么必须在当前部门的下面没有子部门,否则更新失败
+            departmentMapper.updateDepartment(department);
+        }else{
+            List<Department> list = departmentMapper.getDepartmentListByDeptId(department.getDeptId());
+            if(list!=null && list.size()>0){
+                throw new BhWmsException(2,"存在子部门,不能更新");
+            }else{
+                departmentMapper.updateDepartment(department);
+            }
         }
     }
 

@@ -9,10 +9,6 @@
 <body>
 
     <div class="layui-fluid">
-        <!-- 条件搜索 -->
-        <div class="layui-row">
-            <h1>条件展示</h1>
-        </div>
         <!-- 数据表格展示 -->
         <div class="layui-row">
             <table id="demo" lay-filter="test"></table>
@@ -32,6 +28,37 @@
         const $ = layui.jquery;
 
         /**
+         * 单元格事件绑定
+         */
+        table.on("tool(test)",function (obj){
+            //获取事件名
+            let e = obj.event;
+            if(e==="del"){
+                console.log("删除")
+            }else if(e==="edit"){
+                layer.open({
+                    type:2,
+                    title:'更新角色',
+                    content:'roleUpdate.html?isDelete='+obj.data.isDelete,
+                    area:['500px','400px'],
+                    success: function(layero, index){
+                        //弹出执行
+                        let body = layer.getChildFrame('body', index);//获取弹出层中body标签的DOM对象
+                        //给弹出层表单回显
+                        body.find('#roleId').val(obj.data.roleId);
+                        body.find('#roleName').val(obj.data.roleName);
+                        body.find('#createTime').val(obj.data.createTime);
+                    },
+                    end:function (){
+                        //弹出层销毁之后执行
+                        //刷新数据表格
+                        table.reload("demo");
+                    }
+                });
+            }
+        });
+
+        /**
          * 表格头部事件绑定
          */
         table.on('toolbar(test)',function (obj){
@@ -43,7 +70,6 @@
                     layer.close(index);
                     //获取选中行数据
                     let batchParam = table.checkStatus("demo");
-                    console.log("->>",batchParam);
                     //构建参数
                     let roleIds=[];
                     let list=batchParam.data;

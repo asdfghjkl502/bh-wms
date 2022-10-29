@@ -88,11 +88,20 @@
 
         //列事件绑定
         treeTable.on('tool(deptId)',function (obj) {
-            console.log("-->>>",obj);
             if(obj.event==="del"){
                 console.log("删除...");
-
-
+                layer.confirm("确定删除?",function (index){
+                    //关闭弹出层
+                    layer.close(index);
+                    $.post("/deleteDepartment",{deptId:obj.data.deptId},function (d){
+                        if(d.code!=0){
+                            layer.msg(d.msg);
+                        }else{
+                            //刷新数据表格
+                            treeTable.reload("deptId");
+                        }
+                    });
+                });
             }else if(obj.event==="edit"){
                 layer.open({
                     type:2,

@@ -18,7 +18,7 @@ public class DepartmentController {
 
     /**
      * 更新部门
-     * @param department
+     * @param department : 部门
      * @return
      */
     @PostMapping(value = "/updateDepartment")
@@ -29,12 +29,23 @@ public class DepartmentController {
 
     /**
      * 添加部门
-     * @param department
+     * @param department: 部门
      * @return
      */
     @PostMapping(value = "/addDepartment")
     public Object addDepartment(@RequestBody Department department){
         departmentService.addDepartment(department);
+        return new Result();
+    }
+
+    /**
+     * 删除部门
+     * @param deptId: 部门ID
+     * @return
+     */
+    @PostMapping(value = "/deleteDepartment")
+    public Object deleteDepartment(Integer deptId){
+        departmentService.deleteDepartment(deptId);
         return new Result();
     }
 

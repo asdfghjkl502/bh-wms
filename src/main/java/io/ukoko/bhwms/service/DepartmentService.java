@@ -2,6 +2,7 @@ package io.ukoko.bhwms.service;
 
 import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.entity.Department;
+import io.ukoko.bhwms.exceptions.BhWmsException;
 
 import java.util.List;
 
@@ -20,6 +21,10 @@ public interface DepartmentService {
      * 更新部门
      */
     void updateDepartment(Department department);
+    /*
+        删除部门
+     */
+    void deleteDepartment(Integer deptId) throws BhWmsException;
 
     /**
      * 部门列表查询

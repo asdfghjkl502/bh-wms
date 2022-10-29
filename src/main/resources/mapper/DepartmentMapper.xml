@@ -27,6 +27,13 @@
     <select id="getDepartmentList" resultType="department">
         SELECT * FROM department ORDER BY PARENT_ID ASC,DEPT_ID ASC
     </select>
+    
+    <select id="getDepartmentListByDeptId" parameterType="int" resultType="department">
+        SELECT * FROM department WHERE IS_DELETE=1 AND PARENT_ID=#{deptId}
+    </select>
 
+    <update id="deleteDepartment" parameterType="int">
+        UPDATE department SET IS_DELETE=0 WHERE dept_id=#{deptId}
+    </update>
 
 </mapper>

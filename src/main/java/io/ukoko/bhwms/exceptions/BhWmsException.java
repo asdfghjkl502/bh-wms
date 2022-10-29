@@ -1,0 +1,23 @@
+package io.ukoko.bhwms.exceptions;
+
+/**
+ * @Auther: hushuang
+ * @Date: 2022/10/29 13:23
+ * @Description:
+ */
+public class BhWmsException extends RuntimeException{
+    private int code=0;
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public BhWmsException(int code, String message) {
+        super(message);
+        this.code = code;
+    }
+}

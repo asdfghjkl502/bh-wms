@@ -1,6 +1,7 @@
 package io.ukoko.bhwms.service.impl;
 
 import io.ukoko.bhwms.entity.Department;
+import io.ukoko.bhwms.exceptions.BhWmsException;
 import io.ukoko.bhwms.mapper.DepartmentMapper;
 import io.ukoko.bhwms.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,20 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public void updateDepartment(Department department) {
         departmentMapper.updateDepartment(department);
+    }
+
+    @Override
+    public void deleteDepartment(Integer deptId) throws BhWmsException{
+        //判断当前部门ID下是否存在有效的子部门,如果不存在方可删除
+        List<Department> list = departmentMapper.getDepartmentListByDeptId(deptId);
+        if(list!=null && list.size()>0){
+            //不能删除,抛出异常
+            throw new BhWmsException(1,"存在子部门,不能删除");
+        }else{
+            //删除
+            departmentMapper.deleteDepartment(deptId);
+        }
+
     }
 
     @Override

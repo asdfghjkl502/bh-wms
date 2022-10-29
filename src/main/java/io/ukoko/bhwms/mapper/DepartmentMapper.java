@@ -17,6 +17,11 @@ public interface DepartmentMapper {
     void addDepartment(Department department);
 
     /*
+        删除部门
+     */
+    void deleteDepartment(Integer deptId);
+
+    /*
         更新部门
      */
     void updateDepartment(Department department);

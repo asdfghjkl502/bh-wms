@@ -16,7 +16,6 @@ public interface RoleMapper {
         添加角色
      */
     void addRole(Role role);
-
     /*
         删除角色
      */

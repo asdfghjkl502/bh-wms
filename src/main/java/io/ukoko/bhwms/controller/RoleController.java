@@ -9,12 +9,10 @@ import io.ukoko.bhwms.entity.Role;
 import io.ukoko.bhwms.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Api(tags = "角色模块")
 @CrossOrigin
@@ -31,9 +29,19 @@ public class RoleController {
      * @return
      */
     @PostMapping(value = "/addRole")
-    public Object addRole(Role role){
-        System.out.println("添加角色: "+role);
+    public Object addRole(@RequestBody Role role){
         roleService.addRole(role);
+        return new Result();
+    }
+
+    /**
+     * 批量删除
+     * @param roleIds
+     * @return
+     */
+    @PostMapping(value = "/batchDeleteRole")
+    public Object batchDeleteRole(@RequestBody List<Integer> roleIds){
+        roleService.batchDeleteRole(roleIds);
         return new Result();
     }
 
@@ -54,43 +62,26 @@ public class RoleController {
      * @return
      */
     @PostMapping(value = "/updateRole")
-    public Object updateRole(Role role){
+    public Object updateRole(@RequestBody Role role){
         System.out.println("更新角色: "+role);
         roleService.updateRole(role);
         return new Result();
     }
 
+
     /**
-     * 获取角色列表信息
-     * @param limit : 每页显示多少条数
-     * @param offset: 偏移量
-     * @param isDelete : 是否删除
-     * @param roleName : 角色名称
-     * @param startTime: 开始时间
-     * @param endTime: 结束时间
-     * @param roleId : 角色ID
+     * 获取角色页
+     * @param pageSize
+     * @param pageNo
+     * @param isDelete
+     * @param roleName
+     * @param startTime
+     * @param endTime
+     * @param roleId
      * @return
      */
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "limit",value = "页容量",dataType = "java.lang.Integer"),
-            @ApiImplicitParam(name = "offset",value = "偏移量",dataType = "java.lang.Integer"),
-            @ApiImplicitParam(name = "isDelete",value = "是否删除 0:删除,1:未删除",dataType = "java.lang.Integer"),
-            @ApiImplicitParam(name = "roleName",value = "角色名称",dataType = "java.lang.String"),
-            @ApiImplicitParam(name = "startTime",value = "开始时间",dataType = "java.util.Date"),
-            @ApiImplicitParam(name = "endTime",value = "结束时间",dataType = "java.util.Date"),
-            @ApiImplicitParam(name = "roleId",value = "角色ID",dataType = "java.lang.Integer")
-    })
-    @GetMapping(value = "/getRoles")
-    public Result getRoles(int limit, int offset, Integer isDelete, String roleName, @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime, Integer roleId){
-        Page page = roleService.getRolePageFor(limit, offset, isDelete, roleName, startTime, endTime, roleId);
-        return new Result(page);
-    }
-
-
     @GetMapping(value = "/getRolePage")
     public Result getRolePage(Integer pageSize, Integer pageNo, Integer isDelete, String roleName, @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime, Integer roleId){
-        System.out.println(pageNo);
-        System.out.println(pageSize);
         Page page = roleService.getRolePage(pageSize, pageNo, isDelete, roleName, startTime, endTime, roleId);
         return new Result(page);
     }

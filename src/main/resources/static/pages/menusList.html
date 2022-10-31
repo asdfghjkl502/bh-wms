@@ -22,9 +22,37 @@
         let $ = layui.jquery;
         let layer = layui.layer;
 
-        //添加一级菜单
+        //表的列事件绑定
+        treeTable.on("tool(menuId)",function (obj) {
+            console.log("-->>>",obj)
+            let e = obj.event;
+            if(e==="del"){
+                console.log("删除...")
+            }else if(e==="edit"){
+                console.log("编辑...")
+            }else if(e==="add"){
+                layer.open({
+                    type:2,
+                    title:'添加菜单',
+                    content:'menusAdd.html',
+                    area:['500px','450px'],
+                    success: function(layero, index){
+                        //弹出执行
+                        let body = layer.getChildFrame('body', index);//获取弹出层中body标签的DOM对象
+                        //给弹出层表单回显
+                        body.find('#parentId').val(obj.data.menuId);
+                        body.find('#level').val(2);
+                    },
+                    end:function (){
+                        //刷新数据表格
+                        treeTable.reload("menuId");
+                    }
+                });
+            }
+        });
+
+        //表头事件绑定
         treeTable.on("toolbar(menuId)",function (obj){
-            console.log("-->>>",obj);
             let e = obj.event;
             if(e==="addMenu"){
                 layer.open({

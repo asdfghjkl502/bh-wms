@@ -22,6 +22,16 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
+    public void updateMenu(Menu menu) {
+        menuMapper.updateMenu(menu);
+    }
+
+    @Override
+    public void deleteMenu(Integer menuId) {
+        menuMapper.deleteMenu(menuId);
+    }
+
+    @Override
     public List<Menu> getMenuList() {
         return menuMapper.getMenuList();
     }

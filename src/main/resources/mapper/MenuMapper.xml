@@ -15,6 +15,25 @@
                    #{parentId},#{createTime},#{isDelete}
                   )
     </insert>
+    
+    <update id="updateMenu" parameterType="menu">
+        UPDATE menus
+        <set>
+            <if test="menuName!=null">MENU_NAME=#{menuName},</if>
+            <if test="menuUrl!=null">MENU_URL=#{menuUrl},</if>
+            <if test="level!=null">LEVEL=#{level},</if>
+            <if test="parentId!=null">PARENT_ID=#{parentId},</if>
+            <if test="createTime!=null">CREATE_TIME=#{createTime},</if>
+            <if test="isDelete!=null">IS_DELETE=#{isDelete}</if>
+        </set>
+        <where>
+            MENU_ID=#{menuId}
+        </where>
+    </update>
+    
+    <update id="deleteMenu" parameterType="int">
+        UPDATE menus SET IS_DELETE=0 WHERE  MENU_ID=#{menuId}
+    </update>
 
     <select id="getMenuList" resultType="menu">
         SELECT * FROM menus ORDER BY PARENT_ID ASC,MENU_ID ASC

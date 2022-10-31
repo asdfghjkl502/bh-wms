@@ -15,7 +15,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">菜单名</label>
             <div class="layui-input-block">
-                <input type="text" name="roleName" required  lay-verify="required" placeholder="菜单名" autocomplete="off" class="layui-input">
+                <input type="text" name="menuName" required  lay-verify="required" placeholder="菜单名" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -66,20 +66,20 @@
         form.on("submit(add)",function (data) {
             console.log(data.field);
             //AJAX
-            // $.ajax({
-            //     url:"/addRole",
-            //     method:"post",
-            //     data:JSON.stringify(data.field),
-            //     contentType:"application/json",
-            //     success:function (d){
-            //         //关闭弹出层
-            //         let index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-            //         parent.layer.close(index); //再执行关闭
-            //         if(d.code!=0){
-            //             layer.msg(d.msg);
-            //         }
-            //     }
-            // });
+            $.ajax({
+                url:"/addMenu",
+                method:"post",
+                data:JSON.stringify(data.field),
+                contentType:"application/json",
+                success:function (d){
+                    //关闭弹出层
+                    let index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index); //再执行关闭
+                    if(d.code!=0){
+                        layer.msg(d.msg);
+                    }
+                }
+            });
             return false;
         });
 

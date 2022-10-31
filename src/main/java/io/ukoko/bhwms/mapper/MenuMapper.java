@@ -17,6 +17,16 @@ public interface MenuMapper {
     void addMenu(Menu menu);
 
     /*
+        更新菜单
+     */
+    void updateMenu(Menu menu);
+
+    /*
+        删除菜单
+     */
+    void deleteMenu(Integer menuId);
+
+    /*
         获取菜单列表
      */
     List<Menu> getMenuList();

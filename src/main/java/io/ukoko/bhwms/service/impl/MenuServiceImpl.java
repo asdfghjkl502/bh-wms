@@ -28,7 +28,12 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public void deleteMenu(Integer menuId) {
-        menuMapper.deleteMenu(menuId);
+
+        //首先判断当前要删除的菜单下是否存在子菜单(未删除的子菜单)
+
+        //如果存在未删除的子菜单
+
+
     }
 
     @Override

@@ -30,4 +30,9 @@ public interface MenuMapper {
         获取菜单列表
      */
     List<Menu> getMenuList();
+
+    /*
+        通过菜单ID查询当前菜单的子菜单
+     */
+    List<Menu> getMenusByMenuId(Integer menuId);
 }

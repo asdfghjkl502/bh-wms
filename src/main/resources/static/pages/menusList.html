@@ -27,10 +27,41 @@
             console.log("-->>>",obj)
             let e = obj.event;
             if(e==="del"){
-                console.log("删除...")
-
+                layer.confirm("是否删除",function (index){
+                    layer.close(index);//关闭弹出层
+                    $.getJSON("/deleteMenu",{menuId:obj.data.menuId},function (d){
+                        if(d.code!=0){
+                            layer.msg(d.msg);
+                        }else{
+                            //刷新数据表格
+                            treeTable.reload("menuId");
+                        }
+                    });
+                });
             }else if(e==="edit"){
-                console.log("编辑...")
+
+                layer.open({
+                    type:2,
+                    title:'更新菜单',
+                    content:'menusUpdate.html?isDelete='+obj.data.isDelete,
+                    area:['500px','450px'],
+                    success: function(layero, index){
+                        //弹出执行
+                        let body = layer.getChildFrame('body', index);//获取弹出层中body标签的DOM对象
+                        //给弹出层表单回显
+                        body.find('#menuId').val(obj.data.menuId);
+                        body.find('#parentId').val(obj.data.parentId);
+                        body.find('#level').val(obj.data.level);
+                        body.find('#menuName').val(obj.data.menuName);
+                        body.find('#menuUrl').val(obj.data.menuUrl);
+                        body.find('#createTime').val(obj.data.createTime);
+                    },
+                    end:function (){
+                        //刷新数据表格
+                        treeTable.reload("menuId");
+                    }
+                });
+
             }else if(e==="add"){
                 layer.open({
                     type:2,

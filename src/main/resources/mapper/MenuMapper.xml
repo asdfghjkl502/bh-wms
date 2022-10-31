@@ -38,5 +38,9 @@
     <select id="getMenuList" resultType="menu">
         SELECT * FROM menus ORDER BY PARENT_ID ASC,MENU_ID ASC
     </select>
+
+    <select id="getMenusByMenuId" resultType="menu" parameterType="int">
+        SELECT * FROM menus WHERE IS_DELETE=1 AND PARENT_ID=#{menuId}
+    </select>
     
 </mapper>

@@ -15,8 +15,23 @@ public class MenuController {
     @Autowired
     private MenuService menuService;
 
-    
+    /*
+        删除菜单
+     */
+    @GetMapping(value = "/deleteMenu")
+    public Object deleteMenu(Integer menuId){
+        menuService.deleteMenu(menuId);
+        return new Result();
+    }
 
+    /*
+        更新菜单
+     */
+    @PostMapping(value = "/updateMenu")
+    public Object updateMenu(@RequestBody Menu menu) {
+        menuService.updateMenu(menu);
+        return new Result();
+    }
 
     /*
         添加菜单

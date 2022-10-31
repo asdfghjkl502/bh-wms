@@ -22,6 +22,35 @@
         let $ = layui.jquery;
         let layer = layui.layer;
 
+        //添加一级菜单
+        treeTable.on("toolbar(menuId)",function (obj){
+            console.log("-->>>",obj);
+            let e = obj.event;
+            if(e==="addMenu"){
+                layer.open({
+                    type:2,
+                    title:'添加菜单',
+                    content:'menusAdd.html',
+                    area:['500px','450px'],
+                    success: function(layero, index){
+                        //弹出执行
+                        let body = layer.getChildFrame('body', index);//获取弹出层中body标签的DOM对象
+                        //给弹出层表单回显
+                        body.find('#parentId').val(0);
+                        body.find('#level').val(1);
+                    },
+                    end:function (){
+                        //刷新数据表格
+                        treeTable.reload("menuId");
+                    }
+                });
+
+            }else {
+                layer.msg("功能还在路上");
+            }
+        });
+
+
         //初始化数据表格
         treeTable.render({
             elem: '#menuId',
@@ -76,7 +105,7 @@
                     templet:function (d){
                         let s='<button type="button" lay-event="del" class="layui-btn layui-btn-xs layui-btn-danger">删除</button>';
                         s+='<button type="button" lay-event="edit" class="layui-btn layui-btn-xs layui-btn-warm">更新</button>';
-                        if(d.level!=3){
+                        if(d.level!=2){
                             s+='<button type="button" lay-event="add" class="layui-btn layui-btn-xs layui-btn-normal">添加</button>';
                         }
                         return s;

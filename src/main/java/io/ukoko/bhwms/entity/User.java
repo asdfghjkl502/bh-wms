@@ -35,6 +35,18 @@ public class User {
     盐值
    */
   private String salt;
+
+  /*
+    部门ID
+   */
+  private Integer deptId;
+
+  /*
+    部门详情
+   */
+  private Department department;
+
+
   /*
         创建时间
      */
@@ -131,6 +143,22 @@ public class User {
     this.updateTime = updateTime;
   }
 
+  public Integer getDeptId() {
+    return deptId;
+  }
+
+  public void setDeptId(Integer deptId) {
+    this.deptId = deptId;
+  }
+
+  public Department getDepartment() {
+    return department;
+  }
+
+  public void setDepartment(Department department) {
+    this.department = department;
+  }
+
   @Override
   public String toString() {
     return "User{" +
@@ -141,6 +169,8 @@ public class User {
             ", userNick='" + userNick + '\'' +
             ", password='" + password + '\'' +
             ", salt='" + salt + '\'' +
+            ", deptId=" + deptId +
+            ", department=" + department +
             ", createTime=" + createTime +
             ", updateTime=" + updateTime +
             ", isDelete=" + isDelete +

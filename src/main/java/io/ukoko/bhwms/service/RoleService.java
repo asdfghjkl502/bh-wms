@@ -37,20 +37,22 @@ public interface RoleService {
     Role getRoleByRoleId(Integer roleId);
 
     /**
-     * 角色分页信息
-     * @param limit: 每页显示多少条数
-     * @param offset: 偏移量
-     * @param isDelete: 是是否有效 0:无效 1: 有效
-     * @param roleName: 角色名称
-     * @param startTime: 开始时间
-     * @param endTime : 结束时间
-     * @param roleId : 角色ID
+     * 获取角色分页
+     * @param pageSize
+     * @param pageNo
+     * @param isDelete
+     * @param roleName
+     * @param startTime
+     * @param endTime
+     * @param roleId
      * @return
      */
-    Page getRolePageFor(int limit,int offset,Integer isDelete,String roleName,Date startTime,Date endTime,Integer roleId);
-
     Page getRolePage(int pageSize,int pageNo,Integer isDelete,String roleName,Date startTime,Date endTime,Integer roleId);
 
+    /**
+     * 查询全部
+     */
+    List<Role> getRoleList();
 
     /**
      * 批量删除

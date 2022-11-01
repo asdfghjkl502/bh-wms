@@ -40,21 +40,6 @@ public class RoleServiceImpl implements RoleService {
         return roleMapper.getRoleByRoleId(roleId);
     }
 
-    @Override
-    public Page getRolePageFor(int limit, int offset, Integer isDelete, String roleName, Date startTime, Date endTime, Integer roleId) {
-        PageHelper.offsetPage(offset,limit);
-        List<Role> list = roleMapper.getRoleList(roleName, isDelete, roleId, startTime, endTime);
-        PageInfo<Role> info = new PageInfo<>(list);
-        Page page = new Page();
-        page.setPageNo(info.getPageNum());
-        page.setPageSize(info.getPageSize());
-        page.setPageCount(info.getPages());
-        page.setCount(info.getTotal());
-        page.setHasPre(info.isHasPreviousPage());
-        page.setHasNext(info.isHasNextPage());
-        page.setData(info.getList());
-        return page;
-    }
 
     @Override
     public Page getRolePage(int pageSize, int pageNo, Integer isDelete, String roleName, Date startTime, Date endTime, Integer roleId) {
@@ -70,6 +55,11 @@ public class RoleServiceImpl implements RoleService {
         page.setHasNext(info.isHasNextPage());
         page.setData(info.getList());
         return page;
+    }
+
+    @Override
+    public List<Role> getRoleList() {
+        return roleMapper.getRoleList(null,null,null,null,null);
     }
 
     @Override

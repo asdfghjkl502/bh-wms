@@ -97,4 +97,13 @@ public class RoleController {
         Role role = roleService.getRoleByRoleId(roleId);
         return new Result(role);
     }
+
+    /**
+     * 查询全部
+     * @return
+     */
+    @GetMapping(value = "/getRoleList")
+    public Object getRoleList(){
+        return new Result(roleService.getRoleList());
+    }
 }

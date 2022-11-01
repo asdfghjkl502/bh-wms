@@ -47,6 +47,9 @@ CREATE TABLE department (
     IS_DELETE INT DEFAULT 1 COMMENT '是否删除 0:删除 1:未删除'
 )DEFAULT CHARSET=UTF8 COMMENT="部门表";
 
+-- 用户部门关联
+ALTER TABLE user ADD FOREIGN KEY(DEPT_ID) REFERENCES department(DEPT_ID);
+
 -- 用户角色关联表
 CREATE TABLE user_role (
   USER_ID INT COMMENT '用户ID,关联用户表主键',

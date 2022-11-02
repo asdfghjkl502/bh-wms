@@ -37,7 +37,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">部门</label>
             <div class="layui-input-block">
-                <select name="deptId">
+                <select name="deptId" id="deptId">
                     <option value="0">北京</option>
                     <option value="1">上海</option>
                 </select>
@@ -90,15 +90,45 @@
             type:'datetime',/* 年月日时分秒 */
             theme:'#2F4056 '
         });
-        /* 下拉多选框 */
-        xmSelect.render({
-            el:"#role",
-            data:[
-                {name: '水果', value: 1, selected: true, disabled: true},
-                {name: '蔬菜', value: 2, selected: true},
-                {name: '桌子', value: 3, disabled: true},
-                {name: '北京', value: 4},
-            ]
+
+        /* 部门列表 */
+        $.getJSON("/getDepartmentList",function (d) {
+            console.log(d);
+            if(d.code===0){
+                //处理列表
+                let s="";
+                let list = d.obj;
+                for (let i = 0; i < list.length; i++) {
+                    s+="<option value='"+list[i].deptId+"'>"+list[i].deptName+"</option>";
+                }
+                $("#deptId").html(s);
+                //刷新
+                form.render("select");
+            }else{
+                //出错
+                layer.msg(d.msg);
+            }
+        });
+
+        /* 角色列表 */
+        $.getJSON("/getRoleList",function(d){
+            if(d.code===0){
+                //处理列表
+                xmSelect.render({
+                    el:"#role",
+                    theme: {
+                        color: '#0081ff',
+                    },
+                    prop:{
+                        name:'roleName',
+                        value:'roleId'
+                    },
+                    data:d.obj
+                });
+            }else{
+                //出错
+                layer.msg(d.msg);
+            }
         });
 
         /**

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -78,6 +79,19 @@ class DepartmentMapperTest extends BhWmsApplicationTests {
     }
 
     @Test
+    void getDepartmentList$() {
+        departmentMapper.getDepartmentList$().forEach(System.out::println);
+    }
+
+    @Test
     void getDepartmentListByDepatId() {
+        List<Department> list = departmentMapper.getDepartmentListByDeptId(1);
+        list.forEach(System.out::println);
+    }
+
+    @Test
+    void getSubDepartmentListByParentId(){
+        List<Department> list = departmentMapper.getSubDepartmentListByParentId(1);
+        list.forEach(System.out::println);
     }
 }

@@ -1,6 +1,7 @@
 package io.ukoko.bhwms.entity;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 映射数据库department(部门)表
@@ -35,6 +36,12 @@ public class Department {
         是否删除 0:删除 1:未删除
      */
     private int isDelete=1;
+
+    /*
+        子部门列表
+     */
+    private List<Department> children;
+
     public Department() {
     }
 
@@ -94,6 +101,14 @@ public class Department {
         this.updateTime = updateTime;
     }
 
+    public List<Department> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Department> children) {
+        this.children = children;
+    }
+
     @Override
     public String toString() {
         return "Department{" +
@@ -104,6 +119,7 @@ public class Department {
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 ", isDelete=" + isDelete +
+                ", children=" + children +
                 '}';
     }
 }

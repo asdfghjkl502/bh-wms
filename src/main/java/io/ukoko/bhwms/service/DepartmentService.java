@@ -30,4 +30,9 @@ public interface DepartmentService {
      * 部门列表查询
      */
     List<Department> getDepartmentList();
+
+    /**
+     * 获取部门列表(下拉框使用)
+     */
+    List<Department> getDepartmentList$();
 }

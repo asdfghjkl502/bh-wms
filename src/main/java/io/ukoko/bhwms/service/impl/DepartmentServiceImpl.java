@@ -57,4 +57,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     public List<Department> getDepartmentList() {
         return departmentMapper.getDepartmentList();
     }
+
+    @Override
+    public List<Department> getDepartmentList$() {
+        return departmentMapper.getDepartmentList$();
+    }
 }

@@ -56,4 +56,12 @@ public class DepartmentController {
     public Object getDepartmentList(){
         return new Result(departmentService.getDepartmentList());
     }
+
+    /**
+     * 下拉框列表
+     */
+    @GetMapping(value = "/getDepartmentList$")
+    public Object getDepartmentList$(){
+        return new Result(departmentService.getDepartmentList$());
+    }
 }

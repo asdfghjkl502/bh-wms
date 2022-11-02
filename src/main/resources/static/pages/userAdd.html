@@ -36,8 +36,8 @@
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">部门</label>
-            <div class="layui-input-block">
-                <select name="deptId" id="deptId"></select>
+            <div class="layui-input-block" id="deptId">
+
             </div>
         </div>
         <div class="layui-form-item">
@@ -89,7 +89,39 @@
         });
 
         /* 部门列表 */
-        $.getJSON("/getDepartmentList",function (d) {
+        xmSelect.render({
+            el:"#deptId",
+            tree:{
+                //是否显示树状结构
+                show: true,
+                //是否展示三角图标
+                showFolderIcon: true,
+                //是否显示虚线
+                showLine: false,
+                //间距
+                indent: 20
+            },
+            data: function(){
+                return [
+                    {name: '销售员', value: -1, children: [
+                            {name: '张三1', value: 1},
+                            {name: '李四1', value: 2},
+                            {name: '王五1', value: 3},
+                        ]},
+                    {name: '奖品', value: -2, children: [
+                            {name: '奖品3', value: -3, children: [
+                                    {name: '苹果3', value: 14},
+                                    {name: '香蕉3', value: 15},
+                                    {name: '葡萄3', value: 16},
+                                ]},
+                            {name: '苹果2', value: 4},
+                            {name: '香蕉2', value: 5},
+                            {name: '葡萄2', value: 6},
+                        ]},
+                ]
+            }
+        });
+        /*$.getJSON("/getDepartmentList",function (d) {
             console.log(d);
             if(d.code===0){
                 //处理列表
@@ -105,7 +137,7 @@
                 //出错
                 layer.msg(d.msg);
             }
-        });
+        });*/
 
         /* 角色列表 */
         $.getJSON("/getRoleList",function(d){

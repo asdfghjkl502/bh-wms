@@ -37,10 +37,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">部门</label>
             <div class="layui-input-block">
-                <select name="deptId" id="deptId">
-                    <option value="0">北京</option>
-                    <option value="1">上海</option>
-                </select>
+                <select name="deptId" id="deptId"></select>
             </div>
         </div>
         <div class="layui-form-item">
@@ -96,7 +93,7 @@
             console.log(d);
             if(d.code===0){
                 //处理列表
-                let s="";
+                let s="<option value=''></option>";
                 let list = d.obj;
                 for (let i = 0; i < list.length; i++) {
                     s+="<option value='"+list[i].deptId+"'>"+list[i].deptName+"</option>";
@@ -116,6 +113,7 @@
                 //处理列表
                 xmSelect.render({
                     el:"#role",
+                    name:"roleId",
                     theme: {
                         color: '#0081ff',
                     },
@@ -135,8 +133,14 @@
          * 提交表单
          */
         form.on("submit(add)",function (data) {
+
+            //参数处理
+            let param = data.field;
+            let roleIds = param.roleId!=""||param.roleId!=null?param.roleId.split(","):[];
+            param.roleId=roleIds;
+            console.log("param: ",param);
             //AJAX
-            $.ajax({
+            /*$.ajax({
                 url:"/addUser",
                 method:"post",
                 data:JSON.stringify(data.field),
@@ -149,7 +153,7 @@
                         layer.msg(d.msg);
                     }
                 }
-            });
+            });*/
             return false;
         });
 

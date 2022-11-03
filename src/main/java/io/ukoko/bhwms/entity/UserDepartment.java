@@ -13,9 +13,17 @@ public class UserDepartment {
    */
   private Integer deptId;
   /*
+    部门信息
+   */
+  private Department department;
+  /*
     用户ID
    */
   private Integer userId;
+  /*
+    用户信息
+   */
+  private User user;
   /*
     创建时间
    */
@@ -72,11 +80,29 @@ public class UserDepartment {
     this.isDelete = isDelete;
   }
 
+  public Department getDepartment() {
+    return department;
+  }
+
+  public void setDepartment(Department department) {
+    this.department = department;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
+
   @Override
   public String toString() {
     return "UserDepartment{" +
             "deptId=" + deptId +
+            ", department=" + department +
             ", userId=" + userId +
+            ", user=" + user +
             ", createTime=" + createTime +
             ", updateTime=" + updateTime +
             ", isDelete=" + isDelete +

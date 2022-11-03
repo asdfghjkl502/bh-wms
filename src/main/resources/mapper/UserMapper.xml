@@ -41,7 +41,20 @@
         SELECT * FROM user WHERE USER_ID=#{userId}
     </select>
     
-    <select id="getUserList" resultType="user">
+    <resultMap id="userMap" type="user">
+        <id column="USER_ID" property="userId"></id>
+        <result column="USER_NAME" property="userName"></result>
+        <result column="USER_TEL" property="userTel"></result>
+        <result column="USER_EMAIL" property="userEmail"></result>
+        <result column="USER_NICK" property="userNick"></result>
+        <result column="PASSWORD" property="password"></result>
+        <result column="SALT" property="salt"></result>
+        <result column="CREATE_TIME" property="createTime"></result>
+        <result column="UPDATE_TIME" property="updateTime"></result>
+        <result column="IS_DELETE" property="isDelete"></result>
+    </resultMap>
+    
+    <select id="getUserList" resultMap="userMap">
         SELECT * FROM user
             <where>
                 <if test="userName!=null">USER_NAME LIKE CONCAT('%',#{userName},'%')</if>

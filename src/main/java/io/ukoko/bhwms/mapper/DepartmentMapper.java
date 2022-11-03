@@ -44,4 +44,9 @@ public interface DepartmentMapper {
         通过部门ID查询当前部门下所有子部门列表
      */
     List<Department> getSubDepartmentListByParentId(Integer parentId);
+
+    /*
+        通过部门ID查询部门信息
+     */
+    Department getDepartmentByDeptId(Integer deptId);
 }

@@ -4,9 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.dto.UserDto;
-import io.ukoko.bhwms.entity.User;
-import io.ukoko.bhwms.entity.UserDepartment;
-import io.ukoko.bhwms.entity.UserRole;
+import io.ukoko.bhwms.entity.*;
 import io.ukoko.bhwms.mapper.UserDepartmentMapper;
 import io.ukoko.bhwms.mapper.UserMapper;
 import io.ukoko.bhwms.mapper.UserRoleMapper;
@@ -15,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 @Transactional
@@ -96,7 +96,22 @@ public class UserServiceImpl  implements UserService {
         page.setCount(info.getTotal());
         page.setHasNext(info.isHasNextPage());
         page.setHasPre(info.isHasPreviousPage());
-        page.setData(info.getList());
+
+        for (User user : userList) {
+            List<Department> ds = new ArrayList<>();
+            List<Role> rs = new ArrayList<>();
+            List<UserDepartment> userDepartments = userDepartmentMapper.getUserDepartmentByUserId(user.getUserId());
+            for (UserDepartment ud : userDepartments) {
+                ds.add(ud.getDepartment());
+            }
+            user.setDepartments(ds);
+            List<UserRole> userRoles = userRoleMapper.getUserRoleByUserId(user.getUserId());
+            for (UserRole ur : userRoles) {
+                rs.add(ur.getRole());
+            }
+            user.setRoles(rs);
+        }
+        page.setData(userList);
         return page;
     }
 

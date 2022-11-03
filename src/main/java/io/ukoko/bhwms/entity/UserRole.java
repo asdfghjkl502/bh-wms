@@ -11,9 +11,17 @@ public class UserRole {
    */
   private Integer userId;
   /*
+    用户信息
+   */
+  private User user;
+  /*
     角色ID
    */
   private Integer roleId;
+  /*
+    角色信息
+   */
+  private Role role;
   /*
         创建时间
      */
@@ -74,11 +82,29 @@ public class UserRole {
     this.updateTime = updateTime;
   }
 
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
+
+  public Role getRole() {
+    return role;
+  }
+
+  public void setRole(Role role) {
+    this.role = role;
+  }
+
   @Override
   public String toString() {
     return "UserRole{" +
             "userId=" + userId +
+            ", user=" + user +
             ", roleId=" + roleId +
+            ", role=" + role +
             ", createTime=" + createTime +
             ", updateTime=" + updateTime +
             ", isDelete=" + isDelete +

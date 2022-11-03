@@ -12,7 +12,17 @@
             (#{roleId},#{userId},#{createTime},#{isDelete})
     </insert>
 
-    <select id="getUserRoleByUserId" resultType="userRole" parameterType="int">
+    <resultMap id="urMap" type="userRole">
+        <id column="ROLE_ID" property="roleId"></id>
+        <id column="USER_ID" property="userId"></id>
+        <result column="CREATE_TIME" property="createTime"></result>
+        <result column="UPDATE_TIME" property="updateTime"></result>
+        <result column="IS_DELETE" property="isDelete"></result>
+        <association property="role" column="ROLE_ID" select="io.ukoko.bhwms.mapper.RoleMapper.getRoleByRoleId"></association>
+        <association property="user" column="USER_ID" select="io.ukoko.bhwms.mapper.UserMapper.getUser"></association>
+    </resultMap>
+
+    <select id="getUserRoleByUserId" resultMap="urMap" parameterType="int">
         SELECT * FROM user_role WHERE USER_ID=#{userId}
     </select>
 

@@ -3,7 +3,6 @@ package io.ukoko.bhwms.mapper;
 import io.ukoko.bhwms.entity.UserDepartment;
 import org.apache.ibatis.annotations.Mapper;
 
-import javax.annotation.ManagedBean;
 import java.util.List;
 
 /**

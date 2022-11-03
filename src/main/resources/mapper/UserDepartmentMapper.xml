@@ -13,7 +13,17 @@
                 (#{deptId},#{userId},#{createTime},#{isDelete})
     </insert>
 
-    <select id="getUserDepartmentByUserId" resultType="userDepartment" parameterType="int">
+    <resultMap id="udMap" type="userDepartment">
+        <id column="DEPT_ID" property="deptId"></id>
+        <id column="USER_ID" property="userId"></id>
+        <result column="CREATE_TIME" property="createTime"></result>
+        <result column="UPDATE_TIME" property="updateTime"></result>
+        <result column="IS_DELETE" property="isDelete"></result>
+        <association property="department" column="DEPT_ID" select="io.ukoko.bhwms.mapper.DepartmentMapper.getDepartmentByDeptId"></association>
+        <association property="user" column="USER_ID" select="io.ukoko.bhwms.mapper.UserMapper.getUser"></association>
+    </resultMap>
+
+    <select id="getUserDepartmentByUserId"  resultMap="udMap"  parameterType="int">
         SELECT * FROM user_department WHERE USER_ID=#{userId}
     </select>
 

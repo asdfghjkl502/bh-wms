@@ -54,5 +54,9 @@
     <update id="deleteDepartment" parameterType="int">
         UPDATE department SET IS_DELETE=0 WHERE dept_id=#{deptId}
     </update>
+    
+    <select id="getDepartmentByDeptId" parameterType="int" resultType="department">
+        SELECT * FROM department WHERE DEPT_ID=#{deptId}
+    </select>
 
 </mapper>

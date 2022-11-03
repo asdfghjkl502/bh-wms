@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.ukoko.bhwms.mapper.UserDepartmentMapper">
+
+
+    <insert id="addUserDepartment" parameterType="userDepartment">
+        INSERT INTO
+                user_department
+                (DEPT_ID,USER_ID,CREATE_TIME,IS_DELETE)
+                VALUES
+                (#{deptId},#{userId},#{createTime},#{isDelete})
+    </insert>
+
+    <select id="getUserDepartmentByUserId" resultType="userDepartment" parameterType="int">
+        SELECT * FROM user_department WHERE USER_ID=#{userId}
+    </select>
+
+</mapper>

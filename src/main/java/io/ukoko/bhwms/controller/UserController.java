@@ -36,8 +36,9 @@ public class UserController {
      */
     @PostMapping(value = "/addUser")
     public Object addUser(@RequestBody UserDto user){
-        System.out.println("user===>>>>"+user);
-        return new Result(user);
+        user.setSalt(System.currentTimeMillis()+"");
+        userService.addUser(user);
+        return new Result();
     }
 
     /**

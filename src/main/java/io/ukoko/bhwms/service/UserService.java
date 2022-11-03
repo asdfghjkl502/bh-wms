@@ -1,6 +1,7 @@
 package io.ukoko.bhwms.service;
 
 import io.ukoko.bhwms.dto.Page;
+import io.ukoko.bhwms.dto.UserDto;
 import io.ukoko.bhwms.entity.User;
 
 import java.util.Date;
@@ -15,7 +16,7 @@ public interface UserService {
      * 添加用户
      * @param user 用户信息
      */
-    void addUser(User user);
+    void addUser(UserDto user);
 
     /**
      * 删除用户

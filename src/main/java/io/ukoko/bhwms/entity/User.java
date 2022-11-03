@@ -1,12 +1,12 @@
 package io.ukoko.bhwms.entity;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 映射数据库user(用户)表
  */
 public class User {
-
   /*
     用户ID
    */
@@ -35,21 +35,17 @@ public class User {
     盐值
    */
   private String salt;
-
   /*
-    部门ID
+    部门列表
    */
-  private Integer deptId;
-
+  private List<Department> departments;
   /*
-    部门详情
+    角色列表
    */
-  private Department department;
-
-
+  private List<Role> roles;
   /*
-        创建时间
-     */
+      创建时间
+   */
   private Date createTime;
   /*
       更新时间
@@ -143,20 +139,20 @@ public class User {
     this.updateTime = updateTime;
   }
 
-  public Integer getDeptId() {
-    return deptId;
+  public List<Department> getDepartments() {
+    return departments;
   }
 
-  public void setDeptId(Integer deptId) {
-    this.deptId = deptId;
+  public void setDepartments(List<Department> departments) {
+    this.departments = departments;
   }
 
-  public Department getDepartment() {
-    return department;
+  public List<Role> getRoles() {
+    return roles;
   }
 
-  public void setDepartment(Department department) {
-    this.department = department;
+  public void setRoles(List<Role> roles) {
+    this.roles = roles;
   }
 
   @Override
@@ -169,8 +165,8 @@ public class User {
             ", userNick='" + userNick + '\'' +
             ", password='" + password + '\'' +
             ", salt='" + salt + '\'' +
-            ", deptId=" + deptId +
-            ", department=" + department +
+            ", departments=" + departments +
+            ", roles=" + roles +
             ", createTime=" + createTime +
             ", updateTime=" + updateTime +
             ", isDelete=" + isDelete +

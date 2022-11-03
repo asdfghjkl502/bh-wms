@@ -156,12 +156,13 @@
             param.deptId=deptIds;
             console.log("===>",param);
             //AJAX
-            /*$.ajax({
+            $.ajax({
                 url:"/addUser",
                 method:"post",
                 data:JSON.stringify(data.field),
                 contentType:"application/json",
                 success:function (d){
+                    console.log("=d=d=d>",d);
                     //关闭弹出层
                     let index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                     parent.layer.close(index); //再执行关闭
@@ -169,7 +170,7 @@
                         layer.msg(d.msg);
                     }
                 }
-            });*/
+            });
             return false;
         });
 

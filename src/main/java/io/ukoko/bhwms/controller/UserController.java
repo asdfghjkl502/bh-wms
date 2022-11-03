@@ -3,6 +3,7 @@ package io.ukoko.bhwms.controller;
 import io.swagger.annotations.Api;
 import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.dto.Result;
+import io.ukoko.bhwms.dto.UserDto;
 import io.ukoko.bhwms.entity.User;
 import io.ukoko.bhwms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +35,9 @@ public class UserController {
      * 添加用户
      */
     @PostMapping(value = "/addUser")
-    public Object addUser(@RequestBody User user){
-
-        user.setSalt("盐"+System.currentTimeMillis());
-        userService.addUser(user);
-        return new Result();
+    public Object addUser(@RequestBody UserDto user){
+        System.out.println("user===>>>>"+user);
+        return new Result(user);
     }
 
     /**

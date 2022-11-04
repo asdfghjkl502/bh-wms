@@ -26,7 +26,6 @@
         url = url.substring(url.lastIndexOf("?")+1,url.length);
         let userId=url.split("=")[1];
         $.getJSON("/getUserDetail",{userId:userId},function (d){
-            console.log("详情: ",d);
             if (d.code===0){
                 //展示数据
                 let s="";
@@ -80,6 +79,28 @@
                         s+="<tr>\n" +
                             "                <td style=\"width: 25%;\">是否有效</td>\n" +
                             "                <td style=\"width: 75%;\"> "+(val==1?'<span class="layui-badge layui-bg-blue">有效</span>':'<span class="layui-badge layui-bg-orange">无效</span>')+" </td>\n" +
+                            "            </tr>";
+                    }else if(key=="departments"){
+                        let ds = "";
+                        if(val!=null && val!="" && val.length>0){
+                            for (let i = 0; i < val.length; i++) {
+                                ds+=val[i].deptName+"&nbsp;&nbsp;";
+                            }
+                        }
+                        s+="<tr>\n" +
+                            "                <td style=\"width: 25%;\">部门</td>\n" +
+                            "                <td style=\"width: 75%;\">"+ds+"</td>\n" +
+                            "            </tr>";
+                    }else if(key=="roles"){
+                        let rs = "";
+                        if(val!=null && val!="" && val.length>0){
+                            for (let i = 0; i < val.length; i++) {
+                                rs+=val[i].roleName+"&nbsp;&nbsp;";
+                            }
+                        }
+                        s+="<tr>\n" +
+                            "                <td style=\"width: 25%;\">角色</td>\n" +
+                            "                <td style=\"width: 75%;\">"+rs+"</td>\n" +
                             "            </tr>";
                     }
 

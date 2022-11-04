@@ -81,7 +81,20 @@ public class UserServiceImpl  implements UserService {
 
     @Override
     public User getUserByUserId(Integer userId) {
-        return userMapper.getUser(userId);
+        User user = userMapper.getUser(userId);
+        List<Department> ds = new ArrayList<>();
+        List<Role> rs = new ArrayList<>();
+        List<UserDepartment> userDepartments = userDepartmentMapper.getUserDepartmentByUserId(user.getUserId());
+        for (UserDepartment ud : userDepartments) {
+            ds.add(ud.getDepartment());
+        }
+        List<UserRole> userRoles = userRoleMapper.getUserRoleByUserId(user.getUserId());
+        for (UserRole ur : userRoles) {
+            rs.add(ur.getRole());
+        }
+        user.setDepartments(ds);
+        user.setRoles(rs);
+        return user;
     }
 
     @Override

@@ -22,13 +22,13 @@ public class SourceController {
 
     /**
      * 来源分页查询
-     * @param offset
-     * @param limit
+     * @param pageNo
+     * @param pageSize
      * @return
      */
     @GetMapping(value = "/getSourcePage")
-    public Object getSourcePage(int offset,int limit){
-        Page page = sourceService.getSourcePage(offset,limit);
+    public Object getSourcePage(int pageNo,int pageSize){
+        Page page = sourceService.getSourcePage(pageNo,pageSize);
         return new Result(page);
     }
 

@@ -25,9 +25,9 @@ public class SourceServiceImpl implements SourceService {
     }
 
     @Override
-    public Page getSourcePage(int offset, int limit) {
+    public Page getSourcePage(int pageNo, int pageSize) {
         Page page = new Page();
-        PageHelper.offsetPage(offset,limit);
+        PageHelper.startPage(pageNo,pageSize);
         List<Source> sourceList = sourceMapper.getSourceList();
         PageInfo<Source> info = new PageInfo<>(sourceList);
         page.setPageNo(info.getPageNum());

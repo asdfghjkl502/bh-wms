@@ -25,9 +25,9 @@ public class IndustryServiceImpl implements IndustryService {
     }
 
     @Override
-    public Page getIndustryPage(int offset, int limit) {
+    public Page getIndustryPage(int pageNo, int pageSize) {
         Page page = new Page();
-        PageHelper.offsetPage(offset,limit);
+        PageHelper.startPage(pageNo,pageSize);
         List<Industry> industryList = industryMapper.getIndustryList();
         PageInfo<Industry> info = new PageInfo<>(industryList);
         page.setPageNo(info.getPageNum());

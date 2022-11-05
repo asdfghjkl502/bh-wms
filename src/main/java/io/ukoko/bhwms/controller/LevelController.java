@@ -20,13 +20,13 @@ public class LevelController {
 
     /**
      * 级别分页查询
-     * @param offset
-     * @param limit
+     * @param pageNo
+     * @param pageSize
      * @return
      */
     @GetMapping(value = "/getLevelPage")
-    public Object getLevelPage(int offset,int limit){
-        Page page = levelService.getLevelPage(offset, limit);
+    public Object getLevelPage(int pageNo,int pageSize){
+        Page page = levelService.getLevelPage(pageNo, pageSize);
         return new Result(page);
     }
 

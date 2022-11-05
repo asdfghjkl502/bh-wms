@@ -15,9 +15,9 @@ public interface IndustryService {
 
     /**
      * 获取行业分页
-     * @param offset
-     * @param limit
+     * @param pageNo
+     * @param pageSize
      * @return
      */
-    Page getIndustryPage(int offset, int limit);
+    Page getIndustryPage(int pageNo, int pageSize);
 }

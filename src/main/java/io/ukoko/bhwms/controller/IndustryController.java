@@ -20,13 +20,13 @@ public class IndustryController {
 
     /**
      * 行业分页查询
-     * @param offset
-     * @param limit
+     * @param pageNo
+     * @param pageSize
      * @return
      */
     @GetMapping(value = "/getIndustryPage")
-    public Object getIndustryPage(int offset,int limit){
-        Page page = industryService.getIndustryPage(offset,limit);
+    public Object getIndustryPage(int pageNo,int pageSize){
+        Page page = industryService.getIndustryPage(pageNo,pageSize);
         return new Result(page);
     }
 

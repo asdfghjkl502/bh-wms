@@ -24,9 +24,9 @@ public class LevelServiceImpl implements LevelService {
     }
 
     @Override
-    public Page getLevelPage(int offset, int limit) {
+    public Page getLevelPage(int pageNo, int pageSize) {
         Page page = new Page();
-        PageHelper.offsetPage(offset,limit);
+        PageHelper.startPage(pageNo,pageSize);
         List<Level> levelList = levelMapper.getLevelList();
         PageInfo<Level> info = new PageInfo<>(levelList);
         page.setPageNo(info.getPageNum());

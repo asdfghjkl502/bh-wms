@@ -15,9 +15,9 @@ public interface SourceService {
 
     /**
      * 获取级别分页
-     * @param offset
-     * @param limit
+     * @param pageNo
+     * @param pageSize
      * @return
      */
-    Page getSourcePage(int offset, int limit);
+    Page getSourcePage(int pageNo, int pageSize);
 }

@@ -18,9 +18,9 @@ public interface LevelService {
 
     /**
      * 获取级别分页
-     * @param offset
-     * @param limit
+     * @param pageNo
+     * @param pageSize
      * @return
      */
-    Page getLevelPage(int offset,int limit);
+    Page getLevelPage(int pageNo,int pageSize);
 }

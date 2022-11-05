@@ -90,11 +90,11 @@
                         }
                     });
                 });
-            }else if(e==="addRole"){
+            }else if(e==="add"){
                 layer.open({
                     type:2,
-                    title:'添加角色',
-                    content:'roleAdd.html',
+                    title:'添加级别',
+                    content:'levelAdd.html',
                     area:['500px','400px'],
                     end:function (){
                         //刷新数据表格
@@ -129,7 +129,7 @@
                     "data": res.obj.data
                 }
             },
-            toolbar: '<div> <button lay-event="batchDel" class="layui-btn layui-btn-sm layui-btn-danger"> <i class="layui-icon layui-icon-delete"></i> 批量删除</button><button lay-event="addRole" class="layui-btn layui-btn-sm layui-btn-normal"> <i class="layui-icon layui-icon-add-1"></i>添加</button> </div>',
+            toolbar: '<div> <button lay-event="batchDel" class="layui-btn layui-btn-sm layui-btn-danger"> <i class="layui-icon layui-icon-delete"></i> 批量删除</button><button lay-event="add" class="layui-btn layui-btn-sm layui-btn-normal"> <i class="layui-icon layui-icon-add-1"></i>添加</button> </div>',
             defaultToolbar: ['exports', 'print'],
             cols:[
                 [
@@ -174,10 +174,6 @@
                 ]
             ]
         });
-
-
-
-
     });
 
 </script>

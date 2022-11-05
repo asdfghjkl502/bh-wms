@@ -6,10 +6,7 @@ import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.entity.Level;
 import io.ukoko.bhwms.service.LevelService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Api(tags = "级别模块")
 @CrossOrigin
@@ -36,7 +33,8 @@ public class LevelController {
      * @return
      */
     @PostMapping(value = "/addLevel")
-    public Object addLevel(Level level){
+    public Object addLevel(@RequestBody Level level){
+        System.out.println("--->>>"+level);
         levelService.addLevel(level);
         return new Result();
     }

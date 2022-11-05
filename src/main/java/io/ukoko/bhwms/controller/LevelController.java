@@ -25,6 +25,7 @@ public class LevelController {
      */
     @PostMapping(value = "/batchDeleteLevel")
     public Object batchDeleteLevel(@RequestBody List<Integer> levelIds){
+        System.out.println("---->>>>>>"+levelIds);
         levelService.batchDeleteLevelByLevelId(levelIds);
         return new Result();
     }

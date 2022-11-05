@@ -20,6 +20,19 @@
         UPDATE level SET IS_DELETE=0 WHERE level_id=#{levelId}
     </update>
 
+    <update id="updateLevel" parameterType="level">
+        UPDATE level
+        <set>
+            <if test="levelName!=null">LEVEL_NAME=#{levelName},</if>
+            <if test="createTime!=null">CREATE_TIME=#{createTime},</if>
+            <if test="isDelete!=null">IS_DELETE=#{isDelete}</if>
+        </set>
+        <where>
+            <if test="levelId!=null">LEVEL_ID=#{levelId}</if>
+        </where>
+    </update>
+
+
     <update id="batchDeleteLevel" parameterType="int">
         <foreach collection="list" item="item" separator=";">
             UPDATE level SET IS_DELETE=0 WHERE level_id=#{item}

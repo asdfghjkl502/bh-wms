@@ -29,6 +29,18 @@ public class LevelController {
         return new Result();
     }
 
+    /**
+     * 更新级别
+     * @param level
+     * @return
+     */
+    @PostMapping(value = "/updateLevel")
+    public Object updateLevel(@RequestBody Level level){
+        System.out.println("======"+level);
+        levelService.updateLevel(level);
+        return new Result();
+    }
+
 
     /**
      * 批量删除
@@ -61,7 +73,6 @@ public class LevelController {
      */
     @PostMapping(value = "/addLevel")
     public Object addLevel(@RequestBody Level level){
-        System.out.println("--->>>"+level);
         levelService.addLevel(level);
         return new Result();
     }

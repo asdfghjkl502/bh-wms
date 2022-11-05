@@ -18,6 +18,12 @@ public interface LevelMapper {
     void addLevel(Level level);
 
     /**
+     * 更新
+     * @param level
+     */
+    void updateLevel(Level level);
+
+    /**
      * 获取级别列表
      * @return
      */

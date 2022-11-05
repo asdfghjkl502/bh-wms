@@ -17,6 +17,12 @@ public interface LevelService {
     void addLevel(Level level);
 
     /**
+     * 更新级别
+     * @param level
+     */
+    void updateLevel(Level level);
+
+    /**
      * 根据ID删除
      * @param levelId
      */

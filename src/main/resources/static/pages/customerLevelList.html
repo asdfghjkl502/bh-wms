@@ -52,15 +52,15 @@
             }else if(e==="edit"){
                 layer.open({
                     type:2,
-                    title:'更新角色',
-                    content:'roleUpdate.html?isDelete='+obj.data.isDelete,
+                    title:'更新级别',
+                    content:'customerLevelUpdate.html?isDelete='+obj.data.isDelete,
                     area:['500px','400px'],
                     success: function(layero, index){
                         //弹出执行
                         let body = layer.getChildFrame('body', index);//获取弹出层中body标签的DOM对象
                         //给弹出层表单回显
-                        body.find('#roleId').val(obj.data.roleId);
-                        body.find('#roleName').val(obj.data.roleName);
+                        body.find('#levelId').val(obj.data.levelId);
+                        body.find('#levelName').val(obj.data.levelName);
                         body.find('#createTime').val(obj.data.createTime);
                     },
                     end:function (){

@@ -17,6 +17,18 @@ public interface LevelService {
     void addLevel(Level level);
 
     /**
+     * 根据ID删除
+     * @param levelId
+     */
+    void deleteLevelByLevelId(Integer levelId);
+
+    /**
+     * 批量删除
+     * @param levelIds
+     */
+    void batchDeleteLevelByLevelId(List<Integer> levelIds);
+
+    /**
      * 获取级别分页
      * @param pageNo
      * @param pageSize

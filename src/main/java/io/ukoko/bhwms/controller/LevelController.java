@@ -8,12 +8,27 @@ import io.ukoko.bhwms.service.LevelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Api(tags = "级别模块")
 @CrossOrigin
 @RestController
 public class LevelController {
     @Autowired
     private LevelService levelService;
+
+
+    /**
+     * 批量删除
+     * @param levelIds
+     * @return
+     */
+    @PostMapping(value = "/batchDeleteLevel")
+    public Object batchDeleteLevel(@RequestBody List<Integer> levelIds){
+        levelService.batchDeleteLevelByLevelId(levelIds);
+        return new Result();
+    }
+
 
     /**
      * 级别分页查询

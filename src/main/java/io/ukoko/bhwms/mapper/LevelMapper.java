@@ -27,4 +27,15 @@ public interface LevelMapper {
      * 通过ID查询级别信息
      */
     Level getLevel(Integer levelId);
+
+    /**
+     * 批量删除
+     */
+    void batchDeleteLevel(List<Integer> levelIds);
+
+    /**
+     * 通过ID删除
+     */
+    void deleteLevel(Integer levelId);
+
 }

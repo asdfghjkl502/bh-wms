@@ -15,5 +15,15 @@
     <select id="getLevel" parameterType="int" resultType="level">
         SELECT * FROM level WHERE LEVEL_ID=#{levelId}
     </select>
+    
+    <update id="deleteLevel" parameterType="int">
+        UPDATE level SET IS_DELETE=0 WHERE level_id=#{levelId}
+    </update>
+
+    <update id="batchDeleteLevel" parameterType="int">
+        <foreach collection="list" item="item" separator=";">
+            UPDATE level SET IS_DELETE=0 WHERE level_id=#{item}
+        </foreach>
+    </update>
 
 </mapper>

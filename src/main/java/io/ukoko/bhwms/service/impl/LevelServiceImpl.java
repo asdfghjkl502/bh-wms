@@ -24,6 +24,16 @@ public class LevelServiceImpl implements LevelService {
     }
 
     @Override
+    public void deleteLevelByLevelId(Integer levelId) {
+        levelMapper.deleteLevel(levelId);
+    }
+
+    @Override
+    public void batchDeleteLevelByLevelId(List<Integer> levelIds) {
+        levelMapper.batchDeleteLevel(levelIds);
+    }
+
+    @Override
     public Page getLevelPage(int pageNo, int pageSize) {
         Page page = new Page();
         PageHelper.startPage(pageNo,pageSize);

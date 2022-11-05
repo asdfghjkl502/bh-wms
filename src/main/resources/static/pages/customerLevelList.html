@@ -33,7 +33,22 @@
             //获取事件名
             let e = obj.event;
             if(e==="del"){
-                console.log("删除")
+
+                layer.confirm("是否删除",function (index){
+                    //关闭弹出层
+                    layer.close(index);
+                    //AJAX
+                    $.getJSON("/deleteLevelByLevelId",{levelId:obj.data.levelId},function(d){
+                        console.log("删除--->>>>",d);
+                        if(d.code!=0){
+                            layer.msg(d.msg);
+                        }else{
+                            //刷新表格
+                            table.reload("demo");
+                        }
+                    });
+                });
+
             }else if(e==="edit"){
                 layer.open({
                     type:2,

@@ -1,5 +1,6 @@
 package io.ukoko.bhwms.aop;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -43,6 +44,10 @@ public class LogAspect {
         LOGGER.info("请求方式==>>{}",request.getMethod());
         //获取类名和方法名
         LOGGER.info("类名==>>{} |￥￥| 方法名==>>{}",joinPoint.getSignature().getDeclaringTypeName(),joinPoint.getSignature().getName());
+        //方法的入参
+        ObjectMapper om = new ObjectMapper();
+        String s = om.writeValueAsString(joinPoint.getArgs());
+        LOGGER.info("方法入参==>{}",s);
         //获取结果
         LOGGER.info("方法返回值为 ==>>{}",proceed);
         return proceed;

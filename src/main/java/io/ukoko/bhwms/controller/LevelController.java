@@ -19,13 +19,24 @@ public class LevelController {
 
 
     /**
+     * 删除单个
+     * @param levelId
+     * @return
+     */
+    @GetMapping(value = "/deleteLevelByLevelId")
+    public Object deleteLevelByLevelId(Integer levelId){
+        levelService.deleteLevelByLevelId(levelId);
+        return new Result();
+    }
+
+
+    /**
      * 批量删除
      * @param levelIds
      * @return
      */
     @PostMapping(value = "/batchDeleteLevel")
     public Object batchDeleteLevel(@RequestBody List<Integer> levelIds){
-        System.out.println("---->>>>>>"+levelIds);
         levelService.batchDeleteLevelByLevelId(levelIds);
         return new Result();
     }

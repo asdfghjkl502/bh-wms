@@ -32,9 +32,14 @@
 		<div class="hxx-container-left">
 			<div class="layui-panel">
 			  <ul class="layui-menu" id="hxxmenuid">
-			    <li>
-			        <div onclick="add_tab('仪表盘','pages/statisticsList.html')" class="layui-menu-body-title">仪表盘</div>
-			    </li>
+				<li class="layui-menu-item-group layui-menu-item-up" lay-options="{type: 'group'}">
+				  <div class="layui-menu-body-title">
+					  仪表盘 <i class="layui-icon layui-icon-down"></i>
+				  </div>
+				  <ul>
+					  <li onclick="add_tab('商业智能','pages/statisticsList.html')">商业智能</li>
+				  </ul>
+				</li>
 				<li class="layui-menu-item-divider"></li>
 				<li class="layui-menu-item-group layui-menu-item-up" lay-options="{type: 'group'}">
 				  <div class="layui-menu-body-title">

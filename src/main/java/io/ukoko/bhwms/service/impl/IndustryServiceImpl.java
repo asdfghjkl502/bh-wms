@@ -39,4 +39,19 @@ public class IndustryServiceImpl implements IndustryService {
         page.setData(info.getList());
         return page;
     }
+
+    @Override
+    public void updateIndustry(Industry industry) {
+        industryMapper.updateIndustry(industry);
+    }
+
+    @Override
+    public void deleteIndustryByIndustryId(Integer industryId) {
+        industryMapper.deleteIndustry(industryId);
+    }
+
+    @Override
+    public void batchDeleteIndustryByIndustryId(List<Integer> industryIds) {
+        industryMapper.batchDeleteIndustry(industryIds);
+    }
 }

@@ -2,6 +2,10 @@ package io.ukoko.bhwms.service;
 
 import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.entity.Industry;
+import io.ukoko.bhwms.entity.Source;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
 
 /**
  * 行业管理模块的业务逻辑层
@@ -11,7 +15,7 @@ public interface IndustryService {
      * 添加行业
      * @param industry
      */
-    void addIndustry(Industry industry);
+    void addIndustry(@RequestBody Industry industry);
 
     /**
      * 获取行业分页
@@ -20,4 +24,22 @@ public interface IndustryService {
      * @return
      */
     Page getIndustryPage(int pageNo, int pageSize);
+
+    /**
+     * 更新
+     * @param industry
+     */
+    void updateIndustry(@RequestBody Industry industry);
+
+    /**
+     * 根据ID删除
+     * @param industryId
+     */
+    void deleteIndustryByIndustryId(Integer industryId);
+
+    /**
+     * 批量删除
+     * @param industryIds
+     */
+    void batchDeleteIndustryByIndustryId(List<Integer> industryIds);
 }

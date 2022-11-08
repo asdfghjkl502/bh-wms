@@ -48,7 +48,7 @@ public class SourceController {
      * @return
      */
     @PostMapping(value = "/batchDeleteSource")
-    public Object batchDeleteSource(List<Integer> sourceIds){
+    public Object batchDeleteSource(@RequestBody List<Integer> sourceIds){
         sourceService.batchDeleteSourceBySourceId(sourceIds);
         return new Result();
     }
@@ -72,7 +72,7 @@ public class SourceController {
      * @return
      */
     @PostMapping(value = "/addSource")
-    public Object addSource(Source source){
+    public Object addSource(@RequestBody Source source){
         sourceService.addSource(source);
         return new Result();
     }

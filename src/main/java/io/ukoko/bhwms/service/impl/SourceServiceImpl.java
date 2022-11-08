@@ -39,4 +39,19 @@ public class SourceServiceImpl implements SourceService {
         page.setData(info.getList());
         return page;
     }
+
+    @Override
+    public void updateSource(Source source) {
+        sourceMapper.updateSource(source);
+    }
+
+    @Override
+    public void deleteSourceBySourceId(Integer sourceId) {
+        sourceMapper.deleteSource(sourceId);
+    }
+
+    @Override
+    public void batchDeleteSourceBySourceId(List<Integer> sourceIds) {
+        sourceMapper.batchDeleteSource(sourceIds);
+    }
 }

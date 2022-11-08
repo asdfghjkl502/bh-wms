@@ -16,4 +16,26 @@
         SELECT * FROM industry WHERE INDUSTRY_ID=#{industryId}
     </select>
 
+    <update id="updateIndustry" parameterType="industry">
+        UPDATE industry
+        <set>
+            <if test="industryName!=null">INDUSTRY_NAME=#{industryName},</if>
+            <if test="createTime!=null">CREATE_TIME=#{createTime},</if>
+            <if test="isDelete!=null">IS_DELETE=#{isDelete}</if>
+        </set>
+        <where>
+            <if test="industryId!=null">INDUSTRY_ID=#{industryId}</if>
+        </where>
+    </update>
+
+    <update id="deleteIndustry" parameterType="int">
+        UPDATE industry SET IS_DELETE=0 WHERE INDUSTRY_ID=#{industryId}
+    </update>
+
+    <update id="batchDeleteIndustry" parameterType="int">
+        <foreach collection="list" item="item" separator=";">
+            UPDATE industry SET IS_DELETE=0 WHERE INDUSTRY_ID=#{item}
+        </foreach>
+    </update>
+
 </mapper>

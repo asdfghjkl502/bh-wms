@@ -2,6 +2,7 @@ package io.ukoko.bhwms.mapper;
 
 import io.ukoko.bhwms.entity.Industry;
 import io.ukoko.bhwms.entity.Level;
+import io.ukoko.bhwms.entity.Source;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -27,4 +28,20 @@ public interface IndustryMapper {
      * 根据来源ID查询来源信息
      */
     Industry getIndustry(Integer industryId);
+
+    /**
+     * 更新
+     * @param industry
+     */
+    void updateIndustry(Industry industry);
+
+    /**
+     * 批量删除
+     */
+    void batchDeleteIndustry(List<Integer> industryIds);
+
+    /**
+     * 通过ID删除
+     */
+    void deleteIndustry(Integer industryId);
 }

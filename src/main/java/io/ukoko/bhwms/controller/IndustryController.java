@@ -67,6 +67,7 @@ public class IndustryController {
      * @param industryIds
      * @return
      */
+    @PostMapping(value = "/batchDeleteIndustry")
     public Object batchDeleteIndustry(@RequestBody List<Integer> industryIds){
         industryService.batchDeleteIndustryByIndustryId(industryIds);
         return new Result();

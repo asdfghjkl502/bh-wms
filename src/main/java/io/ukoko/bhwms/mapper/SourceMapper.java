@@ -1,5 +1,6 @@
 package io.ukoko.bhwms.mapper;
 
+import io.ukoko.bhwms.entity.Level;
 import io.ukoko.bhwms.entity.Source;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -17,6 +18,12 @@ public interface SourceMapper {
     void addSource(Source source);
 
     /**
+     * 更新
+     * @param source
+     */
+    void updateSource(Source source);
+
+    /**
      * 获取级别列表
      * @return
      */
@@ -26,4 +33,16 @@ public interface SourceMapper {
      * 通过来源ID查询来源信息
      */
     Source getSource(Integer sourceId);
+
+
+    /**
+     * 批量删除
+     */
+    void batchDeleteSource(List<Integer> sourceIds);
+
+    /**
+     * 通过ID删除
+     */
+    void deleteSource(Integer sourceId);
+
 }

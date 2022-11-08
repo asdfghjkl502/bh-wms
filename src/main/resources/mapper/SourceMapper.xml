@@ -7,6 +7,18 @@
     <insert id="addSource" parameterType="source">
         INSERT INTO source(SOURCE_NAME,CREATE_TIME,IS_DELETE) VALUES (#{sourceName},#{createTime},#{isDelete})
     </insert>
+    
+    <update id="updateSource" parameterType="source">
+        UPDATE source
+        <set>
+            <if test="sourceName!=null">SOURCE_NAME=#{sourceName},</if>
+            <if test="createTime!=null">CREATE_TIME=#{createTime},</if>
+            <if test="isDelete!=null">IS_DELETE=#{isDelete}</if>
+        </set>
+        <where>
+            <if test="sourceId!=null">SOURCE_ID=#{sourceId}</if>
+        </where>
+    </update>
 
     <select id="getSourceList" resultType="source">
         SELECT * FROM source
@@ -15,5 +27,15 @@
     <select id="getSource" parameterType="int" resultType="source">
         SELECT * FROM source WHERE SOURCE_ID=#{sourceId}
     </select>
+    
+    <update id="deleteSource" parameterType="int">
+        UPDATE source SET IS_DELETE=0 WHERE SOURCE_ID=#{sourceId}
+    </update>
+
+    <update id="batchDeleteSource" parameterType="int">
+        <foreach collection="list" item="item" separator=";">
+            UPDATE source SET IS_DELETE=0 WHERE SOURCE_ID=#{item}
+        </foreach>
+    </update>
 
 </mapper>

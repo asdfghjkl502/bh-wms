@@ -2,8 +2,6 @@ package io.ukoko.bhwms.service;
 
 import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.entity.Industry;
-import io.ukoko.bhwms.entity.Source;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -15,7 +13,7 @@ public interface IndustryService {
      * 添加行业
      * @param industry
      */
-    void addIndustry(@RequestBody Industry industry);
+    void addIndustry(Industry industry);
 
     /**
      * 获取行业分页
@@ -29,7 +27,7 @@ public interface IndustryService {
      * 更新
      * @param industry
      */
-    void updateIndustry(@RequestBody Industry industry);
+    void updateIndustry(Industry industry);
 
     /**
      * 根据ID删除

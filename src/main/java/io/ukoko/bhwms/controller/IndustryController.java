@@ -6,10 +6,9 @@ import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.entity.Industry;
 import io.ukoko.bhwms.service.IndustryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Api(tags = "行业模块")
 @CrossOrigin
@@ -36,8 +35,40 @@ public class IndustryController {
      * @return
      */
     @PostMapping(value = "/addIndustry")
-    public Object addIndustry(Industry industry){
+    public Object addIndustry(@RequestBody Industry industry){
         industryService.addIndustry(industry);
+        return new Result();
+    }
+
+    /**
+     * 更新
+     * @param industry
+     * @return
+     */
+    @PostMapping(value = "/updateIndustry")
+    public Object updateIndustry(@RequestBody Industry industry){
+        industryService.updateIndustry(industry);
+        return new Result();
+    }
+
+    /**
+     * 删除
+     * @param industryId
+     * @return
+     */
+    @GetMapping(value = "/deleteIndustry")
+    public Object deleteIndustry(Integer industryId){
+        industryService.deleteIndustryByIndustryId(industryId);
+        return new Result();
+    }
+
+    /**
+     * 批量删除
+     * @param industryIds
+     * @return
+     */
+    public Object batchDeleteIndustry(@RequestBody List<Integer> industryIds){
+        industryService.batchDeleteIndustryByIndustryId(industryIds);
         return new Result();
     }
 }

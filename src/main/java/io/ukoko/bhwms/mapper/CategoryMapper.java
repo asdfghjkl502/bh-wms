@@ -29,4 +29,9 @@ public interface CategoryMapper {
         更新
      */
     void updateCategory(Category category);
+
+    /*
+        删除
+     */
+    void deleteCategory(Integer categoryId);
 }

@@ -32,5 +32,9 @@
             <if test="categoryId!=null">CATEGORY_ID=#{categoryId}</if>
         </where>
     </update>
+    
+    <update id="deleteCategory" parameterType="int">
+        UPDATE category SET IS_DELETE=0 WHERE CATEGORY_ID=#{categoryId}
+    </update>
 
 </mapper>

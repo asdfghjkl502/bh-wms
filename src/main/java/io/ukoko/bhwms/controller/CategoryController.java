@@ -14,6 +14,16 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    /**
+     * 根据ID删除分类
+     * @param categoryId
+     * @return
+     */
+    @PostMapping(value = "/deleteCategory")
+    public Object deleteCategory(Integer categoryId){
+        categoryService.deleteCategory(categoryId);
+        return new Result();
+    }
 
     /**
      * 更新分类

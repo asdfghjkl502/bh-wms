@@ -6,6 +6,7 @@ import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.exceptions.BhWmsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,9 +39,14 @@ public class BhWmsExceptionHandler {
     @ExceptionHandler(value = {Exception.class})
     public Result commonException(Exception e){
         e.printStackTrace();//控制台异常消息打印
+
         Result result = new Result();
         result.setCode(-1);
-        result.setMsg("系统异常");
+        if(e instanceof HttpRequestMethodNotSupportedException){
+            result.setMsg("请求方式错误");
+        }else {
+            result.setMsg("系统异常");
+        }
         ObjectMapper om = new ObjectMapper();
         try {
             String json = om.writeValueAsString(result);

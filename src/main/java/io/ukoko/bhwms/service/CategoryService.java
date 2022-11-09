@@ -20,4 +20,9 @@ public interface CategoryService {
         更新
      */
     void updateCategory(Category category);
+
+    /*
+        删除
+     */
+    void deleteCategory(Integer categoryId);
 }

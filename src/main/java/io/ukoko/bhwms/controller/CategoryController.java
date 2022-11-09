@@ -5,10 +5,7 @@ import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.entity.Category;
 import io.ukoko.bhwms.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Api(tags = "类目模块")
 @CrossOrigin
@@ -21,7 +18,7 @@ public class CategoryController {
      * 添加类目
      */
     @PostMapping(value = "/addCategory")
-    public Object addCategory(Category category){
+    public Object addCategory(@RequestBody Category category){
         categoryService.addCategory(category);
         return new Result();
     }
@@ -31,7 +28,7 @@ public class CategoryController {
      */
     @GetMapping(value = "/getCategoryList")
     public Object getCategoryList(){
-        return categoryService.getCategoryList();
+        return new Result(categoryService.getCategoryList());
     }
 
 }

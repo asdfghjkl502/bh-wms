@@ -8,9 +8,166 @@
 </head>
 <body>
 
-	<h1>产品类目</h1>
+    <div class="layui-container">
+        <!--表格展示位置-->
+        <table id="demo" lay-filter="test"></table>
+    </div>
 
 
 <script src="../layui/layui.js"></script>
+<script>
+    //加载额外模块
+    layui.extend({"treeTable":"../js/treeTable"}).use(["treeTable","jquery","layer"],function () {
+        //加载树形表格模块
+        let treeTable = layui.treeTable;
+        let $=layui.jquery;
+        let layer = layui.layer;
+
+        //初始化数据表格
+        treeTable.render({
+            elem: '#demo',
+            url: '/getCategoryList',
+            toolbar: '<div><button lay-event="addCategory" class="layui-btn layui-btn-sm"> <i class="layui-icon layui-icon-add-1"></i>添加一级分类</button> </div>',
+            defaultToolbar: ['exports', 'print'],
+            tree: {
+                iconIndex: 0,
+                isPidData: true,
+                idName: 'categoryId',
+                pidName: 'parentId'
+            },
+            parseData:function(res){
+                return {
+                    "code": res.code,
+                    "msg": res.msg,
+                    "data": res.obj
+                }
+            },
+            cols:[[
+                {
+                    field: 'categoryName',
+                    title: '分类名称',
+                    width: '35%'
+                },
+                {
+                    field: 'level',
+                    title: '层级',
+                    width: '15%',
+                    templet:function (d){
+                        return '<span class="layui-badge layui-bg-'+(d.level==1?"blue":d.level==2?"green":"cyan")+'">'+d.level+'</span>';
+                    }
+                },
+                {
+                    field: 'createTime',
+                    title: '创建时间'
+                },
+                {
+                    field: 'updateTime',
+                    title: '更新时间'
+                },
+                {
+                    field: 'isDelete',
+                    title: '是否有效',
+                    width: '15%',
+                    templet:function (d){
+                        return d.isDelete==1?'<span class="layui-badge layui-bg-green">有效</span>':'<span class="layui-badge">无效</span>';
+                    }
+                },
+                {
+                    title: '操作',
+                    templet:function (d){
+                        let s='<button type="button" lay-event="del" class="layui-btn layui-btn-xs layui-btn-danger">删除</button>';
+                        s+='<button type="button" lay-event="edit" class="layui-btn layui-btn-xs layui-btn-warm">更新</button>';
+                        if(d.level!=3){
+                            s+='<button type="button" lay-event="add" class="layui-btn layui-btn-xs layui-btn-normal">添加</button>';
+                        }
+                        return s;
+                    }
+                }
+            ]]
+        });
+
+        //列事件绑定
+        treeTable.on('tool(demo)',function (obj) {
+            if(obj.event==="del"){
+                console.log("删除...");
+                layer.confirm("确定删除?",function (index){
+                    //关闭弹出层
+                    layer.close(index);
+                    $.post("/deleteDepartment",{deptId:obj.data.deptId},function (d){
+                        if(d.code!=0){
+                            layer.msg(d.msg);
+                        }else{
+                            //刷新数据表格
+                            treeTable.reload("deptId");
+                        }
+                    });
+                });
+            }else if(obj.event==="edit"){
+                layer.open({
+                    type:2,
+                    title:'更新部门',
+                    content:'departmentUpdate.html?isDelete='+obj.data.isDelete,
+                    area:['500px','450px'],
+                    success: function(layero, index){
+                        //弹出执行
+                        let body = layer.getChildFrame('body', index);//获取弹出层中body标签的DOM对象
+                        //给弹出层表单回显
+                        body.find('#deptId').val(obj.data.deptId);
+                        body.find('#level').val(obj.data.level);
+                        body.find('#deptName').val(obj.data.deptName);
+                        body.find('#createTime').val(obj.data.createTime);
+                    },
+                    end:function (){
+                        //刷新数据表格
+                        treeTable.reload("demo");
+                    }
+                });
+            }else if(obj.event==="add"){
+                layer.open({
+                    type:2,
+                    title:'添加部门',
+                    content:'departmentAdd.html',
+                    area:['500px','450px'],
+                    success: function(layero, index){
+                        //弹出执行
+                        let body = layer.getChildFrame('body', index);//获取弹出层中body标签的DOM对象
+                        //给弹出层表单回显
+                        body.find('#parentId').val(obj.data.deptId);
+                        body.find('#level').val(obj.data.level+1);
+                    },
+                    end:function (){
+                        //刷新数据表格
+                        treeTable.reload("demo");
+                    }
+                });
+            }
+        });
+
+        //头部事件绑定
+        treeTable.on('toolbar(demo)',function (obj) {
+            if(obj.event==="addCategory"){
+                layer.open({
+                    type:2,
+                    title:'添加类目',
+                    content:'departmentAdd.html',
+                    area:['500px','450px'],
+                    success: function(layero, index){
+                        //弹出执行
+                        let body = layer.getChildFrame('body', index);//获取弹出层中body标签的DOM对象
+                        //给弹出层表单回显
+                        body.find('#parentId').val(0);
+                        body.find('#level').val(1);
+                    },
+                    end:function (){
+                        //刷新数据表格
+                        treeTable.reload("demo");
+                    }
+                });
+            }
+        });
+
+    });
+
+</script>
 </body>
 </html>

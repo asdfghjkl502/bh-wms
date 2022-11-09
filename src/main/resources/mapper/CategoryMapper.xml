@@ -18,5 +18,19 @@
     <select id="getCategory" resultType="category">
         SELECT * FROM category WHERE CATEGORY_ID=#{categoryId}
     </select>
+    
+    <update id="updateCategory" parameterType="category">
+        UPDATE category
+        <set>
+            <if test="categoryName!=null">CATEGORY_NAME=#{categoryName},</if>
+            <if test="level!=null">LEVEL=#{level},</if>
+            <if test="parentId!=null">PARENT_ID=#{parentId},</if>
+            <if test="createTime!=null">CREATE_TIME=#{createTime},</if>
+            <if test="isDelete!=null">IS_DELETE=#{isDelete}</if>
+        </set>
+        <where>
+            <if test="categoryId!=null">CATEGORY_ID=#{categoryId}</if>
+        </where>
+    </update>
 
 </mapper>

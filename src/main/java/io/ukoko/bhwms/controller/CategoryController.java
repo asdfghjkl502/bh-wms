@@ -14,6 +14,18 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+
+    /**
+     * 更新分类
+     * @param category
+     * @return
+     */
+    @PostMapping(value = "/updateCategory")
+    public Object updateCategory(@RequestBody Category category){
+        categoryService.updateCategory(category);
+        return new Result();
+    }
+
     /**
      * 添加类目
      */

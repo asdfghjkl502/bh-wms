@@ -24,4 +24,9 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> getCategoryList() {
         return categoryMapper.getCategoryList();
     }
+
+    @Override
+    public void updateCategory(Category category) {
+        categoryMapper.updateCategory(category);
+    }
 }

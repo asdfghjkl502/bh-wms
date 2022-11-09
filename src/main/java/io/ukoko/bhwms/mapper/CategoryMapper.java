@@ -24,4 +24,9 @@ public interface CategoryMapper {
         查询单个
      */
     Category getCategory(Integer categoryId);
+
+    /*
+        更新
+     */
+    void updateCategory(Category category);
 }

@@ -16,4 +16,8 @@ public interface CategoryService {
         获取分类列表
      */
     List<Category> getCategoryList();
+    /*
+        更新
+     */
+    void updateCategory(Category category);
 }

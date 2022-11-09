@@ -34,4 +34,11 @@ public interface CategoryMapper {
         删除
      */
     void deleteCategory(Integer categoryId);
+
+    /**
+     * 通过ID查询当前id下是否存在子节点
+     * @param categoryId
+     * @return
+     */
+    List<Category> getCategoryListByParentId(Integer categoryId);
 }

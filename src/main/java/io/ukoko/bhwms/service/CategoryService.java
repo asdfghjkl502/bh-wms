@@ -1,6 +1,7 @@
 package io.ukoko.bhwms.service;
 
 import io.ukoko.bhwms.entity.Category;
+import io.ukoko.bhwms.exceptions.BhWmsException;
 
 import java.util.List;
 
@@ -24,5 +25,5 @@ public interface CategoryService {
     /*
         删除
      */
-    void deleteCategory(Integer categoryId);
+    void deleteCategory(Integer categoryId) throws BhWmsException;
 }

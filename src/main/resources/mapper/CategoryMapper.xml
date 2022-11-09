@@ -19,6 +19,10 @@
         SELECT * FROM category WHERE CATEGORY_ID=#{categoryId}
     </select>
     
+    <select id="getCategoryListByParentId" parameterType="int" resultType="category">
+        SELECT * FROM category WHERE PARENT_ID=#{categoryId}
+    </select>
+    
     <update id="updateCategory" parameterType="category">
         UPDATE category
         <set>

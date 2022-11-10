@@ -82,15 +82,15 @@
                     //获取选中行数据
                     let batchParam = table.checkStatus("demo");
                     //构建参数
-                    let roleIds=[];
+                    let supplierIds=[];
                     let list=batchParam.data;
                     for (let i = 0; i < list.length; i++) {
-                        roleIds.push(list[i].roleId);
+                        supplierIds.push(list[i].supplierId);
                     }
                     $.ajax({
-                        url:"/batchDeleteRole",
+                        url:"/batchDeleteSupplier",
                         method:"post",
-                        data:JSON.stringify(roleIds),
+                        data:JSON.stringify(supplierIds),
                         contentType:"application/json",
                         success:function (d){
                             if(d.code===0){

@@ -21,14 +21,17 @@ public class SupplierController {
     private SupplierService supplierService;
 
     /**
-     * 供应商分页查询
-     * @param offset
-     * @param limit
+     * 供应商分页查询t
+     * @param pageNo
+     * @param pageSize
+     * @param supplierName
+     * @param supplierLeader
+     * @param supplierTel
      * @return
      */
     @GetMapping(value = "/getSupplierPage")
-    public Object getSupplierPage(int offset,int limit,String supplierName){
-        Page page = supplierService.getSupplierPage(offset,limit,supplierName);
+    public Object getSupplierPage(int pageNo,int pageSize,String supplierName,String supplierLeader,String supplierTel){
+        Page page = supplierService.getSupplierPage(pageNo,pageSize,supplierName,supplierLeader,supplierTel);
         return new Result(page);
     }
 

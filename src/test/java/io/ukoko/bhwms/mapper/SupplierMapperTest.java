@@ -32,6 +32,6 @@ class SupplierMapperTest extends BhWmsApplicationTests {
 
     @Test
     void getSupplierList() {
-        supplierMapper.getSupplierList("0").forEach(System.out::println);
+        supplierMapper.getSupplierList("0","0","0").forEach(System.out::println);
     }
 }

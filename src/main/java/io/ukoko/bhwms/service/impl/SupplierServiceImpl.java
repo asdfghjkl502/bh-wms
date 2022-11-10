@@ -26,10 +26,10 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public Page getSupplierPage(int offset, int limit, String supplierName) {
+    public Page getSupplierPage(int pageNo, int pageSize, String supplierName, String supplierLeader, String supplierTel) {
         Page page = new Page();
-        PageHelper.offsetPage(offset,limit);
-        List<Supplier> supplierList = supplierMapper.getSupplierList(supplierName);
+        PageHelper.startPage(pageNo,pageSize);
+        List<Supplier> supplierList = supplierMapper.getSupplierList(supplierName,supplierLeader,supplierTel);
         PageInfo<Supplier> info = new PageInfo<>(supplierList);
         page.setPageNo(info.getPageNum());
         page.setPageSize(info.getPageSize());
@@ -40,4 +40,6 @@ public class SupplierServiceImpl implements SupplierService {
         page.setData(info.getList());
         return page;
     }
+
+
 }

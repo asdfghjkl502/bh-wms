@@ -61,7 +61,7 @@ public class SupplierController {
      * @param supplierId
      * @return
      */
-    @GetMapping(value = "/deleteSupplier")
+    @PostMapping(value = "/deleteSupplier")
     public Object deleteSupplier(Integer supplierId){
         supplierService.deleteSupplier(supplierId);
         return new Result();

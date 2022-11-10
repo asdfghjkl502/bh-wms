@@ -18,10 +18,8 @@
 
 <script src="../layui/layui.js"></script>
 <script>
-    layui.use(["table","laydate","form","layer","jquery"],function(){
+    layui.use(["table","layer","jquery"],function(){
         const table = layui.table;
-        const laydate = layui.laydate;
-        const form = layui.form;
         const layer = layui.layer;
         const $ = layui.jquery;
 
@@ -32,19 +30,34 @@
             //获取事件名
             let e = obj.event;
             if(e==="del"){
-                console.log("删除")
+                layer.confirm("确定删除?",function (index){
+                    //关闭弹出层
+                    layer.close(index);
+                    $.post("/deleteSupplier",{supplierId:obj.data.supplierId},function (d){
+                        if(d.code!=0){
+                            layer.msg(d.msg);
+                        }else{
+                            //刷新数据表格
+                            table.reload("demo");
+                        }
+                    });
+                });
             }else if(e==="edit"){
                 layer.open({
                     type:2,
-                    title:'更新角色',
-                    content:'roleUpdate.html?isDelete='+obj.data.isDelete,
-                    area:['500px','400px'],
+                    title:'更新供应商',
+                    content:'supplierUpdate.html?isDelete='+obj.data.isDelete,
+                    area:['500px','450px'],
                     success: function(layero, index){
                         //弹出执行
                         let body = layer.getChildFrame('body', index);//获取弹出层中body标签的DOM对象
                         //给弹出层表单回显
-                        body.find('#roleId').val(obj.data.roleId);
-                        body.find('#roleName').val(obj.data.roleName);
+                        body.find('#supplierId').val(obj.data.supplierId);
+                        body.find('#supplierName').val(obj.data.supplierName);
+                        body.find('#supplierLeader').val(obj.data.supplierLeader);
+                        body.find('#supplierTel').val(obj.data.supplierTel);
+                        body.find('#supplierEmail').val(obj.data.supplierEmail);
+                        body.find('#supplierAddress').val(obj.data.supplierAddress);
                         body.find('#createTime').val(obj.data.createTime);
                     },
                     end:function (){
@@ -94,7 +107,7 @@
                     type:2,
                     title:'添加供应商',
                     content:'supplierAdd.html',
-                    area:['500px','400px'],
+                    area:['500px','450px'],
                     end:function (){
                         //刷新数据表格
                         table.reload("demo");
@@ -195,7 +208,7 @@
                             s+="<button type='button' lay-event='edit' class='layui-btn layui-btn-warm layui-btn-xs'>更新</button>";
                             return s;
                         },
-                        width:'10%'
+                        width:'13%'
                     }
                 ]
             ]

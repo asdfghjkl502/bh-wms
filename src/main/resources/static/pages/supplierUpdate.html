@@ -10,40 +10,41 @@
 
 <div class="layui-fluid">
     <form class="layui-form" style="margin-top: 10px;">
+        <input type="hidden" id="supplierId" name="supplierId">
         <div class="layui-form-item">
             <label class="layui-form-label">供应商名称</label>
             <div class="layui-input-block">
-                <input type="text" name="supplierName" required  lay-verify="required" placeholder="供应商名称" autocomplete="off" class="layui-input">
+                <input type="text" id="supplierName" name="supplierName" required  lay-verify="required" placeholder="供应商名称" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">联系人</label>
             <div class="layui-input-block">
-                <input type="text" name="supplierLeader" required  lay-verify="required" placeholder="供应商联系人" autocomplete="off" class="layui-input">
+                <input type="text" id="supplierLeader" name="supplierLeader" required  lay-verify="required" placeholder="供应商联系人" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">联系电话</label>
             <div class="layui-input-block">
-                <input type="text" name="supplierTel" required  lay-verify="required" placeholder="供应商电话" autocomplete="off" class="layui-input">
+                <input type="text" id="supplierTel" name="supplierTel" required  lay-verify="required" placeholder="供应商电话" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">供应商邮箱</label>
             <div class="layui-input-block">
-                <input type="text" name="supplierEmail" required  lay-verify="required" placeholder="供应商邮箱" autocomplete="off" class="layui-input">
+                <input type="text" id="supplierEmail" name="supplierEmail" required  lay-verify="required" placeholder="供应商邮箱" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">供应商地址</label>
             <div class="layui-input-block">
-                <input type="text" name="supplierAddress" required  lay-verify="required" placeholder="供应商地址" autocomplete="off" class="layui-input">
+                <input type="text" id="supplierAddress" name="supplierAddress" required  lay-verify="required" placeholder="供应商地址" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">是否有效</label>
             <div class="layui-input-block">
-                <input type="radio" name="isDelete" value="1" title="有效" checked>
+                <input type="radio" name="isDelete" value="1" title="有效">
                 <input type="radio" name="isDelete" value="0" title="无效">
             </div>
         </div>
@@ -55,7 +56,7 @@
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn  layui-btn-normal" lay-submit lay-filter="add">添加供应商</button>
+                <button class="layui-btn  layui-btn-normal" lay-submit lay-filter="edit">更新供应商</button>
             </div>
         </div>
     </form>
@@ -76,13 +77,27 @@
             theme:'#2F4056 '
         });
 
+        //获取参数
+        let url = location.href;
+        url = url.substring(url.lastIndexOf("?")+1,url.length);
+        //表单回显(性别)
+        if(url.split("=")[1]==1){
+            //有效
+            $('input[name="isDelete"][value="1"]').attr("checked","checked");
+        }else{
+            //无效
+            $('input[name="isDelete"][value="0"]').attr("checked","checked");
+        }
+        //刷新
+        form.render("radio");
+
         /**
          * 提交表单
          */
-        form.on("submit(add)",function (data) {
+        form.on("submit(edit)",function (data) {
             //AJAX
             $.ajax({
-                url:"/addSupplier",
+                url:"/updateSupplier",
                 method:"post",
                 data:JSON.stringify(data.field),
                 contentType:"application/json",

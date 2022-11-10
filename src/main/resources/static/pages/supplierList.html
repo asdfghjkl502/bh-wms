@@ -8,9 +8,196 @@
 </head>
 <body>
 
-	<h1>供应商管理</h1>
+    <div class="layui-fluid">
+        <!-- 数据表格展示 -->
+        <div class="layui-row">
+            <table id="demo" lay-filter="test"></table>
+        </div>
+    </div>
 
 
 <script src="../layui/layui.js"></script>
+<script>
+    layui.use(["table","laydate","form","layer","jquery"],function(){
+        const table = layui.table;
+        const laydate = layui.laydate;
+        const form = layui.form;
+        const layer = layui.layer;
+        const $ = layui.jquery;
+
+        /**
+         * 单元格事件绑定
+         */
+        table.on("tool(test)",function (obj){
+            //获取事件名
+            let e = obj.event;
+            if(e==="del"){
+                console.log("删除")
+            }else if(e==="edit"){
+                layer.open({
+                    type:2,
+                    title:'更新角色',
+                    content:'roleUpdate.html?isDelete='+obj.data.isDelete,
+                    area:['500px','400px'],
+                    success: function(layero, index){
+                        //弹出执行
+                        let body = layer.getChildFrame('body', index);//获取弹出层中body标签的DOM对象
+                        //给弹出层表单回显
+                        body.find('#roleId').val(obj.data.roleId);
+                        body.find('#roleName').val(obj.data.roleName);
+                        body.find('#createTime').val(obj.data.createTime);
+                    },
+                    end:function (){
+                        //弹出层销毁之后执行
+                        //刷新数据表格
+                        table.reload("demo");
+                    }
+                });
+            }
+        });
+
+        /**
+         * 表格头部事件绑定
+         */
+        table.on('toolbar(test)',function (obj){
+            //获取事件名
+            let e = obj.event;
+            if(e==="batchDel"){
+                layer.confirm("是否删除",function (index){
+                    //关闭弹出层
+                    layer.close(index);
+                    //获取选中行数据
+                    let batchParam = table.checkStatus("demo");
+                    //构建参数
+                    let roleIds=[];
+                    let list=batchParam.data;
+                    for (let i = 0; i < list.length; i++) {
+                        roleIds.push(list[i].roleId);
+                    }
+                    $.ajax({
+                        url:"/batchDeleteRole",
+                        method:"post",
+                        data:JSON.stringify(roleIds),
+                        contentType:"application/json",
+                        success:function (d){
+                            if(d.code===0){
+                                //刷新表格
+                                table.reload("demo");
+                            }else{
+                                layer.msg(d.msg);
+                            }
+                        }
+                    });
+                });
+            }else if(e==="addRole"){
+                layer.open({
+                    type:2,
+                    title:'添加角色',
+                    content:'roleAdd.html',
+                    area:['500px','400px'],
+                    end:function (){
+                        //刷新数据表格
+                        table.reload("demo");
+                    }
+                });
+            }
+        });
+
+
+        /*
+            数据表格展示
+        */
+        table.render({
+            elem:"#demo",
+            url:"/getSupplierPage",
+            page:{
+                prev:'上一页',
+                next:'下一页'
+            },
+            limit:5,
+            limits:[5,10,15,20,25],
+            request:{
+                pageName: 'pageNo',
+                limitName:'pageSize'
+            },
+            parseData:function(res){
+                return {
+                    "code": res.code,
+                    "msg": res.msg,
+                    "count": res.obj.count,
+                    "data": res.obj.data
+                }
+            },
+            toolbar: '<div> <button lay-event="batchDel" class="layui-btn layui-btn-sm layui-btn-danger"> <i class="layui-icon layui-icon-delete"></i> 批量删除</button><button lay-event="addRole" class="layui-btn layui-btn-sm layui-btn-normal"> <i class="layui-icon layui-icon-add-1"></i>添加</button> </div>',
+            defaultToolbar: ['exports', 'print'],
+            cols:[
+                [
+                    {
+                        checkbox: true
+                    },
+                    {
+                        title: '序号',
+                        type:'numbers',
+                        width:'10%'
+                    },
+                    {
+                        field: 'supplierName',
+                        title: '供应商名称',
+                        sort: true
+                    },
+                    {
+                        field: 'supplierLeader',
+                        title: '供应商领导',
+                        sort: true
+                    },
+                    {
+                        field: 'supplierTel',
+                        title: '供应商联系电话',
+                        sort: true
+                    },
+                    {
+                        field: 'supplierEmail',
+                        title: '供应商邮箱',
+                        sort: true
+                    },
+                    {
+                        field: 'supplierAddress',
+                        title: '供应商地址',
+                        sort: true
+                    },
+                    {
+                        field: 'createTime',
+                        title: '创建时间',
+                        sort: true
+                    },
+                    {
+                        field: 'updateTime',
+                        title: '更新时间',
+                        sort: true
+                    },
+                    {
+                        field: 'isDelete',
+                        title: '是否有效',
+                        templet:function (d) {
+                            return d.isDelete===1?'<span class="layui-badge layui-bg-green">有效</span>':'<span class="layui-badge layui-bg-orange">无效</span>';
+                        }
+                    },
+                    {
+                        title: '操作',
+                        templet:function (d) {
+                            let s="<button type='button' lay-event='del' class='layui-btn layui-btn-danger layui-btn-xs'>删除</button>";
+                            s+="<button type='button' lay-event='edit' class='layui-btn layui-btn-warm layui-btn-xs'>更新</button>";
+                            return s;
+                        }
+                    }
+                ]
+            ]
+        });
+
+
+
+
+    });
+</script>
 </body>
 </html>

@@ -7,10 +7,7 @@ import io.ukoko.bhwms.entity.Carrier;
 import io.ukoko.bhwms.entity.Supplier;
 import io.ukoko.bhwms.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Api(tags = "供应商模块")
 @CrossOrigin
@@ -41,7 +38,7 @@ public class SupplierController {
      * @return
      */
     @PostMapping(value = "/addSupplier")
-    public Object addSupplier(Supplier supplier){
+    public Object addSupplier(@RequestBody Supplier supplier){
         supplierService.addSupplier(supplier);
         return new Result();
     }

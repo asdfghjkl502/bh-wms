@@ -3,6 +3,8 @@ package io.ukoko.bhwms.service;
 import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.entity.Supplier;
 
+import java.util.List;
+
 
 /**
  * 供应商管理模块的业务逻辑层
@@ -17,4 +19,22 @@ public interface SupplierService {
      * 获取供应商列表
      */
     Page getSupplierPage(int pageNo,int pageSize,String supplierName,String supplierLeader, String supplierTel);
+
+    /**
+     * 更新
+     * @param supplier
+     */
+    void updateSupplier(Supplier supplier);
+
+    /**
+     * 批量删除
+     * @param supplierIds
+     */
+    void batchDeleteSupplier(List<Integer> supplierIds);
+
+    /**
+     * 删除
+     * @param supplierId
+     */
+    void deleteSupplier(Integer supplierId);
 }

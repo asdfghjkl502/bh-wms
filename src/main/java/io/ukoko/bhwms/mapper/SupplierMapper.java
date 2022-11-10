@@ -1,6 +1,5 @@
 package io.ukoko.bhwms.mapper;
 
-import io.ukoko.bhwms.entity.Carrier;
 import io.ukoko.bhwms.entity.Supplier;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -23,4 +22,18 @@ public interface SupplierMapper {
      */
     List<Supplier> getSupplierList(@Param("supplierName") String supplierName,@Param("supplierLeader") String supplierLeader,@Param("supplierTel") String supplierTel);
 
+    /*
+        更新
+     */
+    void updateSupplier(Supplier supplier);
+
+    /*
+        批量删除
+     */
+    void batchDeleteSupplier(List<Integer> supplierIds);
+
+    /*
+        删除
+     */
+    void deleteSupplier(Integer supplierId);
 }

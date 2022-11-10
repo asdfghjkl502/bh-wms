@@ -41,5 +41,20 @@ public class SupplierServiceImpl implements SupplierService {
         return page;
     }
 
+    @Override
+    public void updateSupplier(Supplier supplier) {
+        supplierMapper.updateSupplier(supplier);
+    }
+
+    @Override
+    public void batchDeleteSupplier(List<Integer> supplierIds) {
+        supplierMapper.batchDeleteSupplier(supplierIds);
+    }
+
+    @Override
+    public void deleteSupplier(Integer supplierId) {
+        supplierMapper.deleteSupplier(supplierId);
+    }
+
 
 }

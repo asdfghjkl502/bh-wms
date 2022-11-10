@@ -18,6 +18,33 @@
               )
     </insert>
 
+    <update id="updateSupplier" parameterType="supplier">
+        UPDATE supplier
+        <set>
+            <if test="supplierName!=null">SUPPLIER_NAME=#{supplierName},</if>
+            <if test="supplierLeader!=null">SUPPLIER_LEADER=#{supplierLeader},</if>
+            <if test="supplierTel!=null">SUPPLIER_TEL=#{supplierTel},</if>
+            <if test="supplierEmail!=null">SUPPLIER_EMAIL=#{supplierEmail},</if>
+            <if test="supplierAddress!=null">SUPPLIER_ADDRESS=#{supplierAddress},</if>
+            <if test="createTime!=null">CREATE_TIME=#{createTime},</if>
+            <if test="isDelete!=null">IS_DELETE=#{isDelete}</if>
+        </set>
+        <where>
+            <if test="supplierId!=null">SUPPLIER_ID=#{supplierId}</if>
+        </where>
+    </update>
+    
+    <update id="deleteSupplier" parameterType="int">
+        UPDATE supplier SET IS_DELETE=0 WHERE SUPPLIER_ID=#{supplierId}
+    </update>
+
+    <update id="batchDeleteSupplier">
+        <foreach collection="list" item="item" separator=";">
+            UPDATE supplier SET IS_DELETE=0 WHERE SUPPLIER_ID=#{item}
+        </foreach>
+    </update>
+
+
     <select id="getSupplierList" resultType="supplier">
         SELECT * FROM supplier
         <where>

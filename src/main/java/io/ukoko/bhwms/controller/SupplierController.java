@@ -9,6 +9,8 @@ import io.ukoko.bhwms.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Api(tags = "供应商模块")
 @CrossOrigin
 @RestController
@@ -43,4 +45,36 @@ public class SupplierController {
         return new Result();
     }
 
+    /**
+     * 更新供应商
+     * @param supplier
+     * @return
+     */
+    @PostMapping(value = "/updateSupplier")
+    public Object updateSupplier(@RequestBody Supplier supplier){
+        supplierService.updateSupplier(supplier);
+        return new Result();
+    }
+
+    /**
+     * 删除
+     * @param supplierId
+     * @return
+     */
+    @GetMapping(value = "/deleteSupplier")
+    public Object deleteSupplier(Integer supplierId){
+        supplierService.deleteSupplier(supplierId);
+        return new Result();
+    }
+
+    /**
+     * 批量删除
+     * @param supplierIds
+     * @return
+     */
+    @PostMapping(value = "/batchDeleteSupplier")
+    public Object batchDeleteSupplier(@RequestBody List<Integer> supplierIds){
+        supplierService.batchDeleteSupplier(supplierIds);
+        return new Result();
+    }
 }

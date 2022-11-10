@@ -3,6 +3,7 @@ package io.ukoko.bhwms.mapper;
 import io.ukoko.bhwms.entity.Carrier;
 import io.ukoko.bhwms.entity.Supplier;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,6 +21,6 @@ public interface SupplierMapper {
     /**
      * 获取供应商列表
      */
-    List<Supplier> getSupplierList(String supplierName);
+    List<Supplier> getSupplierList(@Param("supplierName") String supplierName,@Param("supplierLeader") String supplierLeader,@Param("supplierTel") String supplierTel);
 
 }

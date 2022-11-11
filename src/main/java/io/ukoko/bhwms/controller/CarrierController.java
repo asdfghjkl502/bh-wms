@@ -8,6 +8,8 @@ import io.ukoko.bhwms.service.CarrierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Api(tags = "承运商模块")
 @CrossOrigin
 @RestController
@@ -33,6 +35,39 @@ public class CarrierController {
     @PostMapping(value = "/addCarrier")
     public Object addCarrier(@RequestBody Carrier carrier){
         carrierService.addCarrier(carrier);
+        return new Result();
+    }
+
+    /**
+     * 更新承运商
+     * @param carrier
+     * @return
+     */
+    @PostMapping(value = "/updateCarrier")
+    public Object updateCarrier(@RequestBody Carrier carrier){
+        carrierService.updateCarrier(carrier);
+        return new Result();
+    }
+
+    /**
+     * 删除承运商
+     * @param carrierId
+     * @return
+     */
+    @PostMapping(value = "/deleteCarrier")
+    public Object deleteCarrier(Integer carrierId){
+        carrierService.deleteCarrier(carrierId);
+        return new Result();
+    }
+
+    /**
+     * 批量删除
+     * @param carrierIds
+     * @return
+     */
+    @PostMapping(value = "/batchDeleteCarrier")
+    public Object batchDeleteCarrier(@RequestBody List<Integer> carrierIds){
+        carrierService.batchDeleteCarrier(carrierIds);
         return new Result();
     }
 }

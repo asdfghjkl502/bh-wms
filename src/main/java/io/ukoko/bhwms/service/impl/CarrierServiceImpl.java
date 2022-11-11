@@ -26,10 +26,10 @@ public class CarrierServiceImpl implements CarrierService {
     }
 
     @Override
-    public Page getCarrierPage(int offset, int limit,String carrierName) {
+    public Page getCarrierPage(int pageNo, int pageSize, String carrierName, String carrierLeader, String carrierTel) {
         Page page = new Page();
-        PageHelper.offsetPage(offset,limit);
-        List<Carrier> carrierList = carrierMapper.getCarrierList(carrierName);
+        PageHelper.startPage(pageNo,pageSize);
+        List<Carrier> carrierList = carrierMapper.getCarrierList(carrierName,carrierLeader,carrierTel);
         PageInfo<Carrier> info = new PageInfo<>(carrierList);
         page.setPageNo(info.getPageNum());
         page.setPageSize(info.getPageSize());
@@ -40,4 +40,5 @@ public class CarrierServiceImpl implements CarrierService {
         page.setData(info.getList());
         return page;
     }
+
 }

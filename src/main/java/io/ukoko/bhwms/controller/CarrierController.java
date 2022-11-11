@@ -6,10 +6,7 @@ import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.entity.Carrier;
 import io.ukoko.bhwms.service.CarrierService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Api(tags = "承运商模块")
 @CrossOrigin
@@ -20,13 +17,11 @@ public class CarrierController {
 
     /**
      * 承运商分页查询
-     * @param offset
-     * @param limit
      * @return
      */
     @GetMapping(value = "/getCarrierPage")
-    public Object getCarrierPage(int offset,int limit,String carrierName){
-        Page page = carrierService.getCarrierPage(offset, limit, carrierName);
+    public Object getCarrierPage(int pageNo,int pageSize,String carrierName,String carrierLeader,String carrierTel){
+        Page page = carrierService.getCarrierPage(pageNo,pageSize,carrierName,carrierLeader,carrierTel);
         return new Result(page);
     }
 
@@ -36,7 +31,7 @@ public class CarrierController {
      * @return
      */
     @PostMapping(value = "/addCarrier")
-    public Object addCarrier(Carrier carrier){
+    public Object addCarrier(@RequestBody Carrier carrier){
         carrierService.addCarrier(carrier);
         return new Result();
     }

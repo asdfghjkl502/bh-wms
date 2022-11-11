@@ -1,7 +1,9 @@
 package io.ukoko.bhwms.mapper;
 
 import io.ukoko.bhwms.entity.Carrier;
+import io.ukoko.bhwms.entity.Supplier;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,5 +21,20 @@ public interface CarrierMapper {
     /**
      * 获取承运商列表
      */
-    List<Carrier> getCarrierList(String carrierName);
+    List<Carrier> getCarrierList(@Param("carrierName") String carrierName,@Param("carrierLeader") String carrierLeader,@Param("carrierTel") String carrierTel);
+
+    /**
+     * 更新
+     */
+    void updateCarrier(Carrier carrier);
+
+    /**
+     * 批量删除
+     */
+    void batchDeleteCarrier(List<Integer> carrierIds);
+
+    /**
+     * 删除
+     */
+    void deleteCarrier(Integer carrierId);
 }

@@ -21,8 +21,36 @@
     <select id="getCarrierList" resultType="carrier">
         SELECT * FROM carrier
             <where>
-                <if test="carrierName!=null">CARRIER_NAME LIKE CONCAT('%',#{carrierName},'%')</if>
+                <if test="carrierName!=null">CARRIER_NAME LIKE CONCAT('%',#{carrierName},'%') AND </if>
+                <if test="carrierLeader!=null">CARRIER_LEADER LIKE CONCAT('%',#{carrierLeader},'%') AND </if>
+                <if test="carrierTel!=null">CARRIER_TEL LIKE CONCAT('%',#{carrierTel},'%')</if>
             </where>
     </select>
+    
+    <update id="updateCarrier" parameterType="carrier">
+        UPDATE carrier
+        <set>
+            <if test="carrierName!=null">CARRIER_NAME=#{carrierName},</if>
+            <if test="carrierLeader!=null">CARRIER_LEADER=#{carrierLeader},</if>
+            <if test="carrierTel!=null">CARRIER_TEL=#{carrierTel},</if>
+            <if test="carrierEmail!=null">CARRIER_EMAIL=#{carrierEmail},</if>
+            <if test="carrierAddress!=null">CARRIER_ADDRESS=#{carrierAddress},</if>
+            <if test="createTime!=null">CREATE_TIME=#{createTime},</if>
+            <if test="isDelete!=null">IS_DELETE=#{isDelete}</if>
+        </set>
+        <where>
+            <if test="carrierId!=null">CARRIER_ID=#{carrierId}</if>
+        </where>
+    </update>
+
+    <update id="deleteCarrier" parameterType="carrier">
+        UPDATE carrier SET IS_DELETE=0 WHERE CARRIER_ID=#{carrierId}
+    </update>
+
+    <update id="batchDeleteCarrier">
+        <foreach collection="list" item="item" separator=";">
+            UPDATE carrier SET IS_DELETE=0 WHERE CARRIER_ID=#{item}
+        </foreach>
+    </update>
 
 </mapper>

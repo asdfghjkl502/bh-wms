@@ -16,5 +16,5 @@ public interface CarrierService {
     /**
      * 获取承运商分页
      */
-    Page getCarrierPage(int offset,int limit,String carrierName);
+    Page getCarrierPage(int pageNo,int pageSize,String carrierName,String carrierLeader,String carrierTel);
 }

@@ -41,4 +41,19 @@ public class CarrierServiceImpl implements CarrierService {
         return page;
     }
 
+    @Override
+    public void updateCarrier(Carrier carrier) {
+        carrierMapper.updateCarrier(carrier);
+    }
+
+    @Override
+    public void batchDeleteCarrier(List<Integer> carrierIds) {
+        carrierMapper.batchDeleteCarrier(carrierIds);
+    }
+
+    @Override
+    public void deleteCarrier(Integer carrierId) {
+        carrierMapper.deleteCarrier(carrierId);
+    }
+
 }

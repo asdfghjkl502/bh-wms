@@ -38,7 +38,7 @@ class CustomerMapperTest extends BhWmsApplicationTests {
 
     @Test
     void getCustomerList() {
-        List<Customer> list = customerMapper.getCustomerList("0", null, null, null, null, null, null, null);
+        List<Customer> list = customerMapper.getCustomerList("0", null, null, null, null, null, null);
         list.forEach(System.out::println);
     }
 }

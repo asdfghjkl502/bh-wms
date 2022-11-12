@@ -26,10 +26,9 @@ public interface CustomerMapper {
      * @param customerTel: 客户联系电话
      * @param customerEmail: 客户联系邮箱
      * @param customerAddress: 客户联系地址
-     * @param isDelete: 是否有效
      * @param startTime: 开始时间
      * @param endTime: 结束时间
      * @return
      */
-    List<Customer> getCustomerList(@Param("customerName") String customerName,@Param("customerLeader") String customerLeader,@Param("customerTel") String customerTel, @Param("customerEmail") String customerEmail,@Param("customerAddress") String customerAddress,@Param("isDelete") Integer isDelete,@Param("startTime") Date startTime,@Param("endTime") Date endTime);
+    List<Customer> getCustomerList(@Param("customerName") String customerName,@Param("customerLeader") String customerLeader,@Param("customerTel") String customerTel, @Param("customerEmail") String customerEmail,@Param("customerAddress") String customerAddress,@Param("startTime") Date startTime,@Param("endTime") Date endTime);
 }

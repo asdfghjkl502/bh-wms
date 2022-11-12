@@ -34,21 +34,20 @@ public class CustomerController {
 
     /**
      * 获取分页信息
-     * @param offset
-     * @param limit
+     * @param pageNo
+     * @param pageSize
      * @param customerName
      * @param customerLeader
      * @param customerTel
      * @param customerEmail
      * @param customerAddress
-     * @param isDelete
      * @param startTime
      * @param endTime
      * @return
      */
     @GetMapping(value = "/getCustomerPage")
-    public Object getCustomerPage(int offset, int limit,String customerName,String customerLeader,String customerTel,String customerEmail,String customerAddress,Integer isDelete,Date startTime,Date endTime){
-        Page page = customerService.getCustomerPage(offset, limit, customerName, customerLeader, customerTel, customerEmail, customerAddress, isDelete, startTime, endTime);
+    public Object getCustomerPage(int pageNo, int pageSize,String customerName,String customerLeader,String customerTel,String customerEmail,String customerAddress,Date startTime,Date endTime){
+        Page page = customerService.getCustomerPage(pageNo, pageSize, customerName, customerLeader, customerTel, customerEmail, customerAddress, startTime, endTime);
         return new Result(page);
     }
 }

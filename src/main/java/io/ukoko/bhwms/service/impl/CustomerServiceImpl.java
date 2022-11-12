@@ -27,10 +27,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Page getCustomerPage(int offset, int limit, String customerName, String customerLeader, String customerTel, String customerEmail, String customerAddress, Integer isDelete, Date startTime, Date endTime) {
+    public Page getCustomerPage(int pageNo, int pageSize, String customerName, String customerLeader, String customerTel, String customerEmail, String customerAddress, Date startTime, Date endTime) {
         Page page = new Page();
-        PageHelper.offsetPage(offset,limit);
-        List<Customer> customerList = customerMapper.getCustomerList(customerName, customerLeader, customerTel, customerEmail, customerAddress, isDelete, startTime, endTime);
+        PageHelper.startPage(pageNo,pageSize);
+        List<Customer> customerList = customerMapper.getCustomerList(customerName, customerLeader, customerTel, customerEmail, customerAddress, startTime, endTime);
         PageInfo<Customer> info = new PageInfo<>(customerList);
         page.setPageNo(info.getPageNum());
         page.setPageSize(info.getPageSize());
@@ -41,4 +41,5 @@ public class CustomerServiceImpl implements CustomerService {
         page.setData(info.getList());
         return page;
     }
+
 }

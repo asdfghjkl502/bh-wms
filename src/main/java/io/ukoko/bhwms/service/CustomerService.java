@@ -17,9 +17,16 @@ public interface CustomerService {
 
     /**
      * 获取分页
-     * @param offset
-     * @param limit
+     * @param pageNo
+     * @param pageSize
+     * @param customerName
+     * @param customerLeader
+     * @param customerTel
+     * @param customerEmail
+     * @param customerAddress
+     * @param startTime
+     * @param endTime
      * @return
      */
-    Page getCustomerPage(int offset, int limit,String customerName,String customerLeader,String customerTel,String customerEmail,String customerAddress,Integer isDelete,Date startTime,Date endTime);
+    Page getCustomerPage(int pageNo, int pageSize,String customerName,String customerLeader,String customerTel,String customerEmail,String customerAddress,Date startTime,Date endTime);
 }

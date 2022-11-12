@@ -46,7 +46,6 @@
             <if test="customerTel!=null">AND CUSTOMER_TEL LIKE CONCAT('%',#{customerTel},'%')</if>
             <if test="customerEmail!=null">AND CUSTOMER_EMAIL LIKE CONCAT('%',#{customerEmail},'%')</if>
             <if test="customerAddress!=null">AND CUSTOMER_ADDRESS LIKE CONCAT('%',#{customerAddress},'%')</if>
-            <if test="isDelete!=null">AND IS_DELETE=#{isDelete}</if>
             <if test="startTime!=null and endTime!=null">AND CREATE_TIME <![CDATA[>=]]> #{startTime} AND CREATE_TIME <![CDATA[<=]]> #{endTime} </if>
         </where>
     </select>

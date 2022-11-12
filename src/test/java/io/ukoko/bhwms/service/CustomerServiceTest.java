@@ -18,7 +18,7 @@ class CustomerServiceTest extends BhWmsApplicationTests {
 
     @Test
     void getCustomerPage() {
-        Page page = customerService.getCustomerPage(0, 2, null, null, null, null, null, null, null, null);
+        Page page = customerService.getCustomerPage(1, 2, null, null, null, null, null, null, null);
         Object data = page.getData();
         System.out.println(data);
     }

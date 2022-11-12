@@ -42,4 +42,19 @@ public class CustomerServiceImpl implements CustomerService {
         return page;
     }
 
+    @Override
+    public void updateCustomer(Customer customer) {
+        customerMapper.updateCustomer(customer);
+    }
+
+    @Override
+    public void deleteCustomer(Integer customerId) {
+        customerMapper.deleteCustomer(customerId);
+    }
+
+    @Override
+    public void batchDeleteCustomer(List<Integer> customerIds) {
+        customerMapper.batchDeleteCustomer(customerIds);
+    }
+
 }

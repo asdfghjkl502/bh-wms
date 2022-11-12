@@ -77,7 +77,7 @@ public class CustomerController {
      * @return
      */
     @PostMapping(value = "/batchDeleteCustomer")
-    public Object batchDeleteCustomer(List<Integer> customerIds){
+    public Object batchDeleteCustomer(@RequestBody List<Integer> customerIds){
         customerService.batchDeleteCustomer(customerIds);
         return new Result();
     }

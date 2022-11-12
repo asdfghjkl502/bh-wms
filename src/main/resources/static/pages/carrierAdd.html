@@ -10,11 +10,34 @@
 
 <div class="layui-fluid">
     <form class="layui-form" style="margin-top: 10px;">
-        <input type="hidden" id="roleId" name="roleId">
         <div class="layui-form-item">
-            <label class="layui-form-label">角色名</label>
+            <label class="layui-form-label">承运商名称</label>
             <div class="layui-input-block">
-                <input type="text" id="roleName" name="roleName" required  lay-verify="required" placeholder="角色名" autocomplete="off" class="layui-input">
+                <input type="text" name="carrierName" required  lay-verify="required" placeholder="承运商名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">联系人</label>
+            <div class="layui-input-block">
+                <input type="text" name="carrierLeader" required  lay-verify="required" placeholder="承运商联系人" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">联系电话</label>
+            <div class="layui-input-block">
+                <input type="text" name="carrierTel" required  lay-verify="required" placeholder="承运商电话" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">承运商邮箱</label>
+            <div class="layui-input-block">
+                <input type="text" name="carrierEmail" required  lay-verify="required" placeholder="承运商邮箱" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">承运商地址</label>
+            <div class="layui-input-block">
+                <input type="text" name="carrierAddress" required  lay-verify="required" placeholder="承运商地址" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -32,7 +55,7 @@
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn  layui-btn-normal" lay-submit lay-filter="edit">更新角色</button>
+                <button class="layui-btn  layui-btn-normal" lay-submit lay-filter="add">添加承运商</button>
             </div>
         </div>
     </form>
@@ -53,27 +76,13 @@
             theme:'#2F4056 '
         });
 
-        //获取参数
-        let url = location.href;
-        url = url.substring(url.lastIndexOf("?")+1,url.length);
-        //表单回显(性别)
-        if(url.split("=")[1]==1){
-            //有效
-            $('input[name="isDelete"][value="1"]').attr("checked","checked");
-        }else{
-            //无效
-            $('input[name="isDelete"][value="0"]').attr("checked","checked");
-        }
-        //刷新
-        form.render("radio");
-
         /**
          * 提交表单
          */
-        form.on("submit(edit)",function (data) {
+        form.on("submit(add)",function (data) {
             //AJAX
             $.ajax({
-                url:"/updateRole",
+                url:"/addCarrier",
                 method:"post",
                 data:JSON.stringify(data.field),
                 contentType:"application/json",

@@ -33,7 +33,7 @@
                 layer.confirm("确定删除?",function (index){
                     //关闭弹出层
                     layer.close(index);
-                    $.post("/deleteSupplier",{supplierId:obj.data.supplierId},function (d){
+                    $.post("/deleteCarrier",{carrierId:obj.data.carrierId},function (d){
                         if(d.code!=0){
                             layer.msg(d.msg);
                         }else{
@@ -45,19 +45,19 @@
             }else if(e==="edit"){
                 layer.open({
                     type:2,
-                    title:'更新供应商',
-                    content:'supplierUpdate.html?isDelete='+obj.data.isDelete,
+                    title:'更新承运商',
+                    content:'carrierUpdate.html?isDelete='+obj.data.isDelete,
                     area:['500px','450px'],
                     success: function(layero, index){
                         //弹出执行
                         let body = layer.getChildFrame('body', index);//获取弹出层中body标签的DOM对象
                         //给弹出层表单回显
-                        body.find('#supplierId').val(obj.data.supplierId);
-                        body.find('#supplierName').val(obj.data.supplierName);
-                        body.find('#supplierLeader').val(obj.data.supplierLeader);
-                        body.find('#supplierTel').val(obj.data.supplierTel);
-                        body.find('#supplierEmail').val(obj.data.supplierEmail);
-                        body.find('#supplierAddress').val(obj.data.supplierAddress);
+                        body.find('#carrierId').val(obj.data.carrierId);
+                        body.find('#carrierName').val(obj.data.carrierName);
+                        body.find('#carrierLeader').val(obj.data.carrierLeader);
+                        body.find('#carrierTel').val(obj.data.carrierTel);
+                        body.find('#carrierEmail').val(obj.data.carrierEmail);
+                        body.find('#carrierAddress').val(obj.data.carrierAddress);
                         body.find('#createTime').val(obj.data.createTime);
                     },
                     end:function (){
@@ -82,15 +82,15 @@
                     //获取选中行数据
                     let batchParam = table.checkStatus("demo");
                     //构建参数
-                    let supplierIds=[];
+                    let carrierIds=[];
                     let list=batchParam.data;
                     for (let i = 0; i < list.length; i++) {
-                        supplierIds.push(list[i].supplierId);
+                        carrierIds.push(list[i].carrierId);
                     }
                     $.ajax({
-                        url:"/batchDeleteSupplier",
+                        url:"/batchDeleteCarrier",
                         method:"post",
-                        data:JSON.stringify(supplierIds),
+                        data:JSON.stringify(carrierIds),
                         contentType:"application/json",
                         success:function (d){
                             if(d.code===0){
@@ -106,7 +106,7 @@
                 layer.open({
                     type:2,
                     title:'添加承运商',
-                    content:'supplierAdd.html',
+                    content:'carrierAdd.html',
                     area:['500px','450px'],
                     end:function (){
                         //刷新数据表格

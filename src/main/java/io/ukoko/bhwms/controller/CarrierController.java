@@ -46,6 +46,7 @@ public class CarrierController {
     @PostMapping(value = "/updateCarrier")
     public Object updateCarrier(@RequestBody Carrier carrier){
         carrierService.updateCarrier(carrier);
+        System.out.println(carrier);
         return new Result();
     }
 

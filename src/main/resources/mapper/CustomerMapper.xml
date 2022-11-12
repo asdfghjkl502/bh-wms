@@ -20,6 +20,36 @@
             #{isDelete}
         )
     </insert>
+    
+    
+    <update id="updateCustomer" parameterType="customer">
+        UPDATE customer
+        <set>
+            <if test="customerName!=null">CUSTOMER_NAME=#{customerName},</if>
+            <if test="customerLeader!=null">CUSTOMER_LEADER=#{customerLeader},</if>
+            <if test="customerTel!=null">CUSTOMER_TEL=#{customerTel},</if>
+            <if test="customerEmail!=null">CUSTOMER_EMAIL=#{customerEmail},</if>
+            <if test="customerAddress!=null">CUSTOMER_ADDRESS=#{customerAddress},</if>
+            <if test="levelId!=null">LEVEL_ID=#{levelId},</if>
+            <if test="sourceId!=null">SOURCE_ID=#{sourceId},</if>
+            <if test="industryId!=null">INDUSTRY_ID=#{industryId},</if>
+            <if test="createTime!=null">CREATE_TIME=#{createTime},</if>
+            <if test="isDelete!=null">IS_DELETE=#{isDelete}</if>
+        </set>
+        <where>
+            CUSTOMER_ID=#{customerId}
+        </where>
+    </update>
+    
+    <update id="deleteCustomer" parameterType="int">
+        UPDATE customer SET IS_DELETE=0 WHERE CUSTOMER_ID=#{customerId}
+    </update>
+
+    <update id="batchDeleteCustomer">
+        <foreach collection="list" item="item" separator=";">
+            UPDATE customer SET IS_DELETE=0 WHERE CUSTOMER_ID=#{item}
+        </foreach>
+    </update>
 
     <resultMap id="customerMap" type="customer">
         <id column="CUSTOMER_ID" property="customerId"></id>

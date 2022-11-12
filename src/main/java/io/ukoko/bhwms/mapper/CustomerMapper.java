@@ -18,7 +18,6 @@ public interface CustomerMapper {
      * @param customer
      */
     void addCustomer(Customer customer);
-
     /**
      * 获取客户列表
      * @param customerName: 客户名称
@@ -31,4 +30,22 @@ public interface CustomerMapper {
      * @return
      */
     List<Customer> getCustomerList(@Param("customerName") String customerName,@Param("customerLeader") String customerLeader,@Param("customerTel") String customerTel, @Param("customerEmail") String customerEmail,@Param("customerAddress") String customerAddress,@Param("startTime") Date startTime,@Param("endTime") Date endTime);
+
+    /**
+     * 更新
+     * @param customer
+     */
+    void updateCustomer(Customer customer);
+
+    /**
+     * 通过客户ID删除客户信息
+     * @param customerId
+     */
+    void deleteCustomer(Integer customerId);
+
+    /**
+     * 批量删除
+     * @param customerIds
+     */
+    void batchDeleteCustomer(List<Integer> customerIds);
 }

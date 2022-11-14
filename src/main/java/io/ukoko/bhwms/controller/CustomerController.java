@@ -27,7 +27,6 @@ public class CustomerController {
      */
     @PostMapping(value = "/addCustomer")
     public Object addCustomer(@RequestBody Customer customer){
-        System.out.println(customer);
         customerService.addCustomer(customer);
         return new Result();
     }
@@ -58,6 +57,7 @@ public class CustomerController {
      */
     @PostMapping(value = "/updateCustomer")
     public Object updateCustomer(@RequestBody Customer customer){
+        System.out.println(customer);
         customerService.updateCustomer(customer);
         return new Result();
     }

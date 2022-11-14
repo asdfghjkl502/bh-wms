@@ -76,7 +76,18 @@
             //获取事件名
             let e = obj.event;
             if(e==="del"){
-                console.log("删除")
+                layer.confirm("确定删除?",function (index){
+                    //关闭弹出层
+                    layer.close(index);
+                    $.post("/deleteCustomer",{customerId:obj.data.customerId},function (d){
+                        if(d.code!=0){
+                            layer.msg(d.msg);
+                        }else{
+                            //刷新数据表格
+                            table.reload("demo");
+                        }
+                    });
+                });
             }else if(e==="edit"){
                 layer.open({
                     type:2,
@@ -113,15 +124,15 @@
                     //获取选中行数据
                     let batchParam = table.checkStatus("demo");
                     //构建参数
-                    let roleIds=[];
+                    let customerIds=[];
                     let list=batchParam.data;
                     for (let i = 0; i < list.length; i++) {
-                        roleIds.push(list[i].roleId);
+                        customerIds.push(list[i].customerId);
                     }
                     $.ajax({
-                        url:"/batchDeleteRole",
+                        url:"/batchDeleteCustomer",
                         method:"post",
-                        data:JSON.stringify(roleIds),
+                        data:JSON.stringify(customerIds),
                         contentType:"application/json",
                         success:function (d){
                             if(d.code===0){

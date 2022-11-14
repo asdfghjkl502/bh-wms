@@ -41,6 +41,11 @@ public class IndustryServiceImpl implements IndustryService {
     }
 
     @Override
+    public List<Industry> getIndustryList() {
+        return industryMapper.getIndustryList();
+    }
+
+    @Override
     public void updateIndustry(Industry industry) {
         industryMapper.updateIndustry(industry);
     }

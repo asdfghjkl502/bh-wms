@@ -41,6 +41,11 @@ public class SourceServiceImpl implements SourceService {
     }
 
     @Override
+    public List<Source> getSourceList() {
+        return sourceMapper.getSourceList();
+    }
+
+    @Override
     public void updateSource(Source source) {
         sourceMapper.updateSource(source);
     }

@@ -53,4 +53,9 @@ public class LevelServiceImpl implements LevelService {
         page.setData(info.getList());
         return page;
     }
+
+    @Override
+    public List<Level> getLevelList() {
+        return levelMapper.getLevelList();
+    }
 }

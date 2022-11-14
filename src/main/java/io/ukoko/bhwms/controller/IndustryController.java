@@ -30,6 +30,15 @@ public class IndustryController {
     }
 
     /**
+     * 获取行业列表
+     * @return
+     */
+    @GetMapping(value = "/getIndustryList")
+    public Object getIndustryList(){
+        return new Result(industryService.getIndustryList());
+    }
+
+    /**
      * 添加行业
      * @param industry
      * @return

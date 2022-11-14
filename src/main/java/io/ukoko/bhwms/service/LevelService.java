@@ -41,4 +41,10 @@ public interface LevelService {
      * @return
      */
     Page getLevelPage(int pageNo,int pageSize);
+
+    /**
+     * 获取级别列表
+     * @return
+     */
+    List<Level> getLevelList();
 }

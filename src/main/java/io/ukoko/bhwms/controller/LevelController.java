@@ -67,6 +67,15 @@ public class LevelController {
     }
 
     /**
+     * 获取级别列表
+     * @return
+     */
+    @GetMapping(value = "/getLevelList")
+    public Object getLevelList(){
+        return new Result(levelService.getLevelList());
+    }
+
+    /**
      * 添加级别
      * @param level
      * @return

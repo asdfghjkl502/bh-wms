@@ -25,6 +25,12 @@ public interface SourceService {
     Page getSourcePage(int pageNo, int pageSize);
 
     /**
+     * 来源列表
+     * @return
+     */
+    List<Source> getSourceList();
+
+    /**
      * 更新
      * @param source
      */

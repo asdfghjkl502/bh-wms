@@ -24,6 +24,12 @@ public interface IndustryService {
     Page getIndustryPage(int pageNo, int pageSize);
 
     /**
+     * 行业列表
+     * @return
+     */
+    List<Industry> getIndustryList();
+
+    /**
      * 更新
      * @param industry
      */

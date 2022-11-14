@@ -67,6 +67,15 @@ public class SourceController {
     }
 
     /**
+     * 获取来源列表
+     * @return
+     */
+    @GetMapping(value = "/getSourceList")
+    public Object getSourceList(){
+        return new Result(sourceService.getSourceList());
+    }
+
+    /**
      * 添加来源
      * @param source
      * @return

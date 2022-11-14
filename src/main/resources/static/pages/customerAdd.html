@@ -11,43 +11,69 @@
 <div class="layui-fluid">
     <form class="layui-form" style="margin-top: 10px;">
         <div class="layui-form-item">
-            <label class="layui-form-label">用户名</label>
+            <label class="layui-form-label">客户名</label>
             <div class="layui-input-block">
-                <input type="text" name="userName" required  lay-verify="required" placeholder="用户名" autocomplete="off" class="layui-input">
+                <input type="text" name="customerName" required  lay-verify="required" placeholder="客户名" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">联系人</label>
+            <div class="layui-input-block">
+                <input type="text" name="customerLeader" required  lay-verify="required" placeholder="联系人" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">手机号</label>
             <div class="layui-input-block">
-                <input type="text" name="userTel" required  lay-verify="required" placeholder="手机号" autocomplete="off" class="layui-input">
+                <input type="text" name="customerTel" required  lay-verify="required" placeholder="手机号" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">邮箱</label>
             <div class="layui-input-block">
-                <input type="email" name="userEmail" required  lay-verify="required" placeholder="邮箱" autocomplete="off" class="layui-input">
+                <input type="email" name="customerEmail" required  lay-verify="required" placeholder="邮箱" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">昵称</label>
+            <label class="layui-form-label">客户地址</label>
             <div class="layui-input-block">
-                <input type="text" name="userNick" required  lay-verify="required" placeholder="昵称" autocomplete="off" class="layui-input">
+                <input type="text" name="customerAddress" required  lay-verify="required" placeholder="手机号" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">部门</label>
-            <div class="layui-input-block" id="deptId">
-
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">角色</label>
-            <div id="role" class="layui-input-block"></div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">密码</label>
+            <label class="layui-form-label">客户级别</label>
             <div class="layui-input-block">
-                <input type="password" name="password" required  lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input">
+                <select name="city" lay-verify="required">
+                    <option value="0">北京</option>
+                    <option value="1">上海</option>
+                    <option value="2">广州</option>
+                    <option value="3">深圳</option>
+                    <option value="4">杭州</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户来源</label>
+            <div  class="layui-input-block">
+                <select name="city" lay-verify="required">
+                    <option value="0">北京</option>
+                    <option value="1">上海</option>
+                    <option value="2">广州</option>
+                    <option value="3">深圳</option>
+                    <option value="4">杭州</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户行业</label>
+            <div  class="layui-input-block">
+                <select name="city" lay-verify="required">
+                    <option value="0">北京</option>
+                    <option value="1">上海</option>
+                    <option value="2">广州</option>
+                    <option value="3">深圳</option>
+                    <option value="4">杭州</option>
+                </select>
             </div>
         </div>
         <div class="layui-form-item">
@@ -65,7 +91,7 @@
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn  layui-btn-normal" lay-submit lay-filter="add">添加用户</button>
+                <button class="layui-btn  layui-btn-normal" lay-submit lay-filter="add">添加客户</button>
             </div>
         </div>
     </form>

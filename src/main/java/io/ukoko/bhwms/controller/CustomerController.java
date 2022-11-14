@@ -6,6 +6,7 @@ import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.entity.Customer;
 import io.ukoko.bhwms.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -44,7 +45,7 @@ public class CustomerController {
      * @return
      */
     @GetMapping(value = "/getCustomerPage")
-    public Object getCustomerPage(int pageNo, int pageSize,String customerName,String customerLeader,String customerTel,String customerEmail,String customerAddress,Date startTime,Date endTime){
+    public Object getCustomerPage(int pageNo, int pageSize, String customerName, String customerLeader, String customerTel, String customerEmail, String customerAddress, @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime){
         Page page = customerService.getCustomerPage(pageNo, pageSize, customerName, customerLeader, customerTel, customerEmail, customerAddress, startTime, endTime);
         return new Result(page);
     }

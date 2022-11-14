@@ -27,6 +27,7 @@ public class CustomerController {
      */
     @PostMapping(value = "/addCustomer")
     public Object addCustomer(@RequestBody Customer customer){
+        System.out.println(customer);
         customerService.addCustomer(customer);
         return new Result();
     }

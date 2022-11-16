@@ -1,5 +1,6 @@
 package io.ukoko.bhwms.mapper;
 
+import io.ukoko.bhwms.entity.Customer;
 import io.ukoko.bhwms.entity.Product;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -22,4 +23,24 @@ public interface ProductMapper {
      * 获取列表
      */
     List<Product> getProductList(@Param("productName") String productName,@Param("productSize") String productSize, @Param("isDelete") Integer isDelete,@Param("startTime") Date startTime,@Param("endTime") Date endTime);
+
+
+    /**
+     * 更新
+     * @param product
+     */
+    void updateProduct(Product product);
+
+    /**
+     * 通过ID删除客户信息
+     * @param productId
+     */
+    void deleteProduct(Integer productId);
+
+    /**
+     * 批量删除
+     * @param productIds
+     */
+    void batchDeleteProduct(List<Integer> productIds);
+
 }

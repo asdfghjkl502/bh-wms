@@ -6,10 +6,8 @@ import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.entity.Product;
 import io.ukoko.bhwms.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
@@ -25,7 +23,7 @@ public class ProductController {
         添加
      */
     @PostMapping(value = "/addProduct")
-    public Object addProduct(Product product){
+    public Object addProduct(@RequestBody Product product){
         productService.addProduct(product);
         return new Result();
     }
@@ -34,8 +32,8 @@ public class ProductController {
         获取产品分页
      */
     @GetMapping(value = "/getProductPage")
-    public Object getProductPage(int offset, int limit, String productName, String productSize, Integer isDelete, Date startTime, Date endTime){
-        Page page = productService.getProductPage(offset, limit, productName, productSize, isDelete, startTime, endTime);
+    public Object getProductPage(int pageNo, int pageSize, String productName, String productSize, Integer isDelete, @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime){
+        Page page = productService.getProductPage(pageNo, pageSize, productName, productSize, isDelete, startTime, endTime);
         return new Result(page);
     }
 }

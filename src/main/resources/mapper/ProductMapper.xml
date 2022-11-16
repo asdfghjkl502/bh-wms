@@ -16,6 +16,33 @@
              )
     </insert>
 
+    <update id="updateProduct" parameterType="product">
+        UPDATE product 
+        <set>
+            <if test="productName!=null">PRODUCT_NAME=#{productName},</if>
+            <if test="productSize!=null">PRODUCT_SIZE=#{productSize},</if>
+            <if test="productPrice!=null">PRODUCT_PRICE=#{productPrice},</if>
+            <if test="categoryId!=null">CATEGORY_ID=#{categoryId},</if>
+            <if test="createTime!=null">CREATE_TIME=#{createTime},</if>
+            <if test="isDelete!=null">IS_DELETE=#{isDelete}</if>
+        </set>
+        <where>
+            <if test="productId!=null">PRODUCT_ID=#{productId}</if>
+        </where>
+    </update>
+
+
+    <update id="deleteProduct" parameterType="int">
+        UPDATE product SET IS_DELETE=0 WHERE PRODUCT_ID=#{productId}
+    </update>
+
+    <update id="batchDeleteProduct">
+        <foreach collection="list" item="item" separator=";">
+            UPDATE product SET IS_DELETE=0 WHERE PRODUCT_ID=#{item}
+        </foreach>
+    </update>
+
+
     <resultMap id="productMap" type="product">
         <id column="PRODUCT_ID" property="productId"></id>
         <result column="PRODUCT_NAME" property="productName"></result>

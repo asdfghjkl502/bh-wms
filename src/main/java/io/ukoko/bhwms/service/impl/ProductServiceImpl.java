@@ -26,9 +26,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page getProductPage(int offset, int limit, String productName, String productSize, Integer isDelete, Date startTime, Date endTime) {
+    public Page getProductPage(int pageNo, int pageSize, String productName, String productSize, Integer isDelete, Date startTime, Date endTime) {
         Page page = new Page();
-        PageHelper.offsetPage(offset,limit);
+        PageHelper.startPage(pageNo,pageSize);
         List<Product> productList = productMapper.getProductList(productName, productSize, isDelete, startTime, endTime);
         PageInfo<Product> info = new PageInfo<>(productList);
         page.setPageNo(info.getPageNum());

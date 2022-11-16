@@ -40,4 +40,19 @@ public class ProductServiceImpl implements ProductService {
         page.setData(info.getList());
         return page;
     }
+
+    @Override
+    public void updateProduct(Product product) {
+        productMapper.updateProduct(product);
+    }
+
+    @Override
+    public void deleteProduct(Integer productId) {
+        productMapper.deleteProduct(productId);
+    }
+
+    @Override
+    public void batchDeleteProduct(List<Integer> productIds) {
+        productMapper.batchDeleteProduct(productIds);
+    }
 }

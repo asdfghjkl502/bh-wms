@@ -5,12 +5,300 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>百慧智慧wms仓库</title>
   <link href="../layui/css/layui.css" rel="stylesheet">
+    <link href="../css/hxx.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/hxx-user.css">
 </head>
 <body>
 
-	<h1>产品管理</h1>
+<div class="layui-fluid">
+    <!--  条件选项  -->
+    <form class="layui-form layui-row user-search">
+        <!--  用户名称  -->
+        <div class="user">
+            <label for="customerName">姓名:</label>
+            <input id="customerName" name="productName" placeholder="产品名称...">
+        </div>
+        <!--  手机号  -->
+        <div class="user">
+            <label for="phone">手机:</label>
+            <input id="phone" name="customerTel" placeholder="手机号...">
+        </div>
+        <!--  开始时间  -->
+        <div class="user">
+            <label for="start">开始时间:</label>
+            <input id="start" name="startTime" placeholder="起始时间">
+        </div>
+        <!--  结束时间  -->
+        <div class="user">
+            <label for="end">结束时间:</label>
+            <input id="end" name="endTime" placeholder="结束时间">
+        </div>
+        <!--提交按钮-->
+        <div class="user">
+            <button type="button" lay-submit lay-filter="search" class="layui-btn  layui-btn-primary layui-border-green">搜索</button>
+            <button type="reset" class="layui-btn  layui-btn-primary layui-border-red">重置</button>
+        </div>
+    </form>
+    <table id="demo" lay-filter="test"></table>
+</div>
 
 
 <script src="../layui/layui.js"></script>
+<script>
+    layui.use(["table","laydate","form","layer","jquery"],function(){
+        const table = layui.table;
+        const laydate = layui.laydate;
+        const form = layui.form;
+        const layer = layui.layer;
+        const $ = layui.jquery;
+
+        /* 时间控件选择 */
+        /*
+            开始时间
+         */
+        laydate.render({
+            elem: '#start', //指定元素
+            type:'datetime',/* 年月日时分秒 */
+            theme:'#2F4056 '
+        });
+        /*
+            结束时间
+         */
+        laydate.render({
+            elem: '#end', //指定元素
+            type:'datetime',/* 年月日时分秒 */
+            theme:'#2F4056 '
+        });
+
+        /**
+         * 单元格事件绑定
+         */
+        table.on("tool(test)",function (obj){
+            //获取事件名
+            let e = obj.event;
+            if(e==="del"){
+                layer.confirm("确定删除?",function (index){
+                    //关闭弹出层
+                    layer.close(index);
+                    $.post("/deleteCustomer",{customerId:obj.data.customerId},function (d){
+                        if(d.code!=0){
+                            layer.msg(d.msg);
+                        }else{
+                            //刷新数据表格
+                            table.reload("demo");
+                        }
+                    });
+                });
+            }else if(e==="edit"){
+                layer.open({
+                    type:2,
+                    title:'更新客户',
+                    content:'customerUpdate.html?isDelete='+obj.data.isDelete+"&industryId="+obj.data.industryId+"&sourceId="+obj.data.sourceId+"&levelId="+obj.data.levelId,
+                    area:['500px','400px'],
+                    success: function(layero, index){
+                        //弹出执行
+                        let body = layer.getChildFrame('body', index);//获取弹出层中body标签的DOM对象
+                        //给弹出层表单回显
+                        body.find('#customerId').val(obj.data.customerId);
+                        body.find('#customerName').val(obj.data.customerName);
+                        body.find('#customerLeader').val(obj.data.customerLeader);
+                        body.find('#customerTel').val(obj.data.customerTel);
+                        body.find('#customerEmail').val(obj.data.customerEmail);
+                        body.find('#customerAddress').val(obj.data.customerAddress);
+                        body.find('#createTime').val(obj.data.createTime);
+                    },
+                    end:function (){
+                        //弹出层销毁之后执行
+                        //刷新数据表格
+                        table.reload("demo");
+                    }
+                });
+            }
+        });
+
+        /**
+         * 表格头部事件绑定
+         */
+        table.on('toolbar(test)',function (obj){
+            //获取事件名
+            let e = obj.event;
+            if(e==="batchDel"){
+                layer.confirm("是否删除",function (index){
+                    //关闭弹出层
+                    layer.close(index);
+                    //获取选中行数据
+                    let batchParam = table.checkStatus("demo");
+                    //构建参数
+                    let customerIds=[];
+                    let list=batchParam.data;
+                    for (let i = 0; i < list.length; i++) {
+                        customerIds.push(list[i].customerId);
+                    }
+                    $.ajax({
+                        url:"/batchDeleteCustomer",
+                        method:"post",
+                        data:JSON.stringify(customerIds),
+                        contentType:"application/json",
+                        success:function (d){
+                            if(d.code===0){
+                                //刷新表格
+                                table.reload("demo");
+                            }else{
+                                layer.msg(d.msg);
+                            }
+                        }
+                    });
+                });
+            }else if(e==="addCustomer"){
+                layer.open({
+                    type:2,
+                    title:'添加客户',
+                    content:'customerAdd.html',
+                    area:['500px','450px'],
+                    end:function (){
+                        //刷新数据表格
+                        table.reload("demo");
+                    }
+                });
+            }
+        });
+
+
+        /*
+            数据表格展示
+        */
+        table.render({
+            elem:"#demo",
+            url:"/getCustomerPage",
+            page:{
+                prev:'上一页',
+                next:'下一页'
+            },
+            limit:5,
+            limits:[5,10,15,20,25],
+            request:{
+                pageName: 'pageNo',
+                limitName:'pageSize'
+            },
+            parseData:function(res){
+                return {
+                    "code": res.code,
+                    "msg": res.msg,
+                    "count": res.obj.count,
+                    "data": res.obj.data
+                }
+            },
+            toolbar: '<div> <button lay-event="batchDel" class="layui-btn layui-btn-sm layui-btn-danger"> <i class="layui-icon layui-icon-delete"></i> 批量删除</button><button lay-event="addCustomer" class="layui-btn layui-btn-sm layui-btn-normal"> <i class="layui-icon layui-icon-add-1"></i>添加</button> </div>',
+            defaultToolbar: ['exports', 'print'],
+            cols:[
+                [
+                    {
+                        checkbox: true
+                    },
+                    {
+                        title: '序号',
+                        type:'numbers'
+                    },
+                    {
+                        field: 'customerName',
+                        title: '客户名称',
+                        sort: true,
+                        width: '15%'
+                    },
+                    {
+                        field: 'customerLeader',
+                        title: '负责人',
+                        sort: true,
+                        width: '10%'
+                    },
+                    {
+                        field: 'customerTel',
+                        title: '电话',
+                        sort: true,
+                        width: '15%'
+                    },
+                    {
+                        field: 'customerEmail',
+                        title: '邮箱',
+                        sort: true,
+                        width: '15%'
+                    },
+                    {
+                        field: 'customerAddress',
+                        title: '地址',
+                        sort: true,
+                        width: '15%'
+                    },
+                    {
+                        title: '客户级别',
+                        templet:function (d) {
+                            return d.level.levelName;
+                        },
+                        width: '10%'
+                    },
+                    {
+                        title: '客户来源',
+                        templet:function (d) {
+                            return d.source.sourceName;
+                        },
+                        width: '10%'
+                    },
+                    {
+                        title: '客户行业',
+                        templet:function (d) {
+                            return d.industry.industryName;
+                        },
+                        width: '10%'
+                    },
+                    {
+                        field: 'createTime',
+                        title: '创建时间',
+                        width: '17%'
+                    },
+                    {
+                        field: 'updateTime',
+                        title: '更新时间',
+                        width: '17%'
+                    },
+                    {
+                        field: 'isDelete',
+                        title: '是否有效',
+                        templet:function (d) {
+                            return d.isDelete===1?'<span class="layui-badge layui-bg-green">有效</span>':'<span class="layui-badge layui-bg-orange">无效</span>';
+                        },
+                        width: '8%'
+                    },
+                    {
+                        title: '操作',
+                        templet:function (d) {
+                            let s="<button type='button' lay-event='del' class='layui-btn layui-btn-danger layui-btn-xs'>删除</button>";
+                            s+="<button type='button' lay-event='edit' class='layui-btn layui-btn-warm layui-btn-xs'>更新</button>";
+                            return s;
+                        },
+                        width: '12%'
+                    }
+                ]
+            ]
+        });
+
+        /**
+         * 搜索事件绑定
+         */
+        form.on("submit(search)",function (obj){
+            //重新获取数据表格首页数据(根据搜索条件查询出来的数据)
+            table.reload("demo",{
+                page:{
+                    curr:1
+                },
+                where:{
+                    customerName:obj.field.customerName,
+                    customerTel:obj.field.customerTel,
+                    startTime:obj.field.startTime,
+                    endTime:obj.field.endTime
+                }
+            })
+        });
+    });
+</script>
 </body>
 </html>

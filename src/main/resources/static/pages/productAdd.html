@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>百慧wms仓库</title>
+    <link href="../layui/css/layui.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="layui-fluid">
+    <form class="layui-form" style="margin-top: 10px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">产品名</label>
+            <div class="layui-input-block">
+                <input type="text" name="customerName" required  lay-verify="required" placeholder="产品名" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">产品尺寸</label>
+            <div class="layui-input-block">
+                <input type="text" name="customerLeader" required  lay-verify="required" placeholder="尺寸,例如 长*宽*高 mm" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">产品价格</label>
+            <div class="layui-input-block">
+                <input type="text" name="customerTel" required  lay-verify="required" placeholder="产品价格" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">产品分类</label>
+            <div  class="layui-input-block">
+                <select id="industryId" name="industryId" lay-verify="required"></select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否有效</label>
+            <div class="layui-input-block">
+                <input type="radio" name="isDelete" value="1" title="有效" checked>
+                <input type="radio" name="isDelete" value="0" title="无效">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">创建时间</label>
+            <div class="layui-input-block">
+                <input type="text" id="createTime" name="createTime"  placeholder="创建时间"  class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn  layui-btn-normal" lay-submit lay-filter="add">添加产品</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="../layui/layui.js"></script>
+<script src="../js/xm-select.js"></script>
+<script>
+
+    layui.use(["jquery","form","laydate","layer"],function () {
+        let $ = layui.jquery;
+        let form = layui.form;
+        let laydate = layui.laydate;
+        let layer = layui.layer;
+
+        /*创建时间*/
+        laydate.render({
+            elem: '#createTime', //指定元素
+            type:'datetime',/* 年月日时分秒 */
+            theme:'#2F4056 '
+        });
+
+        /* 来源列表 */
+        $.getJSON("/getSourceList",function (d){
+            if(d.code!=0){
+                layer.msg(d.msg);
+            }else{
+                let list = d.obj;
+                let s="";
+                for (let i = 0; i < list.length; i++) {
+                    s+='<option value="'+list[i].sourceId+'">'+list[i].sourceName+'</option>';
+                }
+                //设置到列表位置
+                $("#sourceId").html(s);
+                //刷新
+                form.render("select");
+            }
+        });
+        /* 级别列表 */
+        $.getJSON("/getLevelList",function (d){
+            if(d.code!=0){
+                layer.msg(d.msg);
+            }else{
+                let list = d.obj;
+                let s="";
+                for (let i = 0; i < list.length; i++) {
+                    s+='<option value="'+list[i].levelId+'">'+list[i].levelName+'</option>';
+                }
+                //设置到列表位置
+                $("#levelId").html(s);
+                //刷新
+                form.render("select");
+            }
+        });
+        /* 行业列表 */
+        $.getJSON("/getIndustryList",function (d){
+            if(d.code!=0){
+                layer.msg(d.msg);
+            }else{
+                let list = d.obj;
+                let s="";
+                for (let i = 0; i < list.length; i++) {
+                    s+='<option value="'+list[i].industryId+'">'+list[i].industryName+'</option>';
+                }
+                //设置到列表位置
+                $("#industryId").html(s);
+                //刷新
+                form.render("select");
+            }
+        });
+
+
+        /**
+         * 提交表单
+         */
+        form.on("submit(add)",function (data) {
+            //AJAX
+            $.ajax({
+                url:"/addCustomer",
+                method:"post",
+                data:JSON.stringify(data.field),
+                contentType:"application/json",
+                success:function (d){
+                    //关闭弹出层
+                    let index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index); //再执行关闭
+                    if(d.code!=0){
+                        layer.msg(d.msg);
+                    }
+                }
+            });
+            return false;
+        });
+
+    });
+
+</script>
+</body>
+</html>

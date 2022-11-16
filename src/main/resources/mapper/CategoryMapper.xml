@@ -41,4 +41,20 @@
         UPDATE category SET IS_DELETE=0 WHERE CATEGORY_ID=#{categoryId}
     </update>
 
+
+    <resultMap id="categoryMap" type="category">
+        <id column="CATEGORY_ID" property="categoryId"></id>
+        <result column="CATEGORY_NAME" property="categoryName"></result>
+        <result column="LEVEL" property="level"></result>
+        <result column="PARENT_ID" property="parentId"></result>
+        <result column="CREATE_TIME" property="createTime"></result>
+        <result column="UPDATE_TIME" property="updateTime"></result>
+        <result column="IS_DELETE" property="isDelete"></result>
+        <collection property="children" ofType="category" column="CATEGORY_ID" select="io.ukoko.bhwms.mapper.CategoryMapper.getCategoryListByParentId"></collection>
+    </resultMap>
+    
+    <select id="getCategoryList$" resultMap="categoryMap">
+        SELECT * FROM category WHERE PARENT_ID=0  ORDER BY PARENT_ID ASC,CATEGORY_ID ASC
+    </select>
+
 </mapper>

@@ -1,6 +1,7 @@
 package io.ukoko.bhwms.entity;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 映射数据库category(类目)表
@@ -34,6 +35,12 @@ public class Category {
         是否删除 0:删除 1:未删除
      */
     private int isDelete=1;
+
+    /*
+        子分类列表
+     */
+    private List<Category> children;
+
     public Category() {
     }
 
@@ -103,6 +110,14 @@ public class Category {
         this.isDelete = isDelete;
     }
 
+    public List<Category> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Category> children) {
+        this.children = children;
+    }
+
     @Override
     public String toString() {
         return "Category{" +
@@ -113,6 +128,7 @@ public class Category {
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 ", isDelete=" + isDelete +
+                ", children=" + children +
                 '}';
     }
 }

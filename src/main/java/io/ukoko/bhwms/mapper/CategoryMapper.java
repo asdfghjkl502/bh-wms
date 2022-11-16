@@ -19,6 +19,11 @@ public interface CategoryMapper {
         获取分类列表
      */
     List<Category> getCategoryList();
+    /*
+        获取分类列表(用于前端下拉数据展示)
+     */
+    List<Category> getCategoryList$();
+
 
     /*
         查询单个

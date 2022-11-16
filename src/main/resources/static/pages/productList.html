@@ -90,7 +90,7 @@
                     });
                 });
             }else if(e==="edit"){
-                layer.open({
+                /*layer.open({
                     type:2,
                     title:'更新客户',
                     content:'customerUpdate.html?isDelete='+obj.data.isDelete+"&industryId="+obj.data.industryId+"&sourceId="+obj.data.sourceId+"&levelId="+obj.data.levelId,
@@ -112,7 +112,7 @@
                         //刷新数据表格
                         table.reload("demo");
                     }
-                });
+                });*/
             }
         });
 
@@ -129,15 +129,15 @@
                     //获取选中行数据
                     let batchParam = table.checkStatus("demo");
                     //构建参数
-                    let customerIds=[];
+                    let productIds=[];
                     let list=batchParam.data;
                     for (let i = 0; i < list.length; i++) {
-                        customerIds.push(list[i].customerId);
+                        productIds.push(list[i].productId);
                     }
                     $.ajax({
-                        url:"/batchDeleteCustomer",
+                        url:"/batchDeleteProduct",
                         method:"post",
-                        data:JSON.stringify(customerIds),
+                        data:JSON.stringify(productIds),
                         contentType:"application/json",
                         success:function (d){
                             if(d.code===0){

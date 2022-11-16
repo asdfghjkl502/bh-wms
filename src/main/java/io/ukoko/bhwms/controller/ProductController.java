@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Api(tags = "产品模块")
 @CrossOrigin
@@ -19,12 +20,42 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+
+
+
     /*
         添加
      */
     @PostMapping(value = "/addProduct")
     public Object addProduct(@RequestBody Product product){
         productService.addProduct(product);
+        return new Result();
+    }
+
+    /**
+     * 删除
+     */
+    @PostMapping(value = "/deleteProduct")
+    public Object deleteProduct(Integer productId){
+        productService.deleteProduct(productId);
+        return new Result();
+    }
+
+    /*
+        批量删除
+     */
+    @PostMapping(value = "/batchDeleteProduct")
+    public Object batchDeleteProduct(@RequestBody List<Integer> productIds){
+        productService.batchDeleteProduct(productIds);
+        return new Result();
+    }
+
+    /*
+        更新
+     */
+    @PostMapping(value = "/updateProduct")
+    public Object updateProduct(@RequestBody Product product){
+        productService.updateProduct(product);
         return new Result();
     }
 

@@ -27,6 +27,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public List<Category> getCategoryList$() {
+        return categoryMapper.getCategoryList$();
+    }
+
+    @Override
     public void updateCategory(Category category) {
         categoryMapper.updateCategory(category);
     }

@@ -53,4 +53,14 @@ public class CategoryController {
         return new Result(categoryService.getCategoryList());
     }
 
+    /**
+     * 获取类目列表(用于下拉框展示)
+     * @return
+     */
+    @GetMapping(value = "/getCategoryList$")
+    public Object getCategoryList$(){
+        return new Result(categoryService.getCategoryList$());
+    }
+
+
 }

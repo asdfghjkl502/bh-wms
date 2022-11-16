@@ -17,6 +17,12 @@ public interface CategoryService {
         获取分类列表
      */
     List<Category> getCategoryList();
+
+    /**
+     * 获取分类列表用于前端下拉框展示
+     * @return
+     */
+    List<Category> getCategoryList$();
     /*
         更新
      */

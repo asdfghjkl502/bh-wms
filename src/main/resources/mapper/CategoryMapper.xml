@@ -19,7 +19,7 @@
         SELECT * FROM category WHERE CATEGORY_ID=#{categoryId}
     </select>
     
-    <select id="getCategoryListByParentId" parameterType="int" resultType="category">
+    <select id="getCategoryListByParentId" parameterType="int" resultMap="categoryMap">
         SELECT * FROM category WHERE PARENT_ID=#{categoryId}
     </select>
     

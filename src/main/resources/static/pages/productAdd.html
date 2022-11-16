@@ -13,19 +13,19 @@
         <div class="layui-form-item">
             <label class="layui-form-label">产品名</label>
             <div class="layui-input-block">
-                <input type="text" name="customerName" required  lay-verify="required" placeholder="产品名" autocomplete="off" class="layui-input">
+                <input type="text" name="productName" required  lay-verify="required" placeholder="产品名" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">产品尺寸</label>
             <div class="layui-input-block">
-                <input type="text" name="customerLeader" required  lay-verify="required" placeholder="尺寸,例如 长*宽*高 mm" autocomplete="off" class="layui-input">
+                <input type="text" name="productSize" required  lay-verify="required" placeholder="尺寸,例如 长*宽*高 mm" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">产品价格</label>
             <div class="layui-input-block">
-                <input type="text" name="customerTel" required  lay-verify="required" placeholder="产品价格" autocomplete="off" class="layui-input">
+                <input type="text" name="productPrice" required  lay-verify="required" placeholder="产品价格" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -71,7 +71,37 @@
         });
 
         /* 分类列表 */
-
+        $.getJSON("/getCategoryList$",function (d) {
+            if(d.code===0){
+                xmSelect.render({
+                    el:"#categoryId",
+                    name:"categoryId",
+                    max:1,
+                    tree:{
+                        //是否显示树状结构
+                        show: true,
+                        //是否展示三角图标
+                        showFolderIcon: true,
+                        //是否显示虚线
+                        showLine: false,
+                        //间距
+                        indent: 20,
+                        //默认节点展开
+                        expandedKeys:true
+                    },
+                    prop:{
+                        name:'categoryName',
+                        value:'categoryId'
+                    },
+                    data: function(){
+                        return d.obj;
+                    }
+                });
+            }else{
+                //出错
+                layer.msg(d.msg);
+            }
+        });
 
 
         /**
@@ -80,7 +110,7 @@
         form.on("submit(add)",function (data) {
             //AJAX
             $.ajax({
-                url:"/addCustomer",
+                url:"/addProduct",
                 method:"post",
                 data:JSON.stringify(data.field),
                 contentType:"application/json",

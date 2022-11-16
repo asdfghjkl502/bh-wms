@@ -50,6 +50,7 @@ public class LogAspect {
         LOGGER.info("方法入参==>{}",s);
         //获取结果
         LOGGER.info("方法返回值为 ==>>{}",proceed);
+        LOGGER.info("----------------------------------------------------------------");
         return proceed;
     }
 

@@ -20,8 +20,8 @@
         </div>
         <!--  手机号  -->
         <div class="user">
-            <label for="phone">手机:</label>
-            <input id="phone" name="customerTel" placeholder="手机号...">
+            <label for="phone">价格:</label>
+            <input id="phone" name="productSize" placeholder="价格...">
         </div>
         <!--  开始时间  -->
         <div class="user">
@@ -169,7 +169,7 @@
         */
         table.render({
             elem:"#demo",
-            url:"/getCustomerPage",
+            url:"/getProductPage",
             page:{
                 prev:'上一页',
                 next:'下一页'
@@ -200,53 +200,27 @@
                         type:'numbers'
                     },
                     {
-                        field: 'customerName',
-                        title: '客户名称',
+                        field: 'productName',
+                        title: '产品名称',
                         sort: true,
                         width: '15%'
                     },
                     {
-                        field: 'customerLeader',
-                        title: '负责人',
+                        field: 'productPrice',
+                        title: '产品价格',
                         sort: true,
                         width: '10%'
                     },
                     {
-                        field: 'customerTel',
-                        title: '电话',
+                        field: 'productSize',
+                        title: '产品大小',
                         sort: true,
                         width: '15%'
                     },
                     {
-                        field: 'customerEmail',
-                        title: '邮箱',
-                        sort: true,
-                        width: '15%'
-                    },
-                    {
-                        field: 'customerAddress',
-                        title: '地址',
-                        sort: true,
-                        width: '15%'
-                    },
-                    {
-                        title: '客户级别',
+                        title: '分类',
                         templet:function (d) {
-                            return d.level.levelName;
-                        },
-                        width: '10%'
-                    },
-                    {
-                        title: '客户来源',
-                        templet:function (d) {
-                            return d.source.sourceName;
-                        },
-                        width: '10%'
-                    },
-                    {
-                        title: '客户行业',
-                        templet:function (d) {
-                            return d.industry.industryName;
+                            return d.category.categoryName;
                         },
                         width: '10%'
                     },

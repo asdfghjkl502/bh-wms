@@ -24,7 +24,6 @@
 
         //表的列事件绑定
         treeTable.on("tool(menuId)",function (obj) {
-            console.log("-->>>",obj)
             let e = obj.event;
             if(e==="del"){
                 layer.confirm("是否删除",function (index){

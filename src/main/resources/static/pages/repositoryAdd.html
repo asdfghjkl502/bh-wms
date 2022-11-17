@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>百慧wms仓库</title>
+    <link href="../layui/css/layui.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="layui-fluid">
+    <form class="layui-form" style="margin-top: 10px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">仓库地址</label>
+            <div class="layui-input-block">
+                <input type="text" name="productName" required  lay-verify="required" placeholder="仓库地址" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">仓库面积</label>
+            <div class="layui-input-block">
+                <input type="text" name="productSize" required  lay-verify="required" placeholder="仓库面积 平方米" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">仓库描述</label>
+            <div class="layui-input-block">
+                <input type="text" name="productPrice" required  lay-verify="required" placeholder="仓库描述" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">仓库状态</label>
+            <div  class="layui-input-block" id="categoryId"></div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否有效</label>
+            <div class="layui-input-block">
+                <input type="radio" name="isDelete" value="1" title="有效" checked>
+                <input type="radio" name="isDelete" value="0" title="无效">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">创建时间</label>
+            <div class="layui-input-block">
+                <input type="text" id="createTime" name="createTime"  placeholder="创建时间"  class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn  layui-btn-normal" lay-submit lay-filter="add">创建仓库</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="../layui/layui.js"></script>
+<script src="../js/xm-select.js"></script>
+<script>
+
+    layui.use(["jquery","form","laydate","layer"],function () {
+        let $ = layui.jquery;
+        let form = layui.form;
+        let laydate = layui.laydate;
+        let layer = layui.layer;
+
+        /*创建时间*/
+        laydate.render({
+            elem: '#createTime', //指定元素
+            type:'datetime',/* 年月日时分秒 */
+            theme:'#2F4056 '
+        });
+
+        /* 分类列表 */
+        $.getJSON("/getCategoryList$",function (d) {
+            if(d.code===0){
+                xmSelect.render({
+                    el:"#categoryId",
+                    name:"categoryId",
+                    max:1,
+                    tree:{
+                        //是否显示树状结构
+                        show: true,
+                        //是否展示三角图标
+                        showFolderIcon: true,
+                        //是否显示虚线
+                        showLine: false,
+                        //间距
+                        indent: 20,
+                        //默认节点展开
+                        expandedKeys:true
+                    },
+                    prop:{
+                        name:'categoryName',
+                        value:'categoryId'
+                    },
+                    data: function(){
+                        return d.obj;
+                    }
+                });
+            }else{
+                //出错
+                layer.msg(d.msg);
+            }
+        });
+
+
+        /**
+         * 提交表单
+         */
+        form.on("submit(add)",function (data) {
+            //AJAX
+            $.ajax({
+                url:"/addProduct",
+                method:"post",
+                data:JSON.stringify(data.field),
+                contentType:"application/json",
+                success:function (d){
+                    //关闭弹出层
+                    let index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index); //再执行关闭
+                    if(d.code!=0){
+                        layer.msg(d.msg);
+                    }
+                }
+            });
+            return false;
+        });
+
+    });
+
+</script>
+</body>
+</html>

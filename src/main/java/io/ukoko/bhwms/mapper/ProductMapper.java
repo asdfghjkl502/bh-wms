@@ -32,7 +32,7 @@ public interface ProductMapper {
     void updateProduct(Product product);
 
     /**
-     * 通过ID删除客户信息
+     * 通过ID删除
      * @param productId
      */
     void deleteProduct(Integer productId);

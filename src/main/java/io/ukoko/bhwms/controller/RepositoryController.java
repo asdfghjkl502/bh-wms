@@ -4,13 +4,13 @@ import io.swagger.annotations.Api;
 import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.entity.Repository;
+import io.ukoko.bhwms.enums.RepoStatus;
 import io.ukoko.bhwms.service.RepositoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Api(tags = "仓库模块")
 @CrossOrigin
@@ -77,5 +77,22 @@ public class RepositoryController {
     public Object batchDeleteRepository(@RequestBody List<Integer> repoIds){
         repositoryService.batchDeleteRepository(repoIds);
         return new Result();
+    }
+
+    /**
+     * 获取仓库状态列表
+     * @return
+     */
+    @GetMapping(value = "/getRepositoryStatusList")
+    public Object getRepositoryStatusList(){
+        List<Map<String,Object>> rss = new ArrayList<>();
+        RepoStatus[] values = RepoStatus.values();
+        for (RepoStatus value : values) {
+            Map<String,Object> map = new HashMap<>();
+            map.put("repoStatusId",value.getC());
+            map.put("repoStatusName",value.getM());
+            rss.add(map);
+        }
+        return new Result(rss);
     }
 }

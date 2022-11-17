@@ -7,10 +7,7 @@ import io.ukoko.bhwms.entity.Repository;
 import io.ukoko.bhwms.service.RepositoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -54,7 +51,7 @@ public class RepositoryController {
      * @param endTime
      * @return
      */
-    @PostMapping(value = "/getRepositoryPage")
+    @GetMapping(value = "/getRepositoryPage")
     public Object getRepositoryPage(Integer pageNo, Integer pageSize, String repoAddress, @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime){
         Page page = repositoryService.getRepositoryPage(pageNo, pageSize, repoAddress, startTime, endTime);
         return new Result(page);

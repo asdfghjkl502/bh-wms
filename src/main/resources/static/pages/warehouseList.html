@@ -84,21 +84,19 @@
                     });
                 });
             }else if(e==="edit"){
-                /*layer.open({
+                layer.open({
                     type:2,
-                    title:'更新客户',
-                    content:'customerUpdate.html?isDelete='+obj.data.isDelete+"&industryId="+obj.data.industryId+"&sourceId="+obj.data.sourceId+"&levelId="+obj.data.levelId,
+                    title:'更新仓库',
+                    content:'repositoryUpdate.html?isDelete='+obj.data.isDelete+"&repoStatus="+obj.data.repoStatus,
                     area:['500px','400px'],
                     success: function(layero, index){
                         //弹出执行
                         let body = layer.getChildFrame('body', index);//获取弹出层中body标签的DOM对象
                         //给弹出层表单回显
-                        body.find('#customerId').val(obj.data.customerId);
-                        body.find('#customerName').val(obj.data.customerName);
-                        body.find('#customerLeader').val(obj.data.customerLeader);
-                        body.find('#customerTel').val(obj.data.customerTel);
-                        body.find('#customerEmail').val(obj.data.customerEmail);
-                        body.find('#customerAddress').val(obj.data.customerAddress);
+                        body.find('#repoId').val(obj.data.repoId);
+                        body.find('#repoAddress').val(obj.data.repoAddress);
+                        body.find('#repoArea').val(obj.data.repoArea);
+                        body.find('#repoDesc').val(obj.data.repoDesc);
                         body.find('#createTime').val(obj.data.createTime);
                     },
                     end:function (){
@@ -106,7 +104,7 @@
                         //刷新数据表格
                         table.reload("demo");
                     }
-                });*/
+                });
             }
         });
 

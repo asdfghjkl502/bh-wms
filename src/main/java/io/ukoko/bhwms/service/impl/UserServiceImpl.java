@@ -9,6 +9,7 @@ import io.ukoko.bhwms.mapper.UserDepartmentMapper;
 import io.ukoko.bhwms.mapper.UserMapper;
 import io.ukoko.bhwms.mapper.UserRoleMapper;
 import io.ukoko.bhwms.service.UserService;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,8 +38,13 @@ public class UserServiceImpl  implements UserService {
         u.setUserTel(user.getUserTel());
         u.setUserEmail(user.getUserEmail());
         u.setUserNick(user.getUserNick());
-        u.setPassword(user.getPassword());
-        u.setSalt(user.getSalt());
+        //生成盐值
+        String salt = Math.random()+"";
+        u.setSalt(salt);
+        //通过盐值生成密码
+        Md5Hash md5Hash = new Md5Hash(user.getPassword(),salt,1024);
+        String pwd = md5Hash.toString();
+        u.setPassword(pwd)
         u.setCreateTime(user.getCreateTime());
         u.setIsDelete(user.getIsDelete());
         //用户表添加数据

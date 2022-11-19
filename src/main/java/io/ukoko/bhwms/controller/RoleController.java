@@ -52,7 +52,7 @@ public class RoleController {
      */
     @GetMapping(value = "/deleteRoleByRoleId")
     public Object deleteRoleByRoleId(Integer roleId){
-        System.out.println("删除角色: "+roleId);
+        roleService.deleteRoleByRoleId(roleId);
         return new Result();
     }
 
@@ -63,7 +63,6 @@ public class RoleController {
      */
     @PostMapping(value = "/updateRole")
     public Object updateRole(@RequestBody Role role){
-        System.out.println("更新角色: "+role);
         roleService.updateRole(role);
         return new Result();
     }

@@ -44,7 +44,7 @@ public class UserServiceImpl  implements UserService {
         //通过盐值生成密码
         Md5Hash md5Hash = new Md5Hash(user.getPassword(),salt,1024);
         String pwd = md5Hash.toString();
-        u.setPassword(pwd)
+        u.setPassword(pwd);
         u.setCreateTime(user.getCreateTime());
         u.setIsDelete(user.getIsDelete());
         //用户表添加数据

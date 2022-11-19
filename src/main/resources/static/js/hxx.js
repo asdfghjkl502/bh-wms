@@ -24,6 +24,11 @@ layui.use(['jquery','dropdown','element'],function(){
 	$hcri.css({
 		"height":$wh-130
 	});
+	//设置登录页面的内容高度
+	let $login = $(".login");
+	$login.css({
+		"height":$wh
+	});
 });
 
 /**

@@ -21,4 +21,12 @@ public class HomeController {
         return "home";
     }
 
+    /**
+     * 跳转登录页
+     * @return
+     */
+    @GetMapping(value = "/toLogin")
+    public String toLogin(){
+        return "login";
+    }
 }

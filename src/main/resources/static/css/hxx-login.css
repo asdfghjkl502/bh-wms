@@ -1,0 +1,44 @@
+.login{
+    display: flex;
+}
+.login-left{
+    width: 40%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.login-right{
+    width: 60%;
+    height: 100%;
+}
+.login-right>img{
+    width: 100%;
+}
+.user-in{
+    width: 70%;
+    height: 300px;
+    border-radius: 10px;
+    background-color: rgba(0,0,0,0.1);
+}
+.user-in>h2{
+    margin-top: 40px;
+    text-align: center;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+.form>input{
+    width: 90%;
+    margin-bottom: 5px;
+}
+.form>button{
+    width: 90%;
+    margin-top: 20px;
+}

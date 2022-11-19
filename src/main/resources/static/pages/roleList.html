@@ -36,7 +36,7 @@
                 layer.confirm("确定删除?",function (index){
                     //关闭弹出层
                     layer.close(index);
-                    $.post("/deleteRoleByRoleId",{roleId:obj.data.roleId},function (d){
+                    $.getJSON("/deleteRoleByRoleId",{roleId:obj.data.roleId},function (d){
                         if(d.code!=0){
                             layer.msg(d.msg);
                         }else{

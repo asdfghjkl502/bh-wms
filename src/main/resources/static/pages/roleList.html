@@ -22,7 +22,6 @@
 <script>
     layui.use(["table","laydate","form","layer","jquery"],function(){
         const table = layui.table;
-        const laydate = layui.laydate;
         const form = layui.form;
         const layer = layui.layer;
         const $ = layui.jquery;
@@ -34,7 +33,18 @@
             //获取事件名
             let e = obj.event;
             if(e==="del"){
-                console.log("删除")
+                layer.confirm("确定删除?",function (index){
+                    //关闭弹出层
+                    layer.close(index);
+                    $.post("/deleteRoleByRoleId",{roleId:obj.data.roleId},function (d){
+                        if(d.code!=0){
+                            layer.msg(d.msg);
+                        }else{
+                            //刷新数据表格
+                            table.reload("demo");
+                        }
+                    });
+                });
             }else if(e==="edit"){
                 layer.open({
                     type:2,

@@ -21,7 +21,7 @@ public class HomeController {
      */
     @RequiresAuthentication /*需要认证*/
     @GetMapping(value = "/")
-    public String index(){
+    public String home(){
         return "home";
     }
 

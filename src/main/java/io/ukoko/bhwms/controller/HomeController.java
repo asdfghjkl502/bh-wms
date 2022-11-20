@@ -1,7 +1,9 @@
 package io.ukoko.bhwms.controller;
 
 import io.swagger.annotations.Api;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresGuest;
+import org.apache.shiro.authz.annotation.RequiresUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,7 @@ public class HomeController {
     /**
      * 首页跳转
      */
+    @RequiresAuthentication /*需要认证*/
     @GetMapping(value = "/")
     public String index(){
         return "home";

@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.exceptions.BhWmsException;
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authz.AuthorizationException;
+import org.apache.shiro.authz.UnauthenticatedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -15,12 +17,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * 统一异常处理器
  */
-@ResponseBody
+
 @ControllerAdvice
 public class BhWmsExceptionHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger("BH-WMS");
 
+    @ResponseBody
     @ExceptionHandler(value = {BhWmsException.class})
     public Result departmentException(BhWmsException e){
         e.printStackTrace();//控制台异常消息打印
@@ -37,10 +40,24 @@ public class BhWmsExceptionHandler {
         return result;
     }
 
+    /**
+     * 捕获用户认证异常
+     */
+    @ExceptionHandler(value = {AuthorizationException.class})
+    public String authenticatedException(AuthorizationException e){
+        e.printStackTrace();//控制台异常消息打印
+        //未认证异常
+        if(e instanceof UnauthenticatedException){
+            return "redirect:/toLogin";
+        }else{
+            //认证成功
+            return "redirect:/";
+        }
+    }
+    @ResponseBody
     @ExceptionHandler(value = {Exception.class})
     public Result commonException(Exception e){
         e.printStackTrace();//控制台异常消息打印
-
         Result result = new Result();
         result.setCode(-1);
         if(e instanceof HttpRequestMethodNotSupportedException){

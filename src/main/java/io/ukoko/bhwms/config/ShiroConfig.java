@@ -59,8 +59,6 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean createShiroFilter(SecurityManager securityManager){
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         shiroFilter.setSecurityManager(securityManager);
-        //未认证跳转到登录页
-        shiroFilter.setLoginUrl("/toLogin");
         return shiroFilter;
     }
     /**

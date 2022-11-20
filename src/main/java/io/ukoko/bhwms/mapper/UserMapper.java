@@ -39,4 +39,9 @@ public interface UserMapper {
      * 查询用户
      */
     User getUser(Integer userId);
+
+    /**
+     * 通过用户手机号获取用户信息
+     */
+    User getUserByUserTel(String userTel);
 }

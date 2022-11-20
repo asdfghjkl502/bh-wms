@@ -40,7 +40,11 @@
     <select id="getUser" resultType="user" parameterType="int">
         SELECT * FROM user WHERE USER_ID=#{userId}
     </select>
-    
+
+    <select id="getUserByUserTel" resultType="user" parameterType="String">
+        SELECT * FROM user WHERE USER_TEL=#{userTel}
+    </select>
+
     <resultMap id="userMap" type="user">
         <id column="USER_ID" property="userId"></id>
         <result column="USER_NAME" property="userName"></result>

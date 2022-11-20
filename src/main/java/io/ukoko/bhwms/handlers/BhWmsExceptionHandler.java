@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.exceptions.BhWmsException;
+import org.apache.shiro.authc.AuthenticationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -44,7 +45,9 @@ public class BhWmsExceptionHandler {
         result.setCode(-1);
         if(e instanceof HttpRequestMethodNotSupportedException){
             result.setMsg("请求方式错误");
-        }else {
+        } else if (e instanceof AuthenticationException) {
+            result.setMsg(e.getMessage());
+        } else {
             result.setMsg("系统异常");
         }
         ObjectMapper om = new ObjectMapper();

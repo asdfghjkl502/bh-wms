@@ -1,6 +1,7 @@
 package io.ukoko.bhwms.controller;
 
 import io.swagger.annotations.Api;
+import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,7 @@ public class HomeController {
      * 跳转登录页
      * @return
      */
+    @RequiresGuest /* 匿名 */
     @GetMapping(value = "/toLogin")
     public String toLogin(){
         return "login";

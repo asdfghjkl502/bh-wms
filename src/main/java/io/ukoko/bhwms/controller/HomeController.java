@@ -48,7 +48,6 @@ public class HomeController {
     public void getVerifyCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //获取验证码
         String text = defaultKaptcha.createText();
-        System.out.println("验证码:"+text);
         //将验证码设置到Session对象中
         request.getSession().setAttribute(Constants.KAPTCHA_SESSION_KEY,text);
         //生成图片

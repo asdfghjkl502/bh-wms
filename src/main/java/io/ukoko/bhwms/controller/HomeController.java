@@ -4,7 +4,9 @@ import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import io.swagger.annotations.Api;
 import io.ukoko.bhwms.dto.Result;
+import io.ukoko.bhwms.entity.User;
 import io.ukoko.bhwms.enums.ShiroStatus;
+import io.ukoko.bhwms.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.ShiroException;
 import org.apache.shiro.authc.AuthenticationException;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
@@ -35,6 +38,8 @@ public class HomeController {
 
     @Autowired
     private DefaultKaptcha defaultKaptcha;
+    @Autowired
+    private UserService userService;
 
     /**
      * 生成验证码
@@ -57,11 +62,18 @@ public class HomeController {
      * 注销
      */
     @GetMapping(value = "/logout")
-    public String logout(){
+    public String logout(HttpServletResponse response){
         //获取实体
         Subject subject = SecurityUtils.getSubject();
         //注销
         subject.logout();
+        //删除前端的cookie对象
+        Cookie userId = new Cookie("userId", "");
+        userId.setMaxAge(0);//让前端cookie立即失效
+        Cookie userNick = new Cookie("userNick", "");
+        userNick.setMaxAge(0);//让前端cookie立即失效
+        response.addCookie(userId);
+        response.addCookie(userNick);
         return "redirect:/toLogin";
     }
 
@@ -90,7 +102,7 @@ public class HomeController {
     @RequiresGuest
     @ResponseBody
     @PostMapping(value = "/login")
-    public Object login(@RequestBody Map<String,String> map,HttpServletRequest request){
+    public Object login(@RequestBody Map<String,String> map,HttpServletRequest request,HttpServletResponse response){
         String userTel = map.get("userTel");
         String password = map.get("password");
         String vc = map.get("vc");
@@ -122,7 +134,10 @@ public class HomeController {
                         try {
                             subject.login(token);
                             //向前端保存数据
-
+                            User user = userService.getUserByUserTel(userTel);
+                            //将用户ID和用户昵称送到前端cookie中
+                            response.addCookie(new Cookie("userId",user.getUserId()+""));
+                            response.addCookie(new Cookie("userNick",user.getUserNick()));
                         }catch (AuthenticationException e) {
                             e.printStackTrace();
                             result = new Result(ShiroStatus.LOGIN_ERROR_USER.getCode(),ShiroStatus.LOGIN_ERROR_USER.getMsg());

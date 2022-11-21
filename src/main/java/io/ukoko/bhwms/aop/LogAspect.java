@@ -12,6 +12,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * 日志切面
@@ -46,8 +48,8 @@ public class LogAspect {
         LOGGER.info("类名==>>{} |￥￥| 方法名==>>{}",joinPoint.getSignature().getDeclaringTypeName(),joinPoint.getSignature().getName());
         //方法的入参
         ObjectMapper om = new ObjectMapper();
-        String s = om.writeValueAsString(joinPoint.getArgs());
-        LOGGER.info("方法入参==>{}",s);
+        Object[] args = joinPoint.getArgs();
+        LOGGER.info("方法入参==>{}",args);
         //获取结果
         LOGGER.info("方法返回值为 ==>>{}",proceed);
         LOGGER.info("----------------------------------------------------------------");

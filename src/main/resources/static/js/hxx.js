@@ -29,6 +29,11 @@ layui.use(['jquery','dropdown','element'],function(){
 	$login.css({
 		"height":$wh
 	});
+	//刷新验证码
+	$("#vc").click(function () {
+		//获取验证码地址
+		this.src=this.src+"?"+Math.random();
+	});
 });
 
 /**

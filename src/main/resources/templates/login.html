@@ -15,9 +15,13 @@
             <div class="login-left">
                 <div class="user-in">
                     <h2>百惠WMS后台管理系统</h2>
-                    <form class="form">
-                        <input class="layui-input" type="tel" placeholder="手机号..."/>
-                        <input class="layui-input" type="text" placeholder="密码..."/>
+                    <form class="form" method="post" action="#">
+                        <input class="layui-input" type="tel" name="userTel" placeholder="手机号"/>
+                        <input class="layui-input" type="password" name="password" placeholder="密码"/>
+                        <div class="layui-input" style="width: 90%;display: flex;">
+                            <input type="text" name="vc" placeholder="验证码" style="border: none;width: 120px;"/>
+                            <img id="vc" src="/getVerifyCode">
+                        </div>
                         <button type="submit" class="layui-btn layui-btn-normal layui-btn-fluid">登录</button>
                     </form>
                 </div>

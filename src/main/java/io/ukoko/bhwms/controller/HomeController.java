@@ -10,6 +10,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationException;
+import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.authz.annotation.RequiresUser;
@@ -81,6 +82,7 @@ public class HomeController {
      * @return
      */
     @ResponseBody
+    @RequiresGuest
     @PostMapping(value = "/login")
     public Object login(String userTel,String password,String vc){
         Result result = new Result();
@@ -90,11 +92,10 @@ public class HomeController {
         if(vc==null || vc.length()==0){
             result.setCode(-1);
             result.setMsg("验证码不能为空");
-        }
-        /**
-         * 验证手机号和密码
-         */
-        if(userTel==null || password==null || userTel.length()==0 || password.length()==0){
+        }else if(userTel==null || password==null || userTel.length()==0 || password.length()==0){
+            /**
+             * 验证手机号和密码
+             */
             result.setCode(-1);
             result.setMsg("用户名或密码不存在");
         }else {
@@ -105,7 +106,7 @@ public class HomeController {
                 subject.login(token);
             }catch (AuthenticationException e) {
                 e.printStackTrace();
-                throw new BhWmsException(-1,"用户名或密码错误");
+                throw new BhWmsException(-2,"用户名或密码错误");
             } catch (AuthorizationException e) {
                 e.printStackTrace();
                 throw new BhWmsException(-1,"权限不够");

@@ -50,7 +50,7 @@ public class ShiroRealm extends AuthorizingRealm {
         }
         //盐值转换
         ByteSource bytes = ByteSource.Util.bytes(user.getSalt());
-        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(user.getUserTel(),bytes,getName());
+        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(user.getUserTel(),user.getPassword(),bytes,getName());
         return simpleAuthenticationInfo;
     }
 }

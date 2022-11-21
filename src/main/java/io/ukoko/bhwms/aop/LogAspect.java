@@ -49,7 +49,7 @@ public class LogAspect {
         //方法的入参
         ObjectMapper om = new ObjectMapper();
         Object[] args = joinPoint.getArgs();
-        LOGGER.info("方法入参==>{}",args);
+        LOGGER.info("方法入参==>{}",om.writeValueAsString(args));
         //获取结果
         LOGGER.info("方法返回值为 ==>>{}",proceed);
         LOGGER.info("----------------------------------------------------------------");

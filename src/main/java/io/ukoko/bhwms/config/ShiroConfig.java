@@ -35,7 +35,7 @@ public class ShiroConfig {
         //创建加密的核心对象
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
         //设置加密方式
-        hashedCredentialsMatcher.setHashAlgorithmName("md5");
+        hashedCredentialsMatcher.setHashAlgorithmName("MD5");
         //加密次数
         hashedCredentialsMatcher.setHashIterations(1024);
         return hashedCredentialsMatcher;

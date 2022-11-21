@@ -48,6 +48,7 @@
                 data:JSON.stringify(data.field),
                 dataType:"json",
                 success:function (d) {
+                    console.log(d);
                     if(d.code===0){
                         location.href="/";//跳转首页
                     }else{

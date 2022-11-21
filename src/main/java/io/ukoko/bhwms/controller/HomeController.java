@@ -7,10 +7,12 @@ import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.enums.ShiroStatus;
 import io.ukoko.bhwms.exceptions.BhWmsException;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.ShiroException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -62,6 +64,7 @@ public class HomeController {
     /**
      * 跳转登录页
      */
+    @RequiresGuest
     @GetMapping(value = "/toLogin")
     public String toLogin(){
         return "login";
@@ -70,6 +73,7 @@ public class HomeController {
     /**
      * 登录
      */
+    @RequiresGuest
     @ResponseBody
     @PostMapping(value = "/login")
     public Object login(@RequestBody Map<String,String> map,HttpServletRequest request){
@@ -81,22 +85,22 @@ public class HomeController {
          * 验证验证码
          */
         if(vc==null || vc.length()==0){
-            result = new Result(ShiroStatus.LOGIN_NOT_VC);
+            result = new Result(ShiroStatus.LOGIN_NOT_VC.getCode(),ShiroStatus.LOGIN_NOT_VC.getMsg());
         }else{
             //获取验证码
             String kaptcha = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
             if(kaptcha==null || kaptcha.length()==0){
-                throw new BhWmsException(ShiroStatus.LOGIN_NOT_VC);
+                result = new Result(ShiroStatus.LOGIN_NOT_VC.getCode(),ShiroStatus.LOGIN_NOT_VC.getMsg());
             }else{
                 if(!vc.equals(kaptcha)){
                     //验证码错误
-                    result = new Result(ShiroStatus.LOGIN_ERROR_VC);
+                    result = new Result(ShiroStatus.LOGIN_ERROR_VC.getCode(),ShiroStatus.LOGIN_ERROR_VC.getMsg());
                 }else{
                     if(userTel==null || password==null || userTel.length()==0 || password.length()==0){
                         /**
                          * 验证手机号和密码
                          */
-                        result = new Result(ShiroStatus.LOGIN_NOT_USER);
+                        result = new Result(ShiroStatus.LOGIN_NOT_USER.getCode(),ShiroStatus.LOGIN_NOT_USER.getMsg());
                     }else {
                         //验证手机号和密码是否正确
                         UsernamePasswordToken token = new UsernamePasswordToken(userTel, password);
@@ -105,10 +109,12 @@ public class HomeController {
                             subject.login(token);
                         }catch (AuthenticationException e) {
                             e.printStackTrace();
-                            throw new BhWmsException(ShiroStatus.LOGIN_ERROR_USER);
+                            result = new Result(ShiroStatus.LOGIN_ERROR_USER.getCode(),ShiroStatus.LOGIN_ERROR_USER.getMsg());
                         } catch (AuthorizationException e) {
                             e.printStackTrace();
-                            throw new BhWmsException(ShiroStatus.AUTHORIZATION_ERROR);
+                            result = new Result(ShiroStatus.AUTHORIZATION_ERROR.getCode(),ShiroStatus.AUTHORIZATION_ERROR.getMsg());
+                        }catch (ShiroException e){
+                            System.out.println("===================================其他异常===================================");
                         }
                     }
                 }

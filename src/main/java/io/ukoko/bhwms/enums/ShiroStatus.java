@@ -9,7 +9,7 @@ public enum  ShiroStatus {
     LOGIN_NOT_USER(1001,"用户参数不存在"),
     LOGIN_NOT_VC(1002,"验证码不存在"),
     LOGIN_ERROR_VC(1003,"验证码错误"),
-    LOGIN_ERROR_USER(1004,"用户参数错误"),
+    LOGIN_ERROR_USER(1004,"用户名或密码错误"),
     AUTHORIZATION_ERROR(1005,"权限不够"),
     LOGIN_ERROR(-1000,"登录失败")
 

@@ -71,7 +71,7 @@ public class HomeController {
      */
     @ResponseBody
     @PostMapping(value = "/login")
-    public Object login(@RequestBody Map<String,String> map){
+    public Object login(@RequestBody Map<String,String> map,HttpServletRequest request){
         String userTel = map.get("userTel");
         String password = map.get("password");
         String vc = map.get("vc");
@@ -82,24 +82,38 @@ public class HomeController {
         if(vc==null || vc.length()==0){
             result.setCode(-1);
             result.setMsg("验证码不能为空");
-        }else if(userTel==null || password==null || userTel.length()==0 || password.length()==0){
-            /**
-             * 验证手机号和密码
-             */
-            result.setCode(-1);
-            result.setMsg("用户名或密码不存在");
-        }else {
-            //验证手机号和密码是否正确
-            UsernamePasswordToken token = new UsernamePasswordToken(userTel, password);
-            Subject subject = SecurityUtils.getSubject();
-            try {
-                subject.login(token);
-            }catch (AuthenticationException e) {
-                e.printStackTrace();
-                throw new BhWmsException(-2,"用户名或密码错误");
-            } catch (AuthorizationException e) {
-                e.printStackTrace();
-                throw new BhWmsException(-1,"权限不够");
+        }else{
+            //获取验证码
+            String kaptcha = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+            if(kaptcha==null || kaptcha.length()==0){
+                throw new BhWmsException(-1,"验证码生成错误");
+            }else{
+                if(!vc.equals(kaptcha)){
+                    //验证码错误
+                    result.setCode(-1);
+                    result.setMsg("验证码错误");
+                }else{
+                    if(userTel==null || password==null || userTel.length()==0 || password.length()==0){
+                        /**
+                         * 验证手机号和密码
+                         */
+                        result.setCode(-1);
+                        result.setMsg("用户名或密码不存在");
+                    }else {
+                        //验证手机号和密码是否正确
+                        UsernamePasswordToken token = new UsernamePasswordToken(userTel, password);
+                        Subject subject = SecurityUtils.getSubject();
+                        try {
+                            subject.login(token);
+                        }catch (AuthenticationException e) {
+                            e.printStackTrace();
+                            throw new BhWmsException(-2,"用户名或密码错误");
+                        } catch (AuthorizationException e) {
+                            e.printStackTrace();
+                            throw new BhWmsException(-1,"权限不够");
+                        }
+                    }
+                }
             }
         }
         return result;

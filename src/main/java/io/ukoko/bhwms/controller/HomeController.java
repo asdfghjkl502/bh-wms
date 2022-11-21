@@ -100,14 +100,10 @@ public class HomeController {
                 subject.login(token);
             }catch (AuthenticationException e) {
                 e.printStackTrace();
-                throw new RuntimeException("用户名错误");
-                //return "账号或密码错误！";
             } catch (AuthorizationException e) {
                 e.printStackTrace();
-                throw new RuntimeException("密码错误");
             }
         }
-
         return "redirect:/";/*登陆成功跳转首页*/
     }
 }

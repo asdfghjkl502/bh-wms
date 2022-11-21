@@ -25,7 +25,10 @@
 }
 .user-in>h2{
     margin-top: 40px;
+    color: #000;
     text-align: center;
+    /*设置字体阴影*/
+    text-shadow: 2px 1px 3px #666;
 }
 .form{
     display: flex;

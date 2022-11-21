@@ -41,19 +41,28 @@ public class BhWmsExceptionHandler {
     }
 
     /**
-     * 捕获用户认证异常
+     * 捕获用户登录异常
      */
+    @ResponseBody
     @ExceptionHandler(value = {AuthorizationException.class})
-    public String authenticatedException(AuthorizationException e){
+    public Object authenticatedException(AuthorizationException e){
         e.printStackTrace();//控制台异常消息打印
-        //未认证异常
-        if(e instanceof UnauthenticatedException){
-            return "redirect:/toLogin";
-        }else{
-            //认证成功
-            return "redirect:/";
-        }
+        Result result = new Result(-1,e.getMessage());
+        return result;
     }
+
+
+    /**
+     * 捕获未认证异常
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(value = {UnauthenticatedException.class})
+    public String unauthenticatedExceptionException(UnauthenticatedException e){
+        e.printStackTrace();//控制台异常消息打印
+        return "redirect:/toLogin";
+    }
+
     @ResponseBody
     @ExceptionHandler(value = {Exception.class})
     public Result commonException(Exception e){

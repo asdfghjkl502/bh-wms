@@ -14,6 +14,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 日志切面
@@ -49,7 +51,12 @@ public class LogAspect {
         //方法的入参
         ObjectMapper om = new ObjectMapper();
         Object[] args = joinPoint.getArgs();
-        LOGGER.info("方法入参==>{}",om.writeValueAsString(args));
+        if(args!=null&& args.length>0){
+            List<Object> list = Arrays.asList(args);
+            LOGGER.info("方法入参==>{}",list);
+        }else{
+            LOGGER.info("方法入参==>{}","");
+        }
         //获取结果
         LOGGER.info("方法返回值为 ==>>{}",proceed);
         LOGGER.info("----------------------------------------------------------------");

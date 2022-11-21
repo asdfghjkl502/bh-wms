@@ -3,13 +3,21 @@ package io.ukoko.bhwms.controller;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import io.swagger.annotations.Api;
+import io.ukoko.bhwms.entity.User;
+import io.ukoko.bhwms.exceptions.BhWmsException;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.authz.annotation.RequiresUser;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
@@ -56,11 +64,50 @@ public class HomeController {
 
     /**
      * 跳转登录页
-     * @return
      */
     @RequiresGuest /* 匿名 */
     @GetMapping(value = "/toLogin")
     public String toLogin(){
         return "login";
+    }
+
+    /**
+     * 登录
+     * @param userTel: 手机号
+     * @param password : 密码
+     * @param vc : 验证码
+     * @return
+     */
+    @PostMapping(value = "/login")
+    public String login(String userTel,String password,String vc){
+
+        /**
+         * 验证验证码
+         */
+        if(vc==null || vc.length()==0){
+
+        }
+        /**
+         * 验证手机号和密码
+         */
+        if(userTel==null || password==null || userTel.length()==0 || password.length()==0){
+
+        }else {
+            //验证手机号和密码是否正确
+            UsernamePasswordToken token = new UsernamePasswordToken(userTel, password);
+            Subject subject = SecurityUtils.getSubject();
+            try {
+                subject.login(token);
+            }catch (AuthenticationException e) {
+                e.printStackTrace();
+                throw new RuntimeException("用户名错误");
+                //return "账号或密码错误！";
+            } catch (AuthorizationException e) {
+                e.printStackTrace();
+                throw new RuntimeException("密码错误");
+            }
+        }
+
+        return "redirect:/";/*登陆成功跳转首页*/
     }
 }

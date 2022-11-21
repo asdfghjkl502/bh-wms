@@ -1,6 +1,8 @@
 package io.ukoko.bhwms.shiro;
 
 import io.ukoko.bhwms.entity.User;
+import io.ukoko.bhwms.enums.ShiroStatus;
+import io.ukoko.bhwms.exceptions.BhWmsException;
 import io.ukoko.bhwms.mapper.UserMapper;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -42,11 +44,11 @@ public class ShiroRealm extends AuthorizingRealm {
         String userTel = authenticationToken.getPrincipal().toString();
         //判断手机号是否存在
         if(userTel==null || userTel.length()==0){
-            throw new AuthenticationException("用户名不存在");
+            throw new BhWmsException(ShiroStatus.LOGIN_NOT_USER);
         }
         User user = userMapper.getUserByUserTel(userTel);
         if(user==null){
-            throw new AuthenticationException("用户名或密码错误");
+            throw new BhWmsException(ShiroStatus.LOGIN_ERROR_USER);
         }
         //盐值转换
         ByteSource bytes = ByteSource.Util.bytes(user.getSalt());

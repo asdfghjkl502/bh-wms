@@ -1,5 +1,7 @@
 package io.ukoko.bhwms.exceptions;
 
+import io.ukoko.bhwms.enums.ShiroStatus;
+
 /**
  * @Auther: hushuang
  * @Date: 2022/10/29 13:23
@@ -19,5 +21,10 @@ public class BhWmsException extends RuntimeException{
     public BhWmsException(int code, String message) {
         super(message);
         this.code = code;
+    }
+
+    public BhWmsException(ShiroStatus shiroStatus) {
+        super(shiroStatus.getMsg());
+        this.code = shiroStatus.getCode();
     }
 }

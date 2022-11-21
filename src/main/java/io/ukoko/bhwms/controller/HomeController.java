@@ -4,6 +4,7 @@ import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import io.swagger.annotations.Api;
 import io.ukoko.bhwms.dto.Result;
+import io.ukoko.bhwms.enums.ShiroStatus;
 import io.ukoko.bhwms.exceptions.BhWmsException;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -80,25 +81,22 @@ public class HomeController {
          * 验证验证码
          */
         if(vc==null || vc.length()==0){
-            result.setCode(-1);
-            result.setMsg("验证码不能为空");
+            result = new Result(ShiroStatus.LOGIN_NOT_VC);
         }else{
             //获取验证码
             String kaptcha = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
             if(kaptcha==null || kaptcha.length()==0){
-                throw new BhWmsException(-1,"验证码生成错误");
+                throw new BhWmsException(ShiroStatus.LOGIN_NOT_VC);
             }else{
                 if(!vc.equals(kaptcha)){
                     //验证码错误
-                    result.setCode(-1);
-                    result.setMsg("验证码错误");
+                    result = new Result(ShiroStatus.LOGIN_ERROR_VC);
                 }else{
                     if(userTel==null || password==null || userTel.length()==0 || password.length()==0){
                         /**
                          * 验证手机号和密码
                          */
-                        result.setCode(-1);
-                        result.setMsg("用户名或密码不存在");
+                        result = new Result(ShiroStatus.LOGIN_NOT_USER);
                     }else {
                         //验证手机号和密码是否正确
                         UsernamePasswordToken token = new UsernamePasswordToken(userTel, password);
@@ -107,10 +105,10 @@ public class HomeController {
                             subject.login(token);
                         }catch (AuthenticationException e) {
                             e.printStackTrace();
-                            throw new BhWmsException(-2,"用户名或密码错误");
+                            throw new BhWmsException(ShiroStatus.LOGIN_ERROR_USER);
                         } catch (AuthorizationException e) {
                             e.printStackTrace();
-                            throw new BhWmsException(-1,"权限不够");
+                            throw new BhWmsException(ShiroStatus.AUTHORIZATION_ERROR);
                         }
                     }
                 }

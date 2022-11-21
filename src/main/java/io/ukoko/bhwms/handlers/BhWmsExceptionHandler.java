@@ -3,6 +3,7 @@ package io.ukoko.bhwms.handlers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.ukoko.bhwms.dto.Result;
+import io.ukoko.bhwms.enums.ShiroStatus;
 import io.ukoko.bhwms.exceptions.BhWmsException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authz.AuthorizationException;
@@ -47,7 +48,7 @@ public class BhWmsExceptionHandler {
     @ExceptionHandler(value = {AuthorizationException.class})
     public Object authenticatedException(AuthorizationException e){
         e.printStackTrace();//控制台异常消息打印
-        Result result = new Result(-1,e.getMessage());
+        Result result = new Result(ShiroStatus.LOGIN_ERROR);
         return result;
     }
 

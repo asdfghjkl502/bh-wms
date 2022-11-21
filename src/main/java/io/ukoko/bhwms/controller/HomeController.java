@@ -3,6 +3,7 @@ package io.ukoko.bhwms.controller;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import io.swagger.annotations.Api;
+import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.entity.User;
 import io.ukoko.bhwms.exceptions.BhWmsException;
 import org.apache.shiro.SecurityUtils;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
@@ -78,19 +80,23 @@ public class HomeController {
      * @param vc : 验证码
      * @return
      */
+    @ResponseBody
     @PostMapping(value = "/login")
-    public String login(String userTel,String password,String vc){
+    public Object login(String userTel,String password,String vc){
+        Result result = new Result();
         /**
          * 验证验证码
          */
         if(vc==null || vc.length()==0){
-
+            result.setCode(-1);
+            result.setMsg("验证码不能为空");
         }
         /**
          * 验证手机号和密码
          */
         if(userTel==null || password==null || userTel.length()==0 || password.length()==0){
-
+            result.setCode(-1);
+            result.setMsg("用户名或密码不存在");
         }else {
             //验证手机号和密码是否正确
             UsernamePasswordToken token = new UsernamePasswordToken(userTel, password);
@@ -99,10 +105,12 @@ public class HomeController {
                 subject.login(token);
             }catch (AuthenticationException e) {
                 e.printStackTrace();
+                throw new BhWmsException(-1,"用户名或密码错误");
             } catch (AuthorizationException e) {
                 e.printStackTrace();
+                throw new BhWmsException(-1,"权限不够");
             }
         }
-        return "redirect:/";/*登陆成功跳转首页*/
+        return result;
     }
 }

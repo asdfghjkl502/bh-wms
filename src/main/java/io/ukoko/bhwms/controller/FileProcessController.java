@@ -35,14 +35,11 @@ public class FileProcessController {
         }else {
             //获取项目的跟路径
             String realPath = request.getServletContext().getRealPath("/");
-            System.out.println("真是路径:"+realPath);
-
+            System.out.println("真实路径:"+realPath);
             //处理文件格式
             String type = filename.substring(filename.lastIndexOf("."),filename.length());
-
             //生成新的文件名称
             filename = UUID.randomUUID()+type;
-
             //图片地址
             String picUrl="/pics";
             //文件地址
@@ -76,6 +73,22 @@ public class FileProcessController {
 
     /**
      * 文件删除
+     * @param fileUrl: 数据库查询出来的文件地址
+     * @param request
+     * @return
      */
+    @PostMapping(value = "/deleteFile")
+    public Object deleteFile(String fileUrl,HttpServletRequest request){
+        //获取项目的根目录
+        String realPath = request.getServletContext().getRealPath("/");
+        //抽象文件的File对象
+        File file = new File(realPath + fileUrl);
+        //判断文件是否存在
+        if(file.exists()){
+            //删除文件
+            file.delete();
+        }
+        return new Result();
+    }
 
 }

@@ -3,6 +3,7 @@ package io.ukoko.bhwms.handlers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.ukoko.bhwms.dto.Result;
+import io.ukoko.bhwms.enums.BhWmsStatus;
 import io.ukoko.bhwms.enums.ShiroStatus;
 import io.ukoko.bhwms.exceptions.BhWmsException;
 import org.apache.shiro.authc.AuthenticationException;
@@ -14,6 +15,9 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
+
+import javax.naming.SizeLimitExceededException;
 
 /**
  * 统一异常处理器
@@ -69,13 +73,15 @@ public class BhWmsExceptionHandler {
     public Result commonException(Exception e){
         e.printStackTrace();//控制台异常消息打印
         Result result = new Result();
-        result.setCode(-1);
+        result.setCode(BhWmsStatus.ERROR.getCode());
         if(e instanceof HttpRequestMethodNotSupportedException){
-            result.setMsg("请求方式错误");
+            result.setMsg(BhWmsStatus.REQUEST_NOT_METHOD.getMsg());
         } else if (e instanceof AuthenticationException) {
             result.setMsg(e.getMessage());
+        } else if (e instanceof MaxUploadSizeExceededException) {
+            result.setMsg(BhWmsStatus.FILE_MAX_ERROR.getMsg());
         } else {
-            result.setMsg("系统异常");
+            result.setMsg(BhWmsStatus.ERROR.getMsg());
         }
         ObjectMapper om = new ObjectMapper();
         try {

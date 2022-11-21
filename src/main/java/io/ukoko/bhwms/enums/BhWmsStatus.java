@@ -7,7 +7,9 @@ public enum  BhWmsStatus {
 
     OK(0,"成功"),
     FILE_ERROR(1,"文件上传失败"),
-    FILE_STYLE_ERROR(2,"文件格式不支持"),
+    FILE_STYLE_ERROR(2,"暂时不支持的文件格式"),
+    FILE_MAX_ERROR(3,"文件过大"),
+    REQUEST_NOT_METHOD(4,"请求方式错误"),
 
 
     ERROR(-1,"系统异常,请联系管理员")

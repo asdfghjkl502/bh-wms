@@ -38,6 +38,13 @@ public interface UserService {
     User getUserByUserId(Integer userId);
 
     /**
+     * 通过手机号获取用户信息
+     * @param userTel
+     * @return
+     */
+    User getUserByUserTel(String userTel);
+
+    /**
      * 用户分页信息
      * @param pageSize: 每页显示多少条数
      * @param pageNo: 当前页

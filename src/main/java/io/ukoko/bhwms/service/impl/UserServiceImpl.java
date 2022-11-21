@@ -116,6 +116,24 @@ public class UserServiceImpl  implements UserService {
     }
 
     @Override
+    public User getUserByUserTel(String userTel) {
+        User user = userMapper.getUserByUserTel(userTel);
+        List<Department> ds = new ArrayList<>();
+        List<Role> rs = new ArrayList<>();
+        List<UserDepartment> userDepartments = userDepartmentMapper.getUserDepartmentByUserId(user.getUserId());
+        for (UserDepartment ud : userDepartments) {
+            ds.add(ud.getDepartment());
+        }
+        List<UserRole> userRoles = userRoleMapper.getUserRoleByUserId(user.getUserId());
+        for (UserRole ur : userRoles) {
+            rs.add(ur.getRole());
+        }
+        user.setDepartments(ds);
+        user.setRoles(rs);
+        return user;
+    }
+
+    @Override
     public Page getUserPage(int pageNo, int pageSize, Integer isDelete, String userName, String userTel, String userEmail, String userNick, Date startTime, Date endTime, Integer userId) {
         Page page = new Page();
         PageHelper.startPage(pageNo,pageSize);

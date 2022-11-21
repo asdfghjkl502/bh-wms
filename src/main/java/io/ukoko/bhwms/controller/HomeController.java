@@ -80,7 +80,6 @@ public class HomeController {
      */
     @PostMapping(value = "/login")
     public String login(String userTel,String password,String vc){
-
         /**
          * 验证验证码
          */

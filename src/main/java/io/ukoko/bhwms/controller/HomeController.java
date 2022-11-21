@@ -5,7 +5,6 @@ import com.google.code.kaptcha.impl.DefaultKaptcha;
 import io.swagger.annotations.Api;
 import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.enums.ShiroStatus;
-import io.ukoko.bhwms.exceptions.BhWmsException;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.ShiroException;
 import org.apache.shiro.authc.AuthenticationException;
@@ -122,6 +121,8 @@ public class HomeController {
                         Subject subject = SecurityUtils.getSubject();
                         try {
                             subject.login(token);
+                            //向前端保存数据
+
                         }catch (AuthenticationException e) {
                             e.printStackTrace();
                             result = new Result(ShiroStatus.LOGIN_ERROR_USER.getCode(),ShiroStatus.LOGIN_ERROR_USER.getMsg());
@@ -129,7 +130,7 @@ public class HomeController {
                             e.printStackTrace();
                             result = new Result(ShiroStatus.AUTHORIZATION_ERROR.getCode(),ShiroStatus.AUTHORIZATION_ERROR.getMsg());
                         }catch (ShiroException e){
-                            System.out.println("===================================其他异常===================================");
+                            result = new Result(-1,"系统异常");
                         }
                     }
                 }

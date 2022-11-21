@@ -35,6 +35,12 @@ public class User {
     盐值
    */
   private String salt;
+
+  /*
+    用户头像地址
+   */
+  private String avatar;
+
   /*
     部门列表
    */
@@ -155,6 +161,14 @@ public class User {
     this.roles = roles;
   }
 
+  public String getAvatar() {
+    return avatar;
+  }
+
+  public void setAvatar(String avatar) {
+    this.avatar = avatar;
+  }
+
   @Override
   public String toString() {
     return "User{" +
@@ -165,6 +179,7 @@ public class User {
             ", userNick='" + userNick + '\'' +
             ", password='" + password + '\'' +
             ", salt='" + salt + '\'' +
+            ", avatar='" + avatar + '\'' +
             ", departments=" + departments +
             ", roles=" + roles +
             ", createTime=" + createTime +

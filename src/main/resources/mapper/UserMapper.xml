@@ -53,6 +53,7 @@
         <result column="USER_NICK" property="userNick"></result>
         <result column="PASSWORD" property="password"></result>
         <result column="SALT" property="salt"></result>
+        <result column="AVATAR" property="avatar"></result>
         <result column="CREATE_TIME" property="createTime"></result>
         <result column="UPDATE_TIME" property="updateTime"></result>
         <result column="IS_DELETE" property="isDelete"></result>
@@ -74,7 +75,7 @@
     
     <update id="batchDeleteUser" parameterType="int">
         <foreach collection="list" item="item" separator=";">
-            UPDATE user SET is_delete=0 WHERE user_id=#{item}
+            UPDATE user SET IS_DELETE=0 WHERE USER_ID=#{item}
         </foreach>
     </update>
 </mapper>

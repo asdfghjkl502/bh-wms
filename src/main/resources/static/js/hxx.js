@@ -22,7 +22,7 @@ layui.use(['jquery','dropdown','element'],function(){
 	//设置内容区高度
 	var $hcri = $(".hxx-iframe");
 	$hcri.css({
-		"height":$wh-130
+		"height":$wh-148
 	});
 	//设置登录页面的内容高度
 	let $login = $(".login");
@@ -75,6 +75,6 @@ function add_tab(title,url){
 	var $wh = $(window).height();
 	var $hcri = $(".hxx-iframe");
 	$hcri.css({
-		"height":$wh-130
+		"height":$wh-148
 	});
 }

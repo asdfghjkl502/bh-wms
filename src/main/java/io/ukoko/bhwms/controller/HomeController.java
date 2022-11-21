@@ -6,6 +6,7 @@ import io.swagger.annotations.Api;
 import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.entity.User;
 import io.ukoko.bhwms.enums.ShiroStatus;
+import io.ukoko.bhwms.exceptions.BhWmsException;
 import io.ukoko.bhwms.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.ShiroException;
@@ -115,7 +116,7 @@ public class HomeController {
             //获取验证码
             String kaptcha = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
             if(kaptcha==null || kaptcha.length()==0){
-                result = new Result(ShiroStatus.LOGIN_NOT_VC.getCode(),ShiroStatus.LOGIN_NOT_VC.getMsg());
+                throw new BhWmsException(ShiroStatus.LOGIN_NOT_VC);
             }else{
                 if(!vc.equals(kaptcha)){
                     //验证码错误
@@ -125,7 +126,7 @@ public class HomeController {
                         /**
                          * 验证手机号和密码
                          */
-                        result = new Result(ShiroStatus.LOGIN_NOT_USER.getCode(),ShiroStatus.LOGIN_NOT_USER.getMsg());
+                        throw new BhWmsException(ShiroStatus.LOGIN_NOT_USER);
                     }else {
                         //验证手机号和密码是否正确
                         UsernamePasswordToken token = new UsernamePasswordToken(userTel, password);
@@ -139,12 +140,12 @@ public class HomeController {
                             response.addCookie(new Cookie("userNick",user.getUserNick()));
                         }catch (AuthenticationException e) {
                             e.printStackTrace();
-                            result = new Result(ShiroStatus.LOGIN_ERROR_USER.getCode(),ShiroStatus.LOGIN_ERROR_USER.getMsg());
+                            throw new BhWmsException(ShiroStatus.LOGIN_ERROR_USER);
                         } catch (AuthorizationException e) {
                             e.printStackTrace();
-                            result = new Result(ShiroStatus.AUTHORIZATION_ERROR.getCode(),ShiroStatus.AUTHORIZATION_ERROR.getMsg());
+                            throw new BhWmsException(ShiroStatus.AUTHORIZATION_ERROR);
                         }catch (ShiroException e){
-                            result = new Result(-1,"系统异常");
+                            throw new BhWmsException(-1,"系统异常,请联系客服");
                         }
                     }
                 }

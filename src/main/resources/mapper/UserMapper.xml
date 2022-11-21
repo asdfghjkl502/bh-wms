@@ -29,6 +29,7 @@
                 <if test="userNick!=null">USER_NICK=#{userNick},</if>
                 <if test="password!=null">PASSWORD=#{password},</if>
                 <if test="salt!=null">SALT=#{salt},</if>
+                <if test="avatar!=null">AVATAR=#{avatar},</if>
                 <if test="createTime!=null">CREATE_TIME=#{createTime},</if>
                 <if test="isDelete!=null">IS_DELETE=#{isDelete}</if>
             </set>

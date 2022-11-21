@@ -34,6 +34,17 @@ layui.use(['jquery','dropdown','element'],function(){
 		//获取验证码地址
 		this.src=this.src+"?"+Math.random();
 	});
+	//展示用户昵称
+	//获取用户昵称
+	let cookies = document.cookie;
+	let split = cookies.split(";");
+	let c = {};
+	for (let i = 0; i < split.length; i++) {
+		let ss = split[i].split("=");
+		c[ss[0].trim()]=ss[1]; //key值需要去空格
+	}
+	//将昵称展示到前端用户展示位置(页面右上角)
+	$("#userNick").html(c.userNick);
 });
 
 /**

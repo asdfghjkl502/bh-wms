@@ -1,5 +1,6 @@
 package io.ukoko.bhwms.exceptions;
 
+import io.ukoko.bhwms.enums.BhWmsStatus;
 import io.ukoko.bhwms.enums.ShiroStatus;
 
 /**
@@ -26,5 +27,9 @@ public class BhWmsException extends RuntimeException{
     public BhWmsException(ShiroStatus shiroStatus) {
         super(shiroStatus.getMsg());
         this.code = shiroStatus.getCode();
+    }
+    public BhWmsException(BhWmsStatus status) {
+        super(status.getMsg());
+        this.code = status.getCode();
     }
 }

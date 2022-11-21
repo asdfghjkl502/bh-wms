@@ -3,12 +3,14 @@
 var $;
 var element;
 var dropdown;
+var layer;
 
-layui.use(['jquery','dropdown','element'],function(){
+layui.use(['jquery','dropdown','element','layer'],function(){
 	//加载jquery模块
 	$ = layui.jquery;
 	dropdown = layui.dropdown;
 	element = layui.element;
+	layer = layui.layer;
 	//获取浏览器总宽度
 	var $ww = $(window).width();
 	//获取浏览器的总高度
@@ -45,6 +47,19 @@ layui.use(['jquery','dropdown','element'],function(){
 	}
 	//将昵称展示到前端用户展示位置(页面右上角)
 	$("#userNick").html(c.userNick);
+
+	//修改信息事件处理
+	$("#muid").click(function () {
+		layer.open({
+			type: 2,
+			title: '修改用户信息',
+			shadeClose: true,
+			shade: false,
+			maxmin: true, //开启最大化最小化按钮
+			area: ['500px', '500px'],
+			content: 'pages/user_info.html'
+		});
+	});
 });
 
 /**

@@ -27,6 +27,7 @@ import java.util.Map;
 
 /**
  * 首页控制器
+ * 登陆,注销,验证码生成,以及权限跳转的类
  */
 @Api(tags = "首页模块")
 @CrossOrigin
@@ -51,6 +52,20 @@ public class HomeController {
         //将图片送到前端
         ImageIO.write(image,"jpg",response.getOutputStream());
     }
+
+
+    /**
+     * 注销
+     */
+    @GetMapping(value = "/logout")
+    public String logout(){
+        //获取实体
+        Subject subject = SecurityUtils.getSubject();
+        //注销
+        subject.logout();
+        return "redirect:/toLogin";
+    }
+
 
     /**
      * 首页跳转

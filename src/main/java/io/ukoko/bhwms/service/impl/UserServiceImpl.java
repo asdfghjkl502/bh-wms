@@ -82,18 +82,19 @@ public class UserServiceImpl  implements UserService {
 
     @Override
     public void updateUser(User user) {
-
-        //通过ID查询盐值
-        User u = userMapper.getUser(user.getUserId());
-        //盐值
-        String salt = u.getSalt();
-        //获取原密码
-        String password = user.getPassword();
-        //加密
-        Md5Hash md5Hash = new Md5Hash(password, salt, 1024);
-        //加密之后的密码
-        String newPwd = md5Hash.toString();
-        user.setPassword(newPwd);
+        if(user.getPassword()!=null && user.getPassword()!=""){
+            //通过ID查询盐值
+            User u = userMapper.getUser(user.getUserId());
+            //盐值
+            String salt = u.getSalt();
+            //获取原密码
+            String password = user.getPassword();
+            //加密
+            Md5Hash md5Hash = new Md5Hash(password, salt, 1024);
+            //加密之后的密码
+            String newPwd = md5Hash.toString();
+            user.setPassword(newPwd);
+        }
         userMapper.updateUser(user);
     }
 

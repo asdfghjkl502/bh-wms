@@ -76,12 +76,27 @@
 /*欢迎页样式*/
 .count-item{
 	height: 110px;
+	border-radius: 5px;
 }
 .count-item>.count-item-sub{
-	width: 95%;
+	width: 85%;
 	height: 110px;
-	background-color: blue;
 	margin: auto;
+	display: flex;
+	background-color: #01aaed;
+	border-radius: 10px;
+}
+.count-item>.count-item-sub>.sub-left{
+	width: 30%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.count-item>.count-item-sub>.sub-left>i{
+	font-size: 30px;
+	font-weight: bold;
+	color: white;
 }
 
 

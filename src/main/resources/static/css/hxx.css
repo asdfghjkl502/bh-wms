@@ -101,7 +101,9 @@
 	background-color: #eee;
 }
 .hxx-footer p{
-	font-size: 8px;
+	font-size: 10px;
+	font-weight: bold;
+	text-shadow: 5px 3px 8px #c2be9e;
 	color: #666;
 	text-align: center;
 	line-height: 30px;

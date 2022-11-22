@@ -71,8 +71,10 @@ layui.use(['jquery','dropdown','element','layer'],function(){
  * 添加选项卡
  */
 function add_tab(title,url){
+
 	//根据地址生成md5值,方便进行切换选项卡以及选项卡重复点击问题
 	var tabId = md5(url);
+	console.log("---->>>>",url);
 	/**
 	 * 判断重复点击,如果重复点击直接切换到已经存在的选项卡,如果不存在,那么重新生成
 	 * 根据内容区自动判断选项卡是否存在
@@ -97,4 +99,5 @@ function add_tab(title,url){
 	$hcri.css({
 		"height":$wh-148
 	});
+
 }

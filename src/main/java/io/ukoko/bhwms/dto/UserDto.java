@@ -35,6 +35,17 @@ public class UserDto {
       密码
      */
     private String password;
+
+    /**
+     * 新密码
+     */
+    private String newPassword;
+
+    /**
+     * 头像地址
+     */
+    private String avatar;
+
     /*
       盐值
      */
@@ -159,6 +170,20 @@ public class UserDto {
         this.isDelete = isDelete;
     }
 
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
     @Override
     public String toString() {
         return "UserDto{" +
@@ -168,6 +193,8 @@ public class UserDto {
                 ", userEmail='" + userEmail + '\'' +
                 ", userNick='" + userNick + '\'' +
                 ", password='" + password + '\'' +
+                ", newPassword='" + newPassword + '\'' +
+                ", avatar='" + avatar + '\'' +
                 ", salt='" + salt + '\'' +
                 ", deptId=" + deptId +
                 ", roleId=" + roleId +

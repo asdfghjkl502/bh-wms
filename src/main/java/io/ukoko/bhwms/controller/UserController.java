@@ -9,6 +9,7 @@ import io.ukoko.bhwms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
+import sun.nio.cs.US_ASCII;
 
 import java.util.Date;
 import java.util.List;
@@ -62,8 +63,23 @@ public class UserController {
      * 更新用户
      */
     @PostMapping(value = "/updateUser")
-    public Object updateUser(@RequestBody User user){
+    public Object updateUser(@RequestBody UserDto userDto){
+        User user = new User();
+        user.setUserId(userDto.getUserId());
+        user.setUserName(userDto.getUserName());
+        user.setUserTel(userDto.getUserTel());
+        user.setUserEmail(userDto.getUserEmail());
+        user.setUserNick(userDto.getUserNick());
+        user.setPassword(userDto.getPassword());
+        user.setSalt(userDto.getSalt());
+        user.setAvatar(userDto.getAvatar());
+        user.setCreateTime(userDto.getCreateTime());
+        if(userDto.getNewPassword()!=null && userDto.getNewPassword()!=""){
+            //个人用户修改
+            user.setPassword(userDto.getNewPassword());
+        }
         userService.updateUser(user);
         return new Result();
     }
+
 }

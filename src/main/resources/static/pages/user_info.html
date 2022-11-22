@@ -115,7 +115,8 @@
 
             //提交数据
             form.on('submit(edit)',function (data) {
-                console.log(data.field);
+                data.field.userId=obj.userId;
+                console.log(JSON.stringify(data.field));
             })
         });
 

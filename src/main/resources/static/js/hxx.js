@@ -62,6 +62,16 @@ layui.use(['jquery','dropdown','element','layer'],function(){
 			}
 		});
 	});
+	//获取用户头像
+	$.getJSON("/getUserDetail",{userId:c.userId},function (d) {
+		console.log(d);
+		if(d.code===0){
+			//获取头像的DOM节点
+			$("#avatarId")[0].src=d.obj.avatar;
+		}else{
+			layer.msg(d.msg);
+		}
+	});
 });
 
 /**

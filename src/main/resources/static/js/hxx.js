@@ -55,9 +55,11 @@ layui.use(['jquery','dropdown','element','layer'],function(){
 			title: '修改用户信息',
 			shadeClose: true,
 			shade: false,
-			maxmin: true, //开启最大化最小化按钮
 			area: ['500px', '500px'],
-			content: 'pages/user_info.html'
+			content: 'pages/user_info.html',
+			end:function () {
+				location.reload();//刷新
+			}
 		});
 	});
 });

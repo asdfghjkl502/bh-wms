@@ -82,6 +82,7 @@ public class UserServiceImpl  implements UserService {
 
     @Override
     public void updateUser(User user) {
+        System.out.println("user==="+user);
         if(user.getPassword()!=null && user.getPassword()!=""){
             //通过ID查询盐值
             User u = userMapper.getUser(user.getUserId());

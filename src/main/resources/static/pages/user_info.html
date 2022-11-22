@@ -20,12 +20,6 @@
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">原密码</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="password" required  lay-verify="required" placeholder="原密码" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
                         <label class="layui-form-label">新密码</label>
                         <div class="layui-input-block">
                             <input type="password" name="newPassword" placeholder="新密码" class="layui-input">
@@ -78,13 +72,11 @@
                 let pss = ps[i].split("=");
                 obj[pss[0].trim()]=pss[1].trim();
             }
-            //console.log("cookie数据为: ",obj);
             $.getJSON("/getUserDetail",{userId:obj.userId},function (d) {
                 if(d.code===0){
                     //数据回显
                     form.val('userInfo',{
                         'userNick':d.obj.userNick,
-                        'password':d.obj.password,
                         'avatar':d.obj.avatar
                     });
                     //图片展示
@@ -116,7 +108,22 @@
             //提交数据
             form.on('submit(edit)',function (data) {
                 data.field.userId=obj.userId;
-                console.log(JSON.stringify(data.field));
+                $.ajax({
+                    url:"/updateUser",
+                    method:"post",
+                    data:JSON.stringify(data.field),
+                    contentType:"application/json",
+                    success:function (d){
+                        console.log(d);
+                        //关闭弹出层
+                        let index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭
+                        if(d.code!=0){
+                            layer.msg(d.msg);
+                        }
+                    }
+                });
+                return false;
             })
         });
 

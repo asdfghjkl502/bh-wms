@@ -123,5 +123,34 @@
 <script src="layui/layui.js"></script>
 <script src="js/md5.min.js"></script>
 <script src="js/hxx.js"></script>
+<script>
+	layui.use(['jquery','layer'],function () {
+		let layer = layui.layer;
+		let $ = layui.jquery;
+		/**
+		 *  获取用户头像
+		 *  1. 判断是否登录,cookie是否有值
+		 *  2. 如果不存在值,说明没有登录,不需要查询
+		 */
+		let cookies = document.cookie;
+		let split = cookies.split(";");
+		let c = {};
+		for (let i = 0; i < split.length; i++) {
+			let ss = split[i].split("=");
+			c[ss[0].trim()]=ss[1]; //key值需要去空格
+		}
+		if(c!=null && c.userId!=null && c.userId!="" && c.userId!="undefined"){
+			$.getJSON("/getUserDetail",{userId:c.userId},function (d) {
+				console.log(d);
+				if(d.code===0){
+					//获取头像的DOM节点
+					$("#avatarId")[0].src=d.obj.avatar;
+				}else{
+					layer.msg(d.msg);
+				}
+			});
+		}
+	});
+</script>
 </body>
 </html>

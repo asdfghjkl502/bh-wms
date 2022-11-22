@@ -62,22 +62,7 @@ layui.use(['jquery','dropdown','element','layer'],function(){
 			}
 		});
 	});
-	/**
-	 *  获取用户头像
-	 *  1. 判断是否登录,cookie是否有值
-	 *  2. 如果不存在值,说明没有登录,不需要查询
-	 */
-	if(c!=null && c.userId!=null && c.userId!="" && c.userId!="undefined"){
-		$.getJSON("/getUserDetail",{userId:c.userId},function (d) {
-			console.log(d);
-			if(d.code===0){
-				//获取头像的DOM节点
-				$("#avatarId")[0].src=d.obj.avatar;
-			}else{
-				layer.msg(d.msg);
-			}
-		});
-	}
+
 
 
 });

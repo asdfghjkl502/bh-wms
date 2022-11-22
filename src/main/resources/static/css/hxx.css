@@ -73,4 +73,16 @@
 	text-align: center;
 	line-height: 30px;
 }
+/*欢迎页样式*/
+.count-item{
+	height: 110px;
+}
+.count-item>.count-item-sub{
+	width: 95%;
+	height: 110px;
+	background-color: blue;
+	margin: auto;
+}
+
+
 

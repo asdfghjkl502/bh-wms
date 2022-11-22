@@ -12,7 +12,7 @@
     <div class="layui-container" style="margin-top: 10px;">
         <div class="layui-row">
             <div class="layui-col-md12">
-                <form class="layui-form layui-form-pane">
+                <form class="layui-form layui-form-pane" lay-filter="userInfo">
                     <div class="layui-form-item">
                         <label class="layui-form-label">用户昵称</label>
                         <div class="layui-input-block">
@@ -22,25 +22,25 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">原密码</label>
                         <div class="layui-input-block">
-                            <input type="text" name="title" required  lay-verify="required" placeholder="原密码" autocomplete="off" class="layui-input">
+                            <input type="text" name="password" required  lay-verify="required" placeholder="原密码" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">新密码</label>
                         <div class="layui-input-block">
-                            <input type="text" name="title" required  lay-verify="required" placeholder="新密码" autocomplete="off" class="layui-input">
+                            <input type="password" name="newPassword" placeholder="新密码" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">确认密码</label>
                         <div class="layui-input-block">
-                            <input type="text" name="title" required  lay-verify="required" placeholder="确认密码" autocomplete="off" class="layui-input">
+                            <input type="password" name="confirmPassword"   placeholder="确认密码"  class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">头像修改</label>
                         <div class="layui-input-block">
-                            <div class="layui-upload-drag" id="test10">
+                            <div class="layui-upload-drag" id="avatar">
                                 <i class="layui-icon"></i>
                                 <p>点击上传，或将图片拖拽到此处</p>
                                 <div class="layui-hide" id="uploadDemoView">
@@ -49,6 +49,7 @@
                                 </div>
                             </div>
                         </div>
+                        <input type="hidden" name="avatar">
                     </div>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
@@ -64,7 +65,58 @@
     <script>
 
         layui.use(['layer','jquery','upload','form'],function () {
+            let upload = layui.upload;
+            let layer = layui.layer;
+            let $ = layui.jquery;
+            let form = layui.form;
 
+            //获取当前登录用户信息,回显修改页面
+            let cs = document.cookie;
+            let ps = cs.split(";");
+            let obj={};
+            for (let i=0;i<ps.length;i++){
+                let pss = ps[i].split("=");
+                obj[pss[0].trim()]=pss[1].trim();
+            }
+            //console.log("cookie数据为: ",obj);
+            $.getJSON("/getUserDetail",{userId:obj.userId},function (d) {
+                if(d.code===0){
+                    //数据回显
+                    form.val('userInfo',{
+                        'userNick':d.obj.userNick,
+                        'password':d.obj.password,
+                        'avatar':d.obj.avatar
+                    });
+                    //图片展示
+                    let serverUrl="http://127.0.0.1:8080/";
+                    $('#uploadDemoView').removeClass('layui-hide').find('img').attr('src', serverUrl+d.obj.avatar);
+                }else {
+                    layer.msg(d.msg);
+                }
+            });
+
+            //拖拽上传
+            upload.render({
+                elem: '#avatar',
+                url: '/uploadFile', //文件上传地址
+                done: function(res){
+                    if(res.code===0){
+                        //成功之后展示
+                        $('#uploadDemoView').removeClass('layui-hide').find('img').attr('src', res.obj);
+                        //将成功之后的数据隐藏在表单中
+                        $('input[name="avatar"]').val(res.obj);
+                    }else {
+                        //失败提示消息
+                        layer.msg(d.msg);
+                    }
+
+                }
+            });
+
+            //提交数据
+            form.on('submit(edit)',function (data) {
+                console.log(data.field);
+            })
         });
 
     </script>

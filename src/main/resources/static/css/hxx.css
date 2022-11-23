@@ -83,7 +83,7 @@
 	height: 110px;
 	margin: auto;
 	display: flex;
-	background-color: #01aaed;
+	border: 1px solid #c2be9e;
 	border-radius: 10px;
 }
 .count-item>.count-item-sub>.sub-left{

@@ -86,28 +86,11 @@
         </div>
         <!-- 下 -->
         <div class="layui-row" style="margin-top: 10px;">
-            <div class="layui-col-md6" style="margin-top: 10px;background-color: white;">
-                <div id="repoId" style="width: 600px;height:400px;"></div>
+            <div class="layui-col-md6" style="background-color: white;">
+                <div id="repoId" style="width: 500px;height:400px;"></div>
             </div>
-            <div class="layui-col-md6" style="height: 400px;margin-top: 10px;">
-                <div class="layui-row" style="height: 100%;">
-                    <div class="layui-col-md11" style="height: 100%;margin-left: 5px;">
-                        <div class="layui-panel" style="height: 100%;">
-                            <div style="height: 100%;">
-                                <div class="layui-row" style="height: 100%;">
-                                    <div class="layui-col-md5 layui-col-md-offset1" style="height: 100%;">
-                                        <!-- 登录日志 -->
-
-                                    </div>
-                                    <div class="layui-col-md5 layui-col-md-offset1" style="height: 100%;">
-                                        <!-- 出入库日志 -->
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="layui-col-md6" style="background-color: white;">
+                <div id="clockId" style="width: 500px;height:400px;"></div>
             </div>
         </div>
     </div>
@@ -116,48 +99,6 @@
 	<script src="../js/md5.min.js"></script>
 	<script src="../js/hxx.js"></script>
     <script src="../js/echarts.js"></script>
-    <script>
-        // 基于准备好的dom，初始化echarts实例
-        let repo = echarts.init(document.getElementById('repoId'));
-
-        // 指定图表的配置项和数据
-        let option = {
-            title: {
-                text: '仓库负载率',
-                subtext: '数据由百惠智慧AI提供运算支持',
-                left: 'center'
-            },
-            tooltip: {
-                trigger: 'item'
-            },
-            legend: {
-                orient: 'vertical',
-                left: 'left'
-            },
-            series: [
-                {
-                    name: '智能仓储',
-                    type: 'pie',
-                    radius: '50%',
-                    data: [
-                        { value: 1048, name: '南京建邺' },
-                        { value: 735, name: '南京江宁' },
-                        { value: 580, name: '南京鼓楼' },
-                        { value: 484, name: '北京大兴' },
-                        { value: 300, name: '上海闸北' }
-                    ],
-                    emphasis: {
-                        itemStyle: {
-                            shadowBlur: 10,
-                            shadowOffsetX: 0,
-                            shadowColor: 'rgba(0, 0, 0, 0.5)'
-                        }
-                    }
-                }
-            ]
-        };
-        // 使用刚指定的配置项和数据显示图表。
-        repo.setOption(option);
-    </script>
+    <script src="../js/charts-statics.js"></script>
 </body>
 </html>

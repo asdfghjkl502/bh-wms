@@ -104,7 +104,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-size: 30px;
+	font-size: 25px;
 	font-weight: bold;
 }
 .sub-bottom>.sub-bottom-right{
@@ -116,7 +116,7 @@
 	align-items: center;
 }
 .sub-bottom>.sub-bottom-right>span{
-	font-size: 35px;
+	font-size: 30px;
 }
 
 

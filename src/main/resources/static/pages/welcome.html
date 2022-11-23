@@ -13,6 +13,7 @@
 <body style="background-color: whitesmoke">
 
 	<div class="layui-fluid" style="margin-top: 10px;">
+        <!-- 上 -->
         <div class="layui-row">
             <div class="layui-col-md3 count-item">
                 <div class="count-item-sub">
@@ -83,21 +84,71 @@
                 </div>
             </div>
         </div>
+        <!-- 下 -->
+        <div class="layui-row" style="margin-top: 20px;">
+            <div class="layui-col-md6" style="margin-top: 20px;background-color: white;">
+                <div id="repoId" style="width: 600px;height:400px;"></div>
+            </div>
+            <div class="layui-col-md6" style="height: 400px;margin-top: 20px;">
+                <div class="layui-row" style="height: 100%;">
+                    <div class="layui-col-md11" style="height: 100%;margin-left: 5px;">
+                        <div class="layui-panel" style="height: 100%;">
+                            <div style="height: 100%;">
+                                数据滚动区
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 	<script src="../layui/layui.js"></script>
 	<script src="../js/md5.min.js"></script>
 	<script src="../js/hxx.js"></script>
+    <script src="../js/echarts.js"></script>
     <script>
+        // 基于准备好的dom，初始化echarts实例
+        let repo = echarts.init(document.getElementById('repoId'));
 
-        /*将echarts加入到layui中*/
-        layui.extend({"echarts":"../js/echarts"}).use(["echarts","jquery"],function () {
-
-            let echarts = layui.echarts;
-            console.log("-->>>",echarts);
-
-        });
-
+        // 指定图表的配置项和数据
+        let option = {
+            title: {
+                text: '仓库负载率',
+                subtext: '数据由百惠智慧AI提供运算支持',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left'
+            },
+            series: [
+                {
+                    name: '智能仓储',
+                    type: 'pie',
+                    radius: '50%',
+                    data: [
+                        { value: 1048, name: '南京建邺' },
+                        { value: 735, name: '南京江宁' },
+                        { value: 580, name: '南京鼓楼' },
+                        { value: 484, name: '北京大兴' },
+                        { value: 300, name: '上海闸北' }
+                    ],
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        repo.setOption(option);
     </script>
 </body>
 </html>

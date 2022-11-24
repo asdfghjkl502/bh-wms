@@ -74,6 +74,7 @@ public class UserController {
         user.setSalt(userDto.getSalt());
         user.setAvatar(userDto.getAvatar());
         user.setCreateTime(userDto.getCreateTime());
+        user.setIsDelete(userDto.getIsDelete());
         if(userDto.getNewPassword()!=null && userDto.getNewPassword()!=""){
             //个人用户修改
             user.setPassword(userDto.getNewPassword());

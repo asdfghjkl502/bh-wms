@@ -39,4 +39,9 @@ public interface RoleMapper {
         查询角色列表
      */
     List<Role> getRoleList(@Param("roleName") String roleName,@Param("isDelete")Integer isDelete,@Param("roleId")Integer roleId,@Param("startTime")Date startTime,@Param("endTime")Date endTime);
+
+    /**
+     * 通过角色名称获取角色信息
+     */
+    Role getRoleByRoleName(String roleName);
 }

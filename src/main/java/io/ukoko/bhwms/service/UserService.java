@@ -62,4 +62,9 @@ public interface UserService {
      * @param userIds
      */
     void batchDeleteUser(List<Integer> userIds);
+
+    /**
+     * 获取仓库管理员列表
+     */
+    List<User> getRepositoryUser();
 }

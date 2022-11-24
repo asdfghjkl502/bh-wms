@@ -11,9 +11,14 @@ import java.util.List;
 @Mapper
 public interface UserRoleMapper {
     /**
-     * 查询数据
+     * 通过用户ID查询角色信息
      */
     List<UserRole> getUserRoleByUserId(Integer userId);
+
+    /**
+     * 通过角色ID查询用户信息
+     */
+    List<UserRole> getUserRoleByRoleId(Integer roleId);
     /**
      * 插入数据
      */

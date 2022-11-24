@@ -26,4 +26,9 @@
         SELECT * FROM user_role WHERE USER_ID=#{userId}
     </select>
 
+
+    <select id="getUserRoleByRoleId" resultMap="urMap" parameterType="int">
+        SELECT * FROM user_role WHERE ROLE_ID=#{roleId}
+    </select>
+
 </mapper>

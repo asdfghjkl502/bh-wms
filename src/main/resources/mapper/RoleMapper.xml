@@ -45,5 +45,9 @@
             <if test="startTime!=null and endTime!=null">AND UPDATE_TIME <![CDATA[>=]]> #{startTime} AND UPDATE_TIME <![CDATA[<=]]> #{endTime}</if>
         </where>
     </select>
+    
+    <select id="getRoleByRoleName" resultType="role">
+        SELECT * FROM role WHERE IS_DELETE=1 AND ROLE_NAME=#{roleName}
+    </select>
 
 </mapper>

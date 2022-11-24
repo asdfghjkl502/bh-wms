@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.dto.UserDto;
 import io.ukoko.bhwms.entity.*;
+import io.ukoko.bhwms.mapper.RoleMapper;
 import io.ukoko.bhwms.mapper.UserDepartmentMapper;
 import io.ukoko.bhwms.mapper.UserMapper;
 import io.ukoko.bhwms.mapper.UserRoleMapper;
@@ -29,6 +30,8 @@ public class UserServiceImpl  implements UserService {
     private UserDepartmentMapper userDepartmentMapper;
     @Autowired
     private UserRoleMapper userRoleMapper;
+    @Autowired
+    private RoleMapper roleMapper;
 
 
     @Override
@@ -168,6 +171,21 @@ public class UserServiceImpl  implements UserService {
     @Override
     public void batchDeleteUser(List<Integer> userIds) {
         userMapper.batchDeleteUser(userIds);
+    }
+
+    @Override
+    public List<User> getRepositoryUser() {
+        //获取仓库管理员角色ID
+        Role role = roleMapper.getRoleByRoleName("仓库管理员");
+        //通过角色ID查询当前角色下的用户
+        List<UserRole> userRoles = userRoleMapper.getUserRoleByRoleId(role.getRoleId());
+        List<Integer> userIds = new ArrayList<>();
+        for (UserRole userRole : userRoles) {
+            userIds.add(userRole.getUserId());
+        }
+        //通过用户ID集合查询用户列表
+        List<User> users = userMapper.batchGetUserList(userIds);
+        return users;
     }
 
 

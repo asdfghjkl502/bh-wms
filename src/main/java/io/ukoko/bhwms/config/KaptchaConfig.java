@@ -39,6 +39,8 @@ public class KaptchaConfig {
         properties.setProperty("kaptcha.image.width","155");
         //设置字体大小
         properties.setProperty("kaptcha.textproducer.font.size","30");
+        //设置生成图片是否存在边框(yes存在,no不存在)
+        properties.setProperty("kaptcha.border","no");
         Config config = new Config(properties);
         return config;
     }

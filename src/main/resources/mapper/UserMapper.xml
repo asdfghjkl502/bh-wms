@@ -60,6 +60,13 @@
         <result column="IS_DELETE" property="isDelete"></result>
     </resultMap>
     
+    <select id="batchGetUserList" resultMap="userMap">
+        SELECT * FROM user WHERE USER_ID IN
+        <foreach collection="list" item="userId" open="(" close=")" separator=",">
+            #{userId}
+        </foreach>
+    </select>
+    
     <select id="getUserList" resultMap="userMap">
         SELECT * FROM user
             <where>

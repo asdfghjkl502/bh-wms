@@ -16,6 +16,16 @@ class UserMapperTest extends BhWmsApplicationTests {
     @Autowired
     private UserMapper userMapper;
 
+
+    @Test
+    public void batchGetUserList(){
+        List<Integer> userIds = new ArrayList<>();
+        userIds.add(2);
+        userIds.add(3);
+        List<User> users = userMapper.batchGetUserList(userIds);
+        users.forEach(System.out::println);
+    }
+
     @Test
     void addUser() {
 

@@ -28,6 +28,11 @@ public interface UserMapper {
     void batchDeleteUser(List<Integer> userIds);
 
     /**
+     * 批量查询
+     */
+    List<User> batchGetUserList(List<Integer> userIds);
+
+    /**
      * 更新用户
      */
     void updateUser(User user);

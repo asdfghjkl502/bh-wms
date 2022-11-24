@@ -6,108 +6,108 @@ import java.util.Date;
  * 映射数据库user_role(用户角色关联表)
  */
 public class UserRole {
-  /*
-    用户ID
-   */
-  private Integer userId;
-  /*
-    用户信息
-   */
-  private User user;
-  /*
-    角色ID
-   */
-  private Integer roleId;
-  /*
-    角色信息
-   */
-  private Role role;
-  /*
-        创建时间
+    /*
+      用户ID
      */
-  private Date createTime;
-  /*
-      更新时间
-   */
-  private Date updateTime;
-  /*
-      是否删除 0:删除 1:未删除
-   */
-  private int isDelete=1;
-  public UserRole() {
-  }
+    private Integer userId;
+    /*
+      用户信息
+     */
+    private User user;
+    /*
+      角色ID
+     */
+    private Integer roleId;
+    /*
+      角色信息
+     */
+    private Role role;
+    /*
+          创建时间
+       */
+    private Date createTime;
+    /*
+        更新时间
+     */
+    private Date updateTime;
+    /*
+        是否删除 0:删除 1:未删除
+     */
+    private int isDelete=1;
+    public UserRole() {
+    }
 
-  public UserRole(Integer userId, Integer roleId) {
-    this.userId = userId;
-    this.roleId = roleId;
-  }
+    public UserRole(Integer userId, Integer roleId) {
+        this.userId = userId;
+        this.roleId = roleId;
+    }
 
-  public Integer getUserId() {
-    return userId;
-  }
+    public Integer getUserId() {
+        return userId;
+    }
 
-  public void setUserId(Integer userId) {
-    this.userId = userId;
-  }
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-  public Integer getRoleId() {
-    return roleId;
-  }
+    public Integer getRoleId() {
+        return roleId;
+    }
 
-  public void setRoleId(Integer roleId) {
-    this.roleId = roleId;
-  }
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
 
-  public int getIsDelete() {
-    return isDelete;
-  }
+    public int getIsDelete() {
+        return isDelete;
+    }
 
-  public void setIsDelete(int isDelete) {
-    this.isDelete = isDelete;
-  }
+    public void setIsDelete(int isDelete) {
+        this.isDelete = isDelete;
+    }
 
-  public Date getCreateTime() {
-    return createTime;
-  }
+    public Date getCreateTime() {
+        return createTime;
+    }
 
-  public void setCreateTime(Date createTime) {
-    this.createTime = createTime;
-  }
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
-  public Date getUpdateTime() {
-    return updateTime;
-  }
+    public Date getUpdateTime() {
+        return updateTime;
+    }
 
-  public void setUpdateTime(Date updateTime) {
-    this.updateTime = updateTime;
-  }
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
 
-  public User getUser() {
-    return user;
-  }
+    public User getUser() {
+        return user;
+    }
 
-  public void setUser(User user) {
-    this.user = user;
-  }
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-  public Role getRole() {
-    return role;
-  }
+    public Role getRole() {
+        return role;
+    }
 
-  public void setRole(Role role) {
-    this.role = role;
-  }
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
-  @Override
-  public String toString() {
-    return "UserRole{" +
-            "userId=" + userId +
-            ", user=" + user +
-            ", roleId=" + roleId +
-            ", role=" + role +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-            ", isDelete=" + isDelete +
-            '}';
-  }
+    @Override
+    public String toString() {
+        return "UserRole{" +
+                "userId=" + userId +
+                ", user=" + user +
+                ", roleId=" + roleId +
+                ", role=" + role +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", isDelete=" + isDelete +
+                '}';
+    }
 }

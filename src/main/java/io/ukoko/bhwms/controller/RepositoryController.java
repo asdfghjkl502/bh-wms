@@ -21,7 +21,7 @@ public class RepositoryController {
     private RepositoryService repositoryService;
 
     /**
-     * 创建仓库
+     * 添加仓库
      * @param repository
      * @return
      */

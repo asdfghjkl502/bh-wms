@@ -16,9 +16,15 @@ public interface SupplierService {
     void addSupplier(Supplier supplier);
 
     /**
-     * 获取供应商列表
+     * 获取供应商分页
      */
     Page getSupplierPage(int pageNo,int pageSize,String supplierName,String supplierLeader, String supplierTel);
+
+    /**
+     * 获取供应商列表
+     * @return
+     */
+    List<Supplier> getSupplierList();
 
     /**
      * 更新

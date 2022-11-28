@@ -60,7 +60,40 @@
 <script src="../js/xm-select.js"></script>
 <script>
 
+    layui.use(["jquery","form","laydate","layer"],function () {
 
+        let $ = layui.jquery;
+        let form = layui.form;
+        let layer = layui.layer;
+
+        //生成供应商下拉框
+        xmSelect.render({
+            el:".hxx-supplier",
+            filterable: true,/*开启搜索模式*/
+            remoteSearch: true, /* 开启远程搜索 */
+            max: 1, /* 选择一条 */
+            prop:{  /*修改下拉框默认属性*/
+                name:"supplierName",
+                value:"supplierId"
+            },
+            remoteMethod: function(val, cb, show){
+                //这里如果val为空, 则不触发搜索
+                if(!val){
+                    return cb([]);
+                }
+                /* 通过API获取数据 */
+                $.getJSON("/getSupplierList",{supplierName:val},function (d) {
+                    console.log("d:",d);
+                    if(d.code!=0){
+                        layer.msg(d.msg);
+                    }else{
+                        cb(d.obj);
+                    }
+                });
+            }
+        });
+
+    });
 
 </script>
 </body>

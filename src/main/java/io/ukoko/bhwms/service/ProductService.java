@@ -17,9 +17,14 @@ public interface ProductService {
      */
     void addProduct(Product product);
     /*
-        获取列表
+        获取分页列表
      */
     Page getProductPage(int pageNo, int pageSize,String productName,String productSize,Integer isDelete,Date startTime,Date endTime);
+
+    /*
+        获取列表
+     */
+    List<Product> getProductList(String productName);
 
     /**
      * 更新

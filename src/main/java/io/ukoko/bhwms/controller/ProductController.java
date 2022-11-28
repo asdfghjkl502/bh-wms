@@ -67,4 +67,13 @@ public class ProductController {
         Page page = productService.getProductPage(pageNo, pageSize, productName, productSize, isDelete, startTime, endTime);
         return new Result(page);
     }
+
+    /*
+        获取产品列表
+     */
+    @GetMapping(value = "/getProductList")
+    public Object getProductList(String productName){
+        List<Product> productList = productService.getProductList(productName);
+        return new Result(productList);
+    }
 }

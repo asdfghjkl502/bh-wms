@@ -118,14 +118,6 @@
 .sub-bottom>.sub-bottom-right>span{
 	font-size: 30px;
 }
-/*显示和隐藏样式修改*/
-.layui-colla-title{
-	float: right;
-	font-size: 0.9em;
-}
-.layui-colla-title>i{
-	font-size: 0.9em;
-}
 
 
 

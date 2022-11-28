@@ -1,0 +1,18 @@
+/*显示和隐藏样式修改*/
+.layui-colla-title{
+    float: right;
+    font-size: 0.9em;
+}
+.layui-colla-title>i{
+    font-size: 0.9em;
+}
+.layui-form-value{
+    position: relative;
+    float: left;
+    display: block;
+    padding: 9px 15px;
+    width: 80px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+}

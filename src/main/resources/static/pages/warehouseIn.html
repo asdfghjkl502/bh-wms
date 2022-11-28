@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>百慧智慧wms仓库</title>
   <link href="../layui/css/layui.css" rel="stylesheet">
-  <link href="../css/hxx.css" rel="stylesheet">
+  <link href="../css/warehouse.css" rel="stylesheet">
 </head>
 <body>
     <div class="layui-container">
@@ -44,18 +44,145 @@
         </div>
         <!-- 信息展示,展示和隐藏 -->
         <div class="layui-fluid">
-            <div class="layui-collapse" lay-accordion="">
+            <div class="layui-collapse" style="border-style: none;">
                 <div class="layui-colla-item">
-                    <h2 class="layui-colla-title">展示 | 隐藏</h2>
-                    <div class="layui-colla-content">
+                    <h4 class="layui-colla-title" style="line-height: 30px;height: 30px;">展示 | 隐藏</h4>
+                    <div class="layui-colla-content" style="border-top-style: none;">
                         <div class="layui-row">
                             <div class="layui-col-md6">
                                 <!--供应商详情-->
-                                <h1>供应商详情</h1>
+                                <div class="layui-row">
+                                    <div class="layui-col-md12">
+                                        <h4>供应商信息</h4>
+                                    </div>
+                                    <div class="layui-col-md12">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md6">
+                                                <!-- 供应商ID -->
+                                                <div class="layui-inline">
+                                                    <label class="layui-form-label">供应商编号:</label>
+                                                    <div class="layui-form-value">
+                                                        xz200000
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="layui-col-md6">
+                                                <!-- 供应商名称 -->
+                                                <div class="layui-inline">
+                                                    <label class="layui-form-label">供应商名称:</label>
+                                                    <div class="layui-form-value">
+                                                        大萝卜集团
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- |||||||||||||||||||||| -->
+                                        <div class="layui-row">
+                                            <div class="layui-col-md6">
+                                                <!-- 供应商ID -->
+                                                <div class="layui-inline">
+                                                    <label class="layui-form-label">负责人:</label>
+                                                    <div class="layui-form-value">
+                                                        李雷
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="layui-col-md6">
+                                                <!-- 供应商名称 -->
+                                                <div class="layui-inline">
+                                                    <label class="layui-form-label">联系电话:</label>
+                                                    <div class="layui-form-value">
+                                                        13316677777
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- |||||||||||||||||||||| -->
+                                        <div class="layui-row">
+                                            <div class="layui-col-md6">
+                                                <!-- 供应商ID -->
+                                                <div class="layui-inline">
+                                                    <label class="layui-form-label">电子邮件:</label>
+                                                    <div class="layui-form-value">
+                                                        ll@163.com
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="layui-col-md6">
+                                                <!-- 供应商名称 -->
+                                                <div class="layui-inline">
+                                                    <label class="layui-form-label">联系地址:</label>
+                                                    <div class="layui-form-value">
+                                                        上海市宝安区
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="layui-col-md6">
-                                <!--商品详情-->
-                                <h1>商品详情</h1>
+                                <!--货物详情-->
+                                <div class="layui-row">
+                                    <div class="layui-col-md12">
+                                        <h4>货物信息</h4>
+                                    </div>
+                                    <div class="layui-col-md12">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md6">
+                                                <!-- 货物编号 -->
+                                                <div class="layui-inline">
+                                                    <label class="layui-form-label">货物编号:</label>
+                                                    <div class="layui-form-value">
+                                                        pd200000
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="layui-col-md6">
+                                                <!-- 货物名称 -->
+                                                <div class="layui-inline">
+                                                    <label class="layui-form-label">货物名称:</label>
+                                                    <div class="layui-form-value">
+                                                        大花裤衩
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- |||||||||||||||||||||| -->
+                                        <div class="layui-row">
+                                            <div class="layui-col-md6">
+                                                <!-- 货物类型 -->
+                                                <div class="layui-inline">
+                                                    <label class="layui-form-label">货物类型:</label>
+                                                    <div class="layui-form-value">
+                                                        短裤
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="layui-col-md6">
+                                                <!-- 货物价值 -->
+                                                <div class="layui-inline">
+                                                    <label class="layui-form-label">货物价格:</label>
+                                                    <div class="layui-form-value">
+                                                        ￥200000
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- |||||||||||||||||||||| -->
+                                        <div class="layui-row">
+                                            <div class="layui-col-md6">
+                                                <!-- 货物尺寸 -->
+                                                <div class="layui-inline">
+                                                    <label class="layui-form-label">货物尺寸:</label>
+                                                    <div class="layui-form-value">
+                                                        200*300
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

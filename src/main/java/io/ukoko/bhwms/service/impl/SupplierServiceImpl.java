@@ -42,8 +42,8 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public List<Supplier> getSupplierList() {
-        return supplierMapper.getSupplierList(null,null,null);
+    public List<Supplier> getSupplierList(String supplierName) {
+        return supplierMapper.getSupplierList(supplierName,null,null);
     }
 
     @Override

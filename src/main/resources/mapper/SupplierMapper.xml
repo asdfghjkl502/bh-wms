@@ -48,9 +48,9 @@
     <select id="getSupplierList" resultType="supplier">
         SELECT * FROM supplier
         <where>
-            <if test="supplierName!=null">SUPPLIER_NAME LIKE CONCAT('%',#{supplierName},'%') AND </if>
-            <if test="supplierLeader!=null">SUPPLIER_LEADER LIKE CONCAT('%',#{supplierLeader},'%') AND </if>
-            <if test="supplierTel!=null">SUPPLIER_TEL LIKE CONCAT('%',#{supplierTel},'%')</if>
+            <if test="supplierName!=null">SUPPLIER_NAME LIKE CONCAT('%',#{supplierName},'%')</if>
+            <if test="supplierLeader!=null"> AND SUPPLIER_LEADER LIKE CONCAT('%',#{supplierLeader},'%')</if>
+            <if test="supplierTel!=null"> AND SUPPLIER_TEL LIKE CONCAT('%',#{supplierTel},'%')</if>
         </where>
     </select>
 

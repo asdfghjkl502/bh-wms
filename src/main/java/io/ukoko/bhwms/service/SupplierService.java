@@ -24,7 +24,7 @@ public interface SupplierService {
      * 获取供应商列表
      * @return
      */
-    List<Supplier> getSupplierList();
+    List<Supplier> getSupplierList(String supplierName);
 
     /**
      * 更新

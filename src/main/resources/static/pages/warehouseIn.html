@@ -31,8 +31,8 @@
                         <!--商品编号，带搜索框的下拉-->
                         <div class="layui-row">
                             <div class="layui-form-item">
-                                <label class="layui-form-label">商品编号</label>
-                                <div class="layui-input-block" id="product">
+                                <label class="layui-form-label">商品名称</label>
+                                <div class="layui-input-block" id="productId">
 
                                 </div>
                             </div>
@@ -88,6 +88,8 @@
             filterable: true,/*开启搜索模式*/
             remoteSearch: true, /* 开启远程搜索 */
             max: 1, /* 选择一条 */
+            tips:"供应商名称",/* 背景提示 */
+            searchTips:"搜索供应商",/*搜索提示*/
             prop:{  /*修改下拉框默认属性*/
                 name:"supplierName",
                 value:"supplierId"
@@ -112,8 +114,38 @@
             }
         });
 
+        //生成产品下拉框
+        xmSelect.render({
+            el:"#productId",
+            filterable: true,/*开启搜索模式*/
+            remoteSearch: true, /* 开启远程搜索 */
+            max: 1, /* 选择一条 */
+            tips:"商品名称",/* 修改背景提示 */
+            searchTips:"搜索商品名",/*搜索提示*/
+            prop:{  /*修改下拉框默认属性*/
+                name:"productName",
+                value:"productId"
+            },
+            theme: { /*主题*/
+                color: '#0081ff',
+            },
+            remoteMethod: function(val, cb, show){
+                //这里如果val为空, 则不触发搜索
+                if(!val){
+                    return cb([]);
+                }
+                /* 通过API获取数据 */
+                $.getJSON("/getProductList",{productName:val},function (d) {
+                    console.log("d:",d);
+                    if(d.code!=0){
+                        layer.msg(d.msg);
+                    }else{
+                        cb(d.obj);
+                    }
+                });
+            }
+        });
     });
-
 </script>
 </body>
 </html>

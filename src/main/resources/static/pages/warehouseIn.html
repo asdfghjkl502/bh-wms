@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>百慧智慧wms仓库</title>
   <link href="../layui/css/layui.css" rel="stylesheet">
+  <link href="../css/hxx.css" rel="stylesheet">
 </head>
 <body>
     <div class="layui-container">
@@ -43,14 +44,24 @@
         </div>
         <!-- 信息展示,展示和隐藏 -->
         <div class="layui-fluid">
-            <div class="layui-row">
-                <div class="layui-col-md6">
-                    <!--供应商详情-->
-                </div>
-                <div class="layui-col-md6">
-                    <!--商品详情-->
+            <div class="layui-collapse" lay-accordion="">
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">展示 | 隐藏</h2>
+                    <div class="layui-colla-content">
+                        <div class="layui-row">
+                            <div class="layui-col-md6">
+                                <!--供应商详情-->
+                                <h1>供应商详情</h1>
+                            </div>
+                            <div class="layui-col-md6">
+                                <!--商品详情-->
+                                <h1>商品详情</h1>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
         <!-- 入库的仓库 -->
         <div class="layui-row">

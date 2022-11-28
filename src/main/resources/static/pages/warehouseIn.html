@@ -14,6 +14,14 @@
                 <div class="layui-row">
                     <div class="layui-col-md8 hxx-supplier">
                         <!--供应商，带搜索框的下拉-->
+                        <div class="layui-row">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">供应商</label>
+                                <div class="layui-input-block" id="supplierId">
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -21,6 +29,14 @@
                 <div class="layui-row">
                     <div class="layui-col-md8 hxx-product">
                         <!--商品编号，带搜索框的下拉-->
+                        <div class="layui-row">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">商品编号</label>
+                                <div class="layui-input-block" id="product">
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -68,13 +84,16 @@
 
         //生成供应商下拉框
         xmSelect.render({
-            el:".hxx-supplier",
+            el:"#supplierId",
             filterable: true,/*开启搜索模式*/
             remoteSearch: true, /* 开启远程搜索 */
             max: 1, /* 选择一条 */
             prop:{  /*修改下拉框默认属性*/
                 name:"supplierName",
                 value:"supplierId"
+            },
+            theme: { /*主题*/
+                color: '#0081ff',
             },
             remoteMethod: function(val, cb, show){
                 //这里如果val为空, 则不触发搜索

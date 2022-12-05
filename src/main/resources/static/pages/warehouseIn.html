@@ -17,8 +17,8 @@
                         <!--供应商，带搜索框的下拉-->
                         <div class="layui-row">
                             <div class="layui-form-item">
-                                <label class="layui-form-label">供应商</label>
-                                <div class="layui-input-block" id="supplierId">
+                                <label class="layui-form-label">获取编号</label>
+                                <div class="layui-input-block" id="productNoId">
 
                                 </div>
                             </div>
@@ -33,7 +33,7 @@
                         <div class="layui-row">
                             <div class="layui-form-item">
                                 <label class="layui-form-label">货物名称</label>
-                                <div class="layui-input-block" id="productId">
+                                <div class="layui-input-block" id="productNameId">
 
                                 </div>
                             </div>
@@ -268,9 +268,9 @@
         let form = layui.form;
         let layer = layui.layer;
 
-        //生成供应商下拉框
+        //生成获取下拉框,基于商品编号
         let xmSupplier = xmSelect.render({
-            el:"#supplierId",
+            el:"#productNoId",
             filterable: true,/*开启搜索模式*/
             remoteSearch: true, /* 开启远程搜索 */
             max: 1, /* 选择一条 */
@@ -305,7 +305,7 @@
 
         //生成产品下拉框
         xmSelect.render({
-            el:"#productId",
+            el:"#productNameId",
             filterable: true,/*开启搜索模式*/
             remoteSearch: true, /* 开启远程搜索 */
             max: 1, /* 选择一条 */

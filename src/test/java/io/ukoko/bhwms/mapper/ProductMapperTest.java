@@ -34,7 +34,7 @@ class ProductMapperTest extends BhWmsApplicationTests {
 
     @Test
     void getProductList() {
-        List<Product> productList = productMapper.getProductList("0", null, null, null, null);
+        List<Product> productList = productMapper.getProductList("0", null, null, null, null,null);
         productList.forEach(System.out::println);
     }
 }

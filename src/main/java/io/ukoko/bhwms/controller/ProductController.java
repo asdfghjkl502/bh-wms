@@ -72,8 +72,8 @@ public class ProductController {
         获取产品列表
      */
     @GetMapping(value = "/getProductList")
-    public Object getProductList(String productName){
-        List<Product> productList = productService.getProductList(productName);
+    public Object getProductList(String productName,String productId){
+        List<Product> productList = productService.getProductList(productId,productName);
         return new Result(productList);
     }
 }

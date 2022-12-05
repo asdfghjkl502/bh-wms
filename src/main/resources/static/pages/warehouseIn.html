@@ -14,10 +14,10 @@
             <div class="layui-col-md6">
                 <div class="layui-row">
                     <div class="layui-col-md8 hxx-supplier">
-                        <!--供应商，带搜索框的下拉-->
+                        <!--货物编号，带搜索框的下拉-->
                         <div class="layui-row">
                             <div class="layui-form-item">
-                                <label class="layui-form-label">获取编号</label>
+                                <label class="layui-form-label">货物编号</label>
                                 <div class="layui-input-block" id="productNoId">
 
                                 </div>
@@ -29,7 +29,7 @@
             <div class="layui-col-md6">
                 <div class="layui-row">
                     <div class="layui-col-md8 hxx-product">
-                        <!--商品编号，带搜索框的下拉-->
+                        <!--货物名称，带搜索框的下拉-->
                         <div class="layui-row">
                             <div class="layui-form-item">
                                 <label class="layui-form-label">货物名称</label>
@@ -269,16 +269,16 @@
         let layer = layui.layer;
 
         //生成获取下拉框,基于商品编号
-        let xmSupplier = xmSelect.render({
+        xmSelect.render({
             el:"#productNoId",
             filterable: true,/*开启搜索模式*/
             remoteSearch: true, /* 开启远程搜索 */
             max: 1, /* 选择一条 */
-            tips:"供应商名称",/* 背景提示 */
-            searchTips:"搜索供应商",/*搜索提示*/
+            tips:"货物编号",/* 背景提示 */
+            searchTips:"搜索货物编号",/*搜索提示*/
             prop:{  /*修改下拉框默认属性*/
-                name:"supplierName",
-                value:"supplierId"
+                name:"productId",
+                value:"productId"
             },
             theme: { /*主题*/
                 color: '#0081ff',
@@ -289,7 +289,7 @@
                     return cb([]);
                 }
                 /* 通过API获取数据 */
-                $.getJSON("/getSupplierList",{supplierName:val},function (d) {
+                $.getJSON("/getProductList",{productId:val},function (d) {
                     //console.log("d:",d);
                     if(d.code!=0){
                         layer.msg(d.msg);
@@ -299,7 +299,7 @@
                 });
             },
             on:function (data){
-                console.log("供应商: ",data);
+                console.log("产品: ",data);
             }
         });
 

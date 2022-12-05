@@ -22,7 +22,7 @@ public interface ProductMapper {
     /**
      * 获取列表
      */
-    List<Product> getProductList(@Param("productName") String productName,@Param("productSize") String productSize, @Param("isDelete") Integer isDelete,@Param("startTime") Date startTime,@Param("endTime") Date endTime);
+    List<Product> getProductList(@Param("productId") String productId, @Param("productName") String productName,@Param("productSize") String productSize, @Param("isDelete") Integer isDelete,@Param("startTime") Date startTime,@Param("endTime") Date endTime);
 
 
     /**

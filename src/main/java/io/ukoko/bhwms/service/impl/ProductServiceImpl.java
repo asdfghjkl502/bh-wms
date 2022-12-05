@@ -29,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
     public Page getProductPage(int pageNo, int pageSize, String productName, String productSize, Integer isDelete, Date startTime, Date endTime) {
         Page page = new Page();
         PageHelper.startPage(pageNo,pageSize);
-        List<Product> productList = productMapper.getProductList(productName, productSize, isDelete, startTime, endTime);
+        List<Product> productList = productMapper.getProductList(null,productName, productSize, isDelete, startTime, endTime);
         PageInfo<Product> info = new PageInfo<>(productList);
         page.setPageNo(info.getPageNum());
         page.setPageSize(info.getPageSize());
@@ -42,9 +42,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProductList(String productName) {
-        return productMapper.getProductList(productName,null,null,null,null);
+    public List<Product> getProductList(String productId, String productName) {
+        return productMapper.getProductList(productId,productName,null,null,null,null);
     }
+
 
     @Override
     public void updateProduct(Product product) {

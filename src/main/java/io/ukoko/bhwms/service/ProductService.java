@@ -24,7 +24,7 @@ public interface ProductService {
     /*
         获取列表
      */
-    List<Product> getProductList(String productName);
+    List<Product> getProductList(String productId,String productName);
 
     /**
      * 更新

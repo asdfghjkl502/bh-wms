@@ -17,8 +17,8 @@
                         <!--货物编号，带搜索框的下拉-->
                         <div class="layui-row">
                             <div class="layui-form-item">
-                                <label class="layui-form-label">货物编号</label>
-                                <div class="layui-input-block" id="productNoId">
+                                <label class="layui-form-label">供应商</label>
+                                <div class="layui-input-block" id="supplierId">
 
                                 </div>
                             </div>
@@ -268,17 +268,17 @@
         let form = layui.form;
         let layer = layui.layer;
 
-        //生成获取下拉框,基于商品编号
+        //生成获取下拉框
         xmSelect.render({
-            el:"#productNoId",
+            el:"#supplierId",
             filterable: true,/*开启搜索模式*/
             remoteSearch: true, /* 开启远程搜索 */
             max: 1, /* 选择一条 */
-            tips:"货物编号",/* 背景提示 */
-            searchTips:"搜索货物编号",/*搜索提示*/
+            tips:"供应商名称",/* 背景提示 */
+            searchTips:"搜索供应商",/*搜索提示*/
             prop:{  /*修改下拉框默认属性*/
-                name:"productId",
-                value:"productId"
+                name:"supplierName",
+                value:"supplierId"
             },
             theme: { /*主题*/
                 color: '#0081ff',
@@ -289,7 +289,7 @@
                     return cb([]);
                 }
                 /* 通过API获取数据 */
-                $.getJSON("/getProductList",{productId:val},function (d) {
+                $.getJSON("/getSupplierList",{supplierName:val},function (d) {
                     //console.log("d:",d);
                     if(d.code!=0){
                         layer.msg(d.msg);

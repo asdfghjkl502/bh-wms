@@ -52,7 +52,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductVo getProductByProductId(Integer productId, Integer repoId) {
+    public ProductVo getProduct(Integer productId, Integer repoId) {
         ProductVo productVo = new ProductVo();
         //产品信息
         Product product = productMapper.getProductByProductId(productId);

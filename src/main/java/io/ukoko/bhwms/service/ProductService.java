@@ -33,7 +33,7 @@ public interface ProductService {
      * @param repoId
      * @return
      */
-    ProductVo getProductByProductId(Integer productId,Integer repoId);
+    ProductVo getProduct(Integer productId,Integer repoId);
 
     /**
      * 更新

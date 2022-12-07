@@ -2,6 +2,7 @@ package io.ukoko.bhwms.controller;
 
 import io.swagger.annotations.Api;
 import io.ukoko.bhwms.dto.Page;
+import io.ukoko.bhwms.dto.ProductVo;
 import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.entity.Product;
 import io.ukoko.bhwms.service.ProductService;
@@ -75,5 +76,14 @@ public class ProductController {
     public Object getProductList(String productName,String productId){
         List<Product> productList = productService.getProductList(productId,productName);
         return new Result(productList);
+    }
+
+    /*
+        获取单个产品信息
+     */
+    @GetMapping(value = "/getProduct")
+    public Object getProduct(Integer productId,Integer repoId){
+        ProductVo product = productService.getProduct(productId, repoId);
+        return new Result(product);
     }
 }

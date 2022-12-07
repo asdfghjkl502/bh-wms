@@ -61,7 +61,7 @@
                                                 <!-- 供应商ID -->
                                                 <div class="layui-inline">
                                                     <label class="layui-form-label">供应商编号:</label>
-                                                    <div class="layui-form-value">
+                                                    <div class="layui-form-value supplierId">
                                                         -
                                                     </div>
                                                 </div>
@@ -70,7 +70,7 @@
                                                 <!-- 供应商名称 -->
                                                 <div class="layui-inline">
                                                     <label class="layui-form-label">供应商名称:</label>
-                                                    <div class="layui-form-value">
+                                                    <div class="layui-form-value supplierName">
                                                         -
                                                     </div>
                                                 </div>
@@ -82,7 +82,7 @@
                                                 <!-- 供应商ID -->
                                                 <div class="layui-inline">
                                                     <label class="layui-form-label">负责人:</label>
-                                                    <div class="layui-form-value">
+                                                    <div class="layui-form-value supplierLeader">
                                                         -
                                                     </div>
                                                 </div>
@@ -91,7 +91,7 @@
                                                 <!-- 供应商名称 -->
                                                 <div class="layui-inline">
                                                     <label class="layui-form-label">联系电话:</label>
-                                                    <div class="layui-form-value">
+                                                    <div class="layui-form-value supplierTel">
                                                         -
                                                     </div>
                                                 </div>
@@ -103,7 +103,7 @@
                                                 <!-- 供应商ID -->
                                                 <div class="layui-inline">
                                                     <label class="layui-form-label">电子邮件:</label>
-                                                    <div class="layui-form-value">
+                                                    <div class="layui-form-value supplierEmail">
                                                         -
                                                     </div>
                                                 </div>
@@ -112,7 +112,7 @@
                                                 <!-- 供应商名称 -->
                                                 <div class="layui-inline">
                                                     <label class="layui-form-label">联系地址:</label>
-                                                    <div class="layui-form-value">
+                                                    <div class="layui-form-value supplierAddress">
                                                         -
                                                     </div>
                                                 </div>
@@ -133,7 +133,7 @@
                                                 <!-- 货物编号 -->
                                                 <div class="layui-inline">
                                                     <label class="layui-form-label">货物编号:</label>
-                                                    <div class="layui-form-value">
+                                                    <div class="layui-form-value productId">
                                                         -
                                                     </div>
                                                 </div>
@@ -142,7 +142,7 @@
                                                 <!-- 货物名称 -->
                                                 <div class="layui-inline">
                                                     <label class="layui-form-label">货物名称:</label>
-                                                    <div class="layui-form-value">
+                                                    <div class="layui-form-value productName">
                                                         -
                                                     </div>
                                                 </div>
@@ -154,7 +154,7 @@
                                                 <!-- 货物类型 -->
                                                 <div class="layui-inline">
                                                     <label class="layui-form-label">货物类型:</label>
-                                                    <div class="layui-form-value">
+                                                    <div class="layui-form-value categoryId">
                                                         -
                                                     </div>
                                                 </div>
@@ -163,7 +163,7 @@
                                                 <!-- 货物价值 -->
                                                 <div class="layui-inline">
                                                     <label class="layui-form-label">货物价格:</label>
-                                                    <div class="layui-form-value">
+                                                    <div class="layui-form-value productPrice">
                                                         ￥-.--
                                                     </div>
                                                 </div>
@@ -175,7 +175,7 @@
                                                 <!-- 货物尺寸 -->
                                                 <div class="layui-inline">
                                                     <label class="layui-form-label">货物尺寸:</label>
-                                                    <div class="layui-form-value">
+                                                    <div class="layui-form-value productSize">
                                                         -
                                                     </div>
                                                 </div>
@@ -290,7 +290,6 @@
                 }
                 /* 通过API获取数据 */
                 $.getJSON("/getSupplierList",{supplierName:val},function (d) {
-                    //console.log("d:",d);
                     if(d.code!=0){
                         layer.msg(d.msg);
                     }else{
@@ -298,8 +297,15 @@
                     }
                 });
             },
-            on:function (data){
-                console.log("产品: ",data);
+            on:function (val){
+                //console.log("供应商: ",val);
+                //判断数据是否存在,如果存在将其显示在隐藏/显示区域
+                if(val!=null && val!="undefined" && val.arr!=null && val.arr!="undefined" && val.arr.length>0){
+                    //数据存在,获取第一个
+                    let supplier = val.arr[0];
+                    console.log("供应商: -->>>",supplier);
+
+                }
             }
         });
 
@@ -333,8 +339,8 @@
                     }
                 });
             },
-            on:function (data){
-                console.log("产品: ",data);
+            on:function (val){
+                console.log("产品: ",val);
             }
         });
     });

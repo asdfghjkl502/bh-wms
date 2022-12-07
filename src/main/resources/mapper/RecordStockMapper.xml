@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.ukoko.bhwms.mapper.RecordStockMapper">
+
+    <insert id="addRecordStock" parameterType="recordStock">
+        INSERT INTO
+            record_stock
+                (PRODUCT_ID,REPO_ID,PRODUCT_STOCK,CREATE_TIME,IS_DELETE)
+            VALUES
+                (#{productId},#{repoId},#{productStock},#{createTime},#{isDelete})
+    </insert>
+    
+    <update id="updateRecordStock" parameterType="recordStock">
+        UPDATE record_stock 
+        <set>
+            <if test="productStock!=null">PRODUCT_STOCK=#{productStock},</if>
+            <if test="createTime!=null">CREATE_TIME=#{createTime},</if>
+            <if test="isDelete!=null">IS_DELETE=#{isDelete}</if>
+        </set>
+        WHERE PRODUCT_ID=#{productId} AND REPO_ID=#{repoId}
+    </update>
+
+    <select id="getRecordStockList" resultType="recordStock">
+        SELECT * FROM record_stock
+        <where>
+            <if test="productId!=null">PRODUCT_ID=#{productId}</if>
+            <if test="repoId!=null">AND REPO_ID=#{repoId}</if>
+        </where>
+    </select>
+
+</mapper>

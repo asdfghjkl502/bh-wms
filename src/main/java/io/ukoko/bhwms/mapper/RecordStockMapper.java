@@ -13,11 +13,14 @@ import java.util.List;
 public interface RecordStockMapper {
 
     /**
-     *  添加库存
+     * 添加库存
+     * @param recordStock
      */
     void addRecordStock(RecordStock recordStock);
+
     /**
      * 更新库存
+     * @param recordStock
      */
     void updateRecordStock(RecordStock recordStock);
 

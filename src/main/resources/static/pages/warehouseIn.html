@@ -340,7 +340,6 @@
                 }
                 /* 通过API获取数据 */
                 $.getJSON("/getProductList",{productName:val},function (d) {
-                    //console.log("d:",d);
                     if(d.code!=0){
                         layer.msg(d.msg);
                     }else{
@@ -350,6 +349,7 @@
             },
             on:function (val){
                 console.log("产品: ",val);
+
             }
         });
     });

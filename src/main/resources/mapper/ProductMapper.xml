@@ -65,4 +65,8 @@
             <if test="startTime!=null and endTime!=null"> AND CREATE_TIME <![CDATA[>=]]> #{startTime} AND CREATE_TIME <![CDATA[<=]]> #{endTime}</if>
         </where>
     </select>
+    
+    <select id="getProductByProductId" parameterType="int" resultMap="productMap">
+        SELECT * FROM product WHERE PRODUCT_ID=#{productId}
+    </select>
 </mapper>

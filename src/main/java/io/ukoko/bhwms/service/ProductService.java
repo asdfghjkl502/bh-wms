@@ -1,6 +1,7 @@
 package io.ukoko.bhwms.service;
 
 import io.ukoko.bhwms.dto.Page;
+import io.ukoko.bhwms.dto.ProductVo;
 import io.ukoko.bhwms.entity.Product;
 import org.apache.ibatis.annotations.Param;
 
@@ -25,6 +26,14 @@ public interface ProductService {
         获取列表
      */
     List<Product> getProductList(String productId,String productName);
+
+    /**
+     * 获取产品信息
+     * @param productId
+     * @param repoId
+     * @return
+     */
+    ProductVo getProductByProductId(Integer productId,Integer repoId);
 
     /**
      * 更新

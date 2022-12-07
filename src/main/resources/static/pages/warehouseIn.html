@@ -184,7 +184,7 @@
                                                 <!-- 货物库存 -->
                                                 <div class="layui-inline">
                                                     <label class="layui-form-label">货物库存:</label>
-                                                    <div class="layui-form-value">
+                                                    <div class="layui-form-value stock">
                                                         -
                                                     </div>
                                                 </div>
@@ -308,10 +308,13 @@
                     $(".supplierId").html(supplier.supplierId);
                     //供应商名称
                     $(".supplierName").html(supplier.supplierName);
-                    $(".supplierName").html(supplier.supplierName);
+                    //管理者
                     $(".supplierLeader").html(supplier.supplierLeader);
+                    //联系电话
                     $(".supplierTel").html(supplier.supplierTel);
+                    //邮箱
                     $(".supplierEmail").html(supplier.supplierEmail);
+                    //地址
                     $(".supplierAddress").html(supplier.supplierAddress);
 
                 }
@@ -348,8 +351,27 @@
                 });
             },
             on:function (val){
-                console.log("产品: ",val);
-
+                //判断数据是否存在,如果存在将其显示在隐藏/显示区域
+                if(val!=null && val!="undefined" && val.arr!=null && val.arr!="undefined" && val.arr.length>0){
+                    //数据存在,获取第一个
+                    let product = val.arr[0];
+                    //获取产品信息
+                    $.getJSON("/getProduct",{productId:product.productId},function (d){
+                        console.log("产品: <<<-->>>",d);
+                        if(d.code===0){
+                            //获取产品详情信息
+                            let p = d.obj;
+                            //设置隐藏/显示信息
+                            //产品编号
+                            $(".productId").html(p.productId);
+                            $(".productName").html(p.productName);
+                            $(".categoryId").html(p.category.categoryName);
+                            $(".productSize").html(p.productSize);
+                            $(".productPrice").html("￥ "+p.productPrice);
+                            $(".stock").html(p.stock);
+                        }
+                    });
+                }
             }
         });
     });

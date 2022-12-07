@@ -298,7 +298,6 @@
                 });
             },
             on:function (val){
-                //console.log("供应商: ",val);
                 //判断数据是否存在,如果存在将其显示在隐藏/显示区域
                 if(val!=null && val!="undefined" && val.arr!=null && val.arr!="undefined" && val.arr.length>0){
                     //数据存在,获取第一个
@@ -357,7 +356,6 @@
                     let product = val.arr[0];
                     //获取产品信息
                     $.getJSON("/getProduct",{productId:product.productId},function (d){
-                        console.log("产品: <<<-->>>",d);
                         if(d.code===0){
                             //获取产品详情信息
                             let p = d.obj;

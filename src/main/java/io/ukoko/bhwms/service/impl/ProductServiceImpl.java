@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.entity.Product;
 import io.ukoko.bhwms.mapper.ProductMapper;
+import io.ukoko.bhwms.mapper.RecordStockMapper;
 import io.ukoko.bhwms.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

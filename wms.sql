@@ -219,6 +219,9 @@ CREATE TABLE repository(
     IS_DELETE INT DEFAULT 1 COMMENT '是否删除 0:删除 1:未删除'
 )DEFAULT CHARSET=UTF8 COMMENT="仓库信息表";
 
+-- 添加仓库名称列
+ALTER TABLE repository ADD REPO_NAME VARCHAR(100) DEFAULT NULL COMMENT '仓库名称';
+
 -- 用户仓库关联表(一个用户可以管理多个仓库,一个仓库可以被多个用户管理,多对多)
 CREATE TABLE user_repository(
    REPO_ID INT  COMMENT '仓库ID',

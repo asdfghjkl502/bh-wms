@@ -95,6 +95,7 @@
                         //给弹出层表单回显
                         body.find('#repoId').val(obj.data.repoId);
                         body.find('#repoAddress').val(obj.data.repoAddress);
+                        body.find('#repoName').val(obj.data.repoName);
                         body.find('#repoArea').val(obj.data.repoArea);
                         body.find('#repoDesc').val(obj.data.repoDesc);
                         body.find('#createTime').val(obj.data.createTime);
@@ -190,6 +191,12 @@
                     {
                         title: '序号',
                         type:'numbers'
+                    },
+                    {
+                        field: 'repoName',
+                        title: '仓库名称',
+                        sort: true,
+                        width: '15%'
                     },
                     {
                         field: 'repoAddress',

@@ -52,8 +52,8 @@ public class RepositoryController {
      * @return
      */
     @GetMapping(value = "/getRepositoryPage")
-    public Object getRepositoryPage(Integer pageNo, Integer pageSize, String repoAddress, @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime){
-        Page page = repositoryService.getRepositoryPage(pageNo, pageSize, repoAddress, startTime, endTime);
+    public Object getRepositoryPage(Integer pageNo, Integer pageSize, String repoAddress, @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime,String repoName){
+        Page page = repositoryService.getRepositoryPage(pageNo, pageSize, repoAddress, startTime, endTime,repoName);
         return new Result(page);
     }
 

@@ -42,9 +42,9 @@ public class RepositoryServiceImpl implements RepositoryService {
     }
 
     @Override
-    public Page getRepositoryPage(Integer pageNo, Integer pageSize, String repoAddress, Date startTime, Date endTime) {
+    public Page getRepositoryPage(Integer pageNo, Integer pageSize, String repoAddress, Date startTime, Date endTime,String repoName) {
         PageHelper.startPage(pageNo,pageSize);
-        List<Repository> list = repositoryMapper.getRepositoryList(repoAddress, startTime, endTime);
+        List<Repository> list = repositoryMapper.getRepositoryList(repoAddress, startTime, endTime,repoName);
         PageInfo<Repository> info = new PageInfo<>(list);
         Page page = new Page();
         page.setPageNo(info.getPageNum());

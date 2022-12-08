@@ -6,9 +6,9 @@
 
     <insert id="addRepository" parameterType="repository">
         INSERT INTO repository
-                (REPO_ADDRESS,REPO_AREA,REPO_DESC,
+                (REPO_NAME,REPO_ADDRESS,REPO_AREA,REPO_DESC,
                  REPO_STATUS,CREATE_TIME,IS_DELETE)
-        VALUES  (#{repoAddress},#{repoArea},#{repoDesc},
+        VALUES  (#{repoName},#{repoAddress},#{repoArea},#{repoDesc},
                  #{repoStatus},#{createTime},#{isDelete})
     </insert>
     
@@ -21,6 +21,7 @@
         <set>
             <if test="repoAddress!=null">REPO_ADDRESS=#{repoAddress},</if>
             <if test="repoArea!=null">REPO_AREA=#{repoArea},</if>
+            <if test="repoName!=null">REPO_NAME=#{repoName},</if>
             <if test="repoDesc!=null">REPO_DESC=#{repoDesc},</if>
             <if test="repoStatus!=null">REPO_STATUS=#{repoStatus},</if>
             <if test="createTime!=null">CREATE_TIME=#{createTime},</if>
@@ -35,6 +36,7 @@
         SELECT * FROM repository
         <where>
             <if test="repoAddress!=null">REPO_ADDRESS LIKE CONCAT('%',#{repoAddress},'%')</if>
+            <if test="repoName!=null">AND REPO_NAME LIKE CONCAT('%',#{repoName},'%')</if>
             <if test="startTime!=null and endTime!=null">AND CREATE_TIME <![CDATA[>=]]> #{startTime} AND CREATE_TIME <![CDATA[<=]]> #{endTime}</if>
         </where>
     </select>

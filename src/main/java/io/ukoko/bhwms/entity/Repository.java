@@ -11,6 +11,10 @@ public class Repository {
    */
   private Integer repoId;
   /*
+    仓库名称
+   */
+  private String repoName;
+  /*
     仓库地址
    */
   private String repoAddress;
@@ -105,10 +109,19 @@ public class Repository {
     this.updateTime = updateTime;
   }
 
+  public String getRepoName() {
+    return repoName;
+  }
+
+  public void setRepoName(String repoName) {
+    this.repoName = repoName;
+  }
+
   @Override
   public String toString() {
     return "Repository{" +
             "repoId=" + repoId +
+            ", repoName='" + repoName + '\'' +
             ", repoAddress='" + repoAddress + '\'' +
             ", repoArea='" + repoArea + '\'' +
             ", repoDesc='" + repoDesc + '\'' +

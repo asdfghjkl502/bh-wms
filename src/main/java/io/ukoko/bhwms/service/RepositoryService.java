@@ -38,6 +38,6 @@ public interface RepositoryService {
      * @param endTime
      * @return
      */
-    Page getRepositoryPage(Integer pageNo,Integer pageSize,String repoAddress, Date startTime, Date endTime);
+    Page getRepositoryPage(Integer pageNo,Integer pageSize,String repoAddress, Date startTime, Date endTime,String repoName);
 
 }

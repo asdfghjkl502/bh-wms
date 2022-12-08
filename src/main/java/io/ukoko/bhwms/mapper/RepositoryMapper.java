@@ -44,6 +44,6 @@ public interface RepositoryMapper {
      * @param endTime
      * @return
      */
-    List<Repository> getRepositoryList(@Param("repoAddress") String repoAddress,@Param("startTime") Date startTime,@Param("endTime") Date endTime);
+    List<Repository> getRepositoryList(@Param("repoAddress") String repoAddress,@Param("startTime") Date startTime,@Param("endTime") Date endTime,@Param("repoName") String repoName);
 
 }

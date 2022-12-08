@@ -210,14 +210,14 @@
                             <form class="layui-form">
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">入库仓库</label>
-                                    <div class="layui-input-block">
-                                        <select name="city" lay-verify="required">
+                                    <div class="layui-input-block" id="repoId">
+                                        <!--<select name="city" lay-verify="required">
                                             <option value="0">北京昌平仓库</option>
                                             <option value="1">上海宝山仓库</option>
                                             <option value="2">广州白云仓库</option>
                                             <option value="3">南京建邺仓库</option>
                                             <option value="4">杭州余杭仓库</option>
-                                        </select>
+                                        </select>-->
                                     </div>
                                 </div>
                             </form>
@@ -240,7 +240,7 @@
                                     <div class="layui-input-inline">
                                         <input type="text" required lay-verify="required" placeholder="请输入数量" autocomplete="off" class="layui-input">
                                     </div>
-                                    <div class="layui-form-mid layui-word-aux">当前库存:-)</div>
+                                    <div class="layui-form-mid layui-word-aux repo_stock">当前库存:-)</div>
                                 </div>
                             </form>
                         </div>
@@ -268,6 +268,68 @@
         let form = layui.form;
         let layer = layui.layer;
 
+        //获取仓库列表
+        xmSelect.render({
+            el:"#repoId",
+            filterable: true,/*开启搜索模式*/
+            remoteSearch: true, /* 开启远程搜索 */
+            max: 1, /* 选择一条 */
+            tips:"仓库名称",/* 背景提示 */
+            searchTips:"搜索仓库",/*搜索提示*/
+            prop:{  /*修改下拉框默认属性*/
+                name:"repoName",
+                value:"repoId"
+            },
+            theme: { /*主题*/
+                color: '#0081ff',
+            },
+            remoteMethod: function(val, cb, show){
+                //这里如果val为空, 则不触发搜索
+                if(!val){
+                    return cb([]);
+                }
+                /* 通过API获取数据 */
+                $.getJSON("/getRepositoryList",{repoName:val},function (d) {
+                    if(d.code!=0){
+                        layer.msg(d.msg);
+                    }else{
+                        cb(d.obj);
+                    }
+                });
+            },
+            on:function (val){
+                if(val!=null && val!="undefined" && val.arr!=null && val.arr!="undefined" && val.arr.length>0){
+                    //数据存在,获取第一个
+                    let repoId = val.arr[0].repoId;
+                    //获取产品ID
+                    let productId = $(".productId").html();
+                    //console.log("仓库repoId--->>>>>",repoId);
+                    //console.log("仓库productId--->>>>>",productId);
+                    if(repoId!=null && repoId!="undefined" && productId!=null && productId!="undefined"){
+
+                        //判断productId是否为数值型
+                        if(!isNaN(productId)){
+                            //查询库存
+                            $.getJSON("/getProduct",{productId:productId,repoId:repoId},function (d){
+                                if(d.code===0){
+                                    //获取产品详情信息
+                                    let stock = d.obj!=null?d.obj.stock:0;
+                                    $(".repo_stock").html("当前库存: "+stock);
+                                }
+                            });
+                        }else{
+                            //如果非数字,提示用户选择产品
+                            layer.msg("请选择产品");
+                            setTimeout(function () {
+                                location.reload();//刷新页面
+                            },1000)
+
+                        }
+
+                    }
+                }
+            }
+        });
         //生成获取下拉框
         xmSelect.render({
             el:"#supplierId",
@@ -302,7 +364,6 @@
                 if(val!=null && val!="undefined" && val.arr!=null && val.arr!="undefined" && val.arr.length>0){
                     //数据存在,获取第一个
                     let supplier = val.arr[0];
-                    console.log("供应商: -->>>",supplier);
                     //供应商编号
                     $(".supplierId").html(supplier.supplierId);
                     //供应商名称

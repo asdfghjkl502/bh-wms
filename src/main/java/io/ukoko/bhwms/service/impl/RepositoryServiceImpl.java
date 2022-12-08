@@ -56,4 +56,10 @@ public class RepositoryServiceImpl implements RepositoryService {
         page.setData(info.getList());
         return page;
     }
+
+    @Override
+    public List<Repository> getRepositoryList(String repoName) {
+        List<Repository> repositoryList = repositoryMapper.getRepositoryList(null, null, null, repoName);
+        return repositoryList;
+    }
 }

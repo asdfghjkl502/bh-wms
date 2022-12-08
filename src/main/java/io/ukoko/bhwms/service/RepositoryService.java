@@ -32,12 +32,19 @@ public interface RepositoryService {
     void updateRepository(Repository repository);
 
     /**
-     * 获取仓库列表
+     * 获取仓库分页
      * @param repoAddress
      * @param startTime
      * @param endTime
      * @return
      */
     Page getRepositoryPage(Integer pageNo,Integer pageSize,String repoAddress, Date startTime, Date endTime,String repoName);
+
+    /**
+     * 通过名字获取仓库列表
+     * @param repoName
+     * @return
+     */
+    List<Repository> getRepositoryList(String repoName);
 
 }

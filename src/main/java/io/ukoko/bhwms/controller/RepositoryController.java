@@ -58,6 +58,17 @@ public class RepositoryController {
     }
 
     /**
+     * 获取部门列表
+     * @param repoName
+     * @return
+     */
+    @GetMapping(value = "/getRepositoryList")
+    public Object getRepositoryList(String repoName){
+        List<Repository> repositoryList = repositoryService.getRepositoryList(repoName);
+        return new Result(repositoryList);
+    }
+
+    /**
      * 删除仓库
      * @param repoId
      * @return

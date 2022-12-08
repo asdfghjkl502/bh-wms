@@ -238,8 +238,9 @@
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">入库数量</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" required lay-verify="required" placeholder="请输入数量" autocomplete="off" class="layui-input">
+                                        <input type="text" name="stockNum" required lay-verify="required" placeholder="请输入数量" autocomplete="off" class="layui-input">
                                     </div>
+                                    <div style="display: none" class="repo_id"></div><!-- 隐藏域保存仓库ID -->
                                     <div class="layui-form-mid layui-word-aux repo_stock">当前库存:-)</div>
                                 </div>
                             </form>
@@ -252,7 +253,7 @@
         <div class="layui-row">
             <div class="layui-col-md12" style="text-align: right;">
                 <!--按钮靠最右侧,整行显示面板状态-->
-                <button class="layui-btn layui-btn-primary layui-border-blue">提交入库</button>
+                <button class="layui-btn layui-btn-primary layui-border-blue repo-sum-stock">提交入库</button>
             </div>
         </div>
     </div>
@@ -267,6 +268,23 @@
         let $ = layui.jquery;
         let form = layui.form;
         let layer = layui.layer;
+
+        //提交入库
+        $(".repo-sum-stock").click(function () {
+
+            //获取仓库ID
+            let repoId = $(".repo_id").html();
+            //获取产品ID
+            let productId = $(".productId").html();
+            //获取供应商ID
+            let supplierId = $(".supplierId").html();
+            //获取入库数量
+            let stockNum = $("input[name='stockNum']").val();
+            console.log("-->",repoId);
+            console.log("==>",productId);
+            console.log("++>",stockNum);
+            console.log(">>>",supplierId);
+        });
 
         //获取仓库列表
         xmSelect.render({
@@ -315,15 +333,15 @@
                                     //获取产品详情信息
                                     let stock = d.obj!=null?d.obj.stock:0;
                                     $(".repo_stock").html("当前库存: "+stock);
+                                    $(".repo_id").html(repoId);//将仓库ID保存到隐藏域中,为后面提交入库做准备
                                 }
                             });
                         }else{
                             //如果非数字,提示用户选择产品
                             layer.msg("请选择产品");
                             setTimeout(function () {
-                                location.reload();//刷新页面
-                            },1000)
-
+                                location.reload();//刷新页面,重新选择数据
+                            },900)
                         }
 
                     }

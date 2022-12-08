@@ -27,12 +27,23 @@ class RecordStockMapperTest extends BhWmsApplicationTests {
     }
 
     @Test
-    void updateRecordStock() {
+    public void inRecordStock(){
         RecordStock recordStock = new RecordStock();
         recordStock.setProductId(2);
-        recordStock.setProductStock(210);
         recordStock.setRepoId(1);
-        recordStockMapper.updateRecordStock(recordStock);
+        recordStock.setProductStock(10);
+        recordStockMapper.inRecordStock(recordStock);
+
+    }
+
+    @Test
+    public void outRecordStock(){
+        RecordStock recordStock = new RecordStock();
+        recordStock.setProductId(1);
+        recordStock.setRepoId(1);
+        recordStock.setProductStock(500);
+        recordStockMapper.outRecordStock(recordStock);
+
     }
 
     @Test

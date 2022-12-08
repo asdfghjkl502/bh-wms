@@ -12,12 +12,18 @@
                 (#{productId},#{repoId},#{productStock},#{createTime},#{isDelete})
     </insert>
     
-    <update id="updateRecordStock" parameterType="recordStock">
+    <update id="inRecordStock" parameterType="recordStock">
         UPDATE record_stock 
         <set>
-            <if test="productStock!=null">PRODUCT_STOCK=#{productStock},</if>
-            <if test="createTime!=null">CREATE_TIME=#{createTime},</if>
-            <if test="isDelete!=null">IS_DELETE=#{isDelete}</if>
+            <if test="productStock!=null">PRODUCT_STOCK=PRODUCT_STOCK+#{productStock},</if>
+        </set>
+        WHERE PRODUCT_ID=#{productId} AND REPO_ID=#{repoId}
+    </update>
+
+    <update id="outRecordStock" parameterType="recordStock">
+        UPDATE record_stock
+        <set>
+            <if test="productStock!=null">PRODUCT_STOCK=PRODUCT_STOCK-#{productStock},</if>
         </set>
         WHERE PRODUCT_ID=#{productId} AND REPO_ID=#{repoId}
     </update>

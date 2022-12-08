@@ -10,6 +10,8 @@ public enum  BhWmsStatus {
     FILE_STYLE_ERROR(2,"暂时不支持的文件格式"),
     FILE_MAX_ERROR(3,"文件过大"),
     REQUEST_NOT_METHOD(4,"请求方式错误"),
+    REPO_NOT_PARAM(5,"仓库参数不存在"),
+    REPO_NOT_STOCK(6,"库存不足"),
 
 
     ERROR(-1,"系统异常,请联系管理员")

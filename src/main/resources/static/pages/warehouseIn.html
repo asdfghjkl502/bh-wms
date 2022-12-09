@@ -304,11 +304,9 @@
                     data:JSON.stringify(rs),
                     contentType:"application/json",
                     success:function (d){
+                        console.log("d=>>>>",d);
                         if(d.code===0){
-                            layer.msg("入库成功");
-                            setTimeout(function () {
-                                location.href="/";
-                            },1000);
+                            layer.msg("入库成功,当前库存为【"+d.obj.productStock+"】");
                         }else{
                             layer.msg(d.msg);
                         }

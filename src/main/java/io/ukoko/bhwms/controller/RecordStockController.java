@@ -24,7 +24,8 @@ public class RecordStockController {
     @PostMapping(value = "/inRecordStock")
     public Object inRecordStock(@RequestBody RecordStock recordStock){
         recordStockService.inRecordStock(recordStock);
-        return new Result();
+        RecordStock rs = recordStockService.getRecordStockByRepoIdAndProductId(recordStock.getRepoId(), recordStock.getProductId());
+        return new Result(rs);
     }
     /**
      * 出库操作

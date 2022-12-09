@@ -25,7 +25,6 @@ public class RecordStockServiceImpl implements RecordStockService {
      */
     @Override
     public void inRecordStock(RecordStock recordStock) {
-        System.out.println("===>>>>"+recordStock);
         List<RecordStock> recordStocks = recordStockMapper.getRecordStockList(recordStock.getProductId(), recordStock.getRepoId());
         if(recordStocks!=null && recordStocks.size()>0){
             //存在直接入库
@@ -58,5 +57,17 @@ public class RecordStockServiceImpl implements RecordStockService {
         }else{
             throw new BhWmsException(BhWmsStatus.REPO_NOT_PARAM);
         }
+    }
+
+    /**
+     * 通过仓库Id和产品Id查询仓库信息
+     * @param repoId
+     * @param productId
+     * @return
+     */
+    @Override
+    public RecordStock getRecordStockByRepoIdAndProductId(Integer repoId, Integer productId) {
+        List<RecordStock> recordStockList = recordStockMapper.getRecordStockList(productId, repoId);
+        return recordStockList==null?null:recordStockList.get(0);
     }
 }

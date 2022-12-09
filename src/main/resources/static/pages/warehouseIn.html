@@ -307,6 +307,8 @@
                         console.log("d=>>>>",d);
                         if(d.code===0){
                             layer.msg("入库成功,当前库存为【"+d.obj.productStock+"】");
+                            //修改库存显示
+                            $(".repo_stock").html("当前库存: "+d.obj.productStock);
                         }else{
                             layer.msg(d.msg);
                         }

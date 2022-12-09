@@ -280,10 +280,27 @@
             let supplierId = $(".supplierId").html();
             //获取入库数量
             let stockNum = $("input[name='stockNum']").val();
-            console.log("-->",repoId);
-            console.log("==>",productId);
-            console.log("++>",stockNum);
-            console.log(">>>",supplierId);
+            //入库负责人(从cookie中获取当前登录的userId)
+            let cookies =  document.cookie;
+            let c={};
+            if(!!cookies){
+                let cs = cookies.split(";");
+                if(!!cs){
+                    for (let i = 0; i < cs.length; i++) {
+                        if(!!cs[i]){
+                            let kv = cs[i].split("=");
+                            c[kv[0].trim()]=kv[1];
+                        }
+                    }
+                }
+            }
+            //当前登录的用户ID
+            let userId=c.userId;
+            console.log("..> ",userId)
+            console.log("--> ",repoId);
+            console.log("==> ",productId);
+            console.log("++> ",stockNum);
+            console.log(">>> ",supplierId);
         });
 
         //获取仓库列表

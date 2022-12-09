@@ -296,11 +296,39 @@
             }
             //当前登录的用户ID
             let userId=c.userId;
-            console.log("..> ",userId)
-            console.log("--> ",repoId);
-            console.log("==> ",productId);
-            console.log("++> ",stockNum);
-            console.log(">>> ",supplierId);
+            if(!!userId && !!repoId && productId && !!stockNum && supplierId){ //不为空
+                let rs={userId:userId,repoId:repoId,productId:productId,productStock:stockNum,supplierId:supplierId};
+                $.ajax({
+                    url:"/inRecordStock",
+                    method:"post",
+                    data:JSON.stringify(rs),
+                    contentType:"application/json",
+                    success:function (d){
+                        console.log("=====>>>>>>",d);
+                        if(d.code===0){
+                            layer.msg("入库成功");
+                        }else{
+                            layer.msg(d.msg);
+                        }
+                    }
+                });
+            }else{
+                if(!!userId==false){
+                    layer.msg("请先登录");
+                }
+                if(!!repoId==false){
+                    layer.msg("请选择仓库");
+                }
+                if(!!productId==false){
+                    layer.msg("请选择产品");
+                }
+                if(!!stockNum==false){
+                    layer.msg("请填入库数量");
+                }
+                if(!!supplierId==false){
+                    layer.msg("请选择供应商");
+                }
+            }
         });
 
         //获取仓库列表

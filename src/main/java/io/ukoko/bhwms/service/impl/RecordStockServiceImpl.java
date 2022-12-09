@@ -25,6 +25,7 @@ public class RecordStockServiceImpl implements RecordStockService {
      */
     @Override
     public void inRecordStock(RecordStock recordStock) {
+        System.out.println("===>>>>"+recordStock);
         List<RecordStock> recordStocks = recordStockMapper.getRecordStockList(recordStock.getProductId(), recordStock.getRepoId());
         if(recordStocks!=null && recordStocks.size()>0){
             //存在直接入库

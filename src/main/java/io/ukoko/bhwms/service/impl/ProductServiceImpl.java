@@ -58,7 +58,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = productMapper.getProductByProductId(productId);
         //产品的库存信息
         List<RecordStock> recordStockList = recordStockMapper.getRecordStockList(productId, repoId);
-
+        System.out.println("----"+recordStockList);
         //获取产品库存总数
         if(recordStockList!=null){
             long stock = 0;

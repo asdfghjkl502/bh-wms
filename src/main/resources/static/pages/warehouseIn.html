@@ -304,11 +304,12 @@
                     data:JSON.stringify(rs),
                     contentType:"application/json",
                     success:function (d){
-                        console.log("d=>>>>",d);
                         if(d.code===0){
                             layer.msg("入库成功,当前库存为【"+d.obj.productStock+"】");
                             //修改库存显示
                             $(".repo_stock").html("当前库存: "+d.obj.productStock);
+                            //清空更新数量
+                            $("input[name='stockNum']").val("");
                         }else{
                             layer.msg(d.msg);
                         }
@@ -368,8 +369,6 @@
                     let repoId = val.arr[0].repoId;
                     //获取产品ID
                     let productId = $(".productId").html();
-                    //console.log("仓库repoId--->>>>>",repoId);
-                    //console.log("仓库productId--->>>>>",productId);
                     if(repoId!=null && repoId!="undefined" && productId!=null && productId!="undefined"){
 
                         //判断productId是否为数值型

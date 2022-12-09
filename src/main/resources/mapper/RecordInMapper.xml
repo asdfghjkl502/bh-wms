@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.ukoko.bhwms.mapper.RecordInMapper">
+
+    <insert id="addRecordIn" parameterType="recordIn">
+        INSERT INTO
+                record_in
+                (
+                    SUPPLIER_ID,PRODUCT_ID,RECORD_IN_NUMBER,
+                    RECORD_IN_TIME,USER_ID,REPO_ID,
+                    REMARKS,CREATE_TIME,IS_DELETE
+                )
+                VALUES
+                (
+                    #{supplierId},#{productId},#{recordInNumber},
+                    #{recordInTime},#{userId},#{repoId},
+                    #{remarks},#{createTime},#{isDelete}
+                )
+    </insert>
+
+</mapper>

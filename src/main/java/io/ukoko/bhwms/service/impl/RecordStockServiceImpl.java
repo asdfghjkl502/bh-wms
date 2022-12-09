@@ -1,8 +1,10 @@
 package io.ukoko.bhwms.service.impl;
 
+import io.ukoko.bhwms.entity.RecordIn;
 import io.ukoko.bhwms.entity.RecordStock;
 import io.ukoko.bhwms.enums.BhWmsStatus;
 import io.ukoko.bhwms.exceptions.BhWmsException;
+import io.ukoko.bhwms.mapper.RecordInMapper;
 import io.ukoko.bhwms.mapper.RecordStockMapper;
 import io.ukoko.bhwms.service.RecordStockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ public class RecordStockServiceImpl implements RecordStockService {
 
     @Autowired
     private RecordStockMapper recordStockMapper;
+    @Autowired
+    private RecordInMapper recordInMapper;
 
     /**
      * 入库
@@ -34,6 +38,10 @@ public class RecordStockServiceImpl implements RecordStockService {
             recordStock.setCreateTime(new Date());
             recordStockMapper.addRecordStock(recordStock);
         }
+        //添加入库记录(向入库记录表中记录数据)
+        RecordIn recordIn = new RecordIn();
+        //TODO...
+        //recordInMapper.addRecordIn(recordIn);
     }
 
     /**

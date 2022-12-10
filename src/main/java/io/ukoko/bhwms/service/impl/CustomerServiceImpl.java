@@ -43,6 +43,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public List<Customer> getCustomerList(String customerName, String customerLeader, String customerTel, String customerEmail, String customerAddress) {
+        return customerMapper.getCustomerList(customerName,customerLeader,customerTel,customerEmail,customerAddress,null,null);
+    }
+
+    @Override
     public void updateCustomer(Customer customer) {
         customerMapper.updateCustomer(customer);
     }

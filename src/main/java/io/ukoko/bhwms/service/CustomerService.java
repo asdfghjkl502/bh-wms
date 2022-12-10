@@ -32,6 +32,17 @@ public interface CustomerService {
     Page getCustomerPage(int pageNo, int pageSize,String customerName,String customerLeader,String customerTel,String customerEmail,String customerAddress,Date startTime,Date endTime);
 
     /**
+     * 根据条件查询客户列表
+     * @param customerName
+     * @param customerLeader
+     * @param customerTel
+     * @param customerEmail
+     * @param customerAddress
+     * @return
+     */
+    List<Customer> getCustomerList(String customerName,String customerLeader,String customerTel,String customerEmail,String customerAddress);
+
+    /**
      * 更新
      * @param customer
      */

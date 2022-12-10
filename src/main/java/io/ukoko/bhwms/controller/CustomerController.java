@@ -51,6 +51,20 @@ public class CustomerController {
     }
 
     /**
+     * 多条件查询客户列表
+     * @param customerName
+     * @param customerLeader
+     * @param customerTel
+     * @param customerEmail
+     * @param customerAddress
+     * @return
+     */
+    @GetMapping(value = "/getCustomerList")
+    public Object getCustomerList(String customerName,String customerLeader,String customerTel,String customerEmail,String customerAddress){
+        return new Result(customerService.getCustomerList(customerName,customerLeader,customerTel,customerEmail,customerAddress));
+    }
+
+    /**
      * 更新客户
      * @param customer
      * @return

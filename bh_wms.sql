@@ -3,15 +3,15 @@
 
  Source Server         : MYSQL
  Source Server Type    : MySQL
- Source Server Version : 50723
+ Source Server Version : 50731
  Source Host           : localhost:3306
  Source Schema         : bh_wms
 
  Target Server Type    : MySQL
- Target Server Version : 50723
+ Target Server Version : 50731
  File Encoding         : 65001
 
- Date: 25/11/2022 19:23:21
+ Date: 10/12/2022 17:29:38
 */
 
 SET NAMES utf8mb4;
@@ -32,13 +32,7 @@ CREATE TABLE `carrier`  (
   `UPDATE_TIME` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '设置当前时间，并且自动更更新时间',
   `IS_DELETE` int(11) NULL DEFAULT 1 COMMENT '是否删除 0:删除 1:未删除',
   PRIMARY KEY (`CARRIER_ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '承运商表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of carrier
--- ----------------------------
-INSERT INTO `carrier` VALUES (1, '承运商', '领导', '电话', '邮箱', '地址', '2012-12-12 20:12:12', '2022-11-25 18:58:55', 1);
-INSERT INTO `carrier` VALUES (2, '顺丰物流333', 'sf联系人333', '1111111111', '1231111@163.com', '地址111', '2022-11-12 21:00:22', '2022-11-12 13:00:30', 1);
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '承运商表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for category
@@ -53,16 +47,19 @@ CREATE TABLE `category`  (
   `UPDATE_TIME` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '设置当前时间，并且自动更更新时间',
   `IS_DELETE` int(11) NULL DEFAULT 1 COMMENT '是否删除 0:删除 1:未删除',
   PRIMARY KEY (`CATEGORY_ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品类目表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品类目表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of category
 -- ----------------------------
-INSERT INTO `category` VALUES (1, '衣服', 1, 0, '2022-11-10 16:37:09', '2022-11-10 08:37:09', 1);
-INSERT INTO `category` VALUES (2, '流行男装', 2, 1, '2022-11-10 16:37:20', '2022-11-10 08:37:21', 1);
-INSERT INTO `category` VALUES (3, '流行女装', 2, 1, '2022-11-10 16:37:29', '2022-11-10 08:37:30', 1);
-INSERT INTO `category` VALUES (4, '夹克', 3, 2, '2022-11-10 08:00:00', '2022-11-10 08:37:38', 1);
-INSERT INTO `category` VALUES (5, '连衣裙', 3, 3, '2022-11-10 16:37:47', '2022-11-10 08:37:48', 1);
+INSERT INTO `category` VALUES (1, '服装', 1, 0, '2022-11-24 10:56:49', '2022-11-24 10:56:49', 1);
+INSERT INTO `category` VALUES (2, '男装', 2, 1, '2022-11-24 10:56:57', '2022-11-24 10:56:58', 1);
+INSERT INTO `category` VALUES (3, '女装', 2, 1, '2022-11-24 10:57:07', '2022-11-24 10:57:07', 1);
+INSERT INTO `category` VALUES (4, '上衣', 3, 2, '2022-11-24 10:57:14', '2022-11-24 10:57:42', 1);
+INSERT INTO `category` VALUES (5, '裙子', 3, 3, '2022-11-24 10:57:26', '2022-11-24 10:57:27', 1);
+INSERT INTO `category` VALUES (6, '小家电', 1, 0, '2022-11-24 17:35:19', '2022-11-24 17:35:20', 1);
+INSERT INTO `category` VALUES (7, '吹风机', 2, 6, '2022-11-24 17:35:27', '2022-11-24 17:35:27', 1);
+INSERT INTO `category` VALUES (8, '热风器', 3, 7, '2022-11-24 17:35:52', '2022-11-24 17:35:52', 1);
 
 -- ----------------------------
 -- Table structure for customer
@@ -88,13 +85,7 @@ CREATE TABLE `customer`  (
   CONSTRAINT `customer_ibfk_1` FOREIGN KEY (`LEVEL_ID`) REFERENCES `level` (`LEVEL_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `customer_ibfk_2` FOREIGN KEY (`SOURCE_ID`) REFERENCES `source` (`SOURCE_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `customer_ibfk_3` FOREIGN KEY (`INDUSTRY_ID`) REFERENCES `industry` (`INDUSTRY_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '客户表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of customer
--- ----------------------------
-INSERT INTO `customer` VALUES (1, '三一重工', '客户领导1', '123123123123', '123@163.com', '南京建邺', 1, 1, 1, '2011-12-12 20:12:12', '2022-11-14 15:06:57', 1);
-INSERT INTO `customer` VALUES (2, '三二重工', '客户领导2', '123123123123', '123@163.com', '南京建邺', 1, 1, 1, '2011-12-12 20:12:12', '2022-11-14 15:06:59', 1);
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '客户表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for department
@@ -114,13 +105,13 @@ CREATE TABLE `department`  (
 -- ----------------------------
 -- Records of department
 -- ----------------------------
-INSERT INTO `department` VALUES (1, '安丰科技股份有限公司', 1, 0, '2022-11-03 05:08:35', '2022-11-02 21:10:01', 1);
-INSERT INTO `department` VALUES (2, '安丰科技股份有限公司(北京分公司)', 2, 1, '2022-11-03 05:08:59', '2022-11-02 21:09:52', 1);
-INSERT INTO `department` VALUES (3, '产品研发部', 3, 2, '2022-11-03 05:09:16', '2022-11-02 21:09:17', 1);
-INSERT INTO `department` VALUES (4, '安丰科技股份有限公司(南京分公司)', 2, 1, '2022-11-03 05:09:43', '2022-11-02 21:10:40', 1);
-INSERT INTO `department` VALUES (5, '市场部', 3, 4, '2022-11-03 05:10:52', '2022-11-02 21:10:53', 1);
-INSERT INTO `department` VALUES (6, '技术科研部', 3, 2, '2022-11-03 05:11:15', '2022-11-02 21:11:16', 1);
-INSERT INTO `department` VALUES (7, '公关部', 3, 4, '2022-11-03 05:11:27', '2022-11-02 21:11:28', 1);
+INSERT INTO `department` VALUES (1, '北京千锋互联科技有限公司', 1, 0, '2022-11-22 10:00:16', '2022-11-22 10:00:18', 1);
+INSERT INTO `department` VALUES (2, '千锋教育南京分公司', 2, 1, '2022-11-22 10:00:29', '2022-11-22 10:00:30', 1);
+INSERT INTO `department` VALUES (3, '千锋教育北京分公司', 2, 1, '2022-11-22 10:00:44', '2022-11-22 10:00:44', 1);
+INSERT INTO `department` VALUES (4, '人事部', 3, 2, '2022-11-22 10:00:51', '2022-11-22 10:00:51', 1);
+INSERT INTO `department` VALUES (5, '行政部', 3, 2, '2022-11-22 10:00:59', '2022-11-22 10:00:59', 1);
+INSERT INTO `department` VALUES (6, '财务部', 3, 3, '2022-11-22 10:01:07', '2022-11-22 10:01:08', 1);
+INSERT INTO `department` VALUES (7, '教学部', 3, 3, '2022-11-22 10:01:19', '2022-11-22 10:01:20', 1);
 
 -- ----------------------------
 -- Table structure for industry
@@ -133,12 +124,13 @@ CREATE TABLE `industry`  (
   `UPDATE_TIME` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '设置当前时间，并且自动更更新时间',
   `IS_DELETE` int(11) NULL DEFAULT 1 COMMENT '是否删除 0:删除 1:未删除',
   PRIMARY KEY (`INDUSTRY_ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '客户行业表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '客户行业表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of industry
 -- ----------------------------
-INSERT INTO `industry` VALUES (1, '教育', '2022-11-14 14:15:23', '2022-11-14 14:15:26', 1);
+INSERT INTO `industry` VALUES (1, '教育', '2022-11-24 17:34:43', '2022-11-24 17:34:44', 1);
+INSERT INTO `industry` VALUES (2, '化工', '2022-11-24 17:34:54', '2022-11-24 17:34:55', 1);
 
 -- ----------------------------
 -- Table structure for level
@@ -151,19 +143,13 @@ CREATE TABLE `level`  (
   `UPDATE_TIME` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '设置当前时间，并且自动更更新时间',
   `IS_DELETE` int(11) NULL DEFAULT 1 COMMENT '是否删除 0:删除 1:未删除',
   PRIMARY KEY (`LEVEL_ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '客户级别表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '客户级别表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of level
 -- ----------------------------
-INSERT INTO `level` VALUES (1, '白银', '2022-11-05 12:27:01', '2022-11-07 08:35:02', 1);
-INSERT INTO `level` VALUES (2, '黄金', '2022-11-05 12:27:13', '2022-11-07 08:35:11', 1);
-INSERT INTO `level` VALUES (3, '铂金', '2022-11-05 12:27:23', '2022-11-05 12:55:26', 1);
-INSERT INTO `level` VALUES (4, '钻石', '2022-11-05 12:27:32', '2022-11-05 12:27:34', 1);
-INSERT INTO `level` VALUES (5, '星耀', '2021-12-13 06:22:22', '2022-11-05 12:38:40', 1);
-INSERT INTO `level` VALUES (6, '王者', '2022-11-05 20:39:24', '2022-11-05 12:39:25', 1);
-INSERT INTO `level` VALUES (7, '最强王者', '2022-11-05 20:39:37', '2022-11-05 12:39:38', 1);
-INSERT INTO `level` VALUES (8, '超级王者', '2022-11-05 20:59:06', '2022-11-05 12:59:06', 1);
+INSERT INTO `level` VALUES (1, '白银', '2022-11-24 17:34:02', '2022-11-24 17:34:02', 1);
+INSERT INTO `level` VALUES (2, '黄金', '2022-11-24 17:34:12', '2022-11-24 17:34:13', 1);
 
 -- ----------------------------
 -- Table structure for menus
@@ -179,35 +165,7 @@ CREATE TABLE `menus`  (
   `UPDATE_TIME` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '设置当前时间，并且自动更更新时间',
   `IS_DELETE` int(11) NULL DEFAULT 1 COMMENT '菜单状态 0:删除 1:未删除',
   PRIMARY KEY (`MENU_ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of menus
--- ----------------------------
-INSERT INTO `menus` VALUES (1, '仪表盘', '', 1, 0, '2022-11-02 05:09:10', '2022-11-01 21:14:21', 1);
-INSERT INTO `menus` VALUES (2, '系统设置', '', 1, 0, '2022-11-02 05:09:19', '2022-11-01 21:09:20', 1);
-INSERT INTO `menus` VALUES (3, '用户管理', '', 2, 2, '2022-11-02 05:09:29', '2022-11-01 21:09:30', 1);
-INSERT INTO `menus` VALUES (4, '角色管理', '', 2, 2, '2022-11-02 05:09:44', '2022-11-01 21:09:45', 1);
-INSERT INTO `menus` VALUES (5, '部门管理', '', 2, 2, '2022-11-02 05:09:54', '2022-11-01 21:09:55', 1);
-INSERT INTO `menus` VALUES (6, '菜单管理', '', 2, 2, '2022-11-02 05:10:04', '2022-11-01 21:10:05', 1);
-INSERT INTO `menus` VALUES (7, '基础数据', '', 1, 0, '2022-11-02 05:10:20', '2022-11-01 21:10:21', 1);
-INSERT INTO `menus` VALUES (8, '产品管理', '', 2, 7, '2022-11-02 05:10:31', '2022-11-01 21:10:32', 1);
-INSERT INTO `menus` VALUES (9, '客户管理', '', 2, 7, '2022-11-02 05:10:41', '2022-11-01 21:10:42', 1);
-INSERT INTO `menus` VALUES (10, '供应商管理', '', 2, 7, '2022-11-02 05:10:53', '2022-11-01 21:10:54', 1);
-INSERT INTO `menus` VALUES (11, '承运商管理', '', 2, 7, '2022-11-02 05:11:07', '2022-11-01 21:11:08', 1);
-INSERT INTO `menus` VALUES (12, '仓库管理', '', 1, 0, '2022-11-02 05:11:33', '2022-11-01 21:11:34', 1);
-INSERT INTO `menus` VALUES (13, '仓库管理', '', 2, 12, '2022-11-02 05:11:46', '2022-11-01 21:11:48', 1);
-INSERT INTO `menus` VALUES (14, '货物入库', '', 2, 12, '2022-11-02 05:11:58', '2022-11-01 21:11:59', 1);
-INSERT INTO `menus` VALUES (15, '货物出库', '', 2, 12, '2022-11-02 05:12:10', '2022-11-01 21:12:10', 1);
-INSERT INTO `menus` VALUES (16, '库存查询', '', 2, 12, '2022-11-02 05:12:26', '2022-11-01 21:12:28', 1);
-INSERT INTO `menus` VALUES (17, '字典管理', '', 1, 0, '2022-11-02 05:12:40', '2022-11-01 21:12:41', 1);
-INSERT INTO `menus` VALUES (18, '产品类目', '', 2, 17, '2022-11-02 05:12:54', '2022-11-01 21:12:55', 1);
-INSERT INTO `menus` VALUES (19, '客户级别', '', 2, 17, '2022-11-02 05:13:06', '2022-11-01 21:13:07', 1);
-INSERT INTO `menus` VALUES (20, '客户来源', '', 2, 17, '2022-11-02 05:13:16', '2022-11-01 21:13:16', 1);
-INSERT INTO `menus` VALUES (21, '日志管理', '', 1, 0, '2022-11-02 05:13:28', '2022-11-01 21:13:29', 1);
-INSERT INTO `menus` VALUES (22, '系统日志', '', 2, 21, '2022-11-01 08:00:00', '2022-11-01 21:13:40', 1);
-INSERT INTO `menus` VALUES (23, '登录日志', '', 2, 21, '2022-11-02 05:13:49', '2022-11-01 21:13:49', 1);
-INSERT INTO `menus` VALUES (24, '商业智能', '', 2, 1, '2022-11-05 16:45:40', '2022-11-05 08:45:40', 1);
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for product
@@ -225,12 +183,14 @@ CREATE TABLE `product`  (
   PRIMARY KEY (`PRODUCT_ID`) USING BTREE,
   INDEX `CATEGORY_ID`(`CATEGORY_ID`) USING BTREE,
   CONSTRAINT `product_ibfk_1` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `category` (`CATEGORY_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '产品信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '产品信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of product
 -- ----------------------------
-INSERT INTO `product` VALUES (1, '商品名称001', 4, '200*300', 10000.120, '2009-12-12 20:12:12', '2022-11-17 18:02:17', 1);
+INSERT INTO `product` VALUES (1, '裙子01', 4, '100*100', 10000.000, '2022-11-24 10:58:36', '2022-12-10 14:32:28', 1);
+INSERT INTO `product` VALUES (2, '裙子02', 5, '200*200', 100000.000, '2022-11-28 19:46:27', '2022-12-10 14:32:31', 1);
+INSERT INTO `product` VALUES (3, '裙子03', 5, '300*300', 2000000.000, '2022-11-28 19:46:46', '2022-12-10 14:32:34', 1);
 
 -- ----------------------------
 -- Table structure for record_in
@@ -300,6 +260,12 @@ CREATE TABLE `record_stock`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '库存记录表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of record_stock
+-- ----------------------------
+INSERT INTO `record_stock` VALUES (1, 1, 500, '2022-11-24 10:59:44', '2022-12-08 17:03:13', 1);
+INSERT INTO `record_stock` VALUES (2, 1, 900, '2022-12-07 16:23:09', '2022-12-10 08:56:39', 1);
+
+-- ----------------------------
 -- Table structure for repository
 -- ----------------------------
 DROP TABLE IF EXISTS `repository`;
@@ -312,14 +278,14 @@ CREATE TABLE `repository`  (
   `CREATE_TIME` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `UPDATE_TIME` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '设置当前时间，并且自动更更新时间',
   `IS_DELETE` int(11) NULL DEFAULT 1 COMMENT '是否删除 0:删除 1:未删除',
+  `REPO_NAME` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '仓库名称',
   PRIMARY KEY (`REPO_ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '仓库信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '仓库信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of repository
 -- ----------------------------
-INSERT INTO `repository` VALUES (1, '南京市建邺区', '100*100', '发动机仓库', 1, '2022-11-24 08:48:27', '2022-11-24 08:48:28', 1);
-INSERT INTO `repository` VALUES (2, '南京市江宁区', '200*200', '汽车仓库', 2, '2022-11-24 08:48:55', '2022-11-24 08:48:55', 1);
+INSERT INTO `repository` VALUES (1, '南京建邺', '1000*10000', '冷冻', 1, '2022-11-24 09:50:44', '2022-12-08 16:25:17', 1, '南京市建邺区一号库1');
 
 -- ----------------------------
 -- Table structure for role
@@ -337,8 +303,8 @@ CREATE TABLE `role`  (
 -- ----------------------------
 -- Records of role
 -- ----------------------------
-INSERT INTO `role` VALUES (1, '平台管理员', '2022-11-03 05:07:38', '2022-11-02 21:07:39', 1);
-INSERT INTO `role` VALUES (2, '仓库管理员', '2022-11-03 05:07:49', '2022-11-02 21:07:49', 1);
+INSERT INTO `role` VALUES (1, '平台管理员', '2022-11-22 09:58:45', '2022-11-22 09:58:45', 1);
+INSERT INTO `role` VALUES (2, '仓库管理员', '2022-11-22 09:58:53', '2022-11-22 09:58:53', 1);
 
 -- ----------------------------
 -- Table structure for role_menus
@@ -372,8 +338,8 @@ CREATE TABLE `source`  (
 -- ----------------------------
 -- Records of source
 -- ----------------------------
-INSERT INTO `source` VALUES (1, '百度', '2022-11-14 14:15:13', '2022-11-14 14:15:17', 1);
-INSERT INTO `source` VALUES (2, '转介绍', '2022-11-14 22:17:58', '2022-11-14 14:17:59', 1);
+INSERT INTO `source` VALUES (1, '转介绍', '2022-11-24 17:34:24', '2022-11-24 17:34:25', 1);
+INSERT INTO `source` VALUES (2, '网络', '2022-11-24 17:34:30', '2022-11-24 17:34:31', 1);
 
 -- ----------------------------
 -- Table structure for supplier
@@ -390,14 +356,13 @@ CREATE TABLE `supplier`  (
   `UPDATE_TIME` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '设置当前时间，并且自动更更新时间',
   `IS_DELETE` int(11) NULL DEFAULT 1 COMMENT '是否删除 0:删除 1:未删除',
   PRIMARY KEY (`SUPPLIER_ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '供应商信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '供应商信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of supplier
 -- ----------------------------
-INSERT INTO `supplier` VALUES (1, '南京天机星', '大萝卜', '12333333333', '123@123.com', '南京市溧水区', '2022-11-11 16:49:12', '2022-11-11 08:49:12', 1);
-INSERT INTO `supplier` VALUES (2, '顺丰物流', 'sf名字', '1222222222', 'sf@163.com', '北京市昌平区', '2022-11-12 18:41:04', '2022-11-12 10:41:06', 1);
-INSERT INTO `supplier` VALUES (3, 'SHUNFENGSUDI', 'SF', '1111111111', '1@1.com', '背景昌平区', '2022-11-12 18:44:24', '2022-11-12 10:44:25', 1);
+INSERT INTO `supplier` VALUES (1, '供应商01', '供应商名字01', '18222222222', 'gys01@163.com', '南京市建邺区', '2022-11-28 19:26:13', '2022-11-28 19:26:13', 1);
+INSERT INTO `supplier` VALUES (2, '供应商02', '供应商名字02', '18222222223', 'gys02@163.com', '南京市江宁区', '2022-11-28 19:26:13', '2022-11-28 19:26:13', 1);
 
 -- ----------------------------
 -- Table structure for user
@@ -411,18 +376,20 @@ CREATE TABLE `user`  (
   `USER_NICK` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'WMS' COMMENT '用户昵称',
   `PASSWORD` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
   `SALT` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '盐值',
+  `AVATAR` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'img/avatar.jpeg' COMMENT '用户头像地址',
   `CREATE_TIME` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `UPDATE_TIME` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '设置当前时间，并且自动更更新时间',
   `IS_DELETE` int(11) NULL DEFAULT 1 COMMENT '是否删除 0:删除 1:未删除',
-  `AVATAR` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '/img/avatar.jpeg' COMMENT '头像',
-  PRIMARY KEY (`USER_ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`USER_ID`) USING BTREE,
+  UNIQUE INDEX `USER_TEL`(`USER_TEL`) USING BTREE,
+  UNIQUE INDEX `USER_EMAIL`(`USER_EMAIL`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, '张三', '18288888888', 'j@j.com', '夜泊', 'a38b872c85e9096dd2d97b5dbe482861', '1', '2022-11-04 16:42:10', '2022-11-25 18:46:30', 1, '/pics/9151315b-add5-440f-84a1-9e3ba3c6862e.jpeg');
-INSERT INTO `user` VALUES (2, '李四', '18333333332', 'd@2.com', '李四大罗弄', '222222', '1667522858146', '2022-11-04 16:47:37', '2022-11-21 13:01:57', 1, '/img/avatar.jpeg');
+INSERT INTO `user` VALUES (2, 'Polly', '18288888888', 'polly@163.com', '枫桥夜泊', '6f611cbc64767a421ecac26a93a092bf', '1', '/pics/61bb9b9c-5741-4d73-88bc-554e2db5af87.jpeg', '2022-11-22 10:02:18', '2022-12-08 16:29:57', 1);
+INSERT INTO `user` VALUES (3, '张三', '18888888888', 'zs@163.com', '阿三', 'f355f805c9a724fde68d05ed37de9a65', '0.5037285684645121', 'img/avatar.jpeg', '2022-11-24 09:19:33', '2022-11-24 09:19:34', 1);
 
 -- ----------------------------
 -- Table structure for user_department
@@ -443,12 +410,9 @@ CREATE TABLE `user_department`  (
 -- ----------------------------
 -- Records of user_department
 -- ----------------------------
-INSERT INTO `user_department` VALUES (3, 1, '2022-11-04 16:42:10', '2022-11-04 08:42:15', 1);
-INSERT INTO `user_department` VALUES (5, 1, '2022-11-04 16:42:10', '2022-11-04 08:42:15', 1);
-INSERT INTO `user_department` VALUES (6, 1, '2022-11-04 16:42:10', '2022-11-04 08:42:15', 1);
-INSERT INTO `user_department` VALUES (7, 1, '2022-11-04 16:42:10', '2022-11-04 08:42:15', 1);
-INSERT INTO `user_department` VALUES (5, 2, '2022-11-04 16:47:37', '2022-11-04 08:47:38', 1);
-INSERT INTO `user_department` VALUES (7, 2, '2022-11-04 16:47:37', '2022-11-04 08:47:38', 1);
+INSERT INTO `user_department` VALUES (4, 2, '2022-11-22 10:02:18', '2022-11-22 10:02:19', 1);
+INSERT INTO `user_department` VALUES (6, 2, '2022-11-22 10:02:18', '2022-11-22 10:02:19', 1);
+INSERT INTO `user_department` VALUES (4, 3, '2022-11-24 09:19:33', '2022-11-24 09:19:34', 1);
 
 -- ----------------------------
 -- Table structure for user_repository
@@ -485,9 +449,8 @@ CREATE TABLE `user_role`  (
 -- ----------------------------
 -- Records of user_role
 -- ----------------------------
-INSERT INTO `user_role` VALUES (1, 1, '2022-11-04 16:42:10', '2022-11-04 08:42:15', 1);
-INSERT INTO `user_role` VALUES (1, 2, '2022-11-04 16:42:10', '2022-11-04 08:42:15', 1);
-INSERT INTO `user_role` VALUES (2, 1, '2022-11-04 16:47:37', '2022-11-04 08:47:38', 1);
-INSERT INTO `user_role` VALUES (2, 2, '2022-11-04 16:47:37', '2022-11-04 08:47:38', 1);
+INSERT INTO `user_role` VALUES (2, 1, '2022-11-22 10:02:18', '2022-11-22 10:02:19', 1);
+INSERT INTO `user_role` VALUES (2, 2, '2022-11-22 10:02:18', '2022-11-22 10:02:19', 1);
+INSERT INTO `user_role` VALUES (3, 2, '2022-11-24 09:19:33', '2022-11-24 09:19:34', 1);
 
 SET FOREIGN_KEY_CHECKS = 1;

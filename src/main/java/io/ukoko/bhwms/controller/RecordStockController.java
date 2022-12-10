@@ -34,7 +34,8 @@ public class RecordStockController {
     @PostMapping(value = "/outRecordStock")
     public Object outRecordStock(@RequestBody RecordInOutDto recordInOutDto){
         recordStockService.outRecordStock(recordInOutDto);
-        return new Result();
+        RecordStock rs = recordStockService.getRecordStockByRepoIdAndProductId(recordInOutDto.getRepoId(), recordInOutDto.getProductId());
+        return new Result(rs);
     }
 
 }

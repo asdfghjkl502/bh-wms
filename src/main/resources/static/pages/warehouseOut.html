@@ -274,7 +274,7 @@
             //获取入库数量
             let stockNum = $("input[name='stockNum']").val();
             //入库负责人(从cookie中获取当前登录的userId)
-            let cookies =  document.cookie;
+            let cookies = document.cookie;
             let c={};
             if(!!cookies){
                 let cs = cookies.split(";");
@@ -297,7 +297,6 @@
                     data:JSON.stringify(rs),
                     contentType:"application/json",
                     success:function (d){
-                        console.log("=======>>>>>>>>",d);
                         if(d.code===0){
                             layer.msg("出库成功,当前库存为【"+d.obj.productStock+"】");
                             //修改库存显示
@@ -320,7 +319,7 @@
                     layer.msg("请选择产品");
                 }
                 if(!!stockNum==false){
-                    layer.msg("请填入库数量");
+                    layer.msg("请填出库数量");
                 }
                 if(!!customerId==false){
                     layer.msg("请选择客户");

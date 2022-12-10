@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.ukoko.bhwms.mapper.RecordOutMapper">
+
+    <insert id="addRecordOut" parameterType="recordOut">
+        INSERT INTO
+            record_out
+        (
+            CUSTOMER_ID,PRODUCT_ID,RECORD_OUT_NUMBER,
+            RECORD_OUT_TIME,USER_ID,REPO_ID,
+            REMARKS,CREATE_TIME,IS_DELETE
+        )
+        VALUES
+            (
+                #{customerId},#{productId},#{recordOutNumber},
+                #{recordOutTime},#{userId},#{repoId},
+                #{remarks},#{createTime},#{isDelete}
+            )
+    </insert>
+
+</mapper>

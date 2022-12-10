@@ -2,10 +2,12 @@ package io.ukoko.bhwms.service.impl;
 
 import io.ukoko.bhwms.dto.RecordInOutDto;
 import io.ukoko.bhwms.entity.RecordIn;
+import io.ukoko.bhwms.entity.RecordOut;
 import io.ukoko.bhwms.entity.RecordStock;
 import io.ukoko.bhwms.enums.BhWmsStatus;
 import io.ukoko.bhwms.exceptions.BhWmsException;
 import io.ukoko.bhwms.mapper.RecordInMapper;
+import io.ukoko.bhwms.mapper.RecordOutMapper;
 import io.ukoko.bhwms.mapper.RecordStockMapper;
 import io.ukoko.bhwms.service.RecordStockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ public class RecordStockServiceImpl implements RecordStockService {
     private RecordStockMapper recordStockMapper;
     @Autowired
     private RecordInMapper recordInMapper;
+    @Autowired
+    private RecordOutMapper recordOutMapper;
 
     /**
      * 入库
@@ -77,7 +81,17 @@ public class RecordStockServiceImpl implements RecordStockService {
                     rs.setProductId(recordStock.getProductId());
                     //出库
                     recordStockMapper.outRecordStock(rs);
-                    //TODO... 添加出库记录
+                    //添加出库记录
+                    RecordOut recordOut = new RecordOut();
+                    recordOut.setCreateTime(new Date());
+                    recordOut.setProductId(recordStock.getProductId());
+                    recordOut.setIsDelete(1);
+                    recordOut.setRecordOutNumber(recordStock.getProductStock());
+                    recordOut.setRecordOutTime(new Date());
+                    recordOut.setRepoId(recordStock.getRepoId());
+                    recordOut.setCustomerId(recordStock.getCustomerId());
+                    recordOut.setUserId(recordStock.getUserId());
+                    recordOutMapper.addRecordOut(recordOut);
                 }
             }else {
                 throw new BhWmsException(BhWmsStatus.REPO_NOT_PRODUCT);

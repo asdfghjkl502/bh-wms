@@ -45,8 +45,14 @@ public class RecordStockServiceImpl implements RecordStockService {
         }
         //添加入库记录(向入库记录表中记录数据)
         RecordIn recordIn = new RecordIn();
-        //TODO...
-        //recordInMapper.addRecordIn(recordIn);
+        recordIn.setCreateTime(new Date());
+        recordIn.setProductId(recordStock.getProductId());
+        recordIn.setIsDelete(1);
+        recordIn.setRecordInNumber(recordStock.getProductStock());
+        recordIn.setRecordInTime(new Date());
+        recordIn.setRepoId(recordStock.getRepoId());
+        //TODO 供应商
+        recordInMapper.addRecordIn(recordIn);
     }
 
     /**

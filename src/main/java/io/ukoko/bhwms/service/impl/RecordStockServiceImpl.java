@@ -1,5 +1,6 @@
 package io.ukoko.bhwms.service.impl;
 
+import io.ukoko.bhwms.dto.RecordInOutDto;
 import io.ukoko.bhwms.entity.RecordIn;
 import io.ukoko.bhwms.entity.RecordStock;
 import io.ukoko.bhwms.enums.BhWmsStatus;
@@ -28,15 +29,19 @@ public class RecordStockServiceImpl implements RecordStockService {
      * @param recordStock
      */
     @Override
-    public void inRecordStock(RecordStock recordStock) {
+    public void inRecordStock(RecordInOutDto recordStock) {
+        RecordStock rs = new RecordStock();
+        rs.setRepoId(recordStock.getRepoId());
+        rs.setProductStock(recordStock.getProductStock());
+        rs.setProductId(recordStock.getProductId());
         List<RecordStock> recordStocks = recordStockMapper.getRecordStockList(recordStock.getProductId(), recordStock.getRepoId());
         if(recordStocks!=null && recordStocks.size()>0){
             //存在直接入库
-            recordStockMapper.inRecordStock(recordStock);
+            recordStockMapper.inRecordStock(rs);
         }else{
             //不存在需要插入
-            recordStock.setCreateTime(new Date());
-            recordStockMapper.addRecordStock(recordStock);
+            rs.setCreateTime(new Date());
+            recordStockMapper.addRecordStock(rs);
         }
         //添加入库记录(向入库记录表中记录数据)
         RecordIn recordIn = new RecordIn();

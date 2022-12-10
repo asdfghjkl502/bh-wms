@@ -1,5 +1,6 @@
 package io.ukoko.bhwms.service;
 
+import io.ukoko.bhwms.dto.RecordInOutDto;
 import io.ukoko.bhwms.entity.RecordStock;
 
 /**
@@ -10,7 +11,7 @@ public interface RecordStockService {
     /**
      * 入库
      */
-    void inRecordStock(RecordStock recordStock);
+    void inRecordStock(RecordInOutDto recordStock);
 
     /**
      * 出库

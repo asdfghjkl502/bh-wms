@@ -1,6 +1,7 @@
 package io.ukoko.bhwms.controller;
 
 import io.swagger.annotations.Api;
+import io.ukoko.bhwms.dto.RecordInOutDto;
 import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.entity.RecordStock;
 import io.ukoko.bhwms.service.RecordStockService;
@@ -22,9 +23,9 @@ public class RecordStockController {
      * 入库操作
      */
     @PostMapping(value = "/inRecordStock")
-    public Object inRecordStock(@RequestBody RecordStock recordStock){
-        recordStockService.inRecordStock(recordStock);
-        RecordStock rs = recordStockService.getRecordStockByRepoIdAndProductId(recordStock.getRepoId(), recordStock.getProductId());
+    public Object inRecordStock(@RequestBody RecordInOutDto recordInOutDto){
+        recordStockService.inRecordStock(recordInOutDto);
+        RecordStock rs = recordStockService.getRecordStockByRepoIdAndProductId(recordInOutDto.getRepoId(), recordInOutDto.getProductId());
         return new Result(rs);
     }
     /**

@@ -14,8 +14,8 @@
     <!--  条件选项  -->
     <form class="layui-form layui-row user-search">
         <div class="user">
-            <label for="customerName">仓库地址:</label>
-            <input id="customerName" name="repoAddress" placeholder="仓库地址...">
+            <label for="repoName">仓库名称:</label>
+            <input id="repoName" name="repoName" placeholder="仓库名称...">
         </div>
         <!--  开始时间  -->
         <div class="user">
@@ -276,7 +276,7 @@
                     curr:1
                 },
                 where:{
-                    repoAddress:obj.field.repoAddress,
+                    repoName:obj.field.repoName,
                     startTime:obj.field.startTime,
                     endTime:obj.field.endTime
                 }

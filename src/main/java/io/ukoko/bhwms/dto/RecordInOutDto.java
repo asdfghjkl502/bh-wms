@@ -5,9 +5,15 @@ package io.ukoko.bhwms.dto;
  */
 public class RecordInOutDto {
     /*
-   产品ID
-  */
+        产品ID
+    */
     private Integer productId;
+
+    /*
+        供应商ID
+     */
+    private Integer supplierId;
+
     /*
       仓库ID
      */
@@ -53,10 +59,19 @@ public class RecordInOutDto {
         this.userId = userId;
     }
 
+    public Integer getSupplierId() {
+        return supplierId;
+    }
+
+    public void setSupplierId(Integer supplierId) {
+        this.supplierId = supplierId;
+    }
+
     @Override
     public String toString() {
         return "RecordInOutDto{" +
                 "productId=" + productId +
+                ", supplierId=" + supplierId +
                 ", repoId=" + repoId +
                 ", productStock=" + productStock +
                 ", userId=" + userId +

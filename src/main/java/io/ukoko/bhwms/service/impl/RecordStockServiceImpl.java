@@ -51,7 +51,7 @@ public class RecordStockServiceImpl implements RecordStockService {
         recordIn.setRecordInNumber(recordStock.getProductStock());
         recordIn.setRecordInTime(new Date());
         recordIn.setRepoId(recordStock.getRepoId());
-        //TODO 供应商
+        recordIn.setSupplierId(recordStock.getSupplierId());
         recordInMapper.addRecordIn(recordIn);
     }
 

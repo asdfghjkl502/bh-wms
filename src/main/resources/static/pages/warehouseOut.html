@@ -1,16 +1,503 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>百慧智慧wms仓库</title>
-  <link href="../layui/css/layui.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>百慧智慧wms仓库</title>
+    <link href="../layui/css/layui.css" rel="stylesheet">
+    <link href="../css/warehouse.css" rel="stylesheet">
 </head>
 <body>
+<div class="layui-container" style="margin-top: 20px;">
+    <!-- 条件搜索 -->
+    <div class="layui-row">
+        <div class="layui-col-md6">
+            <div class="layui-row">
+                <div class="layui-col-md8 hxx-supplier">
+                    <!--货物编号，带搜索框的下拉-->
+                    <div class="layui-row">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">客户</label>
+                            <div class="layui-input-block" id="supplierId">
 
-	<h1>出库管理</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md6">
+            <div class="layui-row">
+                <div class="layui-col-md8 hxx-product">
+                    <!--货物名称，带搜索框的下拉-->
+                    <div class="layui-row">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">出库货物</label>
+                            <div class="layui-input-block" id="productNameId">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 信息展示,展示和隐藏 -->
+    <div class="layui-fluid">
+        <div class="layui-collapse" style="border-style: none;">
+            <div class="layui-colla-item">
+                <h4 class="layui-colla-title" style="line-height: 30px;height: 30px;">展示 | 隐藏</h4>
+                <div class="layui-colla-content" style="border-top-style: none;">
+                    <div class="layui-row">
+                        <div class="layui-col-md6">
+                            <!--供应商详情-->
+                            <div class="layui-row">
+                                <div class="layui-col-md12">
+                                    <h4 style="color: #31BDEC;font-weight: bold;">供应商信息</h4>
+                                </div>
+                                <div class="layui-col-md12">
+                                    <div class="layui-row">
+                                        <div class="layui-col-md6">
+                                            <!-- 供应商ID -->
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">供应商编号:</label>
+                                                <div class="layui-form-value supplierId">
+                                                    -
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-col-md6">
+                                            <!-- 供应商名称 -->
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">供应商名称:</label>
+                                                <div class="layui-form-value supplierName">
+                                                    -
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- |||||||||||||||||||||| -->
+                                    <div class="layui-row">
+                                        <div class="layui-col-md6">
+                                            <!-- 供应商ID -->
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">负责人:</label>
+                                                <div class="layui-form-value supplierLeader">
+                                                    -
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-col-md6">
+                                            <!-- 供应商名称 -->
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">联系电话:</label>
+                                                <div class="layui-form-value supplierTel">
+                                                    -
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- |||||||||||||||||||||| -->
+                                    <div class="layui-row">
+                                        <div class="layui-col-md6">
+                                            <!-- 供应商ID -->
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">电子邮件:</label>
+                                                <div class="layui-form-value supplierEmail">
+                                                    -
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-col-md6">
+                                            <!-- 供应商名称 -->
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">联系地址:</label>
+                                                <div class="layui-form-value supplierAddress">
+                                                    -
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md6">
+                            <!--货物详情-->
+                            <div class="layui-row">
+                                <div class="layui-col-md12">
+                                    <h4 style="color: #31BDEC;font-weight: bold;">货物信息</h4>
+                                </div>
+                                <div class="layui-col-md12">
+                                    <div class="layui-row">
+                                        <div class="layui-col-md6">
+                                            <!-- 货物编号 -->
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">货物编号:</label>
+                                                <div class="layui-form-value productId">
+                                                    -
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-col-md6">
+                                            <!-- 货物名称 -->
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">货物名称:</label>
+                                                <div class="layui-form-value productName">
+                                                    -
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- |||||||||||||||||||||| -->
+                                    <div class="layui-row">
+                                        <div class="layui-col-md6">
+                                            <!-- 货物类型 -->
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">货物类型:</label>
+                                                <div class="layui-form-value categoryId">
+                                                    -
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-col-md6">
+                                            <!-- 货物价值 -->
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">货物价格:</label>
+                                                <div class="layui-form-value productPrice">
+                                                    ￥-.--
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- |||||||||||||||||||||| -->
+                                    <div class="layui-row">
+                                        <div class="layui-col-md6">
+                                            <!-- 货物尺寸 -->
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">货物尺寸:</label>
+                                                <div class="layui-form-value productSize">
+                                                    -
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-col-md6">
+                                            <!-- 货物库存 -->
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">货物库存:</label>
+                                                <div class="layui-form-value stock">
+                                                    -
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- 入库的仓库 -->
+    <div class="layui-row">
+        <!-- 下拉列表 -->
+        <div class="layui-col-md6">
+            <div class="layui-row">
+                <div class="layui-col-md8 hxx-supplier">
+                    <!--供应商，带搜索框的下拉-->
+                    <div class="layui-row">
+                        <form class="layui-form">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">入库仓库</label>
+                                <div class="layui-input-block" id="repoId">
+                                    <!--<select name="city" lay-verify="required">
+                                        <option value="0">北京昌平仓库</option>
+                                        <option value="1">上海宝山仓库</option>
+                                        <option value="2">广州白云仓库</option>
+                                        <option value="3">南京建邺仓库</option>
+                                        <option value="4">杭州余杭仓库</option>
+                                    </select>-->
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 入库数量 -->
+    <div class="layui-row">
+        <!-- 左侧输入框,右侧显示当前库存 -->
+        <div class="layui-col-md6">
+            <div class="layui-row">
+                <div class="layui-col-md12 hxx-supplier">
+                    <!--供应商，带搜索框的下拉-->
+                    <div class="layui-row">
+                        <form class="layui-form">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">出库数量</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="stockNum" required lay-verify="required" placeholder="请输入数量" autocomplete="off" class="layui-input">
+                                </div>
+                                <div style="display: none" class="repo_id"></div><!-- 隐藏域保存仓库ID -->
+                                <div class="layui-form-mid layui-word-aux repo_stock">当前库存:-)</div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 提交按钮 -->
+    <div class="layui-row">
+        <div class="layui-col-md12" style="text-align: right;">
+            <!--按钮靠最右侧,整行显示面板状态-->
+            <button class="layui-btn layui-btn-primary layui-border-blue repo-sum-stock">提交出库</button>
+        </div>
+    </div>
+</div>
 
 
 <script src="../layui/layui.js"></script>
+<script src="../js/xm-select.js"></script>
+<script>
+
+    layui.use(["jquery","form","laydate","layer"],function () {
+
+        let $ = layui.jquery;
+        let form = layui.form;
+        let layer = layui.layer;
+
+        //提交入库
+        $(".repo-sum-stock").click(function () {
+
+            //获取仓库ID
+            let repoId = $(".repo_id").html();
+            //获取产品ID
+            let productId = $(".productId").html();
+            //获取供应商ID
+            let supplierId = $(".supplierId").html();
+            //获取入库数量
+            let stockNum = $("input[name='stockNum']").val();
+            //入库负责人(从cookie中获取当前登录的userId)
+            let cookies =  document.cookie;
+            let c={};
+            if(!!cookies){
+                let cs = cookies.split(";");
+                if(!!cs){
+                    for (let i = 0; i < cs.length; i++) {
+                        if(!!cs[i]){
+                            let kv = cs[i].split("=");
+                            c[kv[0].trim()]=kv[1];
+                        }
+                    }
+                }
+            }
+            //当前登录的用户ID
+            let userId=c.userId;
+            if(!!userId && !!repoId && productId && !!stockNum && supplierId){ //不为空
+                let rs={userId:userId,repoId:repoId,productId:productId,productStock:stockNum,supplierId:supplierId};
+                $.ajax({
+                    url:"/inRecordStock",
+                    method:"post",
+                    data:JSON.stringify(rs),
+                    contentType:"application/json",
+                    success:function (d){
+                        if(d.code===0){
+                            layer.msg("入库成功,当前库存为【"+d.obj.productStock+"】");
+                            //修改库存显示
+                            $(".repo_stock").html("当前库存: "+d.obj.productStock);
+                            //清空更新数量
+                            $("input[name='stockNum']").val("");
+                        }else{
+                            layer.msg(d.msg);
+                        }
+                    }
+                });
+            }else{
+                if(!!userId==false){
+                    layer.msg("请先登录");
+                }
+                if(!!repoId==false){
+                    layer.msg("请选择仓库");
+                }
+                if(!!productId==false){
+                    layer.msg("请选择产品");
+                }
+                if(!!stockNum==false){
+                    layer.msg("请填入库数量");
+                }
+                if(!!supplierId==false){
+                    layer.msg("请选择供应商");
+                }
+            }
+        });
+
+        //获取仓库列表
+        xmSelect.render({
+            el:"#repoId",
+            filterable: true,/*开启搜索模式*/
+            remoteSearch: true, /* 开启远程搜索 */
+            max: 1, /* 选择一条 */
+            tips:"仓库名称",/* 背景提示 */
+            searchTips:"搜索仓库",/*搜索提示*/
+            prop:{  /*修改下拉框默认属性*/
+                name:"repoName",
+                value:"repoId"
+            },
+            theme: { /*主题*/
+                color: '#0081ff',
+            },
+            remoteMethod: function(val, cb, show){
+                //这里如果val为空, 则不触发搜索
+                if(!val){
+                    return cb([]);
+                }
+                /* 通过API获取数据 */
+                $.getJSON("/getRepositoryList",{repoName:val},function (d) {
+                    if(d.code!=0){
+                        layer.msg(d.msg);
+                    }else{
+                        cb(d.obj);
+                    }
+                });
+            },
+            on:function (val){
+                if(val!=null && val!="undefined" && val.arr!=null && val.arr!="undefined" && val.arr.length>0){
+                    //数据存在,获取第一个
+                    let repoId = val.arr[0].repoId;
+                    //获取产品ID
+                    let productId = $(".productId").html();
+                    if(repoId!=null && repoId!="undefined" && productId!=null && productId!="undefined"){
+
+                        //判断productId是否为数值型
+                        if(!isNaN(productId)){
+                            //查询库存
+                            $.getJSON("/getProduct",{productId:productId,repoId:repoId},function (d){
+                                if(d.code===0){
+                                    //获取产品详情信息
+                                    let stock = d.obj!=null?d.obj.stock:0;
+                                    $(".repo_stock").html("当前库存: "+stock);
+                                    $(".repo_id").html(repoId);//将仓库ID保存到隐藏域中,为后面提交入库做准备
+                                }
+                            });
+                        }else{
+                            //如果非数字,提示用户选择产品
+                            layer.msg("请选择产品");
+                            setTimeout(function () {
+                                location.reload();//刷新页面,重新选择数据
+                            },900)
+                        }
+
+                    }
+                }
+            }
+        });
+        //生成获取下拉框
+        xmSelect.render({
+            el:"#supplierId",
+            filterable: true,/*开启搜索模式*/
+            remoteSearch: true, /* 开启远程搜索 */
+            max: 1, /* 选择一条 */
+            tips:"供应商名称",/* 背景提示 */
+            searchTips:"搜索供应商",/*搜索提示*/
+            prop:{  /*修改下拉框默认属性*/
+                name:"supplierName",
+                value:"supplierId"
+            },
+            theme: { /*主题*/
+                color: '#0081ff',
+            },
+            remoteMethod: function(val, cb, show){
+                //这里如果val为空, 则不触发搜索
+                if(!val){
+                    return cb([]);
+                }
+                /* 通过API获取数据 */
+                $.getJSON("/getSupplierList",{supplierName:val},function (d) {
+                    if(d.code!=0){
+                        layer.msg(d.msg);
+                    }else{
+                        cb(d.obj);
+                    }
+                });
+            },
+            on:function (val){
+                //判断数据是否存在,如果存在将其显示在隐藏/显示区域
+                if(val!=null && val!="undefined" && val.arr!=null && val.arr!="undefined" && val.arr.length>0){
+                    //数据存在,获取第一个
+                    let supplier = val.arr[0];
+                    //供应商编号
+                    $(".supplierId").html(supplier.supplierId);
+                    //供应商名称
+                    $(".supplierName").html(supplier.supplierName);
+                    //管理者
+                    $(".supplierLeader").html(supplier.supplierLeader);
+                    //联系电话
+                    $(".supplierTel").html(supplier.supplierTel);
+                    //邮箱
+                    $(".supplierEmail").html(supplier.supplierEmail);
+                    //地址
+                    $(".supplierAddress").html(supplier.supplierAddress);
+
+                }
+            }
+        });
+
+        //生成产品下拉框
+        xmSelect.render({
+            el:"#productNameId",
+            filterable: true,/*开启搜索模式*/
+            remoteSearch: true, /* 开启远程搜索 */
+            max: 1, /* 选择一条 */
+            tips:"货物名称",/* 修改背景提示 */
+            searchTips:"搜索货物名",/*搜索提示*/
+            prop:{  /*修改下拉框默认属性*/
+                name:"productName",
+                value:"productId"
+            },
+            theme: { /*主题*/
+                color: '#0081ff',
+            },
+            remoteMethod: function(val, cb, show){
+                //这里如果val为空, 则不触发搜索
+                if(!val){
+                    return cb([]);
+                }
+                /* 通过API获取数据 */
+                $.getJSON("/getProductList",{productName:val},function (d) {
+                    if(d.code!=0){
+                        layer.msg(d.msg);
+                    }else{
+                        cb(d.obj);
+                    }
+                });
+            },
+            on:function (val){
+                //判断数据是否存在,如果存在将其显示在隐藏/显示区域
+                if(val!=null && val!="undefined" && val.arr!=null && val.arr!="undefined" && val.arr.length>0){
+                    //数据存在,获取第一个
+                    let product = val.arr[0];
+                    //获取产品信息
+                    $.getJSON("/getProduct",{productId:product.productId},function (d){
+                        if(d.code===0){
+                            //获取产品详情信息
+                            let p = d.obj;
+                            //设置隐藏/显示信息
+                            //产品编号
+                            $(".productId").html(p.productId);
+                            $(".productName").html(p.productName);
+                            $(".categoryId").html(p.category.categoryName);
+                            $(".productSize").html(p.productSize);
+                            $(".productPrice").html("￥ "+p.productPrice);
+                            $(".stock").html(p.stock);
+                        }
+                    });
+                }
+            }
+        });
+    });
+</script>
 </body>
 </html>

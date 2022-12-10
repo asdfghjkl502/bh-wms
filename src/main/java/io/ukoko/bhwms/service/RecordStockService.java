@@ -16,7 +16,7 @@ public interface RecordStockService {
     /**
      * 出库
      */
-    void outRecordStock(RecordStock recordStock);
+    void outRecordStock(RecordInOutDto recordStock);
 
     /**
      * 通过仓库ID和产品ID查询存库

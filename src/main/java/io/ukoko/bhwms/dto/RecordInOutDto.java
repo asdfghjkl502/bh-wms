@@ -15,6 +15,11 @@ public class RecordInOutDto {
     private Integer supplierId;
 
     /*
+        客户ID
+     */
+    private Integer customerId;
+
+    /*
       仓库ID
      */
     private Integer repoId;
@@ -67,11 +72,20 @@ public class RecordInOutDto {
         this.supplierId = supplierId;
     }
 
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
+
     @Override
     public String toString() {
         return "RecordInOutDto{" +
                 "productId=" + productId +
                 ", supplierId=" + supplierId +
+                ", customerId=" + customerId +
                 ", repoId=" + repoId +
                 ", productStock=" + productStock +
                 ", userId=" + userId +

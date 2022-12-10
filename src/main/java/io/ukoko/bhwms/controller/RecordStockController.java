@@ -32,8 +32,8 @@ public class RecordStockController {
      * 出库操作
      */
     @PostMapping(value = "/outRecordStock")
-    public Object outRecordStock(@RequestBody RecordStock recordStock){
-        recordStockService.outRecordStock(recordStock);
+    public Object outRecordStock(@RequestBody RecordInOutDto recordInOutDto){
+        recordStockService.outRecordStock(recordInOutDto);
         return new Result();
     }
 

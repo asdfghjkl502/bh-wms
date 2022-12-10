@@ -12,6 +12,7 @@ public enum  BhWmsStatus {
     REQUEST_NOT_METHOD(4,"请求方式错误"),
     REPO_NOT_PARAM(5,"仓库参数不存在"),
     REPO_NOT_STOCK(6,"库存不足"),
+    REPO_NOT_PRODUCT(7,"当前仓库没有此产品"),
 
 
     ERROR(-1,"系统异常,请联系管理员")

@@ -61,7 +61,7 @@ public class RecordStockServiceImpl implements RecordStockService {
      * @param recordStock
      */
     @Override
-    public void outRecordStock(RecordStock recordStock) {
+    public void outRecordStock(RecordInOutDto recordStock) {
         if(recordStock.getProductId()!=null && recordStock.getRepoId()!=null){
             List<RecordStock> recordStocks = recordStockMapper.getRecordStockList(recordStock.getProductId(), recordStock.getRepoId());
             if(recordStocks!=null && recordStocks.size()>0){
@@ -71,8 +71,16 @@ public class RecordStockServiceImpl implements RecordStockService {
                 if(stock.getProductStock()<recordStock.getProductStock()){
                     throw new BhWmsException(BhWmsStatus.REPO_NOT_STOCK);
                 }else{
-                    recordStockMapper.outRecordStock(recordStock);
+                    RecordStock rs = new RecordStock();
+                    rs.setRepoId(recordStock.getRepoId());
+                    rs.setProductStock(recordStock.getProductStock());
+                    rs.setProductId(recordStock.getProductId());
+                    //出库
+                    recordStockMapper.outRecordStock(rs);
+                    //TODO... 添加出库记录
                 }
+            }else {
+                throw new BhWmsException(BhWmsStatus.REPO_NOT_PRODUCT);
             }
         }else{
             throw new BhWmsException(BhWmsStatus.REPO_NOT_PARAM);

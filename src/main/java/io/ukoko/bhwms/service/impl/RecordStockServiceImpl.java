@@ -52,6 +52,7 @@ public class RecordStockServiceImpl implements RecordStockService {
         recordIn.setRecordInTime(new Date());
         recordIn.setRepoId(recordStock.getRepoId());
         recordIn.setSupplierId(recordStock.getSupplierId());
+        recordIn.setUserId(recordStock.getUserId());
         recordInMapper.addRecordIn(recordIn);
     }
 

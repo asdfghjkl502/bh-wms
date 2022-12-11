@@ -41,6 +41,10 @@
         </where>
     </select>
 
+    <select id="getRepositorybyRepoId" resultType="repository">
+        SELECT * FROM repository WHERE REPO_ID=#{repoId}
+    </select>
+
     <update id="batchDeleteRepository">
         <foreach collection="list" item="item" separator=";">
             UPDATE repository SET IS_DELETE=0 WHERE REPO_ID=#{item}

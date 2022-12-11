@@ -46,4 +46,11 @@ public interface RepositoryMapper {
      */
     List<Repository> getRepositoryList(@Param("repoAddress") String repoAddress,@Param("startTime") Date startTime,@Param("endTime") Date endTime,@Param("repoName") String repoName);
 
+    /**
+     * 通过仓库ID查询仓库
+     * @param repoId
+     * @return
+     */
+    Repository getRepositoryByRepoId(Integer repoId);
+
 }

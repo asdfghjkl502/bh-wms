@@ -28,7 +28,20 @@
         WHERE PRODUCT_ID=#{productId} AND REPO_ID=#{repoId}
     </update>
 
-    <select id="getRecordStockList" resultType="recordStock">
+    <resultMap id="recordStockMap" type="recordStock">
+        <id column="PRODUCT_ID" property="productId"></id>
+        <id column="REPO_ID" property="repoId"></id>
+        <result column="PRODUCT_STOCK" property="productStock"></result>
+        <result column="CREATE_TIME" property="createTime"></result>
+        <result column="UPDATE_TIME" property="updateTime"></result>
+        <result column="IS_DELETE" property="isDelete"></result>
+        <!-- 关联查询仓库 -->
+        <association property="repository" column="REPO_ID" select="io.ukoko.bhwms.mapper.RepositoryMapper.getRepositorybyRepoId"></association>
+        <!-- 关联查询产品 -->
+        <association property="product" column="PRODUCT_ID" select="io.ukoko.bhwms.mapper.ProductMapper.getProductByProductId"></association>
+    </resultMap>
+
+    <select id="getRecordStockList" resultMap="recordStockMap">
         SELECT * FROM record_stock
         <where>
             <if test="productId!=null">PRODUCT_ID=#{productId}</if>

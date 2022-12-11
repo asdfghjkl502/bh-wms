@@ -131,6 +131,7 @@ public class RecordStockServiceImpl implements RecordStockService {
         List<RecordStock> recordStockList = recordStockMapper.getRecordStockList(productId, repoId);
         PageInfo<RecordStock> pageInfo = new PageInfo<>(recordStockList);
         page.setData(pageInfo.getList());
+        page.setCount(pageInfo.getTotal());
         page.setPageCount(pageInfo.getPages());
         page.setPageNo(pageInfo.getPageNum());
         page.setPageSize(pageInfo.getPageSize());

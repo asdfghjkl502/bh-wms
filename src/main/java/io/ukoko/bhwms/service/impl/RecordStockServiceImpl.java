@@ -1,5 +1,8 @@
 package io.ukoko.bhwms.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.dto.RecordInOutDto;
 import io.ukoko.bhwms.entity.RecordIn;
 import io.ukoko.bhwms.entity.RecordOut;
@@ -111,5 +114,28 @@ public class RecordStockServiceImpl implements RecordStockService {
     public RecordStock getRecordStockByRepoIdAndProductId(Integer repoId, Integer productId) {
         List<RecordStock> recordStockList = recordStockMapper.getRecordStockList(productId, repoId);
         return recordStockList==null?null:recordStockList.get(0);
+    }
+
+    /**
+     * 分页查询库存信息
+     * @param pageNo
+     * @param pageSize
+     * @param repoId
+     * @param productId
+     * @return
+     */
+    @Override
+    public Page getRecordStockPage(Integer pageNo, Integer pageSize, Integer repoId, Integer productId) {
+        Page page = new Page();
+        PageHelper.startPage(pageNo,pageSize);
+        List<RecordStock> recordStockList = recordStockMapper.getRecordStockList(productId, repoId);
+        PageInfo<RecordStock> pageInfo = new PageInfo<>(recordStockList);
+        page.setData(pageInfo.getList());
+        page.setPageCount(pageInfo.getPages());
+        page.setPageNo(pageInfo.getPageNum());
+        page.setPageSize(pageInfo.getPageSize());
+        page.setHasPre(pageInfo.isHasPreviousPage());
+        page.setHasNext(pageInfo.isHasNextPage());
+        return page;
     }
 }

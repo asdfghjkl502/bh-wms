@@ -1,5 +1,6 @@
 package io.ukoko.bhwms.service;
 
+import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.dto.RecordInOutDto;
 import io.ukoko.bhwms.entity.RecordStock;
 
@@ -22,4 +23,9 @@ public interface RecordStockService {
      * 通过仓库ID和产品ID查询存库
      */
     RecordStock getRecordStockByRepoIdAndProductId(Integer repoId,Integer productId);
+
+    /**
+     * 分页查询产品库存
+     */
+    Page getRecordStockPage(Integer pageNo,Integer pageSize,Integer repoId,Integer productId);
 }

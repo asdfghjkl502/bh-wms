@@ -1,6 +1,7 @@
 package io.ukoko.bhwms.controller;
 
 import io.swagger.annotations.Api;
+import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.dto.RecordInOutDto;
 import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.entity.RecordStock;
@@ -38,4 +39,8 @@ public class RecordStockController {
         return new Result(rs);
     }
 
+    public Object getRecordStockPage(Integer pageNo,Integer pageSize,Integer repoId,Integer productId){
+        Page page = recordStockService.getRecordStockPage(pageNo, pageSize, repoId, productId);
+        return new Result(page);
+    }
 }

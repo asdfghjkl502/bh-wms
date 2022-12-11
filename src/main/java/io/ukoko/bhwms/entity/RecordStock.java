@@ -11,10 +11,22 @@ public class RecordStock {
     产品ID
    */
   private Integer productId;
+
+  /*
+    产品详情
+   */
+  private Product product;
+
   /*
     仓库ID
    */
   private Integer repoId;
+
+  /*
+    仓库详情
+   */
+  private Repository repository;
+
   /*
     库存数量
    */
@@ -89,11 +101,29 @@ public class RecordStock {
     this.updateTime = updateTime;
   }
 
+  public Product getProduct() {
+    return product;
+  }
+
+  public void setProduct(Product product) {
+    this.product = product;
+  }
+
+  public Repository getRepository() {
+    return repository;
+  }
+
+  public void setRepository(Repository repository) {
+    this.repository = repository;
+  }
+
   @Override
   public String toString() {
     return "RecordStock{" +
             "productId=" + productId +
+            ", product=" + product +
             ", repoId=" + repoId +
+            ", repository=" + repository +
             ", productStock=" + productStock +
             ", createTime=" + createTime +
             ", updateTime=" + updateTime +

@@ -7,12 +7,9 @@ import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.entity.RecordStock;
 import io.ukoko.bhwms.service.RecordStockService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@Api(tags = "产品出入库模块")
+@Api(tags = "库存模块")
 @CrossOrigin
 @RestController
 public class RecordStockController {
@@ -39,6 +36,10 @@ public class RecordStockController {
         return new Result(rs);
     }
 
+    /**
+     * 分页获取库存列表
+     */
+    @GetMapping(value = "/getRecordStockPage")
     public Object getRecordStockPage(Integer pageNo,Integer pageSize,Integer repoId,Integer productId){
         Page page = recordStockService.getRecordStockPage(pageNo, pageSize, repoId, productId);
         return new Result(page);

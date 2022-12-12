@@ -13,7 +13,10 @@
         <div class="layui-row">
             <form>
                 <div class="layui-col-md4">
-                    仓库
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">入库仓库</label>
+                        <div class="layui-input-block" id="repoId"></div>
+                    </div>
                 </div>
                 <div class="layui-col-md4">
                     产品
@@ -30,8 +33,45 @@
     </div>
 
 <script src="../layui/layui.js"></script>
+<script src="../js/xm-select.js"></script>
 <script>
 
+    layui.use(["jquery","form","layer"],function () {
+
+        let $ = layui.jquery;
+        let layer = layui.layer;
+
+        xmSelect.render({
+            el:"#repoId",
+            filterable: true,/*开启搜索模式*/
+            remoteSearch: true, /* 开启远程搜索 */
+            max: 1, /* 选择一条 */
+            tips:"仓库名称",/* 背景提示 */
+            searchTips:"搜索仓库",/*搜索提示*/
+            prop:{  /*修改下拉框默认属性*/
+                name:"repoName",
+                value:"repoId"
+            },
+            theme: { /*主题*/
+                color: '#0081ff',
+            },
+            remoteMethod: function(val, cb, show){
+                //这里如果val为空, 则不触发搜索
+                if(!val){
+                    return cb([]);
+                }
+                /* 通过API获取数据 */
+                $.getJSON("/getRepositoryList",{repoName:val},function (d) {
+                    if(d.code!=0){
+                        layer.msg(d.msg);
+                    }else{
+                        cb(d.obj);
+                    }
+                });
+            }
+        });
+
+    });
 
 
 </script>

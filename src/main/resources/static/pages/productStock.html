@@ -9,20 +9,26 @@
 <body>
 
     <!-- 条件查询 -->
-    <div class="layui-fluid">
+    <div class="layui-fluid" style="border-bottom: 0.5px solid #ccc;">
         <div class="layui-row">
             <form>
                 <div class="layui-col-md4">
                     <div class="layui-form-item">
-                        <label class="layui-form-label">入库仓库</label>
+                        <label class="layui-form-label">仓库</label>
                         <div class="layui-input-block" id="repoId"></div>
                     </div>
                 </div>
                 <div class="layui-col-md4">
-                    产品
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">产品</label>
+                        <div class="layui-input-block" id="prodId"></div>
+                    </div>
                 </div>
-                <div class="layui-col-md4">
-                    按钮
+                <div class="layui-col-md4" style="display: flex;justify-content: center;">
+                    <div class="layui-form-item">
+                        <button type="button" class="layui-btn layui-btn-primary layui-border-blue">搜索</button>
+                        <button type="button" class="layui-btn layui-btn-primary layui-border-red">重置</button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -41,35 +47,55 @@
         let $ = layui.jquery;
         let layer = layui.layer;
 
-        xmSelect.render({
-            el:"#repoId",
-            filterable: true,/*开启搜索模式*/
-            remoteSearch: true, /* 开启远程搜索 */
-            max: 1, /* 选择一条 */
-            tips:"仓库名称",/* 背景提示 */
-            searchTips:"搜索仓库",/*搜索提示*/
-            prop:{  /*修改下拉框默认属性*/
-                name:"repoName",
-                value:"repoId"
-            },
-            theme: { /*主题*/
-                color: '#0081ff',
-            },
-            remoteMethod: function(val, cb, show){
-                //这里如果val为空, 则不触发搜索
-                if(!val){
-                    return cb([]);
-                }
-                /* 通过API获取数据 */
-                $.getJSON("/getRepositoryList",{repoName:val},function (d) {
-                    if(d.code!=0){
-                        layer.msg(d.msg);
-                    }else{
-                        cb(d.obj);
+        /**
+         * 产品列表
+         */
+        $.getJSON("/getProductList",function (d) {
+            if(d.code==0){
+                let r = d.obj;
+                xmSelect.render({
+                    el:"#prodId",
+                    data:r,
+                    filterable: true,/*开启搜索模式*/
+                    max: 1, /* 选择一条 */
+                    tips:"产品名称",/* 修改背景提示 */
+                    searchTips:"搜索产品名",/*搜索提示*/
+                    prop:{  /*修改下拉框默认属性*/
+                        name:"productName",
+                        value:"productId"
+                    },
+                    theme: { /*主题*/
+                        color: '#0081ff'
                     }
                 });
             }
         });
+
+
+        /**
+         * 仓库列表
+         */
+        $.getJSON("/getRepositoryList",function (d) {
+            if(d.code==0){
+                let r = d.obj;
+                xmSelect.render({
+                    el:"#repoId",
+                    data:r,
+                    filterable: true,/*开启搜索模式*/
+                    max: 1, /* 选择一条 */
+                    tips:"仓库名称",/* 背景提示 */
+                    searchTips:"搜索仓库",/*搜索提示*/
+                    prop:{  /*修改下拉框默认属性*/
+                        name:"repoName",
+                        value:"repoId"
+                    },
+                    theme: { /*主题*/
+                        color: '#0081ff'
+                    }
+                });
+            }
+        });
+
 
     });
 

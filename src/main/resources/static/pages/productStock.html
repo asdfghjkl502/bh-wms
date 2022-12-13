@@ -35,17 +35,89 @@
     </div>
     <!-- 数据展示 -->
     <div class="layui-fluid">
-        <h1>数据展示</h1>
+        <table id="demo" lay-filter="test"></table>
     </div>
 
 <script src="../layui/layui.js"></script>
 <script src="../js/xm-select.js"></script>
 <script>
 
-    layui.use(["jquery","form","layer"],function () {
+    layui.use(["jquery","form","layer","table"],function () {
 
         let $ = layui.jquery;
         let layer = layui.layer;
+        let table = layui.table;
+
+        /*
+         * 数据表格生成
+         */
+        table.render({
+            elem:"#demo",
+            url:"/getRecordStockPage",
+            page:{
+                prev:'上一页',
+                next:'下一页'
+            },
+            limit:5,
+            limits:[5,10,15,20,25],
+            request:{
+                pageName: 'pageNo',
+                limitName:'pageSize'
+            },
+            parseData:function(res){
+                return {
+                    "code": res.code,
+                    "msg": res.msg,
+                    "count": res.obj.count,
+                    "data": res.obj.data
+                }
+            },
+            defaultToolbar: ['exports', 'print'],
+            cols:[
+                [
+                    {
+                        title: '序号',
+                        type:'numbers',
+                        width:'10%'
+                    },
+                    {
+                        title: '仓库名称',
+                        sort: true,
+                        templet:function (d) {
+                            return d.repository.repoName;
+                        }
+                    },
+                    {
+                        title: '产品名称',
+                        sort: true,
+                        templet:function (d) {
+                            return d.product.productName;
+                        }
+                    },
+                    {
+                        field: 'productStock',
+                        title: '产品库存'
+                    },
+                    {
+                        field: 'createTime',
+                        title: '创建时间',
+                        sort: true,
+                        width:'18%'
+                    },
+                    {
+                        field: 'updateTime',
+                        title: '更新时间',
+                        sort: true,
+                        width:'18%'
+                    },
+                    {
+                        field: 'isDelete',
+                        title: '是否有效'
+                    }
+                ]
+            ]
+        });
+
 
         /**
          * 产品列表

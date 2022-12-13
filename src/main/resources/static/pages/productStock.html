@@ -26,7 +26,7 @@
                 </div>
                 <div class="layui-col-md4" style="display: flex;justify-content: center;">
                     <div class="layui-form-item">
-                        <button type="button" class="layui-btn layui-btn-primary layui-border-blue">搜索</button>
+                        <button type="button" lay-submit lay-filter="search" class="layui-btn layui-btn-primary layui-border-blue"> <i class="layui-icon layui-icon-search"></i> 搜索</button>
                     </div>
                 </div>
             </form>
@@ -46,6 +46,7 @@
         let $ = layui.jquery;
         let layer = layui.layer;
         let table = layui.table;
+        let form = layui.form;
 
         /*
          * 数据表格生成
@@ -71,7 +72,6 @@
                     "data": res.obj.data
                 }
             },
-            defaultToolbar: ['exports', 'print'],
             cols:[
                 [
                     {
@@ -120,6 +120,23 @@
             ]
         });
 
+        /**
+         * 搜索事件绑定
+         */
+        form.on("submit(search)",function (obj){
+            //重新获取数据表格首页数据(根据搜索条件查询出来的数据)
+            table.reload("demo",{
+                page:{
+                    curr:1
+                },
+                where:{
+                    userName:obj.field.userName,
+                    userTel:obj.field.userTel,
+                    startTime:obj.field.startTime,
+                    endTime:obj.field.endTime
+                }
+            })
+        });
 
         /**
          * 产品列表

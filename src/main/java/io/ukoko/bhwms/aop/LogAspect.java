@@ -12,12 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -63,6 +65,26 @@ public class LogAspect {
         }
         //获取结果
         LOGGER.info("方法返回值为 ==>>{}",proceed);
+        Searcher searcher = null;
+        try {
+            //获取resources目录下的文件对象
+            File file = ResourceUtils.getFile("classpath:xdb/ip2region.xdb");
+            //通过 https://gitee.com/lionsoul/ip2region/tree/master/binding/java获取IP地址对应的省市区信息
+            //获取Search实例
+            searcher = Searcher.newWithFileOnly(file.getPath());
+            String info = searcher.searchByStr(request.getRemoteAddr());
+            //客户的省市区
+            LOGGER.info("客户访问地址 ==>>{}",info);
+        }catch (Exception e){
+            LOGGER.info("客户访问地址 ==>>{}","地址信息未知");
+        }finally {
+            if(searcher!=null){
+                //关闭资源
+                searcher.close();
+            }
+        }
+
+
 
         LOGGER.info("----------------------------------------------------------------");
         return proceed;

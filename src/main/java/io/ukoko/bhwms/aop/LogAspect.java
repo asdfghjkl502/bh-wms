@@ -4,20 +4,13 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.lionsoul.ip2region.xdb.Searcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -63,31 +56,6 @@ public class LogAspect {
         }
         //获取结果
         LOGGER.info("方法返回值为 ==>>{}",proceed);
-        Searcher searcher = null;
-        try {
-
-            //获取jar包中文件的输入流
-            //将其保存到jar包文件所在目录
-            //读取文件
-
-
-            //通过 https://gitee.com/lionsoul/ip2region/tree/master/binding/java获取IP地址对应的省市区信息
-            //获取Search实例
-           // searcher = Searcher.newWithFileOnly(resource.getPath());
-            //String info = searcher.searchByStr(request.getRemoteAddr());
-            //客户的省市区
-            LOGGER.info("123客户访问地址 ==>>{}");
-        }catch (Exception e){
-            e.printStackTrace();
-            LOGGER.info("客户访问地址 ==>>{}","地址信息未知");
-        }finally {
-            if(searcher!=null){
-                //关闭资源
-                searcher.close();
-            }
-        }
-
-
 
         LOGGER.info("----------------------------------------------------------------");
         return proceed;

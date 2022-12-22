@@ -1,16 +1,22 @@
 package io.ukoko.bhwms.aop;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.system.ApplicationHome;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 
@@ -56,6 +62,33 @@ public class LogAspect {
         }
         //获取结果
         LOGGER.info("方法返回值为 ==>>{}",proceed);
+
+        //读取xdb文件的输入流
+        ClassPathResource cpr = new ClassPathResource("xdb/ip2region.xdb");
+        //获取文件输入流
+        InputStream in = cpr.getInputStream();
+        //获取jar包文件所在的路径
+        ApplicationHome home = new ApplicationHome(getClass());
+        File file = home.getSource();//当前jar包的真实文件路径
+        //获取jar包文件的父目录
+        String path = file.getParentFile().getPath();
+
+        //判断当前目录下是否存在ip2region.xdb文件
+        File f = new File(path + "ip2region.xdb");
+        if(!f.exists()){
+            //将文件复制到jar所在目录
+            FileOutputStream out = new FileOutputStream(path);
+            byte[] buff = new byte[128];
+            int len=0;
+            while((len=in.read(buff))!=-1){
+                out.write(buff,0,len);
+            }
+            //关流
+            out.close();
+            in.close();
+        }
+        System.out.println("f:============:>>>"+f);
+
 
         LOGGER.info("----------------------------------------------------------------");
         return proceed;

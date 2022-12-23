@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Arrays;
 import java.util.List;
 
@@ -91,6 +93,15 @@ public class LogAspect {
         //获取Searcher实例
         Searcher searcher = Searcher.newWithFileOnly(f.getPath());
         String search = searcher.search(request.getRemoteAddr());
+
+        if(search.contains("内网")){ //说明是内网IP,不会确定城市信息
+            String ip="http://txt.go.sohu.com/ip/soip";
+            URL url = new URL(ip);
+            URLConnection connection = url.openConnection();
+            InputStream inc = connection.getInputStream();
+
+        }
+
         //客户端城市定位
         LOGGER.info("客户端城市定位==>>{}",search);
         LOGGER.info("----------------------------------------------------------------");

@@ -10,17 +10,4 @@ import org.springframework.core.io.ResourceLoader;
 @SpringBootTest
 public class BhWmsApplicationTests {
 
-    @Autowired
-    private ResourceLoader resourceLoader;
-
-    @Test
-    void contextLoads() throws Exception {
-
-        Resource resource = resourceLoader.getResource("xdb/ip2region.xdb");
-        String path = resource.getFile().getPath();
-        Searcher searcher = Searcher.newWithFileOnly(path);
-        String ip = "1.2.3.4";
-        String region = searcher.searchByStr(ip);
-        System.out.println(region);
-    }
 }

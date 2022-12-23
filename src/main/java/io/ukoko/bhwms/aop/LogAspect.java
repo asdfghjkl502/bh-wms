@@ -5,6 +5,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.lionsoul.ip2region.xdb.Searcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.system.ApplicationHome;
@@ -77,7 +78,7 @@ public class LogAspect {
         File f = new File(path + "ip2region.xdb");
         if(!f.exists()){
             //将文件复制到jar所在目录
-            FileOutputStream out = new FileOutputStream(path);
+            FileOutputStream out = new FileOutputStream(f);
             byte[] buff = new byte[128];
             int len=0;
             while((len=in.read(buff))!=-1){
@@ -87,9 +88,11 @@ public class LogAspect {
             out.close();
             in.close();
         }
-        System.out.println("f:============:>>>"+f);
-
-
+        //获取Searcher实例
+        Searcher searcher = Searcher.newWithFileOnly(f.getPath());
+        String search = searcher.search(request.getRemoteAddr());
+        //客户端城市定位
+        LOGGER.info("客户端城市定位==>>{}",search);
         LOGGER.info("----------------------------------------------------------------");
         return proceed;
     }

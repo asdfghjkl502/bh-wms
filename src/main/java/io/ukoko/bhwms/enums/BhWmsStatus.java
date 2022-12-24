@@ -15,7 +15,7 @@ public enum  BhWmsStatus {
     REPO_NOT_PRODUCT(7,"当前仓库没有此产品"),
 
 
-    ERROR(-1,"系统异常,请联系管理员")
+    ERROR(-1,"系统异常")
     ;
     private int code;
     private String msg;

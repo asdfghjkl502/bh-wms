@@ -94,27 +94,35 @@ public class LogAspect {
             }
             //获取Searcher实例
             Searcher searcher = Searcher.newWithFileOnly(f.getPath());
-            String search = searcher.search(request.getRemoteAddr());
+            String remoteAddr = request.getRemoteAddr();
+            if(remoteAddr!=null&&remoteAddr!=""){
+                String[] split = remoteAddr.split("\\.");
+                if(split.length!=4){
+                    //非IPV4地址
+                    LOGGER.info("客户端城市定位==>>{}","IPV6地址暂不支持定位");
+                }else {
+                    String search = searcher.search(remoteAddr);
 
-            if(search.contains("内网")){ //说明是内网IP,不会确定城市信息
-                String ip="https://ip.chinaz.com/";//https://ip.chinaz.com/
-                URL url = new URL(ip);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"));
-                StringBuilder sb = new StringBuilder();
-                String read="";
-                while ((read=br.readLine())!=null){
-                    sb.append(read+"\r\n");
-                }
-                Pattern p = Pattern.compile("\\<dd class\\=\"fz24\">(.*?)\\<\\/dd>");
-                Matcher m = p.matcher(sb.toString());
-                if(m.find()){
-                    String ipStr = m.group(1);
-                    search = searcher.search(ipStr);
+                    if(search.contains("内网")){ //说明是内网IP,不会确定城市信息
+                        String ip="https://ip.chinaz.com/";//https://ip.chinaz.com/
+                        URL url = new URL(ip);
+                        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                        br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"));
+                        StringBuilder sb = new StringBuilder();
+                        String read="";
+                        while ((read=br.readLine())!=null){
+                            sb.append(read+"\r\n");
+                        }
+                        Pattern p = Pattern.compile("\\<dd class\\=\"fz24\">(.*?)\\<\\/dd>");
+                        Matcher m = p.matcher(sb.toString());
+                        if(m.find()){
+                            String ipStr = m.group(1);
+                            search = searcher.search(ipStr);
+                            LOGGER.info("客户端城市定位==>>{}",search);
+                        }
+                    }
                 }
             }
-            //客户端城市定位
-            LOGGER.info("客户端城市定位==>>{}",search);
             proceed = joinPoint.proceed();
             //获取结果
             LOGGER.info("方法返回值为 ==>>{}",proceed);

@@ -103,7 +103,7 @@ public class LogAspect {
                 }else {
                     String search = searcher.search(remoteAddr);
 
-                    if(search.contains("内网")){ //说明是内网IP,不会确定城市信息
+                    /*if(search.contains("内网")){ //说明是内网IP,不会确定城市信息
                         String ip="https://ip.chinaz.com/";//https://ip.chinaz.com/
                         URL url = new URL(ip);
                         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -120,7 +120,7 @@ public class LogAspect {
                             search = searcher.search(ipStr);
                             LOGGER.info("客户端城市定位==>>{}",search);
                         }
-                    }
+                    }*/
                 }
             }
             proceed = joinPoint.proceed();

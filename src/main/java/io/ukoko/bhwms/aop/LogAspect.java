@@ -102,25 +102,7 @@ public class LogAspect {
                     LOGGER.info("客户端城市定位==>>{}","IPV6地址暂不支持定位");
                 }else {
                     String search = searcher.search(remoteAddr);
-
-                    /*if(search.contains("内网")){ //说明是内网IP,不会确定城市信息
-                        String ip="https://ip.chinaz.com/";//https://ip.chinaz.com/
-                        URL url = new URL(ip);
-                        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                        br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"));
-                        StringBuilder sb = new StringBuilder();
-                        String read="";
-                        while ((read=br.readLine())!=null){
-                            sb.append(read+"\r\n");
-                        }
-                        Pattern p = Pattern.compile("\\<dd class\\=\"fz24\">(.*?)\\<\\/dd>");
-                        Matcher m = p.matcher(sb.toString());
-                        if(m.find()){
-                            String ipStr = m.group(1);
-                            search = searcher.search(ipStr);
-                            LOGGER.info("客户端城市定位==>>{}",search);
-                        }
-                    }*/
+                    LOGGER.info("客户端城市定位==>>{}",search);
                 }
             }
             proceed = joinPoint.proceed();

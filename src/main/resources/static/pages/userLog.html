@@ -29,10 +29,13 @@
 
         table.render({
             elem:"#demo",
-            url:"/getUserPage",
+            url:"/getLogs",
             page:{
                 prev:'上一页',
                 next:'下一页'
+            },
+            where:{
+                type:1
             },
             limit:5,
             limits:[5,10,15,20,25],
@@ -48,8 +51,6 @@
                     "data": res.obj.data
                 }
             },
-            toolbar: '<div> <button lay-event="batchDel" class="layui-btn layui-btn-sm layui-btn-danger"> <i class="layui-icon layui-icon-delete"></i> 批量删除</button><button lay-event="addUser" class="layui-btn layui-btn-sm layui-btn-normal"> <i class="layui-icon layui-icon-add-1"></i>添加</button> </div>',
-            defaultToolbar: ['exports', 'print'],
             cols:[
                 [
                     {
@@ -57,9 +58,35 @@
                         type:'numbers',
                     },
                     {
-                        field: 'userName',
-                        title: '姓名',
+                        field: 'nickName',
+                        title: '昵称',
                         sort: true
+                    },
+                    {
+                        field: 'ipAddr',
+                        title: '登录地址',
+                        sort: true
+                    },
+                    {
+                        field: 'methodName',
+                        title: '请求方法',
+                        templet:function (d) {
+                            return '<span class="layui-badge layui-bg-green">'+d.methodName+'</span>';
+                        }
+                    },
+                    {
+                        field: 'method',
+                        title: '请求方式',
+                        templet:function (d) {
+                            return '<span class="layui-badge layui-bg-black">'+d.method+'</span>';
+                        }
+                    },
+                    {
+                        field: 'type',
+                        title: '日志类型',
+                        templet:function (d) {
+                            return d.type==0?'<span class="layui-badge layui-bg-blue">系统日志</span>':'<span class="layui-badge">登录日志</span>';
+                        }
                     },
                     {
                         field: 'createTime',

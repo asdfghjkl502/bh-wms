@@ -8,9 +8,93 @@
 </head>
 <body>
 
-	<h1>系统日志</h1>
+    <div class="layui-fluid">
+
+        <!-- 数据表格 -->
+        <table id="demo" lay-filter="test"></table>
+    </div>
 
 
 <script src="../layui/layui.js"></script>
+    <script>
+
+        layui.use(["table"],function() {
+            const table = layui.table;
+
+
+
+            table.render({
+                elem:"#demo",
+                url:"/getLogs",
+                page:{
+                    prev:'上一页',
+                    next:'下一页'
+                },
+                where:{
+                    type:0
+                },
+                limit:5,
+                limits:[5,10,15,20,25],
+                request:{
+                    pageName: 'pageNo',
+                    limitName:'pageSize'
+                },
+                parseData:function(res){
+                    return {
+                        "code": res.code,
+                        "msg": res.msg,
+                        "count": res.obj.count,
+                        "data": res.obj.data
+                    }
+                },
+                cols:[
+                    [
+                        {
+                            title: '序号',
+                            type:'numbers',
+                        },
+                        {
+                            field: 'nickName',
+                            title: '昵称',
+                            sort: true
+                        },
+                        {
+                            field: 'ipAddr',
+                            title: '登录地址',
+                            sort: true
+                        },
+                        {
+                            field: 'methodName',
+                            title: '请求方法',
+                            templet:function (d) {
+                                return '<span class="layui-badge layui-bg-green">'+d.methodName+'</span>';
+                            }
+                        },
+                        {
+                            field: 'method',
+                            title: '请求方式',
+                            templet:function (d) {
+                                return '<span class="layui-badge layui-bg-black">'+d.method+'</span>';
+                            }
+                        },
+                        {
+                            field: 'type',
+                            title: '日志类型',
+                            templet:function (d) {
+                                return d.type==0?'<span class="layui-badge layui-bg-blue">系统日志</span>':'<span class="layui-badge">登录日志</span>';
+                            }
+                        },
+                        {
+                            field: 'createTime',
+                            title: '创建时间',
+                            sort: true
+                        }
+                    ]
+                ]
+            });
+
+        });
+
+    </script>
 </body>
 </html>

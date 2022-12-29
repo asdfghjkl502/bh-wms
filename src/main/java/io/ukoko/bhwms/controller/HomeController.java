@@ -135,6 +135,8 @@ public class HomeController {
                             subject.login(token);
                             //向前端保存数据
                             User user = userService.getUserByUserTel(userTel);
+                            //向session对象中保存数据
+                            request.getSession().setAttribute("nickName",user.getUserNick());
                             /**
                              * 将用户ID和用户昵称送到前端cookie中
                              * 注意事项: Safari浏览器的Cookie不支持中文,所以此种方式昵称如果是中文,Safari浏览器不会保存,可以使用其它办法.其它浏览器没有影响

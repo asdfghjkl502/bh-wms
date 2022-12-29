@@ -21,6 +21,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -52,6 +53,9 @@ public class LogAspect {
         try {
             ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
             HttpServletRequest request = requestAttributes.getRequest();
+            //获取用户昵称
+            Object nickName = request.getSession().getAttribute("nickName");
+            LOGGER.info("用户昵称==>>{}",nickName==null?"匿名":nickName);
             //获取主机IP地址
             LOGGER.info("客户端IP地址==>>{}",request.getRemoteAddr());
             //获取请求客户端地址

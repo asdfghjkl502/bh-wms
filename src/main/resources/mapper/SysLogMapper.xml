@@ -12,5 +12,16 @@
              ,#{method},#{nickName},#{createTime}
             )
     </insert>
+
+    <select id="getSysLogList" resultType="sysLog">
+        SELECT * FROM sys_log 
+        <where>
+            <if test="type!=null">type=#{type}</if>
+            <if test="methodName!=null">AND method_name LIKE CONCAT('%',#{methodName},'%')</if>
+            <if test="method!=null">AND method LIKE CONCAT('%',#{method},'%')</if>
+            <if test="nickName!=null">AND nick_name LIKE CONCAT('%',#{nickName},'%')</if>
+            <if test="start!=null and end!=null">AND create_time <![CDATA[ >= ]]> #{start} AND create_time <![CDATA[ <= ]]> #{end}</if>
+        </where>
+    </select>
     
 </mapper>

@@ -20,10 +20,13 @@ public class BhWmsApplicationTests {
         String s="admin";
 
         //编码
-        String encode = Base64.getEncoder().encodeToString(s.getBytes());
-        System.out.println(encode); //YWRtaW4=
+        String encode = Base64
+                .getEncoder()
+                .withoutPadding()
+                .encodeToString(s.getBytes());
+        System.out.println(encode); //YWRtaW4
         //解码
-        byte[] decode = Base64.getDecoder().decode("YWRtaW4=");
+        byte[] decode = Base64.getDecoder().decode("YWRtaW4");
         System.out.println(new String(decode,"UTF-8"));
 
     }

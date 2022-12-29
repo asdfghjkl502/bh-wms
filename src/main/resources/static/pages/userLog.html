@@ -8,9 +8,70 @@
 </head>
 <body>
 
-	<h1>登录日志</h1>
+	<div class="layui-fluid">
+
+        <!-- 数据表格 -->
+        <table id="demo" lay-filter="test"></table>
+    </div>
 
 
 <script src="../layui/layui.js"></script>
+<script>
+
+    layui.use(["table","laydate","form","layer","jquery"],function() {
+        const table = layui.table;
+        const laydate = layui.laydate;
+        const form = layui.form;
+        const layer = layui.layer;
+        const $ = layui.jquery;
+
+
+
+        table.render({
+            elem:"#demo",
+            url:"/getUserPage",
+            page:{
+                prev:'上一页',
+                next:'下一页'
+            },
+            limit:5,
+            limits:[5,10,15,20,25],
+            request:{
+                pageName: 'pageNo',
+                limitName:'pageSize'
+            },
+            parseData:function(res){
+                return {
+                    "code": res.code,
+                    "msg": res.msg,
+                    "count": res.obj.count,
+                    "data": res.obj.data
+                }
+            },
+            toolbar: '<div> <button lay-event="batchDel" class="layui-btn layui-btn-sm layui-btn-danger"> <i class="layui-icon layui-icon-delete"></i> 批量删除</button><button lay-event="addUser" class="layui-btn layui-btn-sm layui-btn-normal"> <i class="layui-icon layui-icon-add-1"></i>添加</button> </div>',
+            defaultToolbar: ['exports', 'print'],
+            cols:[
+                [
+                    {
+                        title: '序号',
+                        type:'numbers',
+                    },
+                    {
+                        field: 'userName',
+                        title: '姓名',
+                        sort: true
+                    },
+                    {
+                        field: 'createTime',
+                        title: '创建时间',
+                        sort: true
+                    }
+                ]
+            ]
+        });
+
+    });
+
+</script>
 </body>
 </html>

@@ -1,7 +1,9 @@
 package io.ukoko.bhwms.aop;
 
+import io.ukoko.bhwms.entity.SysLog;
 import io.ukoko.bhwms.enums.BhWmsStatus;
 import io.ukoko.bhwms.exceptions.BhWmsException;
+import io.ukoko.bhwms.service.SysLogService;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -10,6 +12,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.lionsoul.ip2region.xdb.Searcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.system.ApplicationHome;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
@@ -23,6 +26,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.security.Principal;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,6 +39,9 @@ import java.util.regex.Pattern;
 public class LogAspect {
 
     private static final Logger LOGGER = LoggerFactory.getLogger("BH-WMS");
+
+    @Autowired
+    private SysLogService sysLogService;
 
 
     /**
@@ -72,6 +79,22 @@ public class LogAspect {
             }else{
                 LOGGER.info("方法入参==>{}","");
             }
+
+
+            //向数据库中插入数据
+            SysLog sysLog = new SysLog();
+            sysLog.setCreateTime(new Date());
+            sysLog.setIpAddr(request.getRemoteAddr());
+            sysLog.setMethod(request.getMethod());
+            sysLog.setNickName(nickName==null?"匿名":nickName+"");
+            sysLog.setMethodName(joinPoint.getSignature().getName());
+            if("login".equals(joinPoint.getSignature().getName())){
+                sysLog.setType(1);
+            }else{
+                sysLog.setType(0);
+            }
+            sysLogService.addSysLog(sysLog);
+
             //读取xdb文件的输入流
             ClassPathResource cpr = new ClassPathResource("xdb/ip2region.xdb");
             //获取文件输入流

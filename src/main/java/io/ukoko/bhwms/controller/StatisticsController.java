@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,6 +61,14 @@ public class StatisticsController {
     @GetMapping(value = "/getRepositoryPayloadStatistics")
     public Object getRepositoryPayloadStatistics(){
         List<Statistics> payloadStatistics = repositoryService.getRepositoryPayloadStatistics();
-        return new Result(payloadStatistics);
+
+        List<Map<String,Object>> ss = new ArrayList<>();
+        for (Statistics ps : payloadStatistics) {
+            Map<String,Object> map = new HashMap<>();
+            map.put("name",ps.getCommon());
+            map.put("value",ps.getCount());
+            ss.add(map);
+        }
+        return new Result(ss);
     }
 }

@@ -2,47 +2,43 @@
  * ********************************************************************************************
  * 饼图
  */
-// 基于准备好的dom，初始化echarts实例
-let repo = echarts.init(document.getElementById('repoId'));
+layui.use(["jquery"],function () {
+    let $ = layui.jquery;
 
-// 指定图表的配置项和数据
-let option = {
-    title: {
-        text: '仓库负载',
-        subtext: '百惠大脑AI运算平台提供数据支持',
-        left: 'center'
-    },
-    tooltip: {
-        trigger: 'item'
-    },
-    legend: {
-        orient: 'vertical',
-        left: 'left'
-    },
-    series: [
-        {
-            name: '智能仓储',
-            type: 'pie',
-            radius: '50%',
-            data: [
-                { value: 1048, name: '南京建邺' },
-                { value: 735, name: '南京江宁' },
-                { value: 580, name: '南京鼓楼' },
-                { value: 484, name: '北京大兴' },
-                { value: 300, name: '上海闸北' }
-            ],
-            emphasis: {
-                itemStyle: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+    $.getJSON("/getRepositoryPayloadStatistics",function (d) {
+        let repo = echarts.init(document.getElementById('repoId'));
+        repo.setOption({
+            title: {
+                text: '仓库负载',
+                subtext: '百惠大脑AI运算平台提供数据支持',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left'
+            },
+            series: [
+                {
+                    name: '智能仓储',
+                    type: 'pie',
+                    radius: '50%',
+                    data: d.obj,
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
                 }
-            }
-        }
-    ]
-};
-// 使用刚指定的配置项和数据显示图表。
-repo.setOption(option);
+            ]
+        });
+    });
+});
+
 /**
  * ********************************************************************************************
  * 时钟
@@ -233,7 +229,7 @@ setInterval(function () {
     let second = date.getSeconds();
     let minute = date.getMinutes() + second / 60;
     let hour = (date.getHours() % 12) + minute / 60;
-    option.animationDurationUpdate = 300;
+    //option.animationDurationUpdate = 300;
     clock.setOption({
         series: [
             {

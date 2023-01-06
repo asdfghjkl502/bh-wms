@@ -54,7 +54,7 @@ public class LogAspect {
      * 环绕通知
      */
     @Around(value = "log()")
-    public Object logAround(ProceedingJoinPoint joinPoint){
+    public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
         BufferedReader br = null;
         Object proceed = null;
         try {
@@ -137,7 +137,7 @@ public class LogAspect {
             LOGGER.info("方法返回值为 ==>>{}",proceed);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
-            throw new BhWmsException(BhWmsStatus.ERROR);
+            throw throwable;
         }finally {
             if (br!=null){
                 try {

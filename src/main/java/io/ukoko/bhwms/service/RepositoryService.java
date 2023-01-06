@@ -2,6 +2,7 @@ package io.ukoko.bhwms.service;
 
 import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.entity.Repository;
+import io.ukoko.bhwms.entity.Statistics;
 
 import java.util.Date;
 import java.util.List;
@@ -46,5 +47,10 @@ public interface RepositoryService {
      * @return
      */
     List<Repository> getRepositoryList(String repoName);
+
+    /**
+     * 仓库负载统计
+     */
+    List<Statistics> getRepositoryPayloadStatistics();
 
 }

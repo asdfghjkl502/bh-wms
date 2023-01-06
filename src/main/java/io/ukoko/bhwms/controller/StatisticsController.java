@@ -3,6 +3,7 @@ package io.ukoko.bhwms.controller;
 import io.swagger.annotations.Api;
 import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.entity.Statistics;
+import io.ukoko.bhwms.service.RepositoryService;
 import io.ukoko.bhwms.service.StatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,6 +21,10 @@ public class StatisticsController {
 
     @Autowired
     private StatisticsService statisticsService;
+
+    @Autowired
+    private RepositoryService repositoryService;
+
 
     /**
      * 统计12个月内的入库数量
@@ -48,4 +53,12 @@ public class StatisticsController {
         return new Result(monthMoney);
     }
 
+    /**
+     * 仓库负载统计
+     */
+    @GetMapping(value = "/getRepositoryPayloadStatistics")
+    public Object getRepositoryPayloadStatistics(){
+        List<Statistics> payloadStatistics = repositoryService.getRepositoryPayloadStatistics();
+        return new Result(payloadStatistics);
+    }
 }

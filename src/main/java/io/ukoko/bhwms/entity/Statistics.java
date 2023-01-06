@@ -9,6 +9,7 @@ public class Statistics {
     private Long count;//数量
     private Double price;//金额
     private String time;//时间
+    private String common;//通用字段
 
     public Statistics() {
     }
@@ -50,6 +51,14 @@ public class Statistics {
         this.productId = productId;
     }
 
+    public String getCommon() {
+        return common;
+    }
+
+    public void setCommon(String common) {
+        this.common = common;
+    }
+
     @Override
     public String toString() {
         return "Statistics{" +
@@ -57,6 +66,7 @@ public class Statistics {
                 ", count=" + count +
                 ", price=" + price +
                 ", time='" + time + '\'' +
+                ", common='" + common + '\'' +
                 '}';
     }
 }

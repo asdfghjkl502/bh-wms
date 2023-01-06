@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import javax.annotation.Resource;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -40,5 +42,19 @@ class RecordInMapperTest extends BhWmsApplicationTests {
         for (Statistics statistic : statistics) {
             System.out.println(statistic);
         }
+    }
+
+    @Test
+    public void getStatisticsInByTime() throws ParseException {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String ss = "2023-01-01 00:00:00";
+        String es = "2023-01-31 23:59:59";
+
+        Date start = sdf.parse(ss);
+        Date end = sdf.parse(es);
+
+        List<Statistics> statistics = recordInMapper.getStatisticsInByTime(start, end);
+        statistics.forEach(System.out::println);
     }
 }

@@ -29,4 +29,13 @@ public class StatisticsController {
         return new Result(statistics);
     }
 
+    /**
+     * 统计12个月内的出库数量
+     */
+    @GetMapping(value = "/getStatisticsOutMonth")
+    public Object getStatisticsOutMonth(){
+        Map<String, Object> statistics = statisticsService.getStatisticsOutMonth();
+        return new Result(statistics);
+    }
+
 }

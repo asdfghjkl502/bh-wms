@@ -5,7 +5,9 @@ package io.ukoko.bhwms.entity;
  */
 public class Statistics {
 
+    private Integer productId;//产品ID
     private Long count;//数量
+    private Double price;//金额
     private String time;//时间
 
     public Statistics() {
@@ -32,10 +34,28 @@ public class Statistics {
         this.time = time;
     }
 
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
+
     @Override
     public String toString() {
         return "Statistics{" +
-                "count=" + count +
+                "productId=" + productId +
+                ", count=" + count +
+                ", price=" + price +
                 ", time='" + time + '\'' +
                 '}';
     }

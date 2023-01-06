@@ -20,4 +20,16 @@
             )
     </insert>
 
+    <select id="getStatisticsOutMonth" resultType="statistics">
+        SELECT
+            IFNULL(bb.count,0) AS "count",aa.date AS "time"
+                FROM
+                    (SELECT DATE_FORMAT(@cdate := DATE_ADD(@cdate,INTERVAL -1 MONTH),'%Y-%m') AS DATE
+                        FROM
+                            (SELECT @cdate := DATE_ADD(CURDATE(),INTERVAL 1 MONTH) FROM record_out) a LIMIT 12) aa
+                                LEFT JOIN
+                                    (SELECT SUM(record_out_number) AS COUNT,DATE_FORMAT(record_out_time,'%Y-%m') AS mon FROM record_out GROUP BY mon) bb
+                                        ON aa.date=bb.mon ORDER BY aa.date ASC
+    </select>
+
 </mapper>

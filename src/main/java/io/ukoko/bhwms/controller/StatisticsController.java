@@ -1,0 +1,32 @@
+package io.ukoko.bhwms.controller;
+
+import io.swagger.annotations.Api;
+import io.ukoko.bhwms.dto.Result;
+import io.ukoko.bhwms.entity.Statistics;
+import io.ukoko.bhwms.service.StatisticsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.Map;
+
+@Api(tags = "商业智能模块")
+@CrossOrigin
+@RestController
+public class StatisticsController {
+
+    @Autowired
+    private StatisticsService statisticsService;
+
+    /**
+     * 统计12个月内的入库数量
+     */
+    @GetMapping(value = "/getStatisticsInMonth")
+    public Object getStatisticsInMonth(){
+        Map<String, Object> statistics = statisticsService.getStatisticsInMonth();
+        return new Result(statistics);
+    }
+
+}

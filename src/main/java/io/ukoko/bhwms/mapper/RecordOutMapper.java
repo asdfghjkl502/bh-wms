@@ -16,4 +16,8 @@ public interface RecordOutMapper {
      */
     void addRecordOut(RecordOut recordOut);
 
+    /**
+     * 统计12个月的出库量
+     */
+
 }

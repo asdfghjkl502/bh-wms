@@ -19,5 +19,17 @@
                     #{remarks},#{createTime},#{isDelete}
                 )
     </insert>
+    
+    <select id="getStatisticsInMonth" resultType="statistics">
+        SELECT
+            IFNULL(bb.count,0) AS "count",aa.date AS "time"
+                FROM
+                    (SELECT DATE_FORMAT(@cdate := DATE_ADD(@cdate,INTERVAL -1 MONTH),'%Y-%m') AS DATE
+                        FROM
+                            (SELECT @cdate := DATE_ADD(CURDATE(),INTERVAL 1 MONTH) FROM record_in) a LIMIT 12) aa
+                                LEFT JOIN
+                                    (SELECT COUNT(*) AS COUNT,DATE_FORMAT(record_in_time,'%Y-%m') AS mon FROM record_in GROUP BY mon) bb
+                                        ON aa.date=bb.mon ORDER BY aa.date ASC
+    </select>
 
 </mapper>

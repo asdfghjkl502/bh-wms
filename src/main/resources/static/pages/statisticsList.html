@@ -90,51 +90,60 @@
             });
 
             /*月入库/出库金额,折线图*/
-            var prodMoney = echarts.init(document.getElementById('prodMoney'));
-            prodMoney.setOption( {
-                title: {
-                    text: '月出入库金额'
-                },
-                tooltip: {
-                    trigger: 'axis'
-                },
-                legend: {
-                    data: ['入库金额', '出库金额']
-                },
-                grid: {
-                    left: '3%',
-                    right: '4%',
-                    bottom: '3%',
-                    containLabel: true
-                },
-                toolbox: {
-                    feature: {
-                        saveAsImage: {}
-                    }
-                },
-                xAxis: {
-                    type: 'category',
-                    boundaryGap: false,
-                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-                },
-                yAxis: {
-                    type: 'value'
-                },
-                series: [
-                    {
-                        name: '入库金额',
-                        type: 'line',
-                        stack: 'Total',
-                        data: [120, 132, 101, 134, 90, 230, 210]
-                    },
-                    {
-                        name: '出库金额',
-                        type: 'line',
-                        stack: 'Total',
-                        data: [220, 182, 191, 234, 290, 330, 310]
-                    }
-                ]
+            $.getJSON("/getStatisticsMonthMoney",function (d) {
+                console.log("--->>>>",d);
+                if(d.code===0){
+                    let prodMoney = echarts.init(document.getElementById('prodMoney'));
+                    prodMoney.setOption({
+                        title: {
+                            text: '月出入库金额'
+                        },
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        legend: {
+                            data: ['入库金额', '出库金额']
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        toolbox: {
+                            feature: {
+                                saveAsImage: {}
+                            }
+                        },
+                        xAxis: {
+                            type: 'category',
+                            boundaryGap: false,
+                            data: d.obj.times
+                        },
+                        yAxis: {
+                            type: 'value'
+                        },
+                        series: [
+                            {
+                                name: '入库金额',
+                                type: 'line',
+                                stack: 'Total',
+                                data: d.obj.recordInPrice
+                            },
+                            {
+                                name: '出库金额',
+                                type: 'line',
+                                stack: 'Total',
+                                data: d.obj.recordOutPrice
+                            }
+                        ]
+                    });
+                }else{
+                    layer.msg(d.msg);
+                }
+
             });
+
         });
     </script>
 

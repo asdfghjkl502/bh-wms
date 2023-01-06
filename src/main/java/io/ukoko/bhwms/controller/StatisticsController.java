@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +37,15 @@ public class StatisticsController {
     public Object getStatisticsOutMonth(){
         Map<String, Object> statistics = statisticsService.getStatisticsOutMonth();
         return new Result(statistics);
+    }
+
+    /**
+     * 统计12个月内的出入库金额
+     */
+    @GetMapping(value = "/getStatisticsMonthMoney")
+    public Object getStatisticsMonthMoney() throws ParseException {
+        Map<String, Object> monthMoney = statisticsService.getStatisticsMonthMoney();
+        return new Result(monthMoney);
     }
 
 }

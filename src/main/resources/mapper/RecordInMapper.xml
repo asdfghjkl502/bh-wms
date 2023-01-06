@@ -33,7 +33,7 @@
     </select>
     
     <select id="getStatisticsInByTime" resultType="statistics">
-        SELECT product_id,COUNT(*) AS 'count'
+        SELECT product_id,sum(record_in_number) AS 'count'
             FROM record_in
             WHERE
                 record_in_time <![CDATA[>=]]> #{startTime} AND record_in_time <![CDATA[<=]]> #{endTime}

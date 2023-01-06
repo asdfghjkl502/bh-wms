@@ -134,9 +134,12 @@ public class StatisticsServiceImpl implements StatisticsService {
         }
         //装每一个月入库商品总价
         List<Double> recordInPrice = new ArrayList<>();
+        //装每一个月出库商品总价
+        List<Double> recordOutPrice = new ArrayList<>();
         //通过时间查询入库金额
         for (Map<String, Date> stringDateMap : timeStartEnd) {
-            Double totalPrice=0d;//当前月份商品总价
+            Double totalInPrice=0d;//当前月份入库商品总价
+            Double totalOutPrice=0d;//当前月份出库商品总价
             //通过时间查询入库商品以及商品对应的数量
             List<Statistics> recordInProductCount = recordInMapper.getStatisticsInByTime(stringDateMap.get("startTime"), stringDateMap.get("endTime"));
             for (Statistics sc : recordInProductCount) {
@@ -147,15 +150,27 @@ public class StatisticsServiceImpl implements StatisticsService {
                 //当前商品总价
                 Double t = product.getProductPrice()*count;
                 //总价
-                totalPrice+=t;
+                totalInPrice+=t;
             }
-            recordInPrice.add(totalPrice);
+            recordInPrice.add(totalInPrice);
+            //通过时间查询出库金额
+            List<Statistics> recordOutProductCount = recordOutMapper.getStatisticsOutByTime(stringDateMap.get("startTime"), stringDateMap.get("endTime"));
+            for (Statistics sco : recordOutProductCount) {
+                //通过商品ID获取商品价格
+                Product product = productMapper.getProductByProductId(sco.getProductId());
+                //当前商品数量
+                Long count = sco.getCount();
+                //当前商品总价
+                Double t = product.getProductPrice()*count;
+                //总价
+                totalOutPrice+=t;
+            }
+            recordOutPrice.add(totalOutPrice);
         }
-        //讲入库金额保存到map中
+        //将入库金额保存到map中
         mapInOutTimePrice.put("recordInPrice",recordInPrice);
-
-        //通过时间查询出库金额
-
+        //将入出库金额保存到map中
+        mapInOutTimePrice.put("recordOutPrice",recordOutPrice);
         return mapInOutTimePrice;
     }
 }

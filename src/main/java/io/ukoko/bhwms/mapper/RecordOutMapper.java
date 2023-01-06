@@ -1,10 +1,11 @@
 package io.ukoko.bhwms.mapper;
 
-import io.ukoko.bhwms.entity.RecordIn;
 import io.ukoko.bhwms.entity.RecordOut;
 import io.ukoko.bhwms.entity.Statistics;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,4 +24,8 @@ public interface RecordOutMapper {
      * 统计12个月的出库量
      */
     List<Statistics> getStatisticsOutMonth();
+    /**
+     * 根据时间段统计每一种出库商品的数量
+     */
+    List<Statistics> getStatisticsOutByTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime);
 }

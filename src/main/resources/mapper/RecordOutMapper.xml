@@ -32,4 +32,12 @@
                                         ON aa.date=bb.mon ORDER BY aa.date ASC
     </select>
 
+    <select id="getStatisticsOutByTime" resultType="statistics">
+        SELECT product_id,sum(record_out_number) AS 'count'
+            FROM record_out
+            WHERE
+                record_out_time <![CDATA[>=]]> #{startTime} AND record_out_time <![CDATA[<=]]> #{endTime}
+            GROUP BY product_id
+    </select>
+
 </mapper>

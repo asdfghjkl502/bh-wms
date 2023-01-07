@@ -1,22 +1,51 @@
-# bh-wms
-
-```
-分类介绍: https://baijiahao.baidu.com/s?id=1697569891070074398&wfr=spider&for=pc
-```
+# 百惠wms1.0(SpringBoot版本)
 
 #### 介绍
-
-百惠WMS仓库管理系统
-
+```$xslt
+百惠WMS仓库管理系统,用于日常练习,毕业设计.
+```
+---
 #### 软件架构
    
-* SpringBoot
-* MyBatis
-* MYSQL
-* PageHelper
+* SpringBoot (基础框架)
+* MyBatis (ORM框架)
+* MYSQL (数据库)
+* Druid (数据库连接池)
+* PageHelper (分页插件)
+* kaptcha (验证码)
+* Shiro (权限认证框架)
+* knife4j/swagger (API生成工具)
 
+---
+#### 软件介绍
+
+<img src="https://note.youdao.com/yws/api/personal/file/WEB4cd99b32c012362d71bd64c786c17c48?method=download&shareKey=b9c754f54c9c5c6fd2722b3876536142">
+
+<img src="https://note.youdao.com/yws/api/personal/file/WEB6685d8daa685a06e4c7ec5e12a890573?method=download&shareKey=66ecbf57a6a256d311e99cdbe2a99e4a">
+
+<img src="https://note.youdao.com/yws/api/personal/file/WEB73220491726be27661ee427a06560ca7?method=download&shareKey=37e27dae0a7c1ecbb30b5d07bc84bb4b">
+
+<img src="https://note.youdao.com/yws/api/personal/file/WEBf0dad51de3258e142448a90594889831?method=download&shareKey=159d37ee45ecf8a55a5d4023231243f8">
+
+<img src="https://note.youdao.com/yws/api/personal/file/WEBb0b00a8cf0b60d18b16874582d3bd7d7?method=download&shareKey=e5db4fdd17ec061e626bbc2bf5ca8f59">
+
+<img src="https://note.youdao.com/yws/api/personal/file/WEB593472dc088e63959a92d9038dacf87e?method=download&shareKey=b1b91ab3ce50e7aec1f59a5e7b5f96da">
+
+<img src="https://note.youdao.com/yws/api/personal/file/WEBbae8d18797fb5b2c722a82e1f172b217?method=download&shareKey=3d7b68d82a21c893a9eec81692e91c12">
+
+<img src="https://note.youdao.com/yws/api/personal/file/WEBc47265583278314a39a126a50f16c74d?method=download&shareKey=0ac474e0a91a3c28cb2de43846e26139">
+
+<img src="https://note.youdao.com/yws/api/personal/file/WEBf7f7e38dda892dcfc5f8a83076ce7025?method=download&shareKey=2ec192eb9a24937dfd4852711ad91634">
+
+<img src="https://note.youdao.com/yws/api/personal/file/WEBbb5842e5d7d74b46e1532f16ddcb5dcf?method=download&shareKey=e6a7d69382f403fca09725acaac6e543">
+
+---
 #### 未完成
-* 1. 用户更新［角色,部门未更新］
-* 2. 产品更新 [分类未更新]
-* 3. 仓库负责人有缺陷(需要设计仓库和用户关联表,多对多)[关联表设计完成,添加仓库还未修改]
-* 4.　添加仓库［仓库管理管理员字段未添加］
+
+* 用户更新［角色,部门未更新］
+* 产品更新 [分类未更新]
+* 仓库负责人有缺陷(需要设计仓库和用户关联表,多对多)[关联表设计完成,添加仓库还未修改]
+* 添加仓库［仓库管理管理员字段未添加］
+* 菜单未完成
+---
+

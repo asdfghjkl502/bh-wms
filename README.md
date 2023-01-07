@@ -6,7 +6,8 @@
 ```
 ---
 #### 软件架构
-   
+
+##### 后端   
 * SpringBoot (基础框架)
 * MyBatis (ORM框架)
 * MYSQL (数据库)
@@ -15,6 +16,15 @@
 * kaptcha (验证码)
 * Shiro (权限认证框架)
 * knife4j/swagger (API生成工具)
+
+##### 前端
+
+* LayUI (前端框架)
+* echarts (图标显示)
+* md5 (数据加密)
+* treeTable (树形表格)
+* xm-select (多功能下拉框)
+
 
 ---
 #### 软件介绍

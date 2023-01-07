@@ -42,7 +42,9 @@
                     let prodIn = echarts.init(document.getElementById('prodIn'));
                     prodIn.setOption({
                         title: {
-                            text: '月入库量'
+                            text: '月入库量',
+                            subtext: '百惠大脑AI运算平台提供数据支持',
+                            left: 'left'
                         },
                         tooltip: {},
                         legend: {
@@ -72,7 +74,9 @@
                 let prodOut = echarts.init(document.getElementById('prodOut'));
                 prodOut.setOption({
                     title: {
-                        text: '月出库量'
+                        text: '月出库量',
+                        subtext: '百惠大脑AI运算平台提供数据支持',
+                        left: 'left'
                     },
                     tooltip: {},
                     legend: {
@@ -98,7 +102,9 @@
                     let prodMoney = echarts.init(document.getElementById('prodMoney'));
                     prodMoney.setOption({
                         title: {
-                            text: '月出入库金额'
+                            text: '月出入库金额',
+                            subtext: '百惠大脑AI运算平台提供数据支持',
+                            left: 'left'
                         },
                         tooltip: {
                             trigger: 'axis'

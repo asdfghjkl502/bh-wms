@@ -94,7 +94,6 @@
 
             /*月入库/出库金额,折线图*/
             $.getJSON("/getStatisticsMonthMoney",function (d) {
-                console.log("--->>>>",d);
                 if(d.code===0){
                     let prodMoney = echarts.init(document.getElementById('prodMoney'));
                     prodMoney.setOption({

@@ -40,6 +40,14 @@
 <img src="https://note.youdao.com/yws/api/personal/file/WEBbb5842e5d7d74b46e1532f16ddcb5dcf?method=download&shareKey=e6a7d69382f403fca09725acaac6e543">
 
 ---
+
+#### 测试账户
+
+```
+用户名: 18288888888
+密码  : 1
+```
+
 #### 未完成
 
 * 用户更新［角色,部门未更新］

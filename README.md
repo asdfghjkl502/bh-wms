@@ -51,6 +51,19 @@
 
 ---
 
+#### 启动方式
+
+```$xslt
+1. 下载源码
+2. 导入到IDEA开发工具中
+3. 创建数据库 bh_wms
+4. 导入数据库文件 bh-wms.sql
+5. 修改 application.properties 配置文件中的数据库用户名和密码
+6. 启动springboot项目
+7. 访问地址 http://localhost:8080
+8. 用户名和密码如下: 
+```
+
 #### 测试账户
 
 ```

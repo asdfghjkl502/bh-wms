@@ -56,7 +56,7 @@
 ```$xslt
 1. 下载源码
 2. 导入到IDEA开发工具中
-3. 创建数据库 bh_wms
+3. 创建数据库 bh_wms （数据库为MYSQL数据库,版本为MYSQL5.7或者5.7以上版本）
 4. 导入数据库文件 bh-wms.sql
 5. 修改 application.properties 配置文件中的数据库用户名和密码
 6. 启动springboot项目

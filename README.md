@@ -57,7 +57,7 @@
 1. 下载源码
 2. 导入到IDEA开发工具中
 3. 创建数据库 bh_wms （数据库为MYSQL数据库,版本为MYSQL5.7或者5.7以上版本）
-4. 导入数据库文件 bh-wms.sql
+4. 导入数据库文件 bh-wms-sqlyog.sql(sqlyog客户端) 或者 bh_wms_navcat.sql(navcat客户端)
 5. 修改 application.properties 配置文件中的数据库用户名和密码
 6. 启动springboot项目
 7. 项目访问地址 http://localhost:8080
@@ -83,6 +83,7 @@
 B站: https://space.bilibili.com/514155929/
 ```
 
+
 #### 未完成
 
 * 用户更新［角色,部门未更新］
@@ -92,3 +93,10 @@ B站: https://space.bilibili.com/514155929/
 * 菜单未完成
 ---
 
+#### 版权须知
+```
+
+1. 允许个人学习研究使用,支持二次开发,不允许除作者以外的企业和个人用作商业用途
+2. 如不遵守条约规范产生的法律纠纷本人概不负责
+
+```

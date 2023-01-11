@@ -60,8 +60,9 @@
 4. 导入数据库文件 bh-wms.sql
 5. 修改 application.properties 配置文件中的数据库用户名和密码
 6. 启动springboot项目
-7. 访问地址 http://localhost:8080
-8. 用户名和密码如下: 
+7. 项目访问地址 http://localhost:8080
+8. API在线文档地址 http://localhost:8080/doc.html
+9. 用户名和密码如下: 
 ```
 
 #### 测试账户

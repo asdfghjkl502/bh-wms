@@ -188,6 +188,20 @@ public class UserServiceImpl  implements UserService {
         return users;
     }
 
+    @Override
+    public User getUserByUserTelAndPassword(String userTel, String password) {
+        User u = userMapper.getUserByUserTel(userTel);
+        String s = u.getPassword();//数据库密码
+        String salt = u.getSalt();//数据库盐
+        //前端传递密码,进行加密
+        Md5Hash md5 = new Md5Hash(password, salt, 1024);
+        if(md5.toHex().equals(s)){
+            return u;
+        }else {
+            return null;
+        }
+    }
+
 
     public static void main(String[] args) {
         Md5Hash md5Hash = new Md5Hash("1","1",1024);

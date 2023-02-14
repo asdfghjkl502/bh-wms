@@ -49,4 +49,12 @@ public interface UserMapper {
      * 通过用户手机号获取用户信息
      */
     User getUserByUserTel(String userTel);
+
+    /**
+     * 根据电话和密码查询
+     * @param userTel
+     * @param password
+     * @return
+     */
+    User getUserByUserTelAndPassword(String userTel,String password);
 }

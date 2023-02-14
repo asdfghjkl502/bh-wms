@@ -67,4 +67,12 @@ public interface UserService {
      * 获取仓库管理员列表
      */
     List<User> getRepositoryUser();
+
+    /**
+     * 根据电话和密码查询用户信息
+     * @param userTel
+     * @param password
+     * @return
+     */
+    User getUserByUserTelAndPassword(String userTel,String password);
 }

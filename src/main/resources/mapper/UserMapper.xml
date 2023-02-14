@@ -45,6 +45,10 @@
     <select id="getUserByUserTel" resultType="user" parameterType="String">
         SELECT * FROM user WHERE USER_TEL=#{userTel}
     </select>
+    
+    <select id="getUserByUserTelAndPassword" resultType="user">
+        SELECT * FROM user WHERE USER_TEL=#{userTel} AND PASSWORD=#{password}
+    </select>
 
     <resultMap id="userMap" type="user">
         <id column="USER_ID" property="userId"></id>

@@ -5,6 +5,7 @@ import com.google.code.kaptcha.impl.DefaultKaptcha;
 import io.swagger.annotations.Api;
 import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.entity.User;
+import io.ukoko.bhwms.enums.BhWmsStatus;
 import io.ukoko.bhwms.enums.ShiroStatus;
 import io.ukoko.bhwms.exceptions.BhWmsException;
 import io.ukoko.bhwms.service.UserService;
@@ -41,6 +42,25 @@ public class HomeController {
     private DefaultKaptcha defaultKaptcha;
     @Autowired
     private UserService userService;
+
+
+    /**
+     * 登录 API
+     */
+    @RequiresGuest
+    @ResponseBody
+    @PostMapping(value = "/loginApi")
+    public Result loginApi(String userTel,String password){
+        User user = userService.getUserByUserTelAndPassword(userTel, password);
+        if(user!=null){
+            return new Result(BhWmsStatus.OK.getCode(),BhWmsStatus.OK.getMsg());
+        }else {
+            throw new BhWmsException(BhWmsStatus.LOGIN_ERROR);
+        }
+    }
+
+
+
 
     /**
      * 生成验证码

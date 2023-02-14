@@ -15,6 +15,8 @@ public enum  BhWmsStatus {
     REPO_NOT_PRODUCT(7,"当前仓库没有此产品"),
 
 
+    LOGIN_ERROR(8,"登陆失败"),
+
     ERROR(-1,"系统异常")
     ;
     private int code;

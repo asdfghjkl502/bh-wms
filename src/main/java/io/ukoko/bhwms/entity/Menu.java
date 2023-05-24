@@ -2,6 +2,7 @@ package io.ukoko.bhwms.entity;
 
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 映射数据库menu(菜单)表
@@ -39,6 +40,11 @@ public class Menu {
         是否删除
      */
     private Integer isDelete=1;
+
+    /**
+     * 叶子节点
+     */
+    private List<Menu> menus;
 
     public Menu() {
     }
@@ -107,6 +113,14 @@ public class Menu {
         this.isDelete = isDelete;
     }
 
+    public List<Menu> getMenus() {
+        return menus;
+    }
+
+    public void setMenus(List<Menu> menus) {
+        this.menus = menus;
+    }
+
     @Override
     public String toString() {
         return "Menu{" +
@@ -118,6 +132,7 @@ public class Menu {
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 ", isDelete=" + isDelete +
+                ", menus=" + menus +
                 '}';
     }
 }

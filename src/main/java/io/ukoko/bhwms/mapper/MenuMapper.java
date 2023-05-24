@@ -31,6 +31,12 @@ public interface MenuMapper {
      */
     List<Menu> getMenuList();
 
+    /**
+     * 获取菜单列表(带层级)
+     * @return
+     */
+    List<Menu> getMenuList$();
+
     /*
         通过菜单ID查询当前菜单的子菜单
      */

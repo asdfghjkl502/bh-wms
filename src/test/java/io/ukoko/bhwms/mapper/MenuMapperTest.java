@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,6 +14,13 @@ class MenuMapperTest extends BhWmsApplicationTests {
 
     @Autowired
     private MenuMapper menuMapper;
+
+
+    @Test
+    void getMenuList$(){
+        List<Menu> menuList$ = menuMapper.getMenuList$();
+        menuList$.forEach(System.out::println);
+    }
 
     @Test
     void addMenu() {

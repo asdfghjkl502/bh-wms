@@ -44,4 +44,9 @@ public class MenuServiceImpl implements MenuService {
     public List<Menu> getMenuList() {
         return menuMapper.getMenuList();
     }
+
+    @Override
+    public List<Menu> getMenuList$() {
+        return menuMapper.getMenuList$();
+    }
 }

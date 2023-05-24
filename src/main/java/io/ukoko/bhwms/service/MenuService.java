@@ -27,5 +27,8 @@ public interface MenuService {
         获取菜单列表
      */
     List<Menu> getMenuList();
-
+    /**
+     * 获取菜单列表(带层级)
+     */
+    List<Menu> getMenuList$();
 }

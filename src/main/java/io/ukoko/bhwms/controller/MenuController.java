@@ -15,6 +15,14 @@ public class MenuController {
     @Autowired
     private MenuService menuService;
 
+    /**
+     * 获取菜单列表(包含叶子节点)
+     */
+    @GetMapping(value = "/getMenuList$")
+    public Object getMenuList$(){
+        return new Result(menuService.getMenuList$());
+    }
+
     /*
         删除菜单
      */

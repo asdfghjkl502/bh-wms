@@ -2,6 +2,7 @@ package io.ukoko.bhwms.handlers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import io.ukoko.bhwms.dto.Result;
 import io.ukoko.bhwms.enums.BhWmsStatus;
 import io.ukoko.bhwms.enums.ShiroStatus;
@@ -11,13 +12,12 @@ import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
-
-import javax.naming.SizeLimitExceededException;
 
 /**
  * 统一异常处理器
@@ -80,9 +80,14 @@ public class BhWmsExceptionHandler {
             result.setMsg(e.getMessage());
         } else if (e instanceof MaxUploadSizeExceededException) {
             result.setMsg(BhWmsStatus.FILE_MAX_ERROR.getMsg());
+        } else if(e instanceof HttpMessageNotReadableException){
+            result.setMsg(BhWmsStatus.PARAM_ERROR.getMsg());
+        }else if(e instanceof InvalidFormatException){
+            result.setMsg(BhWmsStatus.PARAM_ERROR.getMsg());
         } else {
             result.setMsg(BhWmsStatus.ERROR.getMsg());
         }
+        result.setObj(e.getMessage());//错误消息
         ObjectMapper om = new ObjectMapper();
         try {
             String json = om.writeValueAsString(result);

@@ -13,9 +13,8 @@ public enum  BhWmsStatus {
     REPO_NOT_PARAM(5,"仓库参数不存在"),
     REPO_NOT_STOCK(6,"库存不足"),
     REPO_NOT_PRODUCT(7,"当前仓库没有此产品"),
-
-
     LOGIN_ERROR(8,"登陆失败"),
+    PARAM_ERROR(9,"请求参数格式错误"),
 
     ERROR(-1,"系统异常")
     ;

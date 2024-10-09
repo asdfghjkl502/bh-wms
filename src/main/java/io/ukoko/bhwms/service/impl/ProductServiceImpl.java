@@ -52,6 +52,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> getProductAll() {
+        return productMapper.getProductAll();
+    }
+
+    @Override
     public ProductVo getProduct(Integer productId, Integer repoId) {
         ProductVo productVo = new ProductVo();
         //产品信息

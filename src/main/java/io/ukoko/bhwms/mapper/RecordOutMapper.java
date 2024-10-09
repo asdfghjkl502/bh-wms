@@ -28,4 +28,9 @@ public interface RecordOutMapper {
      * 根据时间段统计每一种出库商品的数量
      */
     List<Statistics> getStatisticsOutByTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime);
+
+    /**
+     * 当天出库量
+     */
+    Integer getPurchaseQuantityForToday();
 }

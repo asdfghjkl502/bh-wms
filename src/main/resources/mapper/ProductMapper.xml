@@ -17,7 +17,7 @@
     </insert>
 
     <update id="updateProduct" parameterType="product">
-        UPDATE product 
+        UPDATE product
         <set>
             <if test="productName!=null">PRODUCT_NAME=#{productName},</if>
             <if test="productSize!=null">PRODUCT_SIZE=#{productSize},</if>
@@ -54,7 +54,7 @@
         <result column="IS_DELETE" property="isDelete"></result>
         <association property="category" column="CATEGORY_ID" select="io.ukoko.bhwms.mapper.CategoryMapper.getCategory"></association>
     </resultMap>
-    
+
     <select id="getProductList" resultMap="productMap">
         SELECT * FROM product
         <where>
@@ -65,7 +65,10 @@
             <if test="startTime!=null and endTime!=null"> AND CREATE_TIME <![CDATA[>=]]> #{startTime} AND CREATE_TIME <![CDATA[<=]]> #{endTime}</if>
         </where>
     </select>
-    
+    <select id="getProductAll" resultType="product">
+        SELECT * FROM product
+    </select>
+
     <select id="getProductByProductId" parameterType="int" resultMap="productMap">
         SELECT * FROM product WHERE PRODUCT_ID=#{productId}
     </select>

@@ -32,6 +32,12 @@ public interface CustomerMapper {
     List<Customer> getCustomerList(@Param("customerName") String customerName,@Param("customerLeader") String customerLeader,@Param("customerTel") String customerTel, @Param("customerEmail") String customerEmail,@Param("customerAddress") String customerAddress,@Param("startTime") Date startTime,@Param("endTime") Date endTime);
 
     /**
+     * 获取所有客户列表
+     */
+    List<Customer> getCustomerAll();
+
+
+    /**
      * 更新
      * @param customer
      */
@@ -43,6 +49,7 @@ public interface CustomerMapper {
      */
     void deleteCustomer(Integer customerId);
 
+    Customer getCustomerByCustomerId(Integer customerId);
     /**
      * 批量删除
      * @param customerIds

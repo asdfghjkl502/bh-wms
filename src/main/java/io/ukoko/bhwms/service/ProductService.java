@@ -22,11 +22,15 @@ public interface ProductService {
      */
     Page getProductPage(int pageNo, int pageSize,String productName,String productSize,Integer isDelete,Date startTime,Date endTime);
 
-    /*
+    /**
         获取列表
      */
     List<Product> getProductList(String productId,String productName);
 
+    /**
+     * 获取所有列表
+     */
+    List<Product> getProductAll();
     /**
      * 获取产品信息
      * @param productId

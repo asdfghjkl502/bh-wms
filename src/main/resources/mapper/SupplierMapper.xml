@@ -33,7 +33,7 @@
             <if test="supplierId!=null">SUPPLIER_ID=#{supplierId}</if>
         </where>
     </update>
-    
+
     <update id="deleteSupplier" parameterType="int">
         UPDATE supplier SET IS_DELETE=0 WHERE SUPPLIER_ID=#{supplierId}
     </update>
@@ -45,6 +45,24 @@
     </update>
 
 
+    <select id="getSupplierAll" resultType="supplier">
+        SELECT * FROM supplier
+    </select>
+
+    <resultMap id="supplierMap" type="supplier">
+        <id column="SUPPLIER_ID" property="supplierId"></id>
+        <result column="SUPPLIER_NAME" property="supplierName"></result>
+        <result column="SUPPLIER_LEADER" property="supplierLeader"></result>
+        <result column="SUPPLIER_TEL" property="supplierTel"></result>
+        <result column="SUPPLIER_EMAIL" property="supplierEmail"></result>
+        <result column="SUPPLIER_ADDRESS" property="supplierAddress"></result>
+        <result column="CREATE_TIME" property="createTime"></result>
+        <result column="UPDATE_TIME" property="updateTime"></result>
+        <result column="IS_DELETE" property="isDelete"></result>
+    </resultMap>
+    <select id="getSupplierBySuppierId" parameterType="int" resultMap="supplierMap">
+        SELECT * FROM supplier WHERE SUPPLIER_ID=#{supplierId}
+    </select>
     <select id="getSupplierList" resultType="supplier">
         SELECT * FROM supplier
         <where>

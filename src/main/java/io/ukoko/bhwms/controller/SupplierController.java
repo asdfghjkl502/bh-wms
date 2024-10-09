@@ -35,6 +35,14 @@ public class SupplierController {
     }
 
     /**
+     * 获取供应商总列表
+     */
+    @GetMapping(value = "/getSupplierAll")
+    public Object getSupplierAll(){
+        List<Supplier> supplierLists=supplierService.getSupplierAll();
+        return new Result(supplierLists);
+    }
+    /**
      * 获取供应商列表
      * @param supplierName
      * @return

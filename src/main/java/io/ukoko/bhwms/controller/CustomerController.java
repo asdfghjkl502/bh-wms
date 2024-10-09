@@ -64,6 +64,12 @@ public class CustomerController {
         return new Result(customerService.getCustomerList(customerName,customerLeader,customerTel,customerEmail,customerAddress));
     }
 
+    @GetMapping(value = "/getCustomerAll")
+    public Object getCustomerAll(){
+        List<Customer> customerAll = customerService.getCustomerAll();
+        return new Result(customerAll);
+    }
+
     /**
      * 更新客户
      * @param customer

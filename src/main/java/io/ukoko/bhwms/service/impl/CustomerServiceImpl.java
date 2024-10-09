@@ -48,6 +48,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public List<Customer> getCustomerAll() {
+        return customerMapper.getCustomerAll();
+    }
+
+    @Override
     public void updateCustomer(Customer customer) {
         customerMapper.updateCustomer(customer);
     }

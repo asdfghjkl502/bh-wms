@@ -15,8 +15,8 @@
     <form class="layui-form layui-row user-search">
         <!--  用户名称  -->
         <div class="user">
-            <label for="customerName">产品名称:</label>
-            <input id="customerName" name="productName" placeholder="产品名称...">
+            <label for="productName">产品名称:</label>
+            <input id="productName" name="productName" placeholder="产品名称...">
         </div>
         <!--  手机号  -->
         <div class="user">
@@ -90,21 +90,19 @@
                     });
                 });
             }else if(e==="edit"){
-                /*layer.open({
+                layer.open({
                     type:2,
-                    title:'更新客户',
-                    content:'customerUpdate.html?isDelete='+obj.data.isDelete+"&industryId="+obj.data.industryId+"&sourceId="+obj.data.sourceId+"&levelId="+obj.data.levelId,
+                    title:'更新产品',
+                    content:'productUpdate.html?isDelete='+obj.data.isDelete+"&categoryId="+obj.data.category.categoryId,
                     area:['500px','400px'],
                     success: function(layero, index){
                         //弹出执行
                         let body = layer.getChildFrame('body', index);//获取弹出层中body标签的DOM对象
                         //给弹出层表单回显
-                        body.find('#customerId').val(obj.data.customerId);
-                        body.find('#customerName').val(obj.data.customerName);
-                        body.find('#customerLeader').val(obj.data.customerLeader);
-                        body.find('#customerTel').val(obj.data.customerTel);
-                        body.find('#customerEmail').val(obj.data.customerEmail);
-                        body.find('#customerAddress').val(obj.data.customerAddress);
+                        body.find('#productId').val(obj.data.productId);
+                        body.find('#productName').val(obj.data.productName);
+                        body.find('#productPrice').val(obj.data.productPrice);
+                        body.find('#productSize').val(obj.data.productSize);
                         body.find('#createTime').val(obj.data.createTime);
                     },
                     end:function (){
@@ -112,7 +110,7 @@
                         //刷新数据表格
                         table.reload("demo");
                     }
-                });*/
+                });
             }
         });
 

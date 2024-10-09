@@ -11,7 +11,7 @@
         VALUES  (#{repoName},#{repoAddress},#{repoArea},#{repoDesc},
                  #{repoStatus},#{createTime},#{isDelete})
     </insert>
-    
+
     <update id="deleteRepository" parameterType="int">
         UPDATE repository SET IS_DELETE=0 WHERE REPO_ID=#{repoId}
     </update>
@@ -41,6 +41,10 @@
         </where>
     </select>
 
+    <select id="getRepositoryAll" resultType="repository">
+        SELECT * FROM repository
+    </select>
+
     <select id="getRepositorybyRepoId" resultType="repository">
         SELECT * FROM repository WHERE REPO_ID=#{repoId}
     </select>
@@ -50,4 +54,6 @@
             UPDATE repository SET IS_DELETE=0 WHERE REPO_ID=#{item}
         </foreach>
     </update>
+
+
 </mapper>

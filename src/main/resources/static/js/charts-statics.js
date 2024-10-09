@@ -37,6 +37,20 @@ layui.use(["jquery"],function () {
             ]
         });
     });
+    $.get("/recordStockSum", function(data) {
+        $("#currentStockValue").text(data);
+        $("#totalStockValue").text(data.obj);
+    });
+
+    $.get("/getShipmentQuantityForToday", function(data) {
+        $("#getShipmentQuantityForToday").text(data.obj);
+    });
+    $.get("/getPurchaseQuantityForToday", function(data) {
+        $("#getPurchaseQuantityForToday").text(data.obj);
+    });
+    $.get("/productCountWithLowStock", function(data) {
+        $("#productCountWithLowStock").text(data.obj);
+    });
 });
 
 /**

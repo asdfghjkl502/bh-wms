@@ -4,21 +4,19 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.dto.RecordInOutDto;
-import io.ukoko.bhwms.entity.RecordIn;
-import io.ukoko.bhwms.entity.RecordOut;
-import io.ukoko.bhwms.entity.RecordStock;
+import io.ukoko.bhwms.entity.*;
 import io.ukoko.bhwms.enums.BhWmsStatus;
 import io.ukoko.bhwms.exceptions.BhWmsException;
-import io.ukoko.bhwms.mapper.RecordInMapper;
-import io.ukoko.bhwms.mapper.RecordOutMapper;
-import io.ukoko.bhwms.mapper.RecordStockMapper;
+import io.ukoko.bhwms.mapper.*;
 import io.ukoko.bhwms.service.RecordStockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+
+import static java.lang.Integer.parseInt;
 
 @Transactional
 @Service
@@ -31,17 +29,56 @@ public class RecordStockServiceImpl implements RecordStockService {
     @Autowired
     private RecordOutMapper recordOutMapper;
 
+    @Autowired
+    private RepositoryMapper repositoryMapper;
+
+    @Autowired
+    private ProductMapper productMapper;
+
+    @Autowired
+    private SupplierMapper supplierMapper;
+    @Autowired
+    private CustomerMapper customerMapper;
+
+
     /**
      * 入库
+     *
      * @param recordStock
      */
     @Override
     public void inRecordStock(RecordInOutDto recordStock) {
+        Integer repoId = recordStock.getRepoId();
+        Repository repositoryByRepoId = repositoryMapper.getRepositorybyRepoId(repoId);
+        Integer productId = recordStock.getProductId();
+        Product productByProductId = productMapper.getProductByProductId(productId);
+        Integer supplierId = recordStock.getSupplierId();
+        Supplier supplierBySuppierId = supplierMapper.getSupplierBySuppierId(supplierId);
+        int productSize= parseInt(productByProductId.getProductSize());
+        int repoArea=parseInt(repositoryByRepoId.getRepoArea());
+        int recordStockSum = recordStockMapper.getRecordStockByRepoId(repoId)==null?0:recordStockMapper.getRecordStockByRepoId(repoId);
+
+        System.out.println(productSize);
+        System.out.println(repoArea);
+        System.out.println(recordStockSum);
+        if (repositoryByRepoId.getRepoStatus()!=1 || repositoryByRepoId.getIsDelete()!=1 ){
+            throw  new BhWmsException(500,"仓库异常！");
+        } else if (productByProductId.getIsDelete()!=1) {
+            throw  new BhWmsException(500,"该产品已失效！");
+        } else if (supplierBySuppierId.getIsDelete()!=1) {
+            throw  new BhWmsException(500,"该供应商已失效！");
+        } else if (productSize*recordStockSum>repoArea) {
+
+            throw  new BhWmsException(500,"仓库面积不足！");
+
+        }
         RecordStock rs = new RecordStock();
         rs.setRepoId(recordStock.getRepoId());
         rs.setProductStock(recordStock.getProductStock());
         rs.setProductId(recordStock.getProductId());
         List<RecordStock> recordStocks = recordStockMapper.getRecordStockList(recordStock.getProductId(), recordStock.getRepoId());
+
+
         if(recordStocks!=null && recordStocks.size()>0){
             //存在直接入库
             recordStockMapper.inRecordStock(rs);
@@ -64,12 +101,36 @@ public class RecordStockServiceImpl implements RecordStockService {
     }
 
     /**
+     * 当天入库
+     * @return
+     */
+    @Override
+    public int getShipmentQuantityForToday() {
+        Integer shipmentQuantityForToday = recordInMapper.getShipmentQuantityForToday();
+        return Objects.nonNull(shipmentQuantityForToday)?shipmentQuantityForToday:0;
+    }
+
+    /**
      * 出库
      * @param recordStock
      */
     @Override
     public void outRecordStock(RecordInOutDto recordStock) {
         if(recordStock.getProductId()!=null && recordStock.getRepoId()!=null){
+
+            Integer repoId = recordStock.getRepoId();
+            Repository repositoryByRepoId = repositoryMapper.getRepositorybyRepoId(repoId);
+            Integer customerId = recordStock.getCustomerId();
+            Customer customerByCustomerId = customerMapper.getCustomerByCustomerId(customerId);
+            if (repositoryByRepoId.getRepoStatus()!=1 || repositoryByRepoId.getIsDelete()!=1 ){
+                throw  new BhWmsException(500,"仓库异常！");
+            } else if (customerByCustomerId.getIsDelete()!=1) {
+                throw  new BhWmsException(500,"该客户已失效！");
+            }
+            RecordStock rs = new RecordStock();
+            rs.setRepoId(recordStock.getRepoId());
+            rs.setProductStock(recordStock.getProductStock());
+            rs.setProductId(recordStock.getProductId());
             List<RecordStock> recordStocks = recordStockMapper.getRecordStockList(recordStock.getProductId(), recordStock.getRepoId());
             if(recordStocks!=null && recordStocks.size()>0){
                 //获取第一个
@@ -78,10 +139,6 @@ public class RecordStockServiceImpl implements RecordStockService {
                 if(stock.getProductStock()<recordStock.getProductStock()){
                     throw new BhWmsException(BhWmsStatus.REPO_NOT_STOCK);
                 }else{
-                    RecordStock rs = new RecordStock();
-                    rs.setRepoId(recordStock.getRepoId());
-                    rs.setProductStock(recordStock.getProductStock());
-                    rs.setProductId(recordStock.getProductId());
                     //出库
                     recordStockMapper.outRecordStock(rs);
                     //添加出库记录
@@ -104,6 +161,12 @@ public class RecordStockServiceImpl implements RecordStockService {
         }
     }
 
+    @Override
+    public int getPurchaseQuantityForToday() {
+        Integer purchaseQuantityForToday = recordOutMapper.getPurchaseQuantityForToday();
+        return Objects.nonNull(purchaseQuantityForToday)?purchaseQuantityForToday:0;
+    }
+
     /**
      * 通过仓库Id和产品Id查询仓库信息
      * @param repoId
@@ -114,6 +177,17 @@ public class RecordStockServiceImpl implements RecordStockService {
     public RecordStock getRecordStockByRepoIdAndProductId(Integer repoId, Integer productId) {
         List<RecordStock> recordStockList = recordStockMapper.getRecordStockList(productId, repoId);
         return recordStockList==null?null:recordStockList.get(0);
+    }
+
+    @Override
+    public int getRecordStockSum() {
+        return recordStockMapper.getRecordStockSum();
+    }
+
+    @Override
+    public Integer getProductCountWithLowStock() {
+        Integer productCountWithLowStock = recordStockMapper.getProductCountWithLowStock();
+        return Objects.nonNull(productCountWithLowStock)?productCountWithLowStock:0;
     }
 
     /**

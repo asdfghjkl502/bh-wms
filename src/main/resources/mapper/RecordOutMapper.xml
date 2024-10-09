@@ -40,4 +40,7 @@
             GROUP BY product_id
     </select>
 
+    <select id="getPurchaseQuantityForToday" resultType="java.lang.Integer">
+        SELECT SUM(RECORD_OUT_NUMBER) FROM  record_out WHERE DATE(RECORD_OUT_TIME) = CURDATE()
+    </select>
 </mapper>

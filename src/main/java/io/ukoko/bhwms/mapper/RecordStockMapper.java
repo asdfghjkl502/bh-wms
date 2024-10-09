@@ -38,4 +38,15 @@ public interface RecordStockMapper {
      */
     List<RecordStock> getRecordStockList(@Param("productId") Integer productId,@Param("repoId") Integer repoId);
 
+    Integer getRecordStockByRepoId(Integer repoId);
+    /**
+     * 查询库存总量
+     */
+    int getRecordStockSum();
+
+    /**
+     * 预警产品(库存小于10的某个产品的总数)
+     */
+    Integer getProductCountWithLowStock();
+
 }

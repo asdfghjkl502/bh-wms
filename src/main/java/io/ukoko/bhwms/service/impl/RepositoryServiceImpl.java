@@ -70,6 +70,11 @@ public class RepositoryServiceImpl implements RepositoryService {
     }
 
     @Override
+    public List<Repository> getRepositoryAll() {
+        return repositoryMapper.getRepositoryAll();
+    }
+
+    @Override
     public List<Statistics> getRepositoryPayloadStatistics() {
         List<Statistics> statistics = new ArrayList<>();
         //获取所有仓库

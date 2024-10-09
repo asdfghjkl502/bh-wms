@@ -18,6 +18,10 @@ public interface SupplierMapper {
     void addSupplier(Supplier supplier);
 
     /**
+     * 获取供应商总列表
+     */
+    List<Supplier> getSupplierAll();
+    /**
      * 获取供应商列表
      */
     List<Supplier> getSupplierList(@Param("supplierName") String supplierName,@Param("supplierLeader") String supplierLeader,@Param("supplierTel") String supplierTel);
@@ -32,6 +36,7 @@ public interface SupplierMapper {
      */
     void batchDeleteSupplier(List<Integer> supplierIds);
 
+    Supplier getSupplierBySuppierId(Integer supplierId);
     /*
         删除
      */

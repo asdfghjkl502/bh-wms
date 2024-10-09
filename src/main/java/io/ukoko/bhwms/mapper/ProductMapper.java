@@ -25,6 +25,11 @@ public interface ProductMapper {
     List<Product> getProductList(@Param("productId") String productId, @Param("productName") String productName,@Param("productSize") String productSize, @Param("isDelete") Integer isDelete,@Param("startTime") Date startTime,@Param("endTime") Date endTime);
 
     /**
+     * 获取所有列表
+     */
+    List<Product> getProductAll();
+
+    /**
      * 通过产品ID获取产品信息
      */
     Product getProductByProductId(Integer productId);

@@ -21,6 +21,10 @@ public interface SupplierService {
     Page getSupplierPage(int pageNo,int pageSize,String supplierName,String supplierLeader, String supplierTel);
 
     /**
+     * 获取供应商总列表
+     */
+    List<Supplier> getSupplierAll();
+    /**
      * 获取供应商列表
      * @return
      */

@@ -60,8 +60,26 @@ public class ProductController {
         return new Result();
     }
 
-    /*
-        获取产品分页
+    /**
+     * 获取所有分页
+     */
+    @GetMapping(value = "/getProductAll")
+    public Object getProductAll(){
+        List<Product> productAll = productService.getProductAll();
+        return new Result(productAll);
+    }
+
+
+    /**
+     * 获取产品分页
+     * @param pageNo
+     * @param pageSize
+     * @param productName
+     * @param productSize
+     * @param isDelete
+     * @param startTime
+     * @param endTime
+     * @return
      */
     @GetMapping(value = "/getProductPage")
     public Object getProductPage(int pageNo, int pageSize, String productName, String productSize, Integer isDelete, @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime){

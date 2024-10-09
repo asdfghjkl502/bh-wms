@@ -43,6 +43,12 @@ public interface CustomerService {
     List<Customer> getCustomerList(String customerName,String customerLeader,String customerTel,String customerEmail,String customerAddress);
 
     /**
+     * 查询所有列表
+     */
+    List<Customer> getCustomerAll();
+
+
+    /**
      * 更新
      * @param customer
      */

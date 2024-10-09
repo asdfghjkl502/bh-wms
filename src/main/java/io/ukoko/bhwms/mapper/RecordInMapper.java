@@ -20,6 +20,7 @@ public interface RecordInMapper {
      */
     void addRecordIn(RecordIn recordIn);
 
+
     /**
      * 统计12个月的入库量
      */
@@ -30,4 +31,8 @@ public interface RecordInMapper {
      */
     List<Statistics> getStatisticsInByTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime);
 
+    /**
+     * 当天入库
+     */
+    Integer getShipmentQuantityForToday();
 }

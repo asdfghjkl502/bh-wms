@@ -19,7 +19,7 @@
                     #{remarks},#{createTime},#{isDelete}
                 )
     </insert>
-    
+
     <select id="getStatisticsInMonth" resultType="statistics">
         SELECT
             IFNULL(bb.count,0) AS "count",aa.date AS "time"
@@ -31,13 +31,16 @@
                                     (SELECT SUM(record_in_number) AS COUNT,DATE_FORMAT(record_in_time,'%Y-%m') AS mon FROM record_in GROUP BY mon) bb
                                         ON aa.date=bb.mon ORDER BY aa.date ASC
     </select>
-    
+
     <select id="getStatisticsInByTime" resultType="statistics">
         SELECT product_id,sum(record_in_number) AS 'count'
             FROM record_in
             WHERE
                 record_in_time <![CDATA[>=]]> #{startTime} AND record_in_time <![CDATA[<=]]> #{endTime}
             GROUP BY product_id
+    </select>
+    <select id="getShipmentQuantityForToday" resultType="java.lang.Integer">
+        SELECT SUM(RECORD_IN_NUMBER) FROM record_in WHERE DATE(RECORD_IN_TIME) = CURDATE()
     </select>
 
 </mapper>

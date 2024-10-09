@@ -90,6 +90,16 @@ public class RepositoryController {
         return new Result();
     }
 
+
+    /**
+     * 获取所有列表
+     */
+    @GetMapping(value = "/getRepositoryAll")
+    public Object getRepositoryAll(){
+        List<Repository> repositoryAll = repositoryService.getRepositoryAll();
+        return new Result(repositoryAll);
+    }
+
     /**
      * 获取仓库状态列表
      * @return

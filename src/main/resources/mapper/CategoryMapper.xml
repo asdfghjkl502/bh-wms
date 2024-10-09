@@ -14,15 +14,15 @@
     <select id="getCategoryList" resultType="category">
         SELECT * FROM category ORDER BY PARENT_ID ASC,CATEGORY_ID ASC
     </select>
-    
+
     <select id="getCategory" resultType="category">
         SELECT * FROM category WHERE CATEGORY_ID=#{categoryId}
     </select>
-    
+
     <select id="getCategoryListByParentId" parameterType="int" resultMap="categoryMap">
         SELECT * FROM category WHERE PARENT_ID=#{categoryId}
     </select>
-    
+
     <update id="updateCategory" parameterType="category">
         UPDATE category
         <set>
@@ -36,7 +36,7 @@
             <if test="categoryId!=null">CATEGORY_ID=#{categoryId}</if>
         </where>
     </update>
-    
+
     <update id="deleteCategory" parameterType="int">
         UPDATE category SET IS_DELETE=0 WHERE CATEGORY_ID=#{categoryId}
     </update>
@@ -52,9 +52,9 @@
         <result column="IS_DELETE" property="isDelete"></result>
         <collection property="children" ofType="category" column="CATEGORY_ID" select="io.ukoko.bhwms.mapper.CategoryMapper.getCategoryListByParentId"></collection>
     </resultMap>
-    
+
     <select id="getCategoryList$" resultMap="categoryMap">
-        SELECT * FROM category WHERE PARENT_ID=0  ORDER BY PARENT_ID ASC,CATEGORY_ID ASC
+        SELECT * FROM category WHERE `LEVEL`=3  ORDER BY PARENT_ID ASC,CATEGORY_ID ASC
     </select>
 
 </mapper>

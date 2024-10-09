@@ -49,6 +49,10 @@ public interface RepositoryService {
     List<Repository> getRepositoryList(String repoName);
 
     /**
+     * 获取所有列表
+     */
+    List<Repository> getRepositoryAll();
+    /**
      * 仓库负载统计
      */
     List<Statistics> getRepositoryPayloadStatistics();

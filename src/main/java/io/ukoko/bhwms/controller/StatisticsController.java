@@ -71,4 +71,14 @@ public class StatisticsController {
         }
         return new Result(ss);
     }
+
+    /**
+     * 当前库存
+     */
+    /**
+     * 当天出库
+     */
+    /**
+     * 当天入库
+     */
 }

@@ -155,6 +155,9 @@ public class HomeController {
                             subject.login(token);
                             //向前端保存数据
                             User user = userService.getUserByUserTel(userTel);
+                            if (user == null) {
+                                throw new BhWmsException(ShiroStatus.LOGIN_ERROR_USER);
+                            }
                             //向session对象中保存数据
                             request.getSession().setAttribute("nickName",user.getUserNick());
                             /**

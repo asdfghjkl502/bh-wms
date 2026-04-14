@@ -85,7 +85,7 @@ public class UserServiceImpl  implements UserService {
 
     @Override
     public void updateUser(User user) {
-        if(user.getPassword()!=null && user.getPassword()!=""){
+        if(user.getPassword()!=null && !user.getPassword().isEmpty()){
             //通过ID查询盐值
             User u = userMapper.getUser(user.getUserId());
             //盐值
@@ -104,6 +104,9 @@ public class UserServiceImpl  implements UserService {
     @Override
     public User getUserByUserId(Integer userId) {
         User user = userMapper.getUser(userId);
+        if (user == null) {
+            return null;
+        }
         List<Department> ds = new ArrayList<>();
         List<Role> rs = new ArrayList<>();
         List<UserDepartment> userDepartments = userDepartmentMapper.getUserDepartmentByUserId(user.getUserId());
@@ -122,6 +125,9 @@ public class UserServiceImpl  implements UserService {
     @Override
     public User getUserByUserTel(String userTel) {
         User user = userMapper.getUserByUserTel(userTel);
+        if (user == null) {
+            return null;
+        }
         List<Department> ds = new ArrayList<>();
         List<Role> rs = new ArrayList<>();
         List<UserDepartment> userDepartments = userDepartmentMapper.getUserDepartmentByUserId(user.getUserId());
@@ -177,6 +183,9 @@ public class UserServiceImpl  implements UserService {
     public List<User> getRepositoryUser() {
         //获取仓库管理员角色ID
         Role role = roleMapper.getRoleByRoleName("仓库管理员");
+        if (role == null) {
+            return new ArrayList<>();
+        }
         //通过角色ID查询当前角色下的用户
         List<UserRole> userRoles = userRoleMapper.getUserRoleByRoleId(role.getRoleId());
         List<Integer> userIds = new ArrayList<>();

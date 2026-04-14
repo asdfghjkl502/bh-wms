@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.dto.Result;
+import io.ukoko.bhwms.dto.RoleRequest;
 import io.ukoko.bhwms.entity.Role;
 import io.ukoko.bhwms.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,17 @@ public class RoleController {
     @PostMapping(value = "/addRole")
     public Object addRole(@RequestBody Role role){
         roleService.addRole(role);
+        return new Result();
+    }
+
+    /**
+     * 添加角色并分配权限
+     * @param request: 包含role和permissionIds
+     * @return
+     */
+    @PostMapping(value = "/addRoleWithPermissions")
+    public Object addRoleWithPermissions(@RequestBody RoleRequest request){
+        roleService.addRoleWithPermissions(request.getRole(), request.getPermissionIds());
         return new Result();
     }
 

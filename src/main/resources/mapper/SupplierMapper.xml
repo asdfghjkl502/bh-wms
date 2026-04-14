@@ -46,7 +46,7 @@
 
 
     <select id="getSupplierAll" resultType="supplier">
-        SELECT * FROM supplier
+        SELECT * FROM supplier WHERE IS_DELETE=1
     </select>
 
     <resultMap id="supplierMap" type="supplier">
@@ -66,7 +66,8 @@
     <select id="getSupplierList" resultType="supplier">
         SELECT * FROM supplier
         <where>
-            <if test="supplierName!=null">SUPPLIER_NAME LIKE CONCAT('%',#{supplierName},'%')</if>
+            IS_DELETE=1
+            <if test="supplierName!=null"> AND SUPPLIER_NAME LIKE CONCAT('%',#{supplierName},'%')</if>
             <if test="supplierLeader!=null"> AND SUPPLIER_LEADER LIKE CONCAT('%',#{supplierLeader},'%')</if>
             <if test="supplierTel!=null"> AND SUPPLIER_TEL LIKE CONCAT('%',#{supplierTel},'%')</if>
         </where>

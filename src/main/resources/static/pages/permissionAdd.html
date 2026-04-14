@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>添加权限</title>
+    <link href="../layui/css/layui.css" rel="stylesheet">
+</head>
+<body>
+<div style="padding: 15px;">
+    <form class="layui-form" lay-filter="permissionForm">
+        <div class="layui-form-item">
+            <label class="layui-form-label">权限名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="permissionName" required lay-verify="required" placeholder="请输入权限名称"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">权限代码</label>
+            <div class="layui-input-block">
+                <input type="text" name="permissionCode" required lay-verify="required" placeholder="如: system:user:add"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">权限类型</label>
+            <div class="layui-input-block">
+                <select name="permissionType" lay-verify="required">
+                    <option value="">请选择</option>
+                    <option value="1">菜单</option>
+                    <option value="2">按钮</option>
+                    <option value="3">API</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">权限URL</label>
+            <div class="layui-input-block">
+                <input type="text" name="permissionUrl" placeholder="API权限时填写，如: /addUser" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">层级</label>
+            <div class="layui-input-block">
+                <input type="number" name="level" value="1" placeholder="请输入层级" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">父ID</label>
+            <div class="layui-input-block">
+                <input type="number" name="parentId" value="0" placeholder="父权限ID，0表示顶级" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="addPermission">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="../layui/layui.js"></script>
+<script>
+    layui.use(["form", "layer"], function () {
+        const form = layui.form;
+        const layer = layui.layer;
+        const $ = layui.jquery;
+
+        form.on("submit(addPermission)", function (data) {
+            $.ajax({
+                url: "/addPermission",
+                method: "post",
+                data: JSON.stringify(data.field),
+                contentType: "application/json",
+                success: function (d) {
+                    if (d.code === 0) {
+                        layer.msg("添加成功");
+                        let index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+                    } else {
+                        layer.msg(d.msg);
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

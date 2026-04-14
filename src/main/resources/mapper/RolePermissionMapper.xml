@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.ukoko.bhwms.mapper.RolePermissionMapper">
+
+    <insert id="assignPermissions">
+        INSERT INTO role_permission (ROLE_ID, PERMISSION_ID, CREATE_TIME, IS_DELETE)
+        VALUES
+        <foreach collection="permissionIds" item="permissionId" separator=",">
+            (#{roleId}, #{permissionId}, NOW(), 1)
+        </foreach>
+    </insert>
+
+    <delete id="deleteByRoleId">
+        UPDATE role_permission SET IS_DELETE=0 WHERE ROLE_ID=#{roleId}
+    </delete>
+
+    <update id="batchDeleteByRoleId">
+        <foreach collection="list" item="item" separator=";">
+            UPDATE role_permission SET IS_DELETE=0 WHERE ROLE_ID=#{item}
+        </foreach>
+    </update>
+
+    <insert id="addRolePermission" parameterType="rolePermission">
+        INSERT INTO role_permission
+            (ROLE_ID, PERMISSION_ID, CREATE_TIME, IS_DELETE)
+        VALUES
+            (#{roleId}, #{permissionId}, #{createTime}, #{isDelete})
+    </insert>
+
+</mapper>

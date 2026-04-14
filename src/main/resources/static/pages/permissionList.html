@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>权限管理</title>
+    <link href="../layui/css/layui.css" rel="stylesheet">
+    <link href="../css/hxx.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/hxx-user.css">
+</head>
+<body>
+
+<div class="layui-fluid">
+    <!-- 条件选项 -->
+    <form class="layui-form layui-row user-search">
+        <div class="user">
+            <label for="permissionName">权限名称:</label>
+            <input id="permissionName" name="permissionName" placeholder="权限名称...">
+        </div>
+        <div class="user">
+            <label for="permissionCode">权限代码:</label>
+            <input id="permissionCode" name="permissionCode" placeholder="权限代码...">
+        </div>
+        <div class="user">
+            <label for="permissionType">权限类型:</label>
+            <select id="permissionType" name="permissionType">
+                <option value="">全部</option>
+                <option value="1">菜单</option>
+                <option value="2">按钮</option>
+                <option value="3">API</option>
+            </select>
+        </div>
+        <!--提交按钮-->
+        <div class="user">
+            <button type="button" lay-submit lay-filter="search" class="layui-btn  layui-btn-primary layui-border-green">搜索</button>
+            <button type="reset" class="layui-btn  layui-btn-primary layui-border-red">重置</button>
+        </div>
+    </form>
+    <table id="demo" lay-filter="test"></table>
+</div>
+
+<!-- 工具栏 -->
+<script type="text/html" id="toolbar">
+    <div>
+        <button lay-event="batchDel" class="layui-btn layui-btn-sm layui-btn-danger">
+            <i class="layui-icon layui-icon-delete"></i> 批量删除
+        </button>
+        <button lay-event="addPermission" class="layui-btn layui-btn-sm layui-btn-normal">
+            <i class="layui-icon layui-icon-add-1"></i> 添加
+        </button>
+    </div>
+</script>
+
+<!-- 操作按钮 -->
+<script type="text/html" id="operateBar">
+    <button type='button' lay-event='del' class='layui-btn layui-btn-danger layui-btn-xs'>删除</button>
+    <button type='button' lay-event='edit' class='layui-btn layui-btn-warm layui-btn-xs'>更新</button>
+</script>
+
+<!-- 权限类型 -->
+<script type="text/html" id="typeTpl">
+    {{# if(d.permissionType === 1){ }}
+        <span class="layui-badge layui-bg-blue">菜单</span>
+    {{# } else if(d.permissionType === 2){ }}
+        <span class="layui-badge layui-bg-green">按钮</span>
+    {{# } else if(d.permissionType === 3){ }}
+        <span class="layui-badge layui-bg-orange">API</span>
+    {{# } else { }}
+        <span class="layui-badge layui-bg-gray">未知</span>
+    {{# } }}
+</script>
+
+<script src="../layui/layui.js"></script>
+<script>
+    layui.use(["table", "form", "layer", "jquery"], function () {
+        const table = layui.table;
+        const form = layui.form;
+        const layer = layui.layer;
+        const $ = layui.jquery;
+
+        /**
+         * 单元格事件绑定
+         */
+        table.on("tool(test)", function (obj) {
+            let e = obj.event;
+            if (e === "del") {
+                layer.confirm("确定删除?", function (index) {
+                    layer.close(index);
+                    $.post("/deletePermission", {permissionId: obj.data.permissionId}, function (d) {
+                        if (d.code !== 0) {
+                            layer.msg(d.msg);
+                        } else {
+                            table.reload("demo");
+                        }
+                    });
+                });
+            } else if (e === "edit") {
+                layer.open({
+                    type: 2,
+                    title: '更新权限',
+                    content: 'permissionUpdate.html?permissionId=' + obj.data.permissionId,
+                    area: ['500px', '450px'],
+                    success: function (layero, index) {
+                        let body = layer.getChildFrame('body', index);
+                        body.find('#permissionId').val(obj.data.permissionId);
+                        body.find('#permissionName').val(obj.data.permissionName);
+                        body.find('#permissionCode').val(obj.data.permissionCode);
+                        body.find('#permissionType').val(obj.data.permissionType);
+                        body.find('#permissionUrl').val(obj.data.permissionUrl);
+                        body.find('#level').val(obj.data.level);
+                        body.find('#parentId').val(obj.data.parentId);
+                        form.render('select');
+                    },
+                    end: function () {
+                        table.reload("demo");
+                    }
+                });
+            }
+        });
+
+        /**
+         * 表格头部事件绑定
+         */
+        table.on('toolbar(test)', function (obj) {
+            let e = obj.event;
+            if (e === "batchDel") {
+                layer.confirm("是否删除", function (index) {
+                    layer.close(index);
+                    let batchParam = table.checkStatus("demo");
+                    let permissionIds = [];
+                    let list = batchParam.data;
+                    for (let i = 0; i < list.length; i++) {
+                        permissionIds.push(list[i].permissionId);
+                    }
+                    $.ajax({
+                        url: "/batchDeletePermission",
+                        method: "post",
+                        data: JSON.stringify(permissionIds),
+                        contentType: "application/json",
+                        success: function (d) {
+                            if (d.code === 0) {
+                                table.reload("demo");
+                            } else {
+                                layer.msg(d.msg);
+                            }
+                        }
+                    });
+                });
+            } else if (e === "addPermission") {
+                layer.open({
+                    type: 2,
+                    title: '添加权限',
+                    content: 'permissionAdd.html',
+                    area: ['500px', '450px'],
+                    end: function () {
+                        table.reload("demo");
+                    }
+                });
+            }
+        });
+
+        /**
+         * 搜索事件绑定
+         */
+        form.on("submit(search)", function (obj) {
+            table.reload("demo", {
+                page: {curr: 1},
+                where: {
+                    permissionName: obj.field.permissionName,
+                    permissionCode: obj.field.permissionCode,
+                    permissionType: obj.field.permissionType
+                }
+            });
+        });
+
+        /**
+         * 数据表格展示
+         */
+        table.render({
+            elem: "#demo",
+            url: "/getPermissionPage",
+            toolbar: '#toolbar',
+            page: {
+                prev: '上一页',
+                next: '下一页'
+            },
+            limit: 10,
+            limits: [5, 10, 15, 20, 25],
+            request: {
+                pageName: 'pageNo',
+                limitName: 'pageSize'
+            },
+            parseData: function (res) {
+                return {
+                    "code": res.code,
+                    "msg": res.msg,
+                    "count": res.obj.count,
+                    "data": res.obj.data
+                }
+            },
+            defaultToolbar: ['exports', 'print'],
+            cols: [[
+                {type: 'checkbox'},
+                {title: '序号', type: 'numbers'},
+                {field: 'permissionName', title: '权限名称', sort: true, width: '15%'},
+                {field: 'permissionCode', title: '权限代码', sort: true, width: '20%'},
+                {field: 'permissionType', title: '权限类型', templet: '#typeTpl', width: '10%'},
+                {field: 'permissionUrl', title: '权限URL', width: '20%'},
+                {field: 'level', title: '层级', width: '8%'},
+                {title: '操作', toolbar: '#operateBar', width: '12%'}
+            ]]
+        });
+    });
+</script>
+</body>
+</html>

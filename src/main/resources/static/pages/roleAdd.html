@@ -30,6 +30,12 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">分配权限</label>
+            <div class="layui-input-block">
+                <div id="permissionSelect" style="width: 100%;"></div>
+            </div>
+        </div>
+        <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn  layui-btn-normal" lay-submit lay-filter="add">添加角色</button>
             </div>
@@ -38,7 +44,10 @@
 </div>
 
 <script src="../layui/layui.js"></script>
+<script src="../js/xm-select.js"></script>
 <script>
+
+    let permissionSelect;
 
     layui.use(["jquery","form","laydate","layer"],function () {
         let $ = layui.jquery;
@@ -46,9 +55,51 @@
         let laydate = layui.laydate;
         let layer = layui.layer;
 
+        // 延迟初始化权限下拉框，避免刷新时一闪而过
+        setTimeout(function(){
+            permissionSelect = xmSelect.render({
+                el: "#permissionSelect",
+                filterable: true,
+                remoteSearch: true,
+                tips: "选择权限",
+                searchTips: "搜索权限",
+                maxHeight: 120,
+                prop: {
+                    name: "permissionName",
+                    value: "permissionId"
+                },
+                theme: {
+                    color: '#0081ff',
+                },
+                remoteMethod: function(val, cb, show){
+                    if(!val){
+                        $.getJSON("/getPermissionAll",function (d) {
+                            if(d.code!==0){
+                                layer.msg(d.msg);
+                            }else{
+                                cb(d.obj);
+                            }
+                        });
+                    }else{
+                        $.getJSON("/getPermissionAll",function (d) {
+                            if(d.code!==0){
+                                layer.msg(d.msg);
+                            }else{
+                                // 本地过滤
+                                let filtered = d.obj.filter(function(item) {
+                                    return item.permissionName.indexOf(val) !== -1 || item.permissionCode.indexOf(val) !== -1;
+                                });
+                                cb(filtered);
+                            }
+                        });
+                    }
+                }
+            });
+        }, 100);
+
         laydate.render({
-            elem: '#createTime', //指定元素
-            type:'datetime',/* 年月日时分秒 */
+            elem: '#createTime',
+            type:'datetime',
             theme:'#2F4056 '
         });
 
@@ -56,17 +107,33 @@
          * 提交表单
          */
         form.on("submit(add)",function (data) {
+            let role = {
+                roleName: data.field.roleName,
+                isDelete: data.field.isDelete,
+                createTime: data.field.createTime || new Date()
+            };
+
+            let selectedPermissions = permissionSelect.getValue();
+            let permissionIds = selectedPermissions.map(function(item) {
+                return item.permissionId;
+            });
+
+            let params = {
+                role: role,
+                permissionIds: permissionIds
+            };
+
             //AJAX
             $.ajax({
-                url:"/addRole",
+                url:"/addRoleWithPermissions",
                 method:"post",
-                data:JSON.stringify(data.field),
+                data:JSON.stringify(params),
                 contentType:"application/json",
                 success:function (d){
                     //关闭弹出层
-                    let index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                    parent.layer.close(index); //再执行关闭
-                    if(d.code!=0){
+                    let index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                    if(d.code!==0){
                         layer.msg(d.msg);
                     }
                 }

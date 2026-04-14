@@ -1,18 +1,25 @@
 package io.ukoko.bhwms.shiro;
 
+import io.ukoko.bhwms.entity.Permission;
 import io.ukoko.bhwms.entity.User;
 import io.ukoko.bhwms.enums.ShiroStatus;
 import io.ukoko.bhwms.exceptions.BhWmsException;
+import io.ukoko.bhwms.mapper.PermissionMapper;
 import io.ukoko.bhwms.mapper.UserMapper;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * 自定义Shiro Realm
@@ -22,6 +29,9 @@ public class ShiroRealm extends AuthorizingRealm {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private PermissionMapper permissionMapper;
+
     /**
      * 授权
      * @param principalCollection
@@ -29,7 +39,31 @@ public class ShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        return null;
+        // 获取登录用户名
+        String userTel = (String) principalCollection.getPrimaryPrincipal();
+        User user = userMapper.getUserByUserTel(userTel);
+        if (user == null) {
+            return null;
+        }
+
+        // 获取用户的权限列表
+        List<Permission> menuPermissions = permissionMapper.getMenuPermissionsByUserId(user.getUserId());
+        List<String> buttonPermissions = permissionMapper.getButtonPermissionsByUserId(user.getUserId());
+        List<String> apiPermissions = permissionMapper.getApiPermissionsByUserId(user.getUserId());
+
+        // 合并所有权限代码
+        Set<String> allPermissions = new HashSet<>();
+        for (Permission p : menuPermissions) {
+            allPermissions.add(p.getPermissionCode());
+        }
+        allPermissions.addAll(buttonPermissions);
+        allPermissions.addAll(apiPermissions);
+
+        // 创建授权信息
+        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+        authorizationInfo.setStringPermissions(allPermissions);
+
+        return authorizationInfo;
     }
 
     /**

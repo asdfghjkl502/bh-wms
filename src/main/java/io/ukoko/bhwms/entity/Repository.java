@@ -42,6 +42,10 @@ public class Repository {
       是否删除 0:删除 1:未删除
    */
   private int isDelete=1;
+  /*
+      仓库剩余面积（计算字段，不存储）
+   */
+  private Integer remainingArea;
   public Repository() {
   }
 
@@ -115,6 +119,14 @@ public class Repository {
 
   public void setRepoName(String repoName) {
     this.repoName = repoName;
+  }
+
+  public Integer getRemainingArea() {
+    return remainingArea;
+  }
+
+  public void setRemainingArea(Integer remainingArea) {
+    this.remainingArea = remainingArea;
   }
 
   @Override

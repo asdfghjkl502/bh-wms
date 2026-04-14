@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.ukoko.bhwms.mapper.PermissionMapper">
+
+    <insert id="addPermission" parameterType="permission">
+        INSERT INTO permission
+            (PERMISSION_NAME, PERMISSION_CODE, PERMISSION_TYPE, PERMISSION_URL,
+             LEVEL, PARENT_ID, CREATE_TIME, IS_DELETE)
+        VALUES
+            (#{permissionName}, #{permissionCode}, #{permissionType}, #{permissionUrl},
+             #{level}, #{parentId}, #{createTime}, #{isDelete})
+    </insert>
+
+    <update id="deletePermission" parameterType="int">
+        UPDATE permission SET IS_DELETE=0 WHERE PERMISSION_ID=#{permissionId}
+    </update>
+
+    <update id="batchDeletePermission">
+        <foreach collection="list" item="item" separator=";">
+            UPDATE permission SET IS_DELETE=0 WHERE PERMISSION_ID=#{item}
+        </foreach>
+    </update>
+
+    <update id="updatePermission" parameterType="permission">
+        UPDATE permission
+        <set>
+            <if test="permissionName!=null">PERMISSION_NAME=#{permissionName},</if>
+            <if test="permissionCode!=null">PERMISSION_CODE=#{permissionCode},</if>
+            <if test="permissionType!=null">PERMISSION_TYPE=#{permissionType},</if>
+            <if test="permissionUrl!=null">PERMISSION_URL=#{permissionUrl},</if>
+            <if test="level!=null">LEVEL=#{level},</if>
+            <if test="parentId!=null">PARENT_ID=#{parentId},</if>
+            <if test="createTime!=null">CREATE_TIME=#{createTime},</if>
+            <if test="isDelete!=null">IS_DELETE=#{isDelete}</if>
+        </set>
+        <where>
+            PERMISSION_ID=#{permissionId}
+        </where>
+    </update>
+
+    <select id="getPermissionList" resultType="permission">
+        SELECT * FROM permission
+        <where>
+            IS_DELETE=1
+            <if test="permissionName!=null"> AND PERMISSION_NAME LIKE CONCAT('%',#{permissionName},'%')</if>
+            <if test="permissionCode!=null"> AND PERMISSION_CODE LIKE CONCAT('%',#{permissionCode},'%')</if>
+            <if test="permissionType!=null"> AND PERMISSION_TYPE=#{permissionType}</if>
+        </where>
+    </select>
+
+    <select id="getPermissionAll" resultType="permission">
+        SELECT * FROM permission WHERE IS_DELETE=1
+    </select>
+
+    <select id="getPermissionByPermissionId" resultType="permission">
+        SELECT * FROM permission WHERE PERMISSION_ID=#{permissionId}
+    </select>
+
+    <select id="getPermissionByRoleId" resultType="permission">
+        SELECT p.* FROM permission p
+        INNER JOIN role_permission rp ON p.PERMISSION_ID = rp.PERMISSION_ID
+        WHERE rp.ROLE_ID = #{roleId} AND p.IS_DELETE=1 AND rp.IS_DELETE=1
+    </select>
+
+    <!-- 获取用户的菜单权限列表(类型为1的权限) -->
+    <select id="getMenuPermissionsByUserId" resultType="permission">
+        SELECT DISTINCT p.* FROM permission p
+        INNER JOIN role_permission rp ON p.PERMISSION_ID = rp.PERMISSION_ID
+        INNER JOIN user_role ur ON rp.ROLE_ID = ur.ROLE_ID
+        WHERE ur.USER_ID = #{userId}
+          AND p.PERMISSION_TYPE = 1
+          AND p.IS_DELETE = 1
+          AND rp.IS_DELETE = 1
+          AND ur.IS_DELETE = 1
+    </select>
+
+    <!-- 获取用户的按钮权限代码列表 -->
+    <select id="getButtonPermissionsByUserId" resultType="string">
+        SELECT DISTINCT p.PERMISSION_CODE FROM permission p
+        INNER JOIN role_permission rp ON p.PERMISSION_ID = rp.PERMISSION_ID
+        INNER JOIN user_role ur ON rp.ROLE_ID = ur.ROLE_ID
+        WHERE ur.USER_ID = #{userId}
+          AND p.PERMISSION_TYPE = 2
+          AND p.IS_DELETE = 1
+          AND rp.IS_DELETE = 1
+          AND ur.IS_DELETE = 1
+    </select>
+
+    <!-- 获取用户的API权限代码列表 -->
+    <select id="getApiPermissionsByUserId" resultType="string">
+        SELECT DISTINCT p.PERMISSION_CODE FROM permission p
+        INNER JOIN role_permission rp ON p.PERMISSION_ID = rp.PERMISSION_ID
+        INNER JOIN user_role ur ON rp.ROLE_ID = ur.ROLE_ID
+        WHERE ur.USER_ID = #{userId}
+          AND p.PERMISSION_TYPE = 3
+          AND p.IS_DELETE = 1
+          AND rp.IS_DELETE = 1
+          AND ur.IS_DELETE = 1
+    </select>
+
+</mapper>

@@ -58,15 +58,15 @@
     <select id="getProductList" resultMap="productMap">
         SELECT * FROM product
         <where>
-            <if test="productId!=null">PRODUCT_ID LIKE CONCAT('%',#{productId},'%')</if>
-            <if test="productName!=null">PRODUCT_NAME LIKE CONCAT('%',#{productName},'%')</if>
+            IS_DELETE=1
+            <if test="productId!=null"> AND PRODUCT_ID LIKE CONCAT('%',#{productId},'%')</if>
+            <if test="productName!=null"> AND PRODUCT_NAME LIKE CONCAT('%',#{productName},'%')</if>
             <if test="productSize!=null"> AND PRODUCT_SIZE LIKE CONCAT('%',#{productSize},'%')</if>
-            <if test="isDelete!=null"> AND IS_DELETE=#{isDelete}</if>
             <if test="startTime!=null and endTime!=null"> AND CREATE_TIME <![CDATA[>=]]> #{startTime} AND CREATE_TIME <![CDATA[<=]]> #{endTime}</if>
         </where>
     </select>
     <select id="getProductAll" resultType="product">
-        SELECT * FROM product
+        SELECT * FROM product WHERE IS_DELETE=1
     </select>
 
     <select id="getProductByProductId" parameterType="int" resultMap="productMap">

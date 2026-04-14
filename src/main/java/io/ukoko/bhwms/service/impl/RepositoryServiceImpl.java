@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
+
 @Transactional
 @Service
 public class RepositoryServiceImpl implements RepositoryService {
@@ -51,6 +53,11 @@ public class RepositoryServiceImpl implements RepositoryService {
     public Page getRepositoryPage(Integer pageNo, Integer pageSize, String repoAddress, Date startTime, Date endTime,String repoName) {
         PageHelper.startPage(pageNo,pageSize);
         List<Repository> list = repositoryMapper.getRepositoryList(repoAddress, startTime, endTime,repoName);
+        // 计算每个仓库的剩余面积
+        for (Repository repository : list) {
+            int remaining = calculateRemainingArea(repository);
+            repository.setRemainingArea(remaining);
+        }
         PageInfo<Repository> info = new PageInfo<>(list);
         Page page = new Page();
         page.setPageNo(info.getPageNum());
@@ -63,15 +70,72 @@ public class RepositoryServiceImpl implements RepositoryService {
         return page;
     }
 
+    /**
+     * 计算仓库剩余面积
+     * 剩余面积 = 仓库面积 - 已占用面积
+     * 已占用面积 = SUM(每种产品的库存数量 * 产品单位面积)
+     */
+    private int calculateRemainingArea(Repository repository) {
+        // 解析仓库面积
+        int repoArea;
+        String repoAreaStr = repository.getRepoArea();
+        if (repoAreaStr != null && repoAreaStr.contains("*")) {
+            String[] parts = repoAreaStr.split("\\*");
+            if (parts.length >= 2) {
+                repoArea = parseInt(parts[0].trim()) * parseInt(parts[1].trim());
+            } else {
+                repoArea = parseInt(repoAreaStr.trim());
+            }
+        } else {
+            repoArea = parseInt(repoAreaStr.trim());
+        }
+
+        // 获取该仓库下所有产品库存
+        List<RecordStock> recordStocks = recordStockMapper.getRecordStockList(null, repository.getRepoId());
+
+        // 计算已占用面积
+        int usedArea = 0;
+        for (RecordStock recordStock : recordStocks) {
+            if (recordStock.getProduct() != null && recordStock.getProduct().getProductSize() != null) {
+                String productSizeStr = recordStock.getProduct().getProductSize();
+                int productSize;
+                if (productSizeStr.contains("*")) {
+                    String[] parts = productSizeStr.split("\\*");
+                    if (parts.length >= 2) {
+                        productSize = parseInt(parts[0].trim()) * parseInt(parts[1].trim());
+                    } else {
+                        productSize = parseInt(productSizeStr.trim());
+                    }
+                } else {
+                    productSize = parseInt(productSizeStr.trim());
+                }
+                usedArea += productSize * recordStock.getProductStock();
+            }
+        }
+
+        return repoArea - usedArea;
+    }
+
     @Override
     public List<Repository> getRepositoryList(String repoName) {
         List<Repository> repositoryList = repositoryMapper.getRepositoryList(null, null, null, repoName);
+        // 计算每个仓库的剩余面积
+        for (Repository repository : repositoryList) {
+            int remaining = calculateRemainingArea(repository);
+            repository.setRemainingArea(remaining);
+        }
         return repositoryList;
     }
 
     @Override
     public List<Repository> getRepositoryAll() {
-        return repositoryMapper.getRepositoryAll();
+        List<Repository> repositories = repositoryMapper.getRepositoryAll();
+        // 计算每个仓库的剩余面积
+        for (Repository repository : repositories) {
+            int remaining = calculateRemainingArea(repository);
+            repository.setRemainingArea(remaining);
+        }
+        return repositories;
     }
 
     @Override

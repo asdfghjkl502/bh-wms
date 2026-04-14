@@ -1,5 +1,8 @@
 package io.ukoko.bhwms.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
 /**
@@ -17,10 +20,14 @@ public class Role {
     /*
         创建时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "GMT+8")
+    @JsonProperty("createTime")
     private Date createTime;
     /*
         更新时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "GMT+8")
+    @JsonProperty("updateTime")
     private Date updateTime;
     /*
         是否删除 0:删除 1:未删除

@@ -59,4 +59,11 @@ public interface RoleService {
      * @param roleIds 角色ID
      */
     void batchDeleteRole(List<Integer> roleIds);
+
+    /**
+     * 添加角色并分配权限
+     * @param role 角色信息
+     * @param permissionIds 权限ID列表
+     */
+    void addRoleWithPermissions(Role role, List<Integer> permissionIds);
 }

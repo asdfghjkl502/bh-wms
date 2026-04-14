@@ -20,7 +20,9 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.*;
+import java.io.File;
+import java.io.InputStream;
+import java.io.FileOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -55,7 +57,6 @@ public class LogAspect {
      */
     @Around(value = "log()")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        BufferedReader br = null;
         Object proceed = null;
         try {
             ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -138,14 +139,6 @@ public class LogAspect {
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             throw throwable;
-        }finally {
-            if (br!=null){
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
 
         LOGGER.info("----------------------------------------------------------------");

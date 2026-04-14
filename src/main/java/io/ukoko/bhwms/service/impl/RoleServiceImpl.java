@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import io.ukoko.bhwms.dto.Page;
 import io.ukoko.bhwms.entity.Role;
 import io.ukoko.bhwms.mapper.RoleMapper;
+import io.ukoko.bhwms.service.PermissionService;
 import io.ukoko.bhwms.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,9 +21,20 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleMapper roleMapper;
 
+    @Autowired
+    private PermissionService permissionService;
+
     @Override
     public void addRole(Role role) {
         roleMapper.addRole(role);
+    }
+
+    @Override
+    public void addRoleWithPermissions(Role role, List<Integer> permissionIds) {
+        roleMapper.addRole(role);
+        if (permissionIds != null && !permissionIds.isEmpty()) {
+            permissionService.assignPermissions(role.getRoleId(), permissionIds);
+        }
     }
 
     @Override

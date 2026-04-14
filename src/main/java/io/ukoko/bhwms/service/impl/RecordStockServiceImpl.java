@@ -54,23 +54,88 @@ public class RecordStockServiceImpl implements RecordStockService {
         Product productByProductId = productMapper.getProductByProductId(productId);
         Integer supplierId = recordStock.getSupplierId();
         Supplier supplierBySuppierId = supplierMapper.getSupplierBySuppierId(supplierId);
-        int productSize= parseInt(productByProductId.getProductSize());
-        int repoArea=parseInt(repositoryByRepoId.getRepoArea());
-        int recordStockSum = recordStockMapper.getRecordStockByRepoId(repoId)==null?0:recordStockMapper.getRecordStockByRepoId(repoId);
+        if (repositoryByRepoId == null) {
+            throw new BhWmsException(500, "仓库不存在！");
+        }
+        if (productByProductId == null) {
+            throw new BhWmsException(500, "产品不存在！");
+        }
+        if (supplierBySuppierId == null) {
+            throw new BhWmsException(500, "供应商不存在！");
+        }
+
+        int productSize;
+        String productSizeStr = productByProductId.getProductSize();
+        if (productSizeStr != null && productSizeStr.contains("*")) {
+            String[] parts = productSizeStr.split("\\*");
+            if (parts.length < 2) {
+                throw new BhWmsException(500, "产品尺寸格式错误！");
+            }
+            try {
+                productSize = parseInt(parts[0].trim()) * parseInt(parts[1].trim());
+            } catch (NumberFormatException e) {
+                throw new BhWmsException(500, "产品尺寸格式错误！");
+            }
+        } else {
+            try {
+                productSize = parseInt(productSizeStr.trim());
+            } catch (NumberFormatException e) {
+                throw new BhWmsException(500, "产品尺寸格式错误！");
+            }
+        }
+
+        int repoArea;
+        String repoAreaStr = repositoryByRepoId.getRepoArea();
+        if (repoAreaStr != null && repoAreaStr.contains("*")) {
+            String[] parts = repoAreaStr.split("\\*");
+            if (parts.length < 2) {
+                throw new BhWmsException(500, "仓库面积格式错误！");
+            }
+            try {
+                repoArea = parseInt(parts[0].trim()) * parseInt(parts[1].trim());
+            } catch (NumberFormatException e) {
+                throw new BhWmsException(500, "仓库面积格式错误！");
+            }
+        } else {
+            try {
+                repoArea = parseInt(repoAreaStr.trim());
+            } catch (NumberFormatException e) {
+                throw  new BhWmsException(500, "仓库面积格式错误！");
+            }
+        }
 
         System.out.println(productSize);
         System.out.println(repoArea);
-        System.out.println(recordStockSum);
+
         if (repositoryByRepoId.getRepoStatus()!=1 || repositoryByRepoId.getIsDelete()!=1 ){
             throw  new BhWmsException(500,"仓库异常！");
         } else if (productByProductId.getIsDelete()!=1) {
             throw  new BhWmsException(500,"该产品已失效！");
         } else if (supplierBySuppierId.getIsDelete()!=1) {
             throw  new BhWmsException(500,"该供应商已失效！");
-        } else if (productSize*recordStockSum>repoArea) {
+        }
 
+        // 计算仓库已占用面积
+        List<RecordStock> allRecordStocks = recordStockMapper.getRecordStockList(null, repoId);
+        int usedArea = 0;
+        for (RecordStock rs : allRecordStocks) {
+            if (rs.getProduct() != null && rs.getProduct().getProductSize() != null) {
+                String sizeStr = rs.getProduct().getProductSize();
+                int pSize;
+                if (sizeStr.contains("*")) {
+                    String[] parts = sizeStr.split("\\*");
+                    pSize = parseInt(parts[0].trim()) * parseInt(parts[1].trim());
+                } else {
+                    pSize = parseInt(sizeStr.trim());
+                }
+                usedArea += pSize * rs.getProductStock();
+            }
+        }
+
+        // 检查入库后总面积是否超过仓库面积
+        int newUsedArea = usedArea + (productSize * recordStock.getProductStock());
+        if (newUsedArea > repoArea) {
             throw  new BhWmsException(500,"仓库面积不足！");
-
         }
         RecordStock rs = new RecordStock();
         rs.setRepoId(recordStock.getRepoId());
@@ -120,8 +185,14 @@ public class RecordStockServiceImpl implements RecordStockService {
 
             Integer repoId = recordStock.getRepoId();
             Repository repositoryByRepoId = repositoryMapper.getRepositorybyRepoId(repoId);
+            if (repositoryByRepoId == null) {
+                throw new BhWmsException(500, "仓库不存在！");
+            }
             Integer customerId = recordStock.getCustomerId();
             Customer customerByCustomerId = customerMapper.getCustomerByCustomerId(customerId);
+            if (customerByCustomerId == null) {
+                throw new BhWmsException(500, "客户不存在！");
+            }
             if (repositoryByRepoId.getRepoStatus()!=1 || repositoryByRepoId.getIsDelete()!=1 ){
                 throw  new BhWmsException(500,"仓库异常！");
             } else if (customerByCustomerId.getIsDelete()!=1) {
@@ -176,7 +247,10 @@ public class RecordStockServiceImpl implements RecordStockService {
     @Override
     public RecordStock getRecordStockByRepoIdAndProductId(Integer repoId, Integer productId) {
         List<RecordStock> recordStockList = recordStockMapper.getRecordStockList(productId, repoId);
-        return recordStockList==null?null:recordStockList.get(0);
+        if (recordStockList == null || recordStockList.isEmpty()) {
+            return null;
+        }
+        return recordStockList.get(0);
     }
 
     @Override

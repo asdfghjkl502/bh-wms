@@ -71,12 +71,13 @@
     <select id="getCustomerList" resultMap="customerMap">
         SELECT * FROM customer
         <where>
-            <if test="customerName!=null">CUSTOMER_NAME LIKE CONCAT('%',#{customerName},'%')</if>
-            <if test="customerLeader!=null">AND CUSTOMER_LEADER LIKE CONCAT('%',#{customerLeader},'%')</if>
-            <if test="customerTel!=null">AND CUSTOMER_TEL LIKE CONCAT('%',#{customerTel},'%')</if>
-            <if test="customerEmail!=null">AND CUSTOMER_EMAIL LIKE CONCAT('%',#{customerEmail},'%')</if>
-            <if test="customerAddress!=null">AND CUSTOMER_ADDRESS LIKE CONCAT('%',#{customerAddress},'%')</if>
-            <if test="startTime!=null and endTime!=null">AND CREATE_TIME <![CDATA[>=]]> #{startTime} AND CREATE_TIME <![CDATA[<=]]> #{endTime} </if>
+            IS_DELETE=1
+            <if test="customerName!=null"> AND CUSTOMER_NAME LIKE CONCAT('%',#{customerName},'%')</if>
+            <if test="customerLeader!=null"> AND CUSTOMER_LEADER LIKE CONCAT('%',#{customerLeader},'%')</if>
+            <if test="customerTel!=null"> AND CUSTOMER_TEL LIKE CONCAT('%',#{customerTel},'%')</if>
+            <if test="customerEmail!=null"> AND CUSTOMER_EMAIL LIKE CONCAT('%',#{customerEmail},'%')</if>
+            <if test="customerAddress!=null"> AND CUSTOMER_ADDRESS LIKE CONCAT('%',#{customerAddress},'%')</if>
+            <if test="startTime!=null and endTime!=null"> AND CREATE_TIME <![CDATA[>=]]> #{startTime} AND CREATE_TIME <![CDATA[<=]]> #{endTime} </if>
         </where>
     </select>
 
@@ -84,7 +85,7 @@
         SELECT * FROM customer WHERE CUSTOMER_ID=#{customerId}
     </select>
     <select id="getCustomerAll" resultType="customer">
-        SELECT * FROM customer
+        SELECT * FROM customer WHERE IS_DELETE=1
     </select>
 
 </mapper>

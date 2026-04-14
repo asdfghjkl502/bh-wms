@@ -80,6 +80,9 @@ function add_tab(title,url){
 	 */
 	for(var i=0;i<$(".hxx-iframe").length;i++){
 		if($(".hxx-iframe").eq(i).attr("tab-id")==tabId){
+			//刷新已存在标签的内容
+			var iframe = $(".hxx-iframe").eq(i);
+			iframe.attr("src", url);
 			element.tabChange("nav_filter",tabId);
 			return;
 		}

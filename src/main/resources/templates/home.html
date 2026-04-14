@@ -31,69 +31,70 @@
 		<!-- 左侧导航 -->
 		<div class="hxx-container-left">
 			<div class="layui-panel">
-			  <ul class="layui-menu" id="hxxmenuid">
-				<li class="layui-menu-item-group layui-menu-item-up" lay-options="{type: 'group'}">
+			  <ul class="layui-menu" id="hxxmenuid" style="visibility: hidden;">
+				<li class="layui-menu-item-group layui-menu-item-up" lay-options="{type: 'group'}" data-permission="dashboard">
 				  <div class="layui-menu-body-title">
 					  仪表盘 <i class="layui-icon layui-icon-down"></i>
 				  </div>
 				  <ul>
-					  <li onclick="add_tab('商业智能','pages/statisticsList.html')">商业智能</li>
+					  <li onclick="add_tab('商业智能','pages/statisticsList.html')" data-permission="dashboard:statistics">商业智能</li>
 				  </ul>
 				</li>
 				<li class="layui-menu-item-divider"></li>
-				<li class="layui-menu-item-group layui-menu-item-up" lay-options="{type: 'group'}">
+				<li class="layui-menu-item-group layui-menu-item-up" lay-options="{type: 'group'}" data-permission="system">
 				  <div class="layui-menu-body-title">
 				    系统设置 <i class="layui-icon layui-icon-down"></i>
 				  </div>
 				  <ul>
-				    <li onclick="add_tab('用户管理','pages/userList.html')">用户管理</li>
-					<li onclick="add_tab('角色管理','pages/roleList.html')">角色管理</li>
-					<li onclick="add_tab('部门管理','pages/departmentList.html')">部门管理</li>
+				    <li onclick="add_tab('用户管理','pages/userList.html')" data-permission="system:user">用户管理</li>
+					<li onclick="add_tab('角色管理','pages/roleList.html')" data-permission="system:role">角色管理</li>
+					<li onclick="add_tab('部门管理','pages/departmentList.html')" data-permission="system:department">部门管理</li>
+					<li onclick="add_tab('权限管理','pages/permissionList.html')" data-permission="system:permission">权限管理</li>
 				  </ul>
 				</li>
 				<li class="layui-menu-item-divider"></li>
-				<li class="layui-menu-item-group layui-menu-item-up" lay-options="{type: 'group'}">
+				<li class="layui-menu-item-group layui-menu-item-up" lay-options="{type: 'group'}" data-permission="base">
 				  <div class="layui-menu-body-title">
 				    基础数据 <i class="layui-icon layui-icon-down"></i>
 				  </div>
 				  <ul>
-					<li onclick="add_tab('产品管理','pages/productList.html')">产品管理</li>
-					<li onclick="add_tab('客户管理','pages/customerList.html')">客户管理</li>
-					<li onclick="add_tab('供应商管理','pages/supplierList.html')">供应商管理</li>
+					<li onclick="add_tab('产品管理','pages/productList.html')" data-permission="base:product">产品管理</li>
+					<li onclick="add_tab('客户管理','pages/customerList.html')" data-permission="base:customer">客户管理</li>
+					<li onclick="add_tab('供应商管理','pages/supplierList.html')" data-permission="base:supplier">供应商管理</li>
 				  </ul>
 				</li>
 				<li class="layui-menu-item-divider"></li>
-				<li class="layui-menu-item-group layui-menu-item-up" lay-options="{type: 'group'}">
+				<li class="layui-menu-item-group layui-menu-item-up" lay-options="{type: 'group'}" data-permission="repo">
 				  <div class="layui-menu-body-title">
 				    仓库管理 <i class="layui-icon layui-icon-down"></i>
 				  </div>
 				  <ul>
-				    <li onclick="add_tab('仓库管理','pages/warehouseList.html')">仓库管理</li>
-					<li onclick="add_tab('货物入库','pages/warehouseIn.html')">货物入库</li>
-					<li onclick="add_tab('货物出库','pages/warehouseOut.html')">货物出库</li>
-					<li onclick="add_tab('库存查询','pages/productStock.html')">库存查询</li>
+				    <li onclick="add_tab('仓库管理','pages/warehouseList.html')" data-permission="repo:warehouse">仓库管理</li>
+					<li onclick="add_tab('货物入库','pages/warehouseIn.html')" data-permission="repo:warehouse:in">货物入库</li>
+					<li onclick="add_tab('货物出库','pages/warehouseOut.html')" data-permission="repo:warehouse:out">货物出库</li>
+					<li onclick="add_tab('库存查询','pages/productStock.html')" data-permission="repo:stock">库存查询</li>
 				  </ul>
 				</li>
 				<li class="layui-menu-item-divider"></li>
-				<li class="layui-menu-item-group layui-menu-item-up" lay-options="{type: 'group'}">
+				<li class="layui-menu-item-group layui-menu-item-up" lay-options="{type: 'group'}" data-permission="dict">
 				  <div class="layui-menu-body-title">
 				    字典管理 <i class="layui-icon layui-icon-down"></i>
 				  </div>
 				  <ul>
-				    <li onclick="add_tab('产品类目','pages/categoryList.html')">产品类目</li>
-					<li onclick="add_tab('客户级别','pages/customerLevelList.html')">客户级别</li>
-					<li onclick="add_tab('客户来源','pages/customerSourceList.html')">客户来源</li>
-					  <li onclick="add_tab('客户行业','pages/customerIndustryList.html')">客户行业</li>
+				    <li onclick="add_tab('产品类目','pages/categoryList.html')" data-permission="dict:category">产品类目</li>
+					<li onclick="add_tab('客户级别','pages/customerLevelList.html')" data-permission="dict:level">客户级别</li>
+					<li onclick="add_tab('客户来源','pages/customerSourceList.html')" data-permission="dict:source">客户来源</li>
+					  <li onclick="add_tab('客户行业','pages/customerIndustryList.html')" data-permission="dict:industry">客户行业</li>
 				  </ul>
 				</li>
 				<li class="layui-menu-item-divider"></li>
-				<li class="layui-menu-item-group layui-menu-item-up" lay-options="{type: 'group'}">
+				<li class="layui-menu-item-group layui-menu-item-up" lay-options="{type: 'group'}" data-permission="log">
 				  <div class="layui-menu-body-title">
 				    日志管理 <i class="layui-icon layui-icon-down"></i>
 				  </div>
 				  <ul>
-				    <li onclick="add_tab('系统日志','pages/sysLog.html')">系统日志</li>
-					<li onclick="add_tab('登录日志','pages/userLog.html')">登录日志</li>
+				    <li onclick="add_tab('系统日志','pages/sysLog.html')" data-permission="log:system">系统日志</li>
+					<li onclick="add_tab('登录日志','pages/userLog.html')" data-permission="log:user">登录日志</li>
 				  </ul>
 				</li>
 			  </ul>
@@ -122,32 +123,92 @@
 <script src="js/md5.min.js"></script>
 <script src="js/hxx.js"></script>
 <script>
-	layui.use(['jquery','layer'],function () {
+	layui.use(['jquery','layer','element'],function () {
 		let layer = layui.layer;
 		let $ = layui.jquery;
+		let element = layui.element;
+
 		/**
-		 *  获取用户头像
-		 *  1. 判断是否登录,cookie是否有值
-		 *  2. 如果不存在值,说明没有登录,不需要查询
+		 * 获取用户ID从Cookie
 		 */
-		let cookies = document.cookie;
-		let split = cookies.split(";");
-		let c = {};
-		for (let i = 0; i < split.length; i++) {
-			let ss = split[i].split("=");
-			c[ss[0].trim()]=ss[1]; //key值需要去空格
-		}
-		if(c!=null && c.userId!=null && c.userId!="" && c.userId!="undefined"){
-			$.getJSON("/getUserDetail",{userId:c.userId},function (d) {
-				//console.log(d);
-				if(d.code===0){
-					//获取头像的DOM节点
-					$("#avatarId")[0].src=d.obj.avatar;
-				}else{
-					layer.msg(d.msg);
+		function getUserIdFromCookie() {
+			let cookies = document.cookie;
+			let split = cookies.split(";");
+			for (let i = 0; i < split.length; i++) {
+				let ss = split[i].split("=");
+				if (ss[0].trim() === "userId") {
+					return ss[1];
 				}
+			}
+			return null;
+		}
+
+		/**
+		 * 过滤菜单权限
+		 */
+		function filterMenusByPermission() {
+			let userId = getUserIdFromCookie();
+			if (!userId) return;
+
+			$.get("/getUserMenuPermissions", {userId: userId}, function (d) {
+				if (d.code !== 0) return;
+
+				let permissions = d.obj || [];
+				let permissionCodes = permissions.map(function(p) { return p.permissionCode; });
+
+				// 遍历顶级菜单组（layui-menu-item-group）
+				$("#hxxmenuid").find(".layui-menu-item-group").each(function() {
+					let $group = $(this);
+					let $divider = $group.next(".layui-menu-item-divider");
+					let hasAnyPermission = false;
+
+					// 遍历该组下的所有子菜单项（ul > li）
+					$group.find("ul > li").each(function() {
+						let itemPermission = $(this).attr("data-permission");
+						if (itemPermission && permissionCodes.indexOf(itemPermission) !== -1) {
+							hasAnyPermission = true;
+						} else {
+							// 没有该权限，隐藏该菜单项
+							$(this).hide();
+						}
+					});
+
+					// 如果该组没有任何子菜单有权限，隐藏整组
+					if (!hasAnyPermission) {
+						$group.hide();
+						$divider.hide();
+					}
+				});
+
+				// 权限过滤完成后显示菜单
+				$("#hxxmenuid").css("visibility", "visible");
 			});
 		}
+
+		/**
+		 *  获取用户头像
+		 */
+		let userId = getUserIdFromCookie();
+		if(userId && userId !== "" && userId !== "undefined"){
+			$.getJSON("/getUserDetail",{userId:userId},function (d) {
+				if(d.code===0){
+					$("#avatarId")[0].src=d.obj.avatar;
+					$("#userNick").html(d.obj.userNick);
+				}
+			});
+
+			// 过滤菜单权限
+			filterMenusByPermission();
+		}
+
+		// 点击首页tab时刷新
+		$(".home").click(function () {
+			$(".hxx-iframe").each(function () {
+				if ($(this).attr("src") === "pages/welcome.html") {
+					$(this).attr("src", "pages/welcome.html?t=" + new Date().getTime());
+				}
+			});
+		});
 	});
 </script>
 </body>

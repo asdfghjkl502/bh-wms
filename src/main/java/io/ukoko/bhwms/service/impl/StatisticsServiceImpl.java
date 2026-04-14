@@ -74,8 +74,14 @@ public class StatisticsServiceImpl implements StatisticsService {
         //时间格式化
         List<Map<String,Date>> timeStartEnd = new ArrayList<>();
         for (String time : times) {
+            if (time == null || !time.contains("-")) {
+                continue;
+            }
             //获取月份
             String[] split = time.split("-");
+            if (split.length < 2) {
+                continue;
+            }
             Map<String,Date> mse = new HashMap<>();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             switch (split[1]){
@@ -97,7 +103,12 @@ public class StatisticsServiceImpl implements StatisticsService {
                 case "02":
                     /*闰年/平年*/
                     //当前年份
-                    Integer year = Integer.parseInt(split[0]);
+                    int year;
+                    try {
+                        year = Integer.parseInt(split[0]);
+                    } catch (NumberFormatException e) {
+                        continue;
+                    }
                     if(year%400==0 || (year%4==0 && year%100!=0)){
                         //闰年 29号
                         //开始时间
@@ -145,6 +156,9 @@ public class StatisticsServiceImpl implements StatisticsService {
             for (Statistics sc : recordInProductCount) {
                 //通过商品ID获取商品价格
                 Product product = productMapper.getProductByProductId(sc.getProductId());
+                if (product == null) {
+                    continue;
+                }
                 //当前商品数量
                 Long count = sc.getCount();
                 //当前商品总价
@@ -158,6 +172,9 @@ public class StatisticsServiceImpl implements StatisticsService {
             for (Statistics sco : recordOutProductCount) {
                 //通过商品ID获取商品价格
                 Product product = productMapper.getProductByProductId(sco.getProductId());
+                if (product == null) {
+                    continue;
+                }
                 //当前商品数量
                 Long count = sco.getCount();
                 //当前商品总价
